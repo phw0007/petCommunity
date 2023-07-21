@@ -3,7 +3,7 @@ package com.care.ajaxBasic;
 public class AjaxDTO {
 	private String id;
 	private String pw;
-	
+	fdfdfdfjwejfjewefjweiweifjee
 	
 	public String getId() {
 		return id;
