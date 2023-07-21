@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.care.ajaxBasic.MemberMapper">
+		<select id="exists">  <!-- id로 아이디를 구하는 있냐없냐만 구하는 셀렉트문 -->
+			SELECT id FROM session_quiz WHERE  id=#{id}
+		</select>
+		
+		<insert id="jsonInsert" parameterType="com.care.ajaxBasic.AjaxVo">
+			INSERT INTO json_table VALUES(#{title}, #{artist}, #{price})
+		</insert>
+		
+		<delete id="jsonDelete">
+		DELETE FROM json_table
+	</delete>
+	
+	<select id="ex6" resultType="com.care.ajaxBasic.AjaxVo" >
+		SELECT * FROM json_table
+	</select>
+	
+	<select id="all" resultType="com.care.ajaxBasic.AjaxVO">
+		SELECT * FROM json_table
+	</select>
+	<select id="title" resultType="com.care.ajaxBasic.AjaxVO">
+		SELECT * FROM json_table WHERE title like '%'||#{title}||'%'
+	</select>
+		
+</mapper>
+
+
+
+
+
+
+
+
+
+
