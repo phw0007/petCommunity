@@ -4,7 +4,7 @@ public class AjaxDTO {
 	private String id;
 	private String pw;
 	fdfdfdfjwejfjewefjweiweifjee
-	
+	aqwssdasasd
 	public String getId() {
 		return id;
 	}
