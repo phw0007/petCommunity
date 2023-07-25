@@ -20,7 +20,7 @@
 
 <div align="center" >
 
-	<ul>
+	<ul>  					 <!-- 이미지 파일 경로가 다르신분은 수정해서 써주세요 -->
 	<li><a href="${context }home"><img src="img/logo.png" alt="logo" width="100" height="100" ></a></li>
 		<li><a href="${context }index">커뮤니티</a></li>
 		<li><a href="${context }shop">쇼핑몰</a></li>
