@@ -1,18 +1,19 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+	<link href="css/reset.css" rel="stylesheet" type="text/css">
 	<style type="text/css">
 	footer {width: 1200px;}
-	img {width: 100px; height: 100px;}
-	footer ul li {padding-right: 20px;}
+	
+	footerin > li {padding-right: 20px;}
 	
 </style>
  <hr>
 <div class="footer" align="center">
 
-	<img src="/image/logo.png" alt="logo">
-	<div class="footerin">
-	<ul>
+	<img src="img/logo.png" alt="logo" width="100"; height:="100";>
+	<div >
+	<ul class="footerin">
 		<li><a href="${context }Company">회사소개</a></li>
 		<li>|</li>
 		<li><a href="${context }Privacy">개인정보처리방침</a></li>
