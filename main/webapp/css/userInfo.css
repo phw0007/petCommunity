@@ -1,0 +1,29 @@
+@charset "UTF-8";
+.userInfo {width: 1200px; overflow: hidden; margin: 0 auto; font-family: 'Poor Story', cursive;}
+.petInfo {width: 398px; height:200px; float: left; overflow: hidden;  border-right: 1px solid #000000;}
+.ownerInfo {width:780px; height:200px; float: right;}
+
+.petInfo a{float: left; width: 120px; height: 150px; background-color: #FFEDA1; margin-top: 25px; margin-right: 20px;}
+.petInfo p span {margin-left: 10px;}
+.petInfo2 h5{font-size: 18px;}
+
+.userInfo h1 {text-align: center; margin-top: 100px; margin-bottom: 100px;}
+
+.ownerInfo {overflow: hidden; overflow: hidden;}
+.ownerInfo h5 {font-size: 18px;}
+.ownerinfo ul li {list-style: none;}
+.ownerLeft {float: left; margin-left: -35px; margin-right: 150px; margin-top: -1px;}
+.ownerLeft li {margin-bottom: 20px;}
+.ownerLeft li span {margin-left: 10px;}
+
+.ownerRight li {margin-bottom: 20px;}
+.ownerRight li span {margin-left: 10px;}
+
+
+.infoButton button {margin-top: 80px; margin-bottom: 80px; background-color: #FFEDA1; width: 80px; height: 30px; border: 1px solid #000000; margin-right: 30px;}
+
+
+
+
+
+

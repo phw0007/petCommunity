@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+#header{width:100%;background:#fcd11e;
+      }
+.inner{width:1200px; margin:0 auto;}
+
+.inner ul li{display:inline;  font-size:30px; padding-bottom:20px;}
+.inner ul li a{text-decoration:none; color:black;}
+.inner img{width:60px; height:60px;}
+
+  #footer{width:1200px; vertical-align:center;}
+
+  #footer img{width:100px; height:100px;}
+
+  .footerin ul li{padding-right: 20px;}
+
+.main_div{margin-top: 200px; margin-bottom: 200px;}
