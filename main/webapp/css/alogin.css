@@ -1,6 +1,0 @@
-@charset "UTF-8";
-
-	.member {font-family: 'Poor Story'; text-align: center; margin-top:40px; font-size: 26px;}
-	.member a{text-decoration: none; color:black; position: relative;}
-	.member ul li{margin-top :20px; }
-	.header ul li:nth-child(7){font-size: 36px;}
