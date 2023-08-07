@@ -82,15 +82,15 @@ public class BoardService {
 // 업로드 파일 저장 경로
 // ubuntu@ip-172-31-32-35:~$ sudo mkdir /opt/tomcat/tomcat-10/webapps/upload
 // ubuntu@ip-172-31-32-35:~$ sudo chown -RH tomcat: /opt/tomcat/tomcat-10/webapps/upload
-			String fileLocation = "/opt/tomcat/tomcat-10/webapps/upload/";
-			File save = new File(fileLocation + fileName);
+			//String fileLocation = "/opt/tomcat/tomcat-10/webapps/upload/";
+			//File save = new File(fileLocation + fileName);
 			
-			try {
+			//try {
 				// 서버가 저장한 업로드 파일은 임시저장경로에 있는데 개발자가 원하는 경로로 이동
-				file.transferTo(save);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			//	file.transferTo(save);
+			//} catch (Exception e) {
+			//.printStackTrace();
+			//}
 		}
 		
 		boardMapper.boardWriteProc(board);
@@ -239,16 +239,17 @@ public class BoardService {
 	    
 	
 		
-		//int no=0;
+		
 		ArrayList<BoardDTO> freeboards = boardMapper.freeboardForm(begin, end);
-		int totalCount = boardMapper.count();
+		int totalCount = boardMapper.freecount();
 		String url = "freeboardForm?currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		
 		model.addAttribute("freeboards", freeboards);
 		model.addAttribute("result", result);
+		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("currentPage", currentPage);
-		//model.addAttribute("no", no);
+		
 	}
 	
 	public void uploadImage(MultipartFile imageFile, String fileName) {
@@ -258,6 +259,7 @@ public class BoardService {
 	      if(imageFile.getSize() != 0) {
 	         String fileLocation = "C:\\javas\\boot_workspace\\project\\src\\main\\webapp\\image\\"+fileName;
 	         File save = new File(fileLocation);
+             System.out.println(fileLocation);
 	         try {
 	            imageFile.transferTo(save);
 	         } catch (Exception e) {

@@ -6,6 +6,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 </style>
+<script src="/dbQuiz.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +39,7 @@
        <input type="button" value="등록" class="ashop_select" onclick="uploadImage()"/>
          <div class="button">
 			<input class="write" type = "submit" value = "글 등록하기">
-			<input class="list" type = "button" value = "목록" onclick="location.href = 'boardForm'">
+			<input class="list" type = "button" value = "목록" onclick="location.href = 'freeboardForm'">
 			</div>
 		</form>
 	</div>

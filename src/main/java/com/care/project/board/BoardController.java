@@ -145,6 +145,6 @@ public class BoardController {
 	                         @RequestParam("fileName") String fileName) {
 	         System.out.println(fileName);
 	         service.uploadImage(emailFile, fileName);
-	        return "amemberMail";
+	        return "redirect:boardContent";
 	    }
 }

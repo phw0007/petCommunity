@@ -26,14 +26,17 @@
 	<select id="count">
 	  	SELECT count(no) FROM project_board
 	</select>
+	
+	<select id="freecount">
+	  	SELECT count(no) FROM project_board where category='자유게시판'
+	</select>
+ 
  
 	<select id="freeboardForm" resultMap="boardDto">
 	SELECT freeboard. * FROM 
 	(SELECT rownum as rn, free. * FROM (select no,title,id,write_date,hits,likes from project_board where category='자유게시판' order by no desc)free)
 	freeboard WHERE freeboard.rn BETWEEN #{begin} AND #{end}
 	</select>
-
-
 
 
 	<select id="boardContent" resultMap="boardDto">

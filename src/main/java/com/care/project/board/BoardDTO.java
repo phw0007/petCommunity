@@ -25,6 +25,13 @@ public class BoardDTO {
 	private String writeDate;
 	private int hits;
     private int likes;
+    private int rn;
+	public int getRn() {
+		return rn;
+	}
+	public void setRn(int rn) {
+		this.rn = rn;
+	}
 	public String getId() {
 		return id;
 	}

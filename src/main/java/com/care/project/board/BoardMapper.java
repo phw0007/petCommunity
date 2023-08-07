@@ -10,6 +10,7 @@ public interface BoardMapper {
 	ArrayList<BoardDTO> boardForm(@Param("begin")int begin, @Param("end")int end);
 	ArrayList<BoardDTO> freeboardForm(@Param("begin")int begin, @Param("end")int end);
 	int count();
+	int freecount();
 	void boardWriteProc(BoardDTO board);
 	BoardDTO boardContent(int no);
 	void incHit(int no);
