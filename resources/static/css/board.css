@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+/*boardWrite*/
+.boardWrite{width:1200px;margin:0 auto; height:750px;padding-top:100px;padding-left:200px;
+            font-family: 'Poor Story';}
+.boardWrite > h1{padding-right:100px;width:150px;padding-bottom:20px; border-bottom:2px solid black;
+                  vertical-align: left;}
+.button{padding-left:700px;}
+.button > .write{font-size:20px; cursor:pointer;font-size:20px; width:100px; height:40px;background:#fcd11e;  font-family: 'Poor Story'}
+.button > .list{font-size:20px; cursor:pointer;font-size:20px; width:100px; height:40px;background:#fcd11e;  font-family: 'Poor Story'}
+.input-file{padding:6px 25px; background:#fcd11e; cursor:pointer;margin-left:10px;}
+.boardWrite > .contentWirte{font-size:50px;}
+
+
+/*boardContent 게시글 보이는 곳*/
+.boardContent{width:1200px; margin:0 auto; height:750px;padding-top:100px;font-family: 'Poor Story'}
+.boardContent ul{padding-top:50px;} 
+.boardContent > ul li{list-style:none;border-bottom:1px solid black; width:800px; height:30px;font-size:20px;line-height:30px;padding:3px;} 
+.boardContent > ul li span{padding-left:50px;}
+.boardContent > ul li:nth-child(3){border-bottom: 0;}
+.boardContent > ul li:last-child{border-bottom:0; padding-top:50px; text-align:center;}
+.contentB{padding-left:700px;padding-bottom:50px;}
+ .Clist,.Cmodify,.Cdelete{background:#fcd11e; width:60px; height:40px;
+                          font-family: 'Poor Story', cursive;font-size:20px;}
+
+/*comment댓글*/
+.comment{margin-left:50px;border-top:1px solid #e6e6e6;}
+.commentView > ul li{list-style:none;width:750px;padding:5px 0 5px 0;border-bottom:1px solid #e6e6e6;}
+.commentView > ul li span{padding-left:500px; padding-right:30px;}
+.commentView > ul li b{font-weight:200; padding-right:20px;}
+
+/*boardForm*/
+.boardForm{width:1200px;margin:0 auto; height:750px;padding-top:100px;
+          font-family: 'Poor Story', cursive;}
+.boardForm > h1{border-bottom:2px solid black; width:500px; padding-bottom:20px;}
+.boardForm ul{list-style: none;}
+.boardCategory,
+.boardFormT{float:left;margin-top:50px;}
+
+/*카테고리 선택하는 곳*/
+.boardCategory{background:#ffeda1;width:170px;font-size:20px;}
+.boardCategory > ul li a{text-decoration: none;color:black;padding-right:30px;}
+.boardCategory > ul{text-align:center;}
+.boardCategory > ul li{padding-bottom:10px;}
+
+/*게시판 div*/
+.boardFormT{width:850px; margin-left:50px; }
+/*게시판에 있는 table */
+.formTable{border:1px solid black;padding:20px;font-size:20px;}
+.formTable th{border-bottom:1px solid #e6e6e6; padding-bottom:10px;}
+.formTable td{border-bottom:1px solid #e6e6e6; padding:5px 0 5px 0;}
+.writeB{background:#fcd11e; margin-top:50px;width:70px; height:30px;
+         margin-left:750px;}
+         
+/*boardModify글 수정 */
+.boardModify{width:1200px; margin:0 auto; height:750px;padding-top:100px;font-family: 'Poor Story'}
+.boardModify{margin-top:50px;}
+.modifyContent{font-size:30px;}
+.modifyContent > ul li{list-style:none; padding-top:50px;border-bottom:1px solid black; 
+                     width:800px; height:30px;font-size:27px;line-height:30px;padding:5px;
+                     } 
+.modifyContent > ul li span{padding-left:50px;}
+.modifyContent > ul li:last-child{border-bottom:0; padding-top:20px;}
+.modifyB{margin-top:150px;margin-left:640px;}
+.Mlist,.modi,.back{background:#fcd11e; width:70px; height:40px;
+                        font-family: 'Poor Story', cursive;font-size:20px;}
+                        
+
