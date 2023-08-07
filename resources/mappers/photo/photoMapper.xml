@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.care.bong.home.photoMapper">
+	<resultMap type="com.care.bong.home.photoDTO" id="photoDto">
+		<id column="no" property="no"/>
+		<result column="id" property="id"/>
+		<result column="nickname" property="nickname"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="file_name" property="fileName"/>
+		<result column="write_date" property="writeDate"/>
+		<result column="hits" property="hits"/>
+		<result column="likes" property="likes"/>
+	</resultMap>
+
+	
+  
+	
+	
+
+</mapper>
+
+
+
+
+
+
+
+
+
