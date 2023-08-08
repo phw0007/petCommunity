@@ -139,12 +139,16 @@ public class BoardController {
 		return "redirect:boardContent";
 	}
 	
-	   @ResponseBody
-	    @PostMapping(value = "uploadImage", produces = "text/plain; charset=utf-8")
-	    public String uploadImage(@RequestParam(value="imageFile", required = false) MultipartFile emailFile,
-	                         @RequestParam("fileName") String fileName) {
-	         System.out.println(fileName);
-	         service.uploadImage(emailFile, fileName);
-	        return "redirect:boardContent";
-	    }
+	@ResponseBody
+	@PostMapping(value = "uploadImage", produces = "text/plain; charset=utf-8")
+	public String uploadImage(@RequestParam(value = "imageFile", required = false) MultipartFile emailFile,
+			@RequestParam("fileName") String fileName) {
+		System.out.println(fileName);
+		service.uploadImage(emailFile, fileName);
+		return "redirect:boardContent";
+	}
+	
+	//@PostMapping("commentProc")
+	//public String commentProc() {}
+	   
 }
