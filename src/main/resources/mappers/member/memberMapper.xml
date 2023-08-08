@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.care.project.amember.MemberMapper">
+	<resultMap type="com.care.project.amember.MemberDTO" id="memberDto">
+		<id column="id" property="id"/>
+		<result column="pw" property="pw"/>
+		<result column="user_name" property="userName"/>
+		<result column="register_day" property="registerDay"/>
+		<result column="address" property="address"/>
+		<result column="email" property="email"/>
+		<result column="mobile" property="mobile"/>
+		<result column="pet_name" property="petName"/>
+		<result column="pet_category" property="petCategory"/>
+		<result column="pet_file" property="petFile"/>
+	</resultMap>
+	
+	<select id="memberData" resultMap="memberDto">
+		<choose>
+			<when test="select == 'id'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, pw, user_name, register_day, address
+				, email, mobile, pet_name, pet_category, pet_file
+				FROM project_register WHERE id like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<when test="select == 'name'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, pw, user_name, register_day, address
+				, email, mobile, pet_name, pet_category, pet_file
+				FROM project_register WHERE user_name like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<when test="select == 'address'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, pw, user_name, register_day, address
+				, email, mobile, pet_name, pet_category, pet_file
+				FROM project_register WHERE address like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<when test="select == 'mobile'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, pw, user_name, register_day, address
+				, email, mobile, pet_name, pet_category, pet_file
+				FROM project_register WHERE mobile like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<otherwise>
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, pw, user_name, register_day, address
+				, email, mobile, pet_name, pet_category, pet_file
+				FROM project_register WHERE id like ('%' ||  #{search} || '%') or
+				user_name like ('%' ||  #{search} || '%') or
+				address like ('%' ||  #{search} || '%') or
+				mobile like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="count">
+		<choose>
+	  		<when test="select == 'id'">
+	  			SELECT count(id) FROM project_register WHERE id like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<when test="select == 'name'">
+	  			SELECT count(id) FROM project_register WHERE user_name like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<when test="select == 'address'">
+	  			SELECT count(id) FROM project_register WHERE address like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<when test="select == 'mobile'">
+	  			SELECT count(id) FROM project_register WHERE mobile like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<otherwise>
+	  			SELECT count(id) FROM project_register WHERE id like ('%' ||  #{search} || '%') or
+	  			user_name like ('%' ||  #{search} || '%') or 
+	  			address like ('%' ||  #{search} || '%') or
+	  			mobile like ('%' ||  #{search} || '%')
+	  		</otherwise>
+		</choose>
+	</select>
+	
+	<select id="amemberInfo" resultMap="memberDto">
+		SELECT * FROM project_register WHERE id=#{id}
+	</select>
+	
+	<delete id="memberDelete">
+		DELETE FROM project_register WHERE id=#{id}
+	</delete>
+	
+	<update id="passwordUpdata">
+		UPDATE project_register SET pw=#{newPassword} WHERE id=#{id}
+	</update>
+	
+	<select id="loginProc" resultMap="memberDto">
+		SELECT * FROM project_register WHERE id=#{id}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+  

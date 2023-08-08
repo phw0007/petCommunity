@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+.login {margin-top: 100px; margin-bottom: 100px;}
+.login p img{width:200px; height: 200px;}
+.login h1{font-family: 'Poor Story', cursive;}
+.login form input{margin-bottom: 20px; background-color: #FFEDA1; border: none;}
+.login tr td img{width:200px; height: 50px;}
