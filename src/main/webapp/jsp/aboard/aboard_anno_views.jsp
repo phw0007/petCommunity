@@ -51,8 +51,8 @@
 				</li>
 				<li>
 					<input type="button" value="확인" class="select_end" onclick="location.href='aboard_anno'"/>
-					<input type="button" value="수정" class="aboard_anno_update" onclick="location.href='aboard_anno_update'"/>
 					<input type="button" value="삭제" class="aboard_delete" onclick="location.href=''"/>
+					<input type="button" value="수정" class="aboard_anno_update" onclick="location.href='aboard_anno_update'"/>
 				</li>
 			</ul>
 		</div>

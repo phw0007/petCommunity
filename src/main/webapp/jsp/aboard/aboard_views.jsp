@@ -65,8 +65,8 @@
 					</c:otherwise>
 				</c:choose>
 				<li>
-					<input type="button" value="확인" class="select_end" onclick="location.href='aboard'"
-					style="margin-left:100px"/>
+					<input type="button" value="확인" class="select_end" onclick="location.href='aboard?currentPage=${cp }'"
+					style="margin-left:20px; margin-right:40px;"/>
 					<input type="button" value="삭제" class="aboard_delete" onclick="location.href=''"/>
 				</li>
 			</ul>

@@ -64,6 +64,6 @@
 	.comment > p > span {float: left; width: 80px;}
 	.comment > p > textarea{width: 93%; height: 100px; resize: none; border:none; font-size: 22px; font-family: 'Poor Story';}
 	
-	.select_end{font-size: 18px; background-color: #fcd11e; font-weight:bold; height: 36px; width: 100px;}
-	.aboard_delete{font-size: 18px; background-color: #fcd11e; font-weight:bold; height: 36px; width: 100px;}
-	.aboard_anno_update{font-size: 18px; background-color: #fcd11e; font-weight:bold; height: 36px; width: 100px;}
+	.select_end{float: right; font-size: 18px; background-color: #fcd11e; font-weight:bold; height: 36px; width: 100px;}
+	.aboard_delete{float: right; font-size: 18px; background-color: #fcd11e; font-weight:bold; height: 36px; width: 100px;}
+	.aboard_anno_update{float: right; font-size: 18px; background-color: #fcd11e; font-weight:bold; height: 36px; width: 100px;}
