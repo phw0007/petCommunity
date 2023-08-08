@@ -29,7 +29,7 @@ public class BoardController {
 			return "aboard/aboard_delete";
 		}
 	}
-	//게시판정보
+
 	@RequestMapping("aboard_views")
 	public String aboard_views(String id, String boardName, int no, Model model,
 			@RequestParam(value="currentPage", required = false)String cp) {
