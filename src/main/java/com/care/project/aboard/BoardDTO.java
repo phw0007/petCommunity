@@ -2,6 +2,7 @@ package com.care.project.aboard;
 
 public class BoardDTO {
 /*
+CREATE TABLE project_board(
 id VARCHAR2(21),
 no number,
 title VARCHAR2(300),
@@ -10,10 +11,19 @@ file_name VARCHAR2(255),
 write_date VARCHAR2(15),
 hits number,
 likes number,
-board_name VARCHAR2(50),
-primary key(board_name)
+board_name VARCHAR2(30),
+primary key(no)
+);
+CREATE TABLE project_board_comment(
+id VARCHAR2(21),
+no number,
+board_name VARCHAR2(30),
+comment_id VARCHAR2(30),
+write_date VARCHAR2(15),
+comment_content VARCHAR2(300)
 );
 */	
+	
 	private int no;
 	private String id;
 	private String title;

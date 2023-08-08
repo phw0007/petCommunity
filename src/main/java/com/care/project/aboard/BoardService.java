@@ -1,13 +1,13 @@
 package com.care.project.aboard;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.care.project.amember.MemberDTO;
-import com.care.project.amember.MemberMapper;
 import com.care.project.common.PageService;
 
 import jakarta.servlet.http.HttpSession;
@@ -32,10 +32,10 @@ public class BoardService {
 			search = "";
 		}
 		requestUrl = requestUrl.substring(1);
-		int pageBlock = 3; // �븳 �럹�씠吏��뿉 蹂댁씪 �뜲�씠�꽣�쓽 �닔
-		int end = pageBlock * currentPage; // �뀒�씠釉붿뿉�꽌 媛��졇�삱 留덉�留� �뻾踰덊샇
+		int pageBlock = 3; 
+		int end = pageBlock * currentPage; 
 		
-		int begin = end - pageBlock + 1; // �뀒�씠釉붿뿉�꽌 媛��졇�삱 �떆�옉 �뻾踰덊샇
+		int begin = end - pageBlock + 1; 
 		int no = 0;
 		ArrayList<BoardDTO> boards = boardMapper.boardData(begin, end, select, search);
 		int totalCount = boardMapper.count(select, search);
@@ -64,6 +64,9 @@ public class BoardService {
 		model.addAttribute("cp", cp);
 	}
 
+	public void aboardDelete(String selectedValues) {
+		 System.out.println(selectedValues);
+	}
 }
 
 

@@ -13,6 +13,7 @@
 <title>index</title>
 </head>
 <body>
+<script src="/dbQuiz.js"></script>
 <c:import url="/header" />
 <div class="member">
 	<div class="memberItem">
@@ -51,17 +52,18 @@
 			    </thead>
 			    <tbody>
 			    	<c:forEach var="board" items="${boards}">
-							<tr>
-								<td>${no=no+1}</td>
-								<td>${board.boardName }</td>
-								<td>${board.title }</td>
-								<td>${board.id }</td>
-								<td>${board.hits }</td>
-								<td>${board.likes }</td>
-								<td>${board.writeDate }</td>
-								<td><input type="checkbox" class="member-checkbox" value="${board.id }"></td>
-							</tr>
-						</c:forEach>
+						<tr>
+							<td>${no=no+1}</td>
+							<td>${board.boardName }</td>
+							<td>${board.title }</td>
+							<td>${board.id }</td>
+							<td>${board.hits }</td>
+							<td>${board.likes }</td>
+							<td>${board.writeDate }</td>
+							<td><input type="checkbox" class="member-checkbox" value="${boards }"></td>
+						</tr>
+					</c:forEach>
+				</tbody>
 			</table>
 		</div>
 		<div class="memberSearch">
@@ -98,7 +100,7 @@
 					</select>
 					<input type="text" name="search" class="searchOption" value="${search}"/>
 					<input type="submit" value="검색" class="submitOption"/>
-					<input type="button" value="삭제" class="deleteOption" onclick="location.href='delete'"/>
+					<input type="button" value="삭제" class="deleteOption" onclick="getBoardDeleteCheckboxes()"/>
 				</form>
 			</div>
 		</div>

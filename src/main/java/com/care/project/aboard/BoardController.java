@@ -1,14 +1,14 @@
 package com.care.project.aboard;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.HandlerMapping;
-
-import com.care.project.amember.MemberDTO;
-import com.care.project.amember.MemberService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -18,15 +18,17 @@ public class BoardController {
 	@Autowired private BoardService service;
 	@Autowired private HttpSession session;
 	
-	@RequestMapping({ "/aboard"})
+	@RequestMapping({"/aboard", "/aboardDelete"})
 	public String aboard(@RequestParam(value="currentPage", required = false)String cp,
 			String select, String search, Model model, HttpServletRequest request) {
 		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		service.aboard(cp, select, search, model, requestUrl);
 		if("/aboard".equals(requestUrl)) {
 			return "aboard/aboard";
-		}else {
+		}else if("/aboardDelete".equals(requestUrl)){
 			return "aboard/aboardDelete";
+		}else {
+			return "aboard/aboardAnnoDel";
 		}
 	}
 
@@ -37,8 +39,9 @@ public class BoardController {
 		return "aboard/aboardViews";
 	}	
 	
-	@RequestMapping("aboardDelete")
-	public String aboard_delete() {
+	@RequestMapping("boardDelete")
+	public String memberDelete(String selectedValues) {
+		service.aboardDelete(selectedValues);
 		return "aboard/aboardDelete";
 	}
 	

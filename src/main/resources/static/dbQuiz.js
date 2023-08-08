@@ -54,10 +54,31 @@ function getSelectedDeleteCheckboxes() {
 				selectedValues.push(checkboxes[i].value);
 			}
 		}
+		
 		if(selectedValues[0] == null || selectedValues[0] == "") {
 			window.confirm("삭제할 회원을 선택해주세요.")
 		}else{
 			location.href="memberDelete?url=amemberDelete&selectedValues="+selectedValues;
+		}
+	}
+}
+
+function getBoardDeleteCheckboxes() {
+	let checkboxes = document.getElementsByClassName('member-checkbox');
+	let selectedValues = [];
+	
+	if (window.confirm("정말로 삭제하시겠습니까?")) {
+		for (let i = 0; i < checkboxes.length; i++) {
+			if (checkboxes[i].checked) {
+				selectedValues.push(checkboxes[i].value);
+			}
+		}
+		
+		if(selectedValues[0] == null || selectedValues[0] == "") {
+			window.confirm("삭제할 회원을 선택해주세요.")
+		}else{
+			let encodedValues = encodeURIComponent(selectedValues.join(','));
+            location.href = "boardDelete?selectedValues=" + encodedValues;
 		}
 	}
 }

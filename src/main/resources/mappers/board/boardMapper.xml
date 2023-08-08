@@ -75,5 +75,8 @@
 		SELECT * FROM project_board_comment WHERE id=#{id} AND board_name=#{boardName} AND no=#{no}
 	</select>
 		
+	<delete id="memberDelete">
+		DELETE FROM project_board WHERE id=#{id} AND board_name=#{boardName} AND no=#{no}
+	</delete>	
 		
 </mapper>

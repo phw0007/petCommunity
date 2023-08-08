@@ -17,4 +17,6 @@ public interface BoardMapper {
 
 	ArrayList<BoardDTO> aboardComment(@Param("id")String id, @Param("boardName")String boardName, 
 			@Param("no")int no);
+
+	void boardDelete(String name);
 }
