@@ -18,44 +18,40 @@
 	<div class="memberItem">
 		<h3>커뮤니티 관리</h3>
 		<ul>
-			<li><a href="aboard" style="font-weight: bold;">게시글 목록</a></li>
-			<li><a href="aboardDelete">게시글 삭제</a></li>
+			<li><a href="aboard">게시글 목록</a></li>
+			<li><a href="aboardDelete" style="font-weight: bold;">게시글 삭제</a></li>
 			<li><a href="aboardAnno">공지사항 관리</a></li>
 			<li><a href="aboardAnnoDel">공지사항 삭제</a></li>
 		</ul>
 	</div>
 	<div class="memberMain">
 		<div class="memberTitle">
-			<p>게시글 목록</p>
+			<p>게시글 삭제</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
 				<li>></li>
 				<li><a href="aboard">커뮤니티 관리</a></li>
 				<li>></li>
-				<li><a href="aboard">게시글 목록</a></li>
+				<li><a href="aboardDelete">게시글 삭제</a></li>
 			</ul>
 		</div>
 		<div class="memberInfo">
-		<c:choose>
-			<c:when test="${empty boards }">
-				<h1> 등록된 데이터가 존재하지 않습니다. </h1>
-			</c:when>
-			<c:otherwise>
-				<table>
-					<thead>
-				    	<tr>
-				    		<th>번호</th>
-				    		<th>게시판 명</th>
-				    		<th>게시글 제목</th>
-				    		<th>작성자</th>
-				    		<th>추천수</th>
-				    		<th>조회수</th>
-				    		<th>작성일</th>
-				    	</tr>
-				    </thead>
-				    <tbody>
-						<c:forEach var="board" items="${boards}">
-							<tr onclick="location.href='aboardViews?id=${board.id}&boardName=${board.boardName}&no=${no+1}&currentPage=${currentPage }'">
+			<table>
+				<thead>
+			    	<tr>
+			    		<th>번호</th>
+			    		<th>게시판 명</th>
+			    		<th>게시글 제목</th>
+			    		<th>작성자</th>
+			    		<th>추천수</th>
+			    		<th>조회수</th>
+			    		<th>작성일</th>
+			    		<th>선택</th>
+			    	</tr>
+			    </thead>
+			    <tbody>
+			    	<c:forEach var="board" items="${boards}">
+							<tr>
 								<td>${no=no+1}</td>
 								<td>${board.boardName }</td>
 								<td>${board.title }</td>
@@ -63,11 +59,10 @@
 								<td>${board.hits }</td>
 								<td>${board.likes }</td>
 								<td>${board.writeDate }</td>
+								<td><input type="checkbox" class="member-checkbox" value="${board.id }"></td>
 							</tr>
 						</c:forEach>
-					</table>
-				</c:otherwise>
-			</c:choose>
+			</table>
 		</div>
 		<div class="memberSearch">
 			<div> ${result}	</div>
@@ -103,6 +98,7 @@
 					</select>
 					<input type="text" name="search" class="searchOption" value="${search}"/>
 					<input type="submit" value="검색" class="submitOption"/>
+					<input type="button" value="삭제" class="deleteOption" onclick="location.href='delete'"/>
 				</form>
 			</div>
 		</div>

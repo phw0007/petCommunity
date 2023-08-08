@@ -14,17 +14,17 @@
 <body>
 <c:import url="/header" />
 	<div class="member">
-	<div class="member_item">
+	<div class="memberItem">
 		<h3>커뮤니티 관리</h3>
 		<ul>
 			<li><a href="aboard" style="font-weight: bold;">게시글 목록</a></li>
-			<li><a href="aboard_delete">게시글 삭제</a></li>
-			<li><a href="aboard_anno">공지사항 관리</a></li>
-			<li><a href="aboard_anno_del">공지사항 삭제</a></li>
+			<li><a href="aboardDelete">게시글 삭제</a></li>
+			<li><a href="aboardAnno">공지사항 관리</a></li>
+			<li><a href="aboardAnnoDel">공지사항 삭제</a></li>
 		</ul>			
 	</div>
-	<div class="member_main">
-		<div class="member_title">
+	<div class="memberMain">
+		<div class="memberTitle">
 			<p>게시글 목록</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
@@ -34,7 +34,7 @@
 				<li><a href="aboard">게시글 목록</a></li>
 			</ul>
 		</div>
-		<div class="member_views">
+		<div class="memberViews">
 			<ul>
 				<li><span>제목</span>${board.title }</li>
 				<li><span>작성일</span>${board.writeDate }</li>
@@ -65,9 +65,9 @@
 					</c:otherwise>
 				</c:choose>
 				<li>
-					<input type="button" value="확인" class="select_end" onclick="location.href='aboard?currentPage=${cp }'"
+					<input type="button" value="확인" class="selectEnd" onclick="location.href='aboard?currentPage=${cp }'"
 					style="margin-left:20px; margin-right:40px;"/>
-					<input type="button" value="삭제" class="aboard_delete" onclick="location.href=''"/>
+					<input type="button" value="삭제" class="aboardDelete" onclick="location.href=''"/>
 				</li>
 			</ul>
 		</div>

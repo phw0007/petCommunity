@@ -26,40 +26,40 @@ public class BoardController {
 		if("/aboard".equals(requestUrl)) {
 			return "aboard/aboard";
 		}else {
-			return "aboard/aboard_delete";
+			return "aboard/aboardDelete";
 		}
 	}
 
-	@RequestMapping("aboard_views")
+	@RequestMapping("aboardViews")
 	public String aboard_views(String id, String boardName, int no, Model model,
 			@RequestParam(value="currentPage", required = false)String cp) {
 		service.aboardInfo(id, boardName, no, model, cp);	
-		return "aboard/aboard_views";
+		return "aboard/aboardViews";
 	}	
 	
-	@RequestMapping("aboard_delete")
+	@RequestMapping("aboardDelete")
 	public String aboard_delete() {
-		return "aboard/aboard_delete";
+		return "aboard/aboardDelete";
 	}
 	
-	@RequestMapping("aboard_anno")
+	@RequestMapping("aboardAnno")
 	public String aboard_anno() {
-		return "aboard/aboard_anno";
+		return "aboard/aboardAnno";
 	}
 	
-	@RequestMapping("aboard_anno_views")
+	@RequestMapping("aboardAnnoViews")
 	public String aboard_anno_views() {
-		return "aboard/aboard_anno_views";
+		return "aboard/aboardAnnoViews";
 	}
 	
-	@RequestMapping("aboard_anno_del")
+	@RequestMapping("aboardAnnoDel")
 	public String aboard_anno_del() {
-		return "aboard/aboard_anno_del";
+		return "aboard/aboardAnnoDel";
 	}
 	
-	@RequestMapping("aboard_anno_update")
+	@RequestMapping("aboardAnnoUpdate")
 	public String aboard_anno_update() {
-		return "aboard/aboard_anno_update";
+		return "aboard/aboardAnnoUpdate";
 	}
 
 }
