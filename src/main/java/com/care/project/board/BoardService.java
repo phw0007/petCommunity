@@ -257,7 +257,7 @@ public class BoardService {
 	         return;
 	      }
 	      if(imageFile.getSize() != 0) {
-	         String fileLocation = "C:\\javas\\boot_workspace\\project\\src\\main\\webapp\\image\\"+fileName;
+	         String fileLocation = "C:\\javas\\boot_workspace\\petCommunity\\src\\main\\webapp\\image\\"+fileName;
 	         File save = new File(fileLocation);
              System.out.println(fileLocation);
 	         try {

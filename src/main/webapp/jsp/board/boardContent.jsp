@@ -30,10 +30,13 @@ function deleteCheck(){
 	 <ul>
 	   <li>제목<span>${board.title} </span></li>
 	   <li>작성자<span> ${board.id }</span></li>
-	   <li>작성일<span> ${board.writeDate }</span>조회수<span>조회수 들어갈 곳${borad.hits}</span></li>
-	   <li>${board.content} </li>
-	   <li><button class="likes" type="button" ><img src="/image/made.png" alt="하트" style="width:70px; height:70px; ">추천수:<span>${board.likes}</span></button></li>
-	 </ul>
+	   <li>작성일<span> ${board.writeDate }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회수<span> ${borad.hits}</span></li>
+	   </ul>
+	   <div class="content">
+	   ${board.content} <br> <img id="img" src="/image/${board.fileName }" alt="petImage" />
+	   </div>
+	   <div class="likeB"><button class="likes" type="button" ><img src="/image/made.png" alt="하트" style="width:70px; height:70px; ">추천수:<span>${board.likes}</span></button></div>
+	 
 	  <div class="contentB">
 			<button class="Clist" type="button" onclick="location.href='freeboardForm'">목록</button>
 			<button class="Cmodify"type="button"
