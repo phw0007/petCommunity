@@ -57,7 +57,10 @@ public class BoardService {
 		}catch(Exception e){
 			currentPage = 1;
 		}
-		no = (currentPage-1)*3;
+		System.out.println(no);
+		System.out.println(id);
+		System.out.println(category);
+		
 		BoardDTO board = boardMapper.aboardInfo(id, category, no);
 		ArrayList<BoardDTO> comments = boardMapper.aboardComment(id, category, no);
 		model.addAttribute("comments", comments);
@@ -67,17 +70,19 @@ public class BoardService {
 	
 	public void aboardDelete(String selectedValues) {
 		String[] checkData = selectedValues.split(",");
+		int sub = 0;
 		for(int i = 3; i <= checkData.length; i+=3) {
 			int no = Integer.parseInt(checkData[i-3]);
 			String id = checkData[i-2];
 			String category = checkData[i-1];
-			System.out.println(no);
+			System.out.println(no-sub);
 			System.out.println(id);
 			System.out.println(category);
-			boardMapper.aboardDelete(id, category, no);
-			boardMapper.aboardCommentDelete(id, category, no);
-			boardMapper.aboardNoUpdate(no);
-			boardMapper.aboardCommentNoUpdate(no);
+			boardMapper.aboardDelete(id, category, no-sub);
+			boardMapper.aboardCommentDelete(id, category, no-sub);
+			boardMapper.aboardNoUpdate(no-sub);
+			boardMapper.aboardCommentNoUpdate(no-sub);
+			sub++;
 		}
 	}
 }

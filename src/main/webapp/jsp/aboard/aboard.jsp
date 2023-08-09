@@ -55,7 +55,7 @@
 				    </thead>
 				    <tbody>
 						<c:forEach var="board" items="${boards}">
-							<tr onclick="location.href='aboardViews?id=${board.id}&category=${board.category}&no=${no+1}&currentPage=${currentPage }'">
+							<tr onclick="location.href='aboardViews?id=${board.id}&category=${board.category}&no=${board.no}&currentPage=${currentPage }'">
 								<td>${no=no+1}</td>
 								<td>${board.category }</td>
 								<td>${board.title }</td>

@@ -43,7 +43,7 @@ public class BoardController {
 	@PostMapping("boardDelete")
 	public String memberDelete(String selectedValues) {
 		service.aboardDelete(selectedValues);
-		return "aboard/aboardDelete";
+		return "redirect:aboardDelete";
 	}
 	
 	@RequestMapping("aboardAnno")

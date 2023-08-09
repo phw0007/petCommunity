@@ -21,7 +21,7 @@
 	
 	<select id="boardData" resultMap="boardDto">
 		<choose>
-			<when test="select == 'boardName'">
+			<when test="select == 'category'">
 				SELECT AAA.* FROM 
 				(SELECT rownum as rn, no, id, category, title, content, file_name
 				, write_date, hits, likes FROM project_board WHERE category like ('%' ||  #{search} || '%'))AAA 
@@ -68,13 +68,16 @@
 	</select>
 	
 	<select id="aboardInfo" resultMap="boardDto">
-		SELECT * FROM (SELECT rownum as rn, pbc.* FROM project_board pbc 
-		WHERE id = #{id} AND category = #{category})WHERE rn = #{no}
+		SELECT * FROM project_board WHERE id=#{id} AND category=#{category} AND no=#{no}
 	</select>
 	
 	<select id="aboardComment" resultMap="boardDto">
-		SELECT * FROM (SELECT rownum as rn, pbc.* FROM project_board_comment pbc 
-		WHERE id = #{id} AND category = #{category})WHERE no = #{no}
+		SELECT * FROM project_board_comment WHERE id=#{id} AND category=#{category} AND no=#{no}
+	</select>
+		
+	<select id="boardCount">
+		SELECT count(id) FROM project_board WHERE 
+		id like ('%' ||  #{id} || '%') AND category like ('%' ||  #{category} || '%')
 	</select>
 		
 	<delete id="aboardDelete">
@@ -86,7 +89,7 @@
 	</delete>	
 		
 	<update id="aboardNoUpdate">
-		UPDATE project_board SET no = no - 1 WHERE no >= #{no}
+		ss WHERE no >= #{no}
 	</update>
 	<update id="aboardCommentNoUpdate">
 		UPDATE project_board_comment SET no = no - 1 WHERE no >= #{no}

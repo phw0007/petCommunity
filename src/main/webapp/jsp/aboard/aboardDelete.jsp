@@ -69,7 +69,7 @@
 		<div class="memberSearch">
 			<div> ${result}	</div>
 			<div class="selectSearch">
-				<form action="aboard">
+				<form action="aboardDelete">
 					<select name="select" class="selectOption">
 						<c:choose>
 							<c:when test="${select == 'category'}">
