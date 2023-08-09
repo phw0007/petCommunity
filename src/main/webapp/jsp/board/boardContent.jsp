@@ -30,10 +30,19 @@ function deleteCheck(){
 	 <ul>
 	   <li>제목<span>${board.title} </span></li>
 	   <li>작성자<span> ${board.id }</span></li>
-	   <li>작성일<span> ${board.writeDate }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회수<span> ${borad.hits}</span></li>
+	   <li>작성일<span> ${board.writeDate }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회수<span> ${board.hits}</span></li>
 	   </ul>
 	   <div class="content">
-	   ${board.content} <br> <img id="img" src="/image/${board.fileName }" alt="petImage" />
+	   ${board.content} <br><br>
+	<c:choose>
+    <c:when test="${board.fileName == '파일 없음'}">
+        <!-- 파일이 없을 때는 아무것도 출력하지 않음 -->
+    </c:when>
+    <c:otherwise>
+        <img id="img" src="/image/${board.fileName}" alt="petImage" />
+        ${board.fileName}
+    </c:otherwise>
+</c:choose>
 	   </div>
 	   <div class="likeB"><button class="likes" type="button" ><img src="/image/made.png" alt="하트" style="width:70px; height:70px; ">추천수:<span>${board.likes}</span></button></div>
 	 
@@ -45,21 +54,38 @@ function deleteCheck(){
 		</div>
 	  <div class="comment">
 	  <h3>댓글</h3>
-		<form action="commentProc" method="post"  >	
-		<textarea rows="5" cols = "100" name = "comment" placeholder="댓글을 입력해주세요."></textarea>
+		<form action="freecommentProc" method="post"  >	
+		<input type = "hidden" name = "no" value = "${board.no }">
+		<input type = "hidden" name = "category" value = "${board.category }">
+		<textarea rows="5" cols = "100" name = "commentContent" placeholder="댓글을 입력해주세요."></textarea>
 		<button type="submit" style="background:#fcd11e;font-family: 'Poor Story', cursive; 
 		width:50px;  height:25px;">등록</button>
 		</form>	
        </div>
        
        <div class="commentView">
-		<ul>
-		  <li>댓글 들어갈 곳${comment.content } <span>작성자${comment.id}</span><b>날짜</b>
-		  <div class="delete">
-		     <button type="button" onclick="commentDelete()">삭제</button>
-		</div>
-		  </li>
-		</ul>
+			<c:choose>
+				<c:when test="${empty comments }">
+				등록된 댓글이 없습니다.
+				</c:when>
+				<c:otherwise>
+					<li>
+					<c:forEach var="comment" items="${comments}">
+							<div class="comment">
+								<ul>
+									<li><span>작성자</span>${comment.id }</li>
+									<li><span>작성일</span>${comment.writeDate }<a href="">X</a></li>
+								</ul>
+								<p>
+									<span>댓글내용</span>
+									<textarea readonly="readonly">${comment.commentContent }</textarea>
+								</p>
+							</div>
+						</c:forEach>
+						</li>
+				</c:otherwise>
+			</c:choose>
+	
 		</div>
 	</div>
 

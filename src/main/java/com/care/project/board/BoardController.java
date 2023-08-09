@@ -148,7 +148,19 @@ public class BoardController {
 		return "redirect:boardContent";
 	}
 	
-	//@PostMapping("commentProc")
-	//public String commentProc() {}
+	@PostMapping("freecommentProc")
+	public String freecommentProc(BoardDTO board, Model model) {
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.isEmpty()) {
+			return "redirect:login";
+		}
+		String result = service.freecommtentProc(board);
+
+		if(result.equals("댓글 작성 완료")) {
+			return "redirect:freeboardForm"; //forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
+		}
+	
+		return "board/boardContent";
+	}
 	   
 }

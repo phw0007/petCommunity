@@ -267,6 +267,33 @@ public class BoardService {
 	         }
 	      }
 	   }
+    
+	/*자유게시판 댓글 등록*/
+	public String freecommtentProc(BoardDTO board) {
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.isEmpty()) {
+			return "로그인";
+		}
+        
+		BoardDTO free= new BoardDTO();
+		free.setId(id);
+		free.setCategory(board.getCategory());
+		free.setNo(board.getNo());
+		free.setCommentContent(board.getCommentContent());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		free.setWriteDate(sdf.format(new Date()));
+
+		boardMapper.freecommentProc(free);
+	
+		return "댓글 작성 완료";
+	}
+	
+	public void freeComment(String id, String category, int no, Model model, String cp) {
+		ArrayList<BoardDTO> comments = boardMapper.freeComment(id, category, no);
+		System.out.println(comments);
+		model.addAttribute("comments", comments);
+		model.addAttribute("cp", cp);
+	}
 }
 
 
