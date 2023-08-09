@@ -50,22 +50,35 @@ public class BoardService {
 		model.addAttribute("search", search);
 	}
 
-	public void aboardInfo(String id, String boardName, int no, Model model, String cp) {
-		BoardDTO board = boardMapper.aboardInfo(id, boardName, no);
-		ArrayList<BoardDTO> comments = boardMapper.aboardComment(id, boardName, no);
+	public void aboardInfo(String id, String category, int no, Model model, String cp) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		no = (currentPage-1)*3;
+		BoardDTO board = boardMapper.aboardInfo(id, category, no);
+		ArrayList<BoardDTO> comments = boardMapper.aboardComment(id, category, no);
 		model.addAttribute("comments", comments);
 		model.addAttribute("board", board);
 		model.addAttribute("cp", cp);
 	}
 	
-	public void aboardComment(String id, String boardName, int no, Model model, String cp) {
-		ArrayList<BoardDTO> comments = boardMapper.aboardComment(id, boardName, no);
-		model.addAttribute("comments", comments);
-		model.addAttribute("cp", cp);
-	}
-
 	public void aboardDelete(String selectedValues) {
-		 System.out.println(selectedValues);
+		String[] checkData = selectedValues.split(",");
+		for(int i = 3; i <= checkData.length; i+=3) {
+			int no = Integer.parseInt(checkData[i-3]);
+			String id = checkData[i-2];
+			String category = checkData[i-1];
+			System.out.println(no);
+			System.out.println(id);
+			System.out.println(category);
+			boardMapper.aboardDelete(id, category, no);
+			boardMapper.aboardCommentDelete(id, category, no);
+			boardMapper.aboardNoUpdate(no);
+			boardMapper.aboardCommentNoUpdate(no);
+		}
 	}
 }
 

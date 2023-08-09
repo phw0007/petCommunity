@@ -58,31 +58,66 @@ function getSelectedDeleteCheckboxes() {
 		if(selectedValues[0] == null || selectedValues[0] == "") {
 			window.confirm("삭제할 회원을 선택해주세요.")
 		}else{
-			location.href="memberDelete?url=amemberDelete&selectedValues="+selectedValues;
+			const url="memberDelete";
+			getCheckBoxesData(url, selectedValues);
 		}
 	}
 }
 
-function getBoardDeleteCheckboxes() {
+
+function getDeleteBoardButton() {  
+	let selectedValues = [''];
+	
+}
+
+function getBoardDeleteCheckboxes() { 
 	let checkboxes = document.getElementsByClassName('member-checkbox');
 	let selectedValues = [];
-	
+			
 	if (window.confirm("정말로 삭제하시겠습니까?")) {
 		for (let i = 0; i < checkboxes.length; i++) {
 			if (checkboxes[i].checked) {
 				selectedValues.push(checkboxes[i].value);
 			}
 		}
-		
 		if(selectedValues[0] == null || selectedValues[0] == "") {
 			window.confirm("삭제할 회원을 선택해주세요.")
 		}else{
-			let encodedValues = encodeURIComponent(selectedValues.join(','));
-            location.href = "boardDelete?selectedValues=" + encodedValues;
+			const url="boardDelete";
+			getCheckBoxesData(url, selectedValues);
 		}
 	}
 }
 
+function getCheckBoxesData(url, selectedValues) {
+	const data = document.createElement('input');
+	data.setAttribute('type', 'hidden');
+	data.setAttribute('name', 'selectedValues'); // 데이터의 key
+	data.setAttribute('value', selectedValues); // 데이터의 value
+			               	                  
+	const form = document.createElement('form');
+	form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
+	form.setAttribute('action', url); // 전송할 url 지정  
+	form.appendChild(data);
+	document.body.appendChild(form);
+	form.submit();  
+}
+
+function getCheckBoxesData(url, selectedValues) {
+	const data = document.createElement('input');
+	data.setAttribute('type', 'hidden');
+	data.setAttribute('name', 'selectedValues'); // 데이터의 key
+	data.setAttribute('value', selectedValues); // 데이터의 value
+			               	                  
+	const form = document.createElement('form');
+	form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
+	form.setAttribute('action', url); // 전송할 url 지정  
+	form.appendChild(data);
+	document.body.appendChild(form);
+	form.submit();  
+}
+
+    
 function getSelectedEmailCheckboxes() {
 	let checkboxes = document.getElementsByClassName('member-checkbox');
 	let selectedValues = [];
@@ -95,7 +130,8 @@ function getSelectedEmailCheckboxes() {
 	if(selectedValues[0] == null || selectedValues[0] == "") {
 		window.confirm("메일을 보낼 회원을 선택해주세요.")
 	}else{
-		location.href="amemberSend?selectedValues="+selectedValues;
+		const url="amemberSend";
+		getCheckBoxesData(url, selectedValues);
 	}
 }
 

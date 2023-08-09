@@ -54,13 +54,13 @@
 			    	<c:forEach var="board" items="${boards}">
 						<tr>
 							<td>${no=no+1}</td>
-							<td>${board.boardName }</td>
+							<td>${board.category }</td>
 							<td>${board.title }</td>
 							<td>${board.id }</td>
 							<td>${board.hits }</td>
 							<td>${board.likes }</td>
 							<td>${board.writeDate }</td>
-							<td><input type="checkbox" class="member-checkbox" value="${boards }"></td>
+							<td><input type="checkbox" class="member-checkbox" value="${board.no},${board.id},${board.category}"></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -72,27 +72,27 @@
 				<form action="aboard">
 					<select name="select" class="selectOption">
 						<c:choose>
-							<c:when test="${select == 'boardName'}">
+							<c:when test="${select == 'category'}">
 								<option value="">전체</option>
-								<option value="boardName" selected="selected">게시판명</option>
+								<option value="category" selected="selected">게시판명</option>
 								<option value="title">제목</option>
 								<option value="id">작성자</option>
 							</c:when>
 							<c:when test="${select == 'title'}">
 								<option value="">전체</option>
-								<option value="boardName">게시판명</option>
+								<option value="category">게시판명</option>
 								<option value="title" selected="selected">제목</option>
 								<option value="id">작성자</option>
 							</c:when>
 							<c:when test="${select == 'id'}">
 								<option value="">전체</option>
-								<option value="boardName">게시판명</option>
+								<option value="category">게시판명</option>
 								<option value="title">제목</option>
 								<option value="id" selected="selected">작성자</option>
 							</c:when>
 							<c:otherwise>
 								<option value="">전체</option>
-								<option value="boardName">게시판명</option>
+								<option value="category">게시판명</option>
 								<option value="title">제목</option>
 								<option value="id">작성자</option>
 							</c:otherwise>

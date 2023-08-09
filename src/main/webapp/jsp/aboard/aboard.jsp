@@ -55,9 +55,9 @@
 				    </thead>
 				    <tbody>
 						<c:forEach var="board" items="${boards}">
-							<tr onclick="location.href='aboardViews?id=${board.id}&boardName=${board.boardName}&no=${no+1}&currentPage=${currentPage }'">
+							<tr onclick="location.href='aboardViews?id=${board.id}&category=${board.category}&no=${no+1}&currentPage=${currentPage }'">
 								<td>${no=no+1}</td>
-								<td>${board.boardName }</td>
+								<td>${board.category }</td>
 								<td>${board.title }</td>
 								<td>${board.id }</td>
 								<td>${board.hits }</td>
@@ -75,27 +75,27 @@
 				<form action="aboard">
 					<select name="select" class="selectOption">
 						<c:choose>
-							<c:when test="${select == 'boardName'}">
+							<c:when test="${select == 'category'}">
 								<option value="">전체</option>
-								<option value="boardName" selected="selected">게시판명</option>
+								<option value="category" selected="selected">게시판명</option>
 								<option value="title">제목</option>
 								<option value="id">작성자</option>
 							</c:when>
 							<c:when test="${select == 'title'}">
 								<option value="">전체</option>
-								<option value="boardName">게시판명</option>
+								<option value="category">게시판명</option>
 								<option value="title" selected="selected">제목</option>
 								<option value="id">작성자</option>
 							</c:when>
 							<c:when test="${select == 'id'}">
 								<option value="">전체</option>
-								<option value="boardName">게시판명</option>
+								<option value="category">게시판명</option>
 								<option value="title">제목</option>
 								<option value="id" selected="selected">작성자</option>
 							</c:when>
 							<c:otherwise>
 								<option value="">전체</option>
-								<option value="boardName">게시판명</option>
+								<option value="category">게시판명</option>
 								<option value="title">제목</option>
 								<option value="id">작성자</option>
 							</c:otherwise>

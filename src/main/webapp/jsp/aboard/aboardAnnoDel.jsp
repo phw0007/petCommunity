@@ -15,27 +15,27 @@
 <body>
 <c:import url="/header" />
 <div class="member">
-	<div class="member_item">
+	<div class="memberItem">
 		<h3>커뮤니티 관리</h3>
 		<ul>
 			<li><a href="aboard">게시글 목록</a></li>
-			<li><a href="aboard_delete">게시글 삭제</a></li>
-			<li><a href="aboard_anno">공지사항 관리</a></li>
-			<li><a href="aboard_anno_del" style="font-weight: bold;">공지사항 삭제</a></li>
+			<li><a href="aboardDelete">게시글 삭제</a></li>
+			<li><a href="aboardAnno">공지사항 관리</a></li>
+			<li><a href="aboardAnnoDel" style="font-weight: bold;">공지사항 삭제</a></li>
 		</ul>
 	</div>
-	<div class="member_main">
-		<div class="member_title">
+	<div class="memberMain">
+		<div class="memberTitle">
 			<p>공지사항 삭제</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
 				<li>></li>
 				<li><a href="aboard">커뮤니티 관리</a></li>
 				<li>></li>
-				<li><a href="aboard_anno_del">공지사항 삭제</a></li>
+				<li><a href="aboardAnnoDel">공지사항 삭제</a></li>
 			</ul>
 		</div>
-		<div class="member_info">
+		<div class="memberInfo">
 			<table>
 				<thead>
 			    	<tr>
@@ -62,20 +62,20 @@
 			    	</tr>
 			</table>
 		</div>
-		<div class="member_search">
+		<div class="memberSearch">
 			<a href=""><</a><a href="">1</a><a href="">></a>
-			<div class="select_search">
+			<div class="selectSearch">
 				<form action="memberSelect">
-					<select name="select" class="select_option">
+					<select name="select" class="selectOption">
 						<option value="">전체</option>
 						<option value="id">아이디</option>
 						<option value="name">사용자명</option>
 						<option value="address">주소</option>
 						<option value="mobile">전화번호</option>
 					</select>
-					<input type="text" name="search" class="search_option"/>
-					<input type="submit" value="검색" class="submit_option"/>
-					<input type="button" value="삭제" class="delete_option" onclick="location.href='delete'"/>
+					<input type="text" name="search" class="searchOption"/>
+					<input type="submit" value="검색" class="submitOption"/>
+					<input type="button" value="삭제" class="deleteOption" onclick="location.href='delete'"/>
 				</form>
 			</div>
 		</div>

@@ -14,17 +14,17 @@
 <body>
 <c:import url="/header" />
 	<div class="member">
-	<div class="member_item">
+	<div class="memberItem">
 		<h3>커뮤니티 관리</h3>
 		<ul>
 			<li><a href="aboard" >게시글 목록</a></li>
-			<li><a href="aboard_delete">게시글 삭제</a></li>
-			<li><a href="aboard_anno" style="font-weight: bold;">공지사항 관리</a></li>
-			<li><a href="aboard_anno_del">공지사항 삭제</a></li>
+			<li><a href="aboardDelete">게시글 삭제</a></li>
+			<li><a href="aboardAnno" style="font-weight: bold;">공지사항 관리</a></li>
+			<li><a href="aboardAnnoDel">공지사항 삭제</a></li>
 		</ul>
 	</div>
-	<div class="member_main">
-		<div class="member_title">
+	<div class="memberMain">
+		<div class="memberTitle">
 			<p>공지사항 관리</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
@@ -34,7 +34,7 @@
 				<li><a href="aboard">공지사항 관리</a></li>
 			</ul>
 		</div>
-		<div class="member_views">
+		<div class="memberViews">
 			<ul>
 				<li><span>제목</span>안녕하세요</li>
 				<li><span>작성일</span>2023-07-31</li>
@@ -50,9 +50,9 @@
 					</div>
 				</li>
 				<li>
-					<input type="button" value="확인" class="select_end" onclick="location.href='aboard_anno'"/>
-					<input type="button" value="삭제" class="aboard_delete" onclick="location.href=''"/>
-					<input type="button" value="수정" class="aboard_anno_update" onclick="location.href='aboard_anno_update'"/>
+					<input type="button" value="확인" class="selectEnd" onclick="location.href='aboardAnno'"/>
+					<input type="button" value="삭제" class="aboardDelete" onclick="location.href=''"/>
+					<input type="button" value="수정" class="aboardAnnoUpdate" onclick="location.href='aboardAnnoUpdate'"/>
 				</li>
 			</ul>
 		</div>

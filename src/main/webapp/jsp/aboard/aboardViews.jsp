@@ -12,6 +12,39 @@
 <title>index</title>
 </head>
 <body>
+<script>
+function getDeleteBoardButton() {
+    
+    const form = document.createElement('form'); // form 태그 생성
+    url="boardDelete";
+    form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
+    form.setAttribute('action', url); // 전송할 url 지정
+
+    const idData = document.createElement('input'); // input 태그 생성
+    idData.setAttribute('type', 'hidden'); // type = hidden
+    idData.setAttribute('name', 'id'); // 데이터의 key
+    idData.setAttribute('value', '${board.id }'); // 데이터의 value (여기서는 data1)
+
+    const noData = document.createElement('input');
+    noData.setAttribute('type', 'hidden');
+    noData.setAttribute('name', 'no');
+    noData.setAttribute('value', '${board.no }');
+
+    const boardCategory = document.createElement('input');
+    boardNameData.setAttribute('type', 'hidden');
+    boardNameData.setAttribute('name', 'category');
+    boardNameData.setAttribute('value', '${board.category }');
+
+    form.appendChild(idData);
+    form.appendChild(noData);
+    form.appendChild(boardCategory);
+	
+    document.body.appendChild(form);
+
+    form.submit();      
+
+}
+</script>
 <c:import url="/header" />
 	<div class="member">
 	<div class="memberItem">
@@ -67,7 +100,7 @@
 				<li>
 					<input type="button" value="확인" class="selectEnd" onclick="location.href='aboard?currentPage=${cp }'"
 					style="margin-left:20px; margin-right:40px;"/>
-					<input type="button" value="삭제" class="aboardDelete" onclick="location.href=''"/>
+					<input type="button" value="삭제" class="aboardDelete" onclick="getDeleteBoardButton()"/>
 				</li>
 			</ul>
 		</div>

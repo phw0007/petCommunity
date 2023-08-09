@@ -32,9 +32,10 @@ comment_content VARCHAR2(300)
 	private String writeDate;
 	private int hits;
 	private int likes;
-	private String boardName;
+	private String category;
 	private String commentId;
 	private String commentContent;
+	
 	public int getNo() {
 		return no;
 	}
@@ -83,11 +84,11 @@ comment_content VARCHAR2(300)
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
-	public String getBoardName() {
-		return boardName;
+	public String getCategory() {
+		return category;
 	}
-	public void setBoardName(String boardName) {
-		this.boardName = boardName;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	public String getCommentId() {
 		return commentId;

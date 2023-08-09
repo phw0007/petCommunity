@@ -61,10 +61,10 @@ public class MemberController {
 		return "amember/amemberInfo";
 	}	
 	
-	@RequestMapping("memberDelete")
-	public String memberDelete(String selectedValues, String url) {
+	@PostMapping("memberDelete")
+	public String memberDelete(String selectedValues) {
 		service.amemberDelete(selectedValues);
-		return "redirect:"+url;
+		return "redirect:amemberDelete";
 	}
 	
 	@RequestMapping("passwordUpdata")
@@ -79,7 +79,7 @@ public class MemberController {
 		return "amember/amemberPasswordUpdata";
 	}
 	
-	@RequestMapping("amemberSend")
+	@PostMapping("amemberSend")
 	public String amemberSend(Model model, String selectedValues) {
 		service.amemberEmail(model, selectedValues);
 		return "amember/amemberSend";

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.HandlerMapping;
@@ -33,13 +34,13 @@ public class BoardController {
 	}
 
 	@RequestMapping("aboardViews")
-	public String aboard_views(String id, String boardName, int no, Model model,
+	public String aboard_views(String id, String category, int no, Model model,
 			@RequestParam(value="currentPage", required = false)String cp) {
-		service.aboardInfo(id, boardName, no, model, cp);	
+		service.aboardInfo(id, category, no, model, cp);	
 		return "aboard/aboardViews";
 	}	
 	
-	@RequestMapping("boardDelete")
+	@PostMapping("boardDelete")
 	public String memberDelete(String selectedValues) {
 		service.aboardDelete(selectedValues);
 		return "aboard/aboardDelete";
