@@ -61,30 +61,28 @@ function deleteCheck(){
 		<button type="submit" style="background:#fcd11e;font-family: 'Poor Story', cursive;border:none; 
 		width:50px;  height:25px;">등록</button>
 		</form>	
-       </div>
-       
-       <div class="commentView">
-			<c:choose>
+		
+		<c:choose>
 				<c:when test="${empty comments }">
 				등록된 댓글이 없습니다.
 				</c:when>
 				<c:otherwise>
-					<li>
 					<c:forEach var="comment" items="${comments}">
-							<div class="comment">
-								<ul>
-									<li><span>작성자</span>${comment.id }</li>
-									<li><span>작성일</span>${comment.writeDate }<a href="">X</a></li>
-								</ul>
-								<p>
-									<span>댓글내용</span>
-									<textarea readonly="readonly">${comment.commentContent }</textarea>
-								</p>
-							</div>
-						</c:forEach>
-						</li>
+							<ul>
+							<li><span>${comment.id}</span><b>${comment.writeDate }</b></li>
+								<li>${comment.commentContent }
+								<div class="delete">
+								<button type="button" onclick="commentDelete()">삭제</button>
+								</div>
+							</li>
+						</ul>
+				</c:forEach>
 				</c:otherwise>
 			</c:choose>
+       </div>
+       
+       <div class="commentView">
+			
 	
 		</div>
 	</div>
