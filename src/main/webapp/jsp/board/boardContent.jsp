@@ -58,7 +58,7 @@ function deleteCheck(){
 		<input type = "hidden" name = "no" value = "${board.no }">
 		<input type = "hidden" name = "category" value = "${board.category }">
 		<textarea rows="5" cols = "100" name = "commentContent" placeholder="댓글을 입력해주세요."></textarea>
-		<button type="submit" style="background:#fcd11e;font-family: 'Poor Story', cursive; 
+		<button type="submit" style="background:#fcd11e;font-family: 'Poor Story', cursive;border:none; 
 		width:50px;  height:25px;">등록</button>
 		</form>	
        </div>

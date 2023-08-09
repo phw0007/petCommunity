@@ -1,6 +1,7 @@
 package com.care.project.board;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,18 +57,20 @@ public class BoardController {
 		return "board/boardWrite";
 	}
 	
-	@RequestMapping("boardContent")
-	public String boardContent(
-			@RequestParam(value="no", required = false)String n, Model model) {
-		BoardDTO board = service.boardContent(n);
-		System.out.println(n);
-		if(board == null) {
-			System.out.println("boardContent 게시글 번호 : " + n);
-			return "redirect:freeboardForm";
-		}
-		model.addAttribute("board", board);
-		return "board/boardContent";
-	}
+	   @RequestMapping("boardContent")
+	   public String boardContent(
+	         @RequestParam(value="no", required = false)String n, Model model) {
+	      BoardDTO board = service.boardContent(n);
+	      ArrayList<BoardDTO> comments = service.boardComments(n);
+	      System.out.println(n);
+	      if(board == null) {
+	         System.out.println("boardContent 게시글 번호 : " + n);
+	         return "redirect:freeboardForm";
+	      }
+	      model.addAttribute("board", board);
+	      model.addAttribute("comments", comments);
+	      return "board/boardContent";
+	   }
 	
 	
 	@RequestMapping("boardDownload")
@@ -157,9 +160,9 @@ public class BoardController {
 		String result = service.freecommtentProc(board);
 
 		if(result.equals("댓글 작성 완료")) {
-			return "redirect:freeboardForm"; //forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
+			return "redirect:boardContent"; //forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
 		}
-	
+	   
 		return "board/boardContent";
 	}
 	   

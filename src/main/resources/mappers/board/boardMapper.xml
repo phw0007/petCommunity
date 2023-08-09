@@ -14,7 +14,7 @@
 		<result column="write_date" property="writeDate"/>
 		<result column="hits" property="hits"/>
 		<result column="likes" property="likes"/>
-		<result column="comment_content" property="comment_content"/>
+		<result column="comment_content" property="commentContent"/>
 	</resultMap>
     
     <insert id="boardWriteProc">
@@ -66,7 +66,7 @@
       INSERT INTO project_board_comment VALUES(#{id}, #{no}, #{category}, #{writeDate}, #{commentContent})
     </insert>
     
-    <select id="freeComment" resultMap="boardDto">
+      <select id="freeComment" resultMap="boardDto">
 		SELECT * FROM project_board_comment WHERE no=#{no}
 	</select>
 </mapper>

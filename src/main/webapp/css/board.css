@@ -23,7 +23,7 @@
 .likeB{text-align:center; margin-top:100px;}
 .contentB{padding-left:900px;padding-bottom:50px;padding-top:100px;}
 .likes{border:none; background:none;vertical-align:middle; width:70px; height:70px;cursor:pointer}
- .Clist,.Cmodify,.Cdelete{background:#fcd11e; width:50px; height:30px;
+ .Clist,.Cmodify,.Cdelete{background:#fcd11e; width:50px; height:30px; border:none;
                           font-family: 'Poor Story', cursive;font-size:15px;}
                           
 

@@ -288,12 +288,18 @@ public class BoardService {
 		return "댓글 작성 완료";
 	}
 	
-	public void freeComment(String id, String category, int no, Model model, String cp) {
-		ArrayList<BoardDTO> comments = boardMapper.freeComment(id, category, no);
-		System.out.println(comments);
-		model.addAttribute("comments", comments);
-		model.addAttribute("cp", cp);
-	}
+
+
+	  public ArrayList<BoardDTO> boardComments(String n) {
+      int no = 0;
+      try{
+         no = Integer.parseInt(n);
+      }catch(Exception e){
+         return null;
+      }
+      ArrayList<BoardDTO> comments = boardMapper.freeComment(no);
+      return comments;
+   }
 }
 
 
