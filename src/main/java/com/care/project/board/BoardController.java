@@ -51,7 +51,7 @@ public class BoardController {
 			return "redirect:login";
 		}
 		if(msg.equals("게시글 작성 완료")) {
-			return "redirect:boardForm"; //forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
+			return "redirect:freeboardForm"; //forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
 		}
 		model.addAttribute("msg", msg);
 		return "board/boardWrite";

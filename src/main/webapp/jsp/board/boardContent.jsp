@@ -60,27 +60,25 @@ function deleteCheck(){
 		<textarea rows="5" cols = "100" name = "commentContent" placeholder="댓글을 입력해주세요."></textarea>
 		<button type="submit" style="background:#fcd11e;font-family: 'Poor Story', cursive;border:none; 
 		width:50px;  height:25px;">등록</button>
-		</form>	
-		
-		<c:choose>
+		</form>
+
+			<c:choose>
 				<c:when test="${empty comments }">
 				등록된 댓글이 없습니다.
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="comment" items="${comments}">
-							 <ul>
-            <li><span>${comment.id}</span><b>${comment.writeDate}</b></li>
-            <li>${comment.commentContent}
-            <c:if test="${comment.id eq sessionScope.loggedInUserId}">
-                <div class="delete">
-                    <button type="button" onclick="commentDelete(${comment.commentId})">삭제</button>
-                </div>
-            </c:if>
-        </ul>
-				</c:forEach>
+						<ul>
+							<li><span>${comment.id}</span><b>${comment.writeDate}</b></li>
+							<li>${comment.commentContent}
+							
+								<button type="button" onclick="commentDelete(${comment.commentId})">삭제</button>
+							
+						</ul>
+					</c:forEach>
 				</c:otherwise>
 			</c:choose>
-       </div>
+		</div>
        
        <div class="commentView">
 			

@@ -28,7 +28,7 @@
                           
 
 /*comment댓글*/
-.comment{border-top:1px solid #e6e6e6;}
+.comment{border-top:1px solid #e6e6e6;margin-left:50px;}
 .comment ul li{list-style:none;width:750px;padding:5px 0 5px 0;border-bottom:1px solid #e6e6e6; }
 .comment ul li:first-child{border-bottom:0;}
 .comment ul li > span{font-size:18px;}
@@ -37,7 +37,7 @@
 
 
 /*boardForm*/
-.boardForm{width:1200px;margin:0 auto; height:1200px;padding-top:100px;
+.boardForm{width:1200px;margin:0 auto; height:800px;padding-top:100px;
           font-family: 'Poor Story', cursive;}
 .boardForm > h1{border-bottom:2px solid black; width:500px; padding-bottom:20px;}
 .boardForm ul{list-style: none;}
