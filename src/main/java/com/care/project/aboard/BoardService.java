@@ -32,7 +32,7 @@ public class BoardService {
 			search = "";
 		}
 		requestUrl = requestUrl.substring(1);
-		int pageBlock = 3; 
+		int pageBlock = 14; 
 		int end = pageBlock * currentPage; 
 		
 		int begin = end - pageBlock + 1; 
@@ -41,7 +41,7 @@ public class BoardService {
 		int totalCount = boardMapper.count(select, search);
 		String url = requestUrl+"?select="+select+"&search="+search+"&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
-		no = (currentPage-1)*3;
+		no = (currentPage-1)*14;
 		model.addAttribute("boards", boards);
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
@@ -57,9 +57,6 @@ public class BoardService {
 		}catch(Exception e){
 			currentPage = 1;
 		}
-		System.out.println(no);
-		System.out.println(id);
-		System.out.println(category);
 		
 		BoardDTO board = boardMapper.aboardInfo(id, category, no);
 		ArrayList<BoardDTO> comments = boardMapper.aboardComment(id, category, no);
@@ -68,7 +65,7 @@ public class BoardService {
 		model.addAttribute("cp", cp);
 	}
 	
-	public void aboardDelete(String selectedValues) {
+	public void boardDelete(String selectedValues) {
 		String[] checkData = selectedValues.split(",");
 		int sub = 0;
 		for(int i = 3; i <= checkData.length; i+=3) {
@@ -84,6 +81,19 @@ public class BoardService {
 			boardMapper.aboardCommentNoUpdate(no-sub);
 			sub++;
 		}
+	}
+
+	public String boardDeleteComment(String selectedValues) {
+		String[] checkData = selectedValues.split(",");
+		int no = Integer.parseInt(checkData[0]);
+		String id = checkData[1];
+		String category = checkData[2];
+		String cp = checkData[3];
+		System.out.println(no);
+		System.out.println(id);
+		System.out.println(category);
+		System.out.println(cp);
+		return "id="+id+"&category="+category+"&no="+no+"&currentPage="+cp;
 	}
 }
 

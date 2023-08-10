@@ -59,10 +59,10 @@
 	.comment > ul > li:nth-child(1) {float: left; width: 83%;}
 	.comment > ul > li:nth-child(2) {float: right; width: 17%;}
 	.comment > ul > li > span{display: inline-block; width: 80px;}
-	.comment > ul > li > a{margin-left: 25px;}
+	.comment > ul > li > input{background-color:transparent; border: 0; font-size: 22px; margin-left: 10px;}
 	
 	.comment > p > span {float: left; width: 80px;}
-	.comment > p > textarea{width: 93%; height: 100px; resize: none; border:none; font-size: 22px; font-family: 'Poor Story';}
+	.comment > p > textarea{display: inline-block; width: 93%; margin-top: -10px; height: 100px; resize: none; border:none; font-size: 22px; font-family: 'Poor Story';}
 	
 	.selectEnd{float: right; font-size: 18px; background-color: #fcd11e; font-weight:bold; height: 36px; width: 100px;}
 	.aboardDelete{float: right; font-size: 18px; background-color: #fcd11e; font-weight:bold; height: 36px; width: 100px;}

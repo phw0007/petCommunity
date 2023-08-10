@@ -14,35 +14,34 @@
 <body>
 <script>
 function getDeleteBoardButton() {
-    
-    const form = document.createElement('form'); // form 태그 생성
-    url="boardDelete";
-    form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
-    form.setAttribute('action', url); // 전송할 url 지정
+	let selectedValues = ['${board.no}','${board.id}','${board.category}'];
+	url="boardDeleteButton";
+	getDeleteBoard(url, selectedValues);
+}
 
-    const idData = document.createElement('input'); // input 태그 생성
-    idData.setAttribute('type', 'hidden'); // type = hidden
-    idData.setAttribute('name', 'id'); // 데이터의 key
-    idData.setAttribute('value', '${board.id }'); // 데이터의 value (여기서는 data1)
+function getDeleteBoardComment() {
+	let selectedValues = ['${board.no}','${board.id}','${board.category}','${cp}'];
+	url="boardDeleteComment";
+	getDeleteBoard(url, selectedValues);
+}
 
-    const noData = document.createElement('input');
-    noData.setAttribute('type', 'hidden');
-    noData.setAttribute('name', 'no');
-    noData.setAttribute('value', '${board.no }');
-
-    const boardCategory = document.createElement('input');
-    boardNameData.setAttribute('type', 'hidden');
-    boardNameData.setAttribute('name', 'category');
-    boardNameData.setAttribute('value', '${board.category }');
-
-    form.appendChild(idData);
-    form.appendChild(noData);
-    form.appendChild(boardCategory);
+function getDeleteBoard(url, selectedValues) {
+	if (window.confirm("정말로 삭제하시겠습니까?")) {
+	    const form = document.createElement('form'); // form 태그 생성
+	    form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
+	    form.setAttribute('action', url); // 전송할 url 지정
+	    
+	    const data = document.createElement('input'); // input 태그 생성
+	    data.setAttribute('type', 'hidden'); // type = hidden
+	    data.setAttribute('name', 'selectedValues'); // 데이터의 key
+	   	data.setAttribute('value', selectedValues); // 데이터의 value (여기서는 data1)
 	
-    document.body.appendChild(form);
-
-    form.submit();      
-
+	    form.appendChild(data);
+		
+	    document.body.appendChild(form);
+	
+	    form.submit();      
+	}
 }
 </script>
 <c:import url="/header" />
@@ -89,7 +88,7 @@ function getDeleteBoardButton() {
 								<div class="comment">
 									<ul>
 										<li><span>작성자</span>${comment.commentId }</li>
-										<li><span>작성일</span>${comment.writeDate }<a href="">X</a></li>
+										<li><span>작성일</span>${comment.writeDate }<input type="button" value="X" onclick="getDeleteBoardComment()"/></li>
 									</ul>
 									<p><span>댓글내용</span><textarea readonly="readonly">${comment.commentContent }</textarea></p>
 								</div>
@@ -98,7 +97,7 @@ function getDeleteBoardButton() {
 					</c:otherwise>
 				</c:choose>
 				<li>
-					<input type="button" value="확인" class="selectEnd" onclick="location.href='aboard?currentPage=${cp }'"
+					<input type="button" value="확인" class="selectEnd" onclick="location.href='aboard?currentPage=${cp}'"
 					style="margin-left:20px; margin-right:40px;"/>
 					<input type="button" value="삭제" class="aboardDelete" onclick="getDeleteBoardButton()"/>
 				</li>

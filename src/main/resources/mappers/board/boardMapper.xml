@@ -89,7 +89,7 @@
 	</delete>	
 		
 	<update id="aboardNoUpdate">
-		ss WHERE no >= #{no}
+		UPDATE project_board SET no = no - 1 WHERE no >= #{no}
 	</update>
 	<update id="aboardCommentNoUpdate">
 		UPDATE project_board_comment SET no = no - 1 WHERE no >= #{no}

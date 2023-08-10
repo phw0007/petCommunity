@@ -40,10 +40,26 @@ public class BoardController {
 		return "aboard/aboardViews";
 	}	
 	
+	/*체크된 게시글 삭제*/
 	@PostMapping("boardDelete")
-	public String memberDelete(String selectedValues) {
-		service.aboardDelete(selectedValues);
+	public String boardDelete(String selectedValues) {
+		service.boardDelete(selectedValues);
 		return "redirect:aboardDelete";
+	}
+	
+	/*삭제버튼 클릭시 삭제*/
+	@PostMapping("boardDeleteButton")
+	public String boardDeleteButton(String selectedValues) {
+		service.boardDelete(selectedValues);
+		return "redirect:aboard";
+	}
+	
+	/*삭제버튼 클릭시 삭제*/
+	@PostMapping(value = "boardDeleteComment", produces = "text/plain; charset=utf-8")
+	public String boardDeleteComment(String selectedValues) {
+		String url = service.boardDeleteComment(selectedValues);
+		System.out.println(url);
+		return "redirect:aboardViews?"+url;
 	}
 	
 	@RequestMapping("aboardAnno")

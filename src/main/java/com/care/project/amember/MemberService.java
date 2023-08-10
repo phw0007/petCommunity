@@ -31,7 +31,7 @@ public class MemberService {
 			search = "";
 		}
 		requestUrl = requestUrl.substring(1);
-		int pageBlock = 3;
+		int pageBlock = 14;
 		int end = pageBlock * currentPage;
 		
 		int begin = end - pageBlock + 1;
@@ -40,7 +40,7 @@ public class MemberService {
 		int totalCount = memberMapper.count(select, search);
 		String url = requestUrl+"?select="+select+"&search="+search+"&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
-		no = (currentPage-1)*3;
+		no = (currentPage-1)*14;
 		model.addAttribute("members", members);
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);

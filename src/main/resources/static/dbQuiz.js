@@ -44,6 +44,7 @@ function loginCheck(){
 	}
 }
 
+
 function getSelectedDeleteCheckboxes() {
 	let checkboxes = document.getElementsByClassName('member-checkbox');
 	let selectedValues = [];
@@ -64,11 +65,6 @@ function getSelectedDeleteCheckboxes() {
 	}
 }
 
-
-function getDeleteBoardButton() {  
-	let selectedValues = [''];
-	
-}
 
 function getBoardDeleteCheckboxes() { 
 	let checkboxes = document.getElementsByClassName('member-checkbox');
@@ -102,21 +98,7 @@ function getCheckBoxesData(url, selectedValues) {
 	document.body.appendChild(form);
 	form.submit();  
 }
-
-function getCheckBoxesData(url, selectedValues) {
-	const data = document.createElement('input');
-	data.setAttribute('type', 'hidden');
-	data.setAttribute('name', 'selectedValues'); // 데이터의 key
-	data.setAttribute('value', selectedValues); // 데이터의 value
-			               	                  
-	const form = document.createElement('form');
-	form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
-	form.setAttribute('action', url); // 전송할 url 지정  
-	form.appendChild(data);
-	document.body.appendChild(form);
-	form.submit();  
-}
-
+       
     
 function getSelectedEmailCheckboxes() {
 	let checkboxes = document.getElementsByClassName('member-checkbox');
