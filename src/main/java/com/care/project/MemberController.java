@@ -22,15 +22,15 @@ public class MemberController {
 		return "member/index";
 	}
 
-	@RequestMapping("header")
-	public String header() {
-		return "default/header";
-	}
-	
-	@RequestMapping("main")
-	public String main() {
-		return "default/main";
-	}
+//	@RequestMapping("header")
+//	public String header() {
+//		return "default/header";
+//	}
+//	
+//	@RequestMapping("main")
+//	public String main() {
+//		return "default/main";
+//	}
 	
 	@RequestMapping("footer")
 	public String footer() {
@@ -38,19 +38,19 @@ public class MemberController {
 	}
 	
 	/* http://localhost:8086/dbQuiz/login */
-	@GetMapping("login")
-	public String login() {
-		return "member/login";
-	}
-	
-	@PostMapping("loginProc")
-	public String loginProc(MemberDTO member) {
-		String result = service.loginProc(member);
-		if(result.equals("로그인 성공")) {
-			return "member/index2";
-		}
-		return "member/login";
-	}
+//	@GetMapping("login")
+//	public String login() {
+//		return "member/login";
+//	}
+//	
+//	@PostMapping("loginProc")
+//	public String loginProc(MemberDTO member) {
+//		String result = service.loginProc(member);
+//		if(result.equals("로그인 성공")) {
+//			return "member/index2";
+//		}
+//		return "member/login";
+//	}
 	
 	/* http://localhost:8086/dbQuiz/register */
 	@GetMapping("register")

@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<!--<%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -21,9 +20,7 @@
       <li><a href="${context }Terms">이용약관</a></li>
    </ul>
    <p>이메일무단수집거부 문의 : DDobongjagyu@naver.com Copyrightⓒ 2023 Creature all rights reserved</p>
-=======
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+=======-->
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
    <style type = "text/css">
@@ -45,5 +42,5 @@
 		<li><a href="${context }Terms">이용약관</a></li>
 	</ul>
 	<p>이메일무단수집거부 문의 : DDobongjagyu@naver.com Copyrightⓒ 2023 Creature all rights reserved</p>
->>>>>>> refs/remotes/origin/main
+
 </div>

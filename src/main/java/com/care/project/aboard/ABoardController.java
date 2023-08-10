@@ -15,8 +15,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class BoardController {
-	@Autowired private BoardService service;
+public class ABoardController {
+	@Autowired private ABoardService service;
 	@Autowired private HttpSession session;
 	
 	@RequestMapping({"/aboard", "/aboardDelete"})

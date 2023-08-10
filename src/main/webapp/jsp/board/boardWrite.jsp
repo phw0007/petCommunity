@@ -36,7 +36,7 @@
         </label>
         <input type="file" id="fileImg" class="ashopFile" name="upfile" onchange="fileURL()" accept="image/*"/>
        <br><br>
-       <input type="button" value="등록" class="ashop_select" onclick="uploadImage()"/>
+       <input type="button" value="등록" class="ashop_select" onclick="uploadImage2()"/>
          <div class="button">
 			<input class="write" type = "submit" value = "글 등록하기">
 			<input class="list" type = "button" value = "목록" onclick="location.href = 'freeboardForm'">

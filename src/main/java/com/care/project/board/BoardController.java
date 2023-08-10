@@ -146,7 +146,7 @@ public class BoardController {
 	}
 	
 	@ResponseBody
-	@PostMapping(value = "uploadImage", produces = "text/plain; charset=utf-8")
+	@PostMapping(value = "uploadImage2", produces = "text/plain; charset=utf-8")
 	public String uploadImage(@RequestParam(value = "imageFile", required = false) MultipartFile emailFile,
 			@RequestParam("fileName") String fileName) {
 		System.out.println(fileName);

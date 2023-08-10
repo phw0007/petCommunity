@@ -12,8 +12,8 @@ import com.care.project.common.PageService;
 import jakarta.servlet.http.HttpSession;
 
 @Service
-public class MemberService {
-	@Autowired private MemberMapper memberMapper;
+public class AMemberService {
+	@Autowired private AMemberMapper memberMapper;
 	@Autowired private HttpSession session;
 	public void amember(String cp, String select, String search, Model model, String requestUrl) {
 		if(select == null){
@@ -36,7 +36,7 @@ public class MemberService {
 		
 		int begin = end - pageBlock + 1;
 		int no = 0;
-		ArrayList<MemberDTO> members = memberMapper.memberData(begin, end, select, search);
+		ArrayList<AMemberDTO> members = memberMapper.memberData(begin, end, select, search);
 		int totalCount = memberMapper.count(select, search);
 		String url = requestUrl+"?select="+select+"&search="+search+"&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
@@ -49,7 +49,7 @@ public class MemberService {
 		model.addAttribute("search", search);
 	}
 
-	public MemberDTO amemberInfo(String id) {	
+	public AMemberDTO amemberInfo(String id) {	
 		return memberMapper.amemberInfo(id);
 	}
 
@@ -70,7 +70,7 @@ public class MemberService {
 		model.addAttribute("amemberEmail", amemberEmail);
 	}
 	
-	@Autowired private MailService mailService;
+	@Autowired private AMailService mailService;
 	public String sendEmail(String email, String emailTitle, String emailContent, MultipartFile emailFile) {
 		if(email == null || email.isEmpty())
 			return "이메일을 정확하게 입력해 주세요.";
@@ -79,7 +79,7 @@ public class MemberService {
 		return msg;
 	}
 
-	public String loginProc(MemberDTO member) {
+	public String loginProc(AMemberDTO member) {
 		if(member.getId() == null || member.getId().isEmpty()) {
 			return "아이디를 입력하세요.";
 		}
@@ -88,7 +88,7 @@ public class MemberService {
 			return "비밀번호를 입력하세요.";
 		}
 		
-		MemberDTO result = memberMapper.loginProc(member.getId());
+		AMemberDTO result = memberMapper.loginProc(member.getId());
 		if(result != null) {
 			
 			if(member.getPw().equals(result.getPw())) {

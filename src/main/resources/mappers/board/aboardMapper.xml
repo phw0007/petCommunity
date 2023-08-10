@@ -3,8 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.care.project.aboard.BoardMapper">
-	<resultMap type="com.care.project.aboard.BoardDTO" id="boardDto">
+<mapper namespace="com.care.project.aboard.ABoardMapper">
+	<resultMap type="com.care.project.aboard.ABoardDTO" id="boardDto">
 		<id column="no" property="no"/>
 		<result column="id" property="id"/>
 		<result column="no" property="no"/>

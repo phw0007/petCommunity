@@ -15,8 +15,8 @@ import com.care.project.common.PageService;
 import jakarta.servlet.http.HttpSession;
 
 @Service
-public class BoardService {
-	@Autowired private BoardMapper boardMapper;
+public class ABoardService {
+	@Autowired private ABoardMapper boardMapper;
 	@Autowired private HttpSession session;
 	public void aboard(String cp, String select, String search, Model model, String requestUrl) {
 		if(select == null){
@@ -39,7 +39,7 @@ public class BoardService {
 		
 		int begin = end - pageBlock + 1; 
 		int no = 0;
-		ArrayList<BoardDTO> boards = boardMapper.boardData(begin, end, select, search);
+		ArrayList<ABoardDTO> boards = boardMapper.boardData(begin, end, select, search);
 		int totalCount = boardMapper.count(select, search);
 		String url = requestUrl+"?select="+select+"&search="+search+"&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
@@ -60,8 +60,8 @@ public class BoardService {
 			currentPage = 1;
 		}
 		
-		BoardDTO board = boardMapper.aboardInfo(id, category, no);
-		ArrayList<BoardDTO> comments = boardMapper.aboardComment(id, category, no);
+		ABoardDTO board = boardMapper.aboardInfo(id, category, no);
+		ArrayList<ABoardDTO> comments = boardMapper.aboardComment(id, category, no);
 		
 		model.addAttribute("comments", comments);
 		model.addAttribute("board", board);
