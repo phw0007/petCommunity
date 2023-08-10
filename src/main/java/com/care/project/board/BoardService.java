@@ -280,7 +280,7 @@ public class BoardService {
 		free.setCategory(board.getCategory());
 		free.setNo(board.getNo());
 		free.setCommentContent(board.getCommentContent());
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		free.setWriteDate(sdf.format(new Date()));
 
 		boardMapper.freecommentProc(free);
@@ -290,7 +290,7 @@ public class BoardService {
 	
 
 
-	  public ArrayList<BoardDTO> boardComments(String n) {
+	  public ArrayList<BoardDTO> boardComments(BoardDTO board,String n) {
       int no = 0;
       try{
          no = Integer.parseInt(n);

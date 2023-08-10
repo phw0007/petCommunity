@@ -67,7 +67,7 @@
     </insert>
     
       <select id="freeComment" resultMap="boardDto">
-		SELECT * FROM project_board_comment WHERE no=#{no}
+		select no,id,write_date,comment_content from project_board_comment where category='자유게시판' AND no=#{no} order by write_date desc
 	</select>
 </mapper>
 

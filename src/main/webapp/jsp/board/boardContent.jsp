@@ -21,7 +21,7 @@ function deleteCheck(){
 
 
 </script>
-
+<script src="/dbQuiz.js"></script>
 </head>
 <body>
 
@@ -40,7 +40,6 @@ function deleteCheck(){
     </c:when>
     <c:otherwise>
         <img id="img" src="/image/${board.fileName}" alt="petImage" />
-        ${board.fileName}
     </c:otherwise>
 </c:choose>
 	   </div>
@@ -68,14 +67,15 @@ function deleteCheck(){
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="comment" items="${comments}">
-							<ul>
-							<li><span>${comment.id}</span><b>${comment.writeDate }</b></li>
-								<li>${comment.commentContent }
-								<div class="delete">
-								<button type="button" onclick="commentDelete()">삭제</button>
-								</div>
-							</li>
-						</ul>
+							 <ul>
+            <li><span>${comment.id}</span><b>${comment.writeDate}</b></li>
+            <li>${comment.commentContent}
+            <c:if test="${comment.id eq sessionScope.loggedInUserId}">
+                <div class="delete">
+                    <button type="button" onclick="commentDelete(${comment.commentId})">삭제</button>
+                </div>
+            </c:if>
+        </ul>
 				</c:forEach>
 				</c:otherwise>
 			</c:choose>

@@ -61,7 +61,8 @@ public class BoardController {
 	   public String boardContent(
 	         @RequestParam(value="no", required = false)String n, Model model) {
 	      BoardDTO board = service.boardContent(n);
-	      ArrayList<BoardDTO> comments = service.boardComments(n);
+	      BoardDTO boards = new BoardDTO();
+	      ArrayList<BoardDTO> comments = service.boardComments(boards,n);
 	      System.out.println(n);
 	      if(board == null) {
 	         System.out.println("boardContent 게시글 번호 : " + n);
@@ -152,7 +153,7 @@ public class BoardController {
 	}
 	
 	@PostMapping("freecommentProc")
-	public String freecommentProc(BoardDTO board, Model model) {
+	public String freecommentProc(@RequestParam(value="no", required = false)String n,BoardDTO board, Model model) {
 		String id = (String)session.getAttribute("id");
 		if(id == null || id.isEmpty()) {
 			return "redirect:login";
@@ -160,7 +161,7 @@ public class BoardController {
 		String result = service.freecommtentProc(board);
 
 		if(result.equals("댓글 작성 완료")) {
-			return "redirect:boardContent"; //forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
+			return "redirect:boardContent?no="+n; //forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
 		}
 	   
 		return "board/boardContent";

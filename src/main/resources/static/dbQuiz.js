@@ -71,3 +71,25 @@ function uploadImage(){
    };
    xhr.send(formData);
 }
+function commentDelete(commentId) {
+    if (confirm("댓글을 삭제하시겠습니까?")) {
+        // 서버로 삭제 요청 보내기 (AJAX 또는 Fetch API 사용)
+        fetch(`/deleteComment?commentId=${commentId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                // 삭제 성공한 경우, 댓글 UI 업데이트 등 필요한 작업 수행
+                location.reload(); // 예시로 페이지 새로고침
+            } else {
+                console.error('댓글 삭제 실패');
+            }
+        })
+        .catch(error => {
+            console.error('댓글 삭제 오류', error);
+        });
+    }
+}
