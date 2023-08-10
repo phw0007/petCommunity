@@ -28,8 +28,8 @@ public class BoardController {
 		return "board/boardForm";
 	}
 	
-	@GetMapping("freeboardForm")
-	public String freeboardForm(@RequestParam(value="currentPage", required=false)String cp, Model model) {
+	@RequestMapping("freeboardForm")
+	public String freeboardForm(@RequestParam(value="currentPage", required=false)String cp,Model model) {
 		service.freeboardForm(cp, model);
 		return "board/freeboardForm";
 	}

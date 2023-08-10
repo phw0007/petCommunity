@@ -11,6 +11,7 @@
 	<h1>자유게시판</h1>
 	<div class="boardCategory">
 		<ul>
+			<li><a href="location.href=''">공지사항</a></li>
 			<li><a href="location.href='freeboardForm'">자유게시판</a></li>
 			<li><a href="location.href=''">Q&A</a></li>
 			<li><a href="location.href=''">강아지</a></li>
