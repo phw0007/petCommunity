@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.care.project.aboard.BoardMapper">
+	<resultMap type="com.care.project.aboard.BoardDTO" id="boardDto">
+		<id column="no" property="no"/>
+		<result column="id" property="id"/>
+		<result column="no" property="no"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="file_name" property="fileName"/>
+		<result column="write_date" property="writeDate"/>
+		<result column="hits" property="hits"/>
+		<result column="likes" property="likes"/>
+		<result column="category" property="category"/>
+		<result column="comment_id" property="commentId"/>
+		<result column="comment_content" property="commentContent"/>
+	</resultMap>
+	
+	<select id="boardData" resultMap="boardDto">
+		<choose>
+			<when test="select == 'category'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE category like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<when test="select == 'title'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE title like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<when test="select == 'id'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE id like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<otherwise>
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE category like ('%' ||  #{search} || '%') or
+				title like ('%' ||  #{search} || '%') or id like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="count">
+		<choose>
+	  		<when test="select == 'category'">
+	  			SELECT count(id) FROM project_board WHERE category like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<when test="select == 'title'">
+	  			SELECT count(id) FROM project_board WHERE title like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<when test="select == 'id'">
+	  			SELECT count(id) FROM project_board WHERE id like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<otherwise>
+	  			SELECT count(id) FROM project_board WHERE category like ('%' ||  #{search} || '%') or
+	  			title like ('%' ||  #{search} || '%') or id like ('%' ||  #{search} || '%')
+	  		</otherwise>
+		</choose>
+	</select>
+	
+	<select id="aboardInfo" resultMap="boardDto">
+		SELECT * FROM project_board WHERE id=#{id} AND category=#{category} AND no=#{no}
+	</select>
+	
+	<select id="aboardComment" resultMap="boardDto">
+		SELECT * FROM project_board_comment WHERE id=#{id} AND category=#{category} AND no=#{no}
+	</select>
+		
+	<select id="boardCount">
+		SELECT count(id) FROM project_board WHERE 
+		id like ('%' ||  #{id} || '%') AND category like ('%' ||  #{category} || '%')
+	</select>
+		
+	<delete id="aboardDelete">
+		DELETE FROM project_board WHERE id=#{id} AND category=#{category} AND no=#{no}
+	</delete>	
+	
+	<delete id="aboardCommentDelete">
+		DELETE FROM project_board_comment WHERE id=#{id} AND category=#{category} AND no=#{no}
+	</delete>	
+		
+	<update id="aboardNoUpdate">
+		UPDATE project_board SET no = no - 1 WHERE no >= #{no}
+	</update>
+	
+	<update id="aboardCommentNoUpdate">
+		UPDATE project_board_comment SET no = no - 1 WHERE no >= #{no}
+	</update>
+	
+	<delete id="commentDeleteButton">
+		DELETE FROM project_board_comment WHERE id=#{id} AND category=#{category} AND no=#{no} AND write_date=#{writeDate}
+	</delete>	
+	
+</mapper>

@@ -70,4 +70,3 @@
 		select no,id,write_date,comment_content from project_board_comment where category=#{category} AND no=#{no} order by write_date desc
 	</select>
 </mapper>
-
