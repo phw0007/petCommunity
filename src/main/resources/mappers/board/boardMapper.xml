@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -101,3 +102,69 @@
 	</delete>	
 	
 </mapper>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.care.project.board.BoardMapper">
+  	<resultMap type="com.care.project.board.BoardDTO" id="boardDto">
+		<id column="no" property="no"/>
+		<result column="id" property="id"/>
+		<result column="category" property="category"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="file_name" property="fileName"/>
+		<result column="write_date" property="writeDate"/>
+		<result column="hits" property="hits"/>
+		<result column="likes" property="likes"/>
+	</resultMap>
+    
+    <insert id="boardWriteProc">
+		<selectKey order="BEFORE" keyProperty="no" resultType="int">
+			SELECT nvl(max(no),0) + 1 FROM project_board
+		</selectKey>
+		INSERT INTO project_board VALUES(#{no},#{id}, #{category}, #{title}, #{content},#{fileName}, #{writeDate}, 0,0  )
+	</insert>
+
+	<select id="count">
+	  	SELECT count(no) FROM project_board
+	</select>
+	
+	<select id="freecount">
+	  	SELECT count(no) FROM project_board where category='자유게시판'
+	</select>
+ 
+ 
+	<select id="freeboardForm" resultMap="boardDto">
+	SELECT freeboard. * FROM 
+	(SELECT rownum as rn, free. * FROM (select no,title,id,write_date,hits,likes from project_board where category='자유게시판' order by no desc)free)
+	freeboard WHERE freeboard.rn BETWEEN #{begin} AND #{end}
+	</select>
+
+
+	<select id="boardContent" resultMap="boardDto">
+		SELECT * FROM project_board WHERE no=#{no}
+	</select>
+	
+	<update id = "incHit">
+		UPDATE project_board SET hits=hits+1 WHERE no = #{no}
+	</update>
+	
+	<select id = "boardDownload">
+		SELECT file_name FROM project_board WHERE no = #{no}
+	</select>
+
+	
+	<delete id = "boardDeleteProc">
+		DELETE FROM project_board WHERE no = #{no}
+	</delete>
+			
+	<update id = "boardModifyProc">
+		UPDATE project_board SET title = #{title}, content = #{content} WHERE no = #{no}
+	</update>
+
+</mapper>
+
+>>>>>>> refs/remotes/origin/main
