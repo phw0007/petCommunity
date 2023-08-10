@@ -205,5 +205,5 @@ function commentDelete(commentId) {
             console.error('댓글 삭제 오류', error);
         });
     }
-    
-}}
+    }
+}
