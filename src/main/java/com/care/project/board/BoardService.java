@@ -290,18 +290,17 @@ public class BoardService {
 	
 
 
-	  public ArrayList<BoardDTO> boardComments(BoardDTO board,String n) {
+	  public ArrayList<BoardDTO> boardComments(String c,String n) {
       int no = 0;
       try{
          no = Integer.parseInt(n);
       }catch(Exception e){
          return null;
       }
-      ArrayList<BoardDTO> comments = boardMapper.freeComment(no);
+      ArrayList<BoardDTO> comments = boardMapper.freeComment(no,c);
       return comments;
    }
 }
-
 
 
 

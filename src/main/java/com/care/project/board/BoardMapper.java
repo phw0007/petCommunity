@@ -19,5 +19,5 @@ public interface BoardMapper {
 	void boardModifyProc(BoardDTO board);
 	void boardDeleteProc(int no);
 	void freecommentProc(BoardDTO board);
-	ArrayList<BoardDTO> freeComment(int no);
+	ArrayList<BoardDTO> freeComment(int no,String category);
 }

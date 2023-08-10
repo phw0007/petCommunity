@@ -59,10 +59,12 @@ public class BoardController {
 	
 	   @RequestMapping("boardContent")
 	   public String boardContent(
-	         @RequestParam(value="no", required = false)String n, Model model) {
+	         @RequestParam(value="no", required = false)String n,
+	         @RequestParam(value="category")String c,  
+	         Model model) {
 	      BoardDTO board = service.boardContent(n);
 	      BoardDTO boards = new BoardDTO();
-	      ArrayList<BoardDTO> comments = service.boardComments(boards,n);
+	      ArrayList<BoardDTO> comments = service.boardComments(c,n);
 	      System.out.println(n);
 	      if(board == null) {
 	         System.out.println("boardContent 게시글 번호 : " + n);

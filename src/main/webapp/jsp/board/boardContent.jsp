@@ -40,6 +40,7 @@ function deleteCheck(){
     </c:when>
     <c:otherwise>
         <img id="img" src="/image/${board.fileName}" alt="petImage" />
+
     </c:otherwise>
 </c:choose>
 	   </div>
