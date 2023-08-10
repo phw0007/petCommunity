@@ -27,4 +27,7 @@ public interface BoardMapper {
 	void aboardNoUpdate(int no);
 
 	void aboardCommentNoUpdate(int no);
+
+	void commentDeleteButton(@Param("id")String id, @Param("category")String category, 
+			@Param("no")int no, @Param("writeDate")String writeDate);
 }

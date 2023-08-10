@@ -19,8 +19,8 @@ function getDeleteBoardButton() {
 	getDeleteBoard(url, selectedValues);
 }
 
-function getDeleteBoardComment() {
-	let selectedValues = ['${board.no}','${board.id}','${board.category}','${cp}'];
+function getDeleteBoardComment(writeDate) {
+	let selectedValues = ['${board.no}','${board.id}','${board.category}','${cp}',writeDate];
 	url="boardDeleteComment";
 	getDeleteBoard(url, selectedValues);
 }
@@ -88,7 +88,7 @@ function getDeleteBoard(url, selectedValues) {
 								<div class="comment">
 									<ul>
 										<li><span>작성자</span>${comment.commentId }</li>
-										<li><span>작성일</span>${comment.writeDate }<input type="button" value="X" onclick="getDeleteBoardComment()"/></li>
+										<li><span>작성일</span>${comment.writeDate }<input type="button" value="X" onclick="getDeleteBoardComment('${comment.writeDate}')"/></li>
 									</ul>
 									<p><span>댓글내용</span><textarea readonly="readonly">${comment.commentContent }</textarea></p>
 								</div>

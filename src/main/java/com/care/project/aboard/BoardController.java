@@ -55,30 +55,29 @@ public class BoardController {
 	}
 	
 	/*삭제버튼 클릭시 삭제*/
-	@PostMapping(value = "boardDeleteComment", produces = "text/plain; charset=utf-8")
+	@PostMapping("boardDeleteComment")
 	public String boardDeleteComment(String selectedValues) {
 		String url = service.boardDeleteComment(selectedValues);
-		System.out.println(url);
-		return "redirect:aboardViews?"+url;
+		return "forward:aboardViews?"+url;
 	}
 	
 	@RequestMapping("aboardAnno")
-	public String aboard_anno() {
+	public String aboardAnno() {
 		return "aboard/aboardAnno";
 	}
 	
 	@RequestMapping("aboardAnnoViews")
-	public String aboard_anno_views() {
+	public String aboardAnnoViews() {
 		return "aboard/aboardAnnoViews";
 	}
 	
 	@RequestMapping("aboardAnnoDel")
-	public String aboard_anno_del() {
+	public String aboardAnnoDel() {
 		return "aboard/aboardAnnoDel";
 	}
 	
 	@RequestMapping("aboardAnnoUpdate")
-	public String aboard_anno_update() {
+	public String aboardAnnoUpdate() {
 		return "aboard/aboardAnnoUpdate";
 	}
 

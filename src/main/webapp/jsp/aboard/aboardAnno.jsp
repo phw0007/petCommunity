@@ -49,7 +49,7 @@
 			    	</tr>
 			    </thead>
 			    <tbody>
-			    	<tr onclick="location.href='aboard_anno_views'">
+			    	<tr onclick="location.href='aboardAnnoViews'">
 			    		<td>1</td>
 			    		<td>강아지</td>
 			    		<td>안녕하세요</td>
@@ -73,6 +73,7 @@
 					</select>
 					<input type="text" name="search" class="searchOption"/>
 					<input type="submit" value="검색" class="submitOption"/>
+					<input type="button" value="글쓰기" class="deleteOption" onclick="location.href='delete'"/>
 				</form>
 			</div>
 		</div>

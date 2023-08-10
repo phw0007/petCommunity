@@ -1,7 +1,9 @@
 package com.care.project.aboard;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,7 @@ public class BoardService {
 		
 		BoardDTO board = boardMapper.aboardInfo(id, category, no);
 		ArrayList<BoardDTO> comments = boardMapper.aboardComment(id, category, no);
+		
 		model.addAttribute("comments", comments);
 		model.addAttribute("board", board);
 		model.addAttribute("cp", cp);
@@ -70,15 +73,16 @@ public class BoardService {
 		int sub = 0;
 		for(int i = 3; i <= checkData.length; i+=3) {
 			int no = Integer.parseInt(checkData[i-3]);
+			no -= sub;
 			String id = checkData[i-2];
 			String category = checkData[i-1];
-			System.out.println(no-sub);
+			System.out.println(no);
 			System.out.println(id);
 			System.out.println(category);
-			boardMapper.aboardDelete(id, category, no-sub);
-			boardMapper.aboardCommentDelete(id, category, no-sub);
-			boardMapper.aboardNoUpdate(no-sub);
-			boardMapper.aboardCommentNoUpdate(no-sub);
+			boardMapper.aboardDelete(id, category, no);
+			boardMapper.aboardCommentDelete(id, category, no);
+			boardMapper.aboardNoUpdate(no);
+			boardMapper.aboardCommentNoUpdate(no);
 			sub++;
 		}
 	}
@@ -89,10 +93,8 @@ public class BoardService {
 		String id = checkData[1];
 		String category = checkData[2];
 		String cp = checkData[3];
-		System.out.println(no);
-		System.out.println(id);
-		System.out.println(category);
-		System.out.println(cp);
+		String writeDate = checkData[4];
+		boardMapper.commentDeleteButton(id, category, no, writeDate);
 		return "id="+id+"&category="+category+"&no="+no+"&currentPage="+cp;
 	}
 }

@@ -36,22 +36,36 @@
 		</div>
 		<div class="memberViews">
 			<ul>
-				<li><span>제목</span>안녕하세요</li>
-				<li><span>작성일</span>2023-07-31</li>
-				<li><span>작성자</span>관리자</li>
-				<li><span>내용</span><textarea readonly="readonly"></textarea></li>
-				<li>
-					<div class="comment">
-						<ul>
-							<li><span>작성자</span>관리자</li>
-							<li><span>작성일</span>2023-07-31<a href="">X</a></li>
-						</ul>
-						<p><span>댓글내용</span><textarea readonly="readonly"></textarea></p>
+				<li><span>제목</span>${board.title }</li>
+				<li><span>작성일</span>${board.writeDate }</li>
+				<li><span>작성자</span>${board.id }</li>
+				<li><span>조회수</span>${board.hits }</li>
+				<li><span>추천수</span>${board.likes }</li>
+				<li><span>내용</span>
+					<div class="AnnoContent">
+						<textarea></textarea>
 					</div>
 				</li>
+				<c:choose>
+					<c:when test="${empty comments }">
+					</c:when>
+					<c:otherwise>
+						<li>
+							<c:forEach var="comment" items="${comments}">
+								<div class="comment">
+									<ul>
+										<li><span>작성자</span>${comment.commentId }</li>
+										<li><span>작성일</span>${comment.writeDate }<input type="button" value="X" onclick="getDeleteBoardComment('${comment.writeDate}')"/></li>
+									</ul>
+									<p><span>댓글내용</span><textarea readonly="readonly">${comment.commentContent }</textarea></p>
+								</div>
+							</c:forEach>
+						</li>
+					</c:otherwise>
+				</c:choose>
 				<li>
-					<input type="button" value="확인" class="selectEnd" onclick="location.href='aboardAnno'"/>
-					<input type="button" value="삭제" class="aboardDelete" onclick="location.href=''"/>
+					<input type="button" value="확인" class="selectEnd" onclick="location.href='aboardAnno'" style="margin-left:20px; margin-right:40px;"/>
+					<input type="button" value="삭제" class="aboardDelete" onclick="location.href=''" style="margin-left:20px;"/>
 					<input type="button" value="수정" class="aboardAnnoUpdate" onclick="location.href='aboardAnnoUpdate'"/>
 				</li>
 			</ul>

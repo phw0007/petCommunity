@@ -91,7 +91,13 @@
 	<update id="aboardNoUpdate">
 		UPDATE project_board SET no = no - 1 WHERE no >= #{no}
 	</update>
+	
 	<update id="aboardCommentNoUpdate">
 		UPDATE project_board_comment SET no = no - 1 WHERE no >= #{no}
 	</update>
+	
+	<delete id="commentDeleteButton">
+		DELETE FROM project_board_comment WHERE id=#{id} AND category=#{category} AND no=#{no} AND write_date=#{writeDate}
+	</delete>	
+	
 </mapper>
