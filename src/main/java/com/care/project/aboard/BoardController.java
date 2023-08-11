@@ -66,7 +66,7 @@ public class BoardController {
 	public String aboard_anno() {
 		return "aboard/aboardAnno";
 	}
-	
+	//공지사항 화면
 	@RequestMapping("aboardAnnoViews")
 	public String aboard_anno_views() {
 		return "aboard/aboardAnnoViews";
