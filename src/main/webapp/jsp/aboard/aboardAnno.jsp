@@ -49,7 +49,7 @@
 			    	</tr>
 			    </thead>
 			    <tbody>
-			    	<tr onclick="location.href='aboard_anno_views'">
+			    	<tr onclick="location.href='aboardAnnoViews'">
 			    		<td>1</td>
 			    		<td>강아지</td>
 			    		<td>안녕하세요</td>

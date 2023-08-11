@@ -59,7 +59,7 @@ public class BoardController {
 	public String boardDeleteComment(String selectedValues) {
 		String url = service.boardDeleteComment(selectedValues);
 		System.out.println(url);
-		return "redirect:aboardViews?"+url;
+		return "forward:aboardViews?"+url;
 	}
 	
 	@RequestMapping("aboardAnno")
