@@ -35,21 +35,23 @@
 			</ul>
 		</div>
 		<div class="memberViews">
-			<ul>
-				<li><span>제목</span><input type="text" value="안녕하세요" style="font-size: 22px; font-family: 'Poor Story';"></li>
-				<li><span>작성일</span>2023-07-31</li>
-				<li><span>작성자</span><input type="text" value="관리자" style="font-size: 22px; font-family: 'Poor Story';"></li>
-				<li style="float: none;"><span style="float: left;">내용</span>
-					<div class="AnnoContent">
-						<textarea></textarea>
-					</div>
-				</li>
-				<li>
-					<input type="button" value="취소" class="selectEnd" onclick="location.href='aboardAnno'"
-					style="margin-left:20px; margin-right:80px;"/>
-					<input type="button" value="작성완료" class="selectEnd" onclick="location.href='aboardAnno'"/>
-				</li>
-			</ul>
+			<form action="aboardAnnoRegister">
+				<ul>
+					<li><span>제목</span><input type="text" id="title" name="title" style="font-size: 22px; font-family: 'Poor Story';"></li>
+					<li><span>작성일</span></li>
+					<li><span>작성자</span><input type="text" id="id" name="id" style="font-size: 22px; font-family: 'Poor Story';"></li>
+					<li style="float: none;"><span style="float: left;">내용</span>
+						<div class="AnnoContent">
+							<textarea name="text" id="text"></textarea>
+						</div>
+					</li>
+					<li>
+						<input type="button" value="취소" class="selectEnd" onclick="location.href='aboardAnno'"
+						style="margin-left:20px; margin-right:80px;"/>
+						<input type="submit" value="작성완료" class="selectEnd"/>
+					</li>
+				</ul>
+			</form>
 		</div>
 	</div>
 </div>

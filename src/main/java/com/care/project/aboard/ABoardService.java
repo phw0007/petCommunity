@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 
 import com.care.project.common.PageService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Service
@@ -96,6 +97,40 @@ public class ABoardService {
 		String writeDate = checkData[4];
 		boardMapper.commentDeleteButton(id, category, no, writeDate);
 		return "id="+id+"&category="+category+"&no="+no+"&currentPage="+cp;
+	}
+
+	public void aboardAnno(String cp, String select, String search, Model model, HttpServletRequest request) {
+		if(select == null){
+			select = "";
+		}
+		
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+			
+		if(search == null) {
+			search = "";
+		}
+		
+		int pageBlock = 14; 
+		int end = pageBlock * currentPage; 
+		
+		int begin = end - pageBlock + 1; 
+		int no = 0;
+		ArrayList<ABoardDTO> boards = boardMapper.boardAnnoData(begin, end, select, search);
+		int totalCount = boardMapper.annoCount(select, search);
+		String url = "aboardAnno?select="+select+"&search="+search+"&currentPage=";
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		no = (currentPage-1)*14;
+		model.addAttribute("boards", boards);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("no", no);
+		model.addAttribute("select", select);
+		model.addAttribute("search", search);
 	}
 }
 

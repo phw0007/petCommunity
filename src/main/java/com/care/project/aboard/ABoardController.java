@@ -62,7 +62,9 @@ public class ABoardController {
 	}
 	
 	@RequestMapping("aboardAnno")
-	public String aboardAnno() {
+	public String aboardAnno(@RequestParam(value="currentPage", required = false)String cp,
+		String select, String search, Model model, HttpServletRequest request) {
+		service.aboardAnno(cp, select, search, model, request);
 		return "aboard/aboardAnno";
 	}
 	
@@ -80,5 +82,13 @@ public class ABoardController {
 	public String aboardAnnoUpdate() {
 		return "aboard/aboardAnnoUpdate";
 	}
-
+	
+	@RequestMapping("aboardAnnoRegister")
+	public String aboardAnnoRegister(String id, String title, String text) {
+		System.out.println(id);
+		System.out.println(title);
+		System.out.println(text);
+		return "aboard/aboardAnnoRegister";
+	}
+	
 }

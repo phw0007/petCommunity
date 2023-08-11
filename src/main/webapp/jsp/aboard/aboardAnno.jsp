@@ -88,7 +88,7 @@
 					</select>
 					<input type="text" name="search" class="searchOption" value="${search}"/>
 					<input type="submit" value="검색" class="submitOption"/>
-					<input type="button" value="글쓰기" class="selectEnd" onclick="location.href='aboardAnno'"
+					<input type="button" value="글쓰기" class="selectEnd" onclick="location.href='aboardAnnoRegister'"
 					style="float: right;"/>
 				</form>
 			</div>

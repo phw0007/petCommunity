@@ -100,4 +100,42 @@
 		DELETE FROM project_board_comment WHERE id=#{id} AND category=#{category} AND no=#{no} AND write_date=#{writeDate}
 	</delete>	
 	
+	
+		<select id="boardAnnoData" resultMap="boardDto">
+		<choose>
+			<when test="select == 'title'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE title like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<when test="select == 'id'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE id like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<otherwise>
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE category like ('%공지사항%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="annoCount">
+		<choose>
+	  		<when test="select == 'title'">
+	  			SELECT count(id) FROM project_board WHERE title like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<when test="select == 'id'">
+	  			SELECT count(id) FROM project_board WHERE id like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<otherwise>
+	  			SELECT count(id) FROM project_board WHERE category like ('%공지사항%')
+	  		</otherwise>
+		</choose>
+	</select>
+	
 </mapper>
