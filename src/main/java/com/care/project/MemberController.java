@@ -52,8 +52,8 @@ public class MemberController {
 		return "member/login";
 	}
 	
-	@PostMapping("loginProc")
-	public String loginProc(MemberDTO member) {
+	@PostMapping("mloginProc")
+	public String mloginProc(MemberDTO member) {
 		String result = service.loginProc(member);
 		if(result.equals("로그인 성공")) {
 			return "redirect:index2";
@@ -146,8 +146,8 @@ public class MemberController {
 	}
 	
 	   @ResponseBody
-	    @PostMapping(value = "uploadImage", produces = "text/plain; charset=utf-8") //추가
-	    public String uploadImage(@RequestParam(value="imageFile", required = false) MultipartFile emailFile,
+	    @PostMapping(value = "uploadImage3", produces = "text/plain; charset=utf-8") //추가
+	    public String uploadImage3(@RequestParam(value="imageFile", required = false) MultipartFile emailFile,
 	                         @RequestParam("fileName") String fileName) {
 	         System.out.println(fileName);
 	         service.uploadImage(emailFile, fileName);
@@ -174,3 +174,4 @@ public class MemberController {
 	
 	
 }
+

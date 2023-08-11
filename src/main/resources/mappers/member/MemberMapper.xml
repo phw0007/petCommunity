@@ -44,25 +44,5 @@
 			</otherwise>
 		</choose>
 	</select>
-	<update id="updateProc" parameterType="com.care.project.member.MemberDTO">
-		UPDATE project_register 
-		SET pw=#{pw}, user_name=#{userName}, address=#{address}, mobile=#{mobile} 
-		WHERE id=#{id}
-	</update>
-	
-	<delete id="delete">
-		DELETE FROM project_register WHERE id=#{id}
-	</delete>
-	
-	
-
 	
 </mapper>
-
-
-
-
-
-
-
-  

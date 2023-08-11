@@ -1,46 +1,51 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:import url="/header" />
+<c:import url = "/header"/>
+<link href="/css/board.css" rel="stylesheet" type="text/css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+</style>
+<script src="/dbQuiz.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>boardWrite</title>
+</head>
+<body>
+	<div class="boardWrite">
+		<h1>글쓰기</h1>
+		<form action = "boardWriteProc" method = "post" enctype="multipart/form-data">
+		<select id="category" name="category" size="1" style="width:250px; height:30px;">
+			<option value="">카테고리</option>
+			<option value="자유게시판">자유게시판</option>
+			<option value="Q&A">Q&A</option>
+			<option value="강아지">강아지</option>
+			<option value="고양이">고양이</option>
+			<option value="파충류">파충류</option>
+			<option value="조류">조류</option>
+			<option value="수중생물">수중생물</option>
+			<option value="소동물">소동물</option>
+			<option value="기타동물">기타동물</option>
+		</select><br><br>
+		<input type="text" name="title" placeholder="제목을 입력해주세요." id="title" style="width: 800px; height: 30px;"><br><br>
+	    <textarea class="contentWrite" rows="20" cols="130" name="content" placeholder="내용을 입력해주세요."></textarea><br><br>
+	      파일 첨부 :<label class="input-file" for="upfile">
+          파일선택
+        </label>
+        <input type="file" id="fileImg" class="ashopFile" name="upfile" onchange="fileURL()" accept="image/*"/>
+       <br><br>
+       <input type="button" value="등록" class="ashop_select" onclick="uploadImage2()"/>
+         <div class="button">
+			<input class="write" type = "submit" value = "글 등록하기">
+			<input class="list" type = "button" value = "목록" onclick="location.href = 'freeboardForm'">
+			</div>
+		</form>
+	</div>
 
-<div align="center">
-	<form action="boardWriteProc" method='post' enctype="multipart/form-data">
-		<table>
-			<caption>
-				<font size="5"><b>게시글 등록</b></font>
-			</caption>
-			<tr>
-				<th width="100px">제목</th>
-				<td><input style="width: 100%;" type="text" name="title"></td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td>
-					<textarea style="width: 100%;" rows="10" cols="30" name="content"></textarea>
-				</td>
-			</tr>
-			<tr>
-				<th>파일첨부</th>
-				<td><input type="file" name="upfile"></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center">
-					<input type="submit" value="글쓰기"> 
-					<input type="button" value="목록"	 onclick="location.href='boardForm'">
-				</td>
-			</tr>
-		</table>
-	</form>
-</div>
-<c:import url="/footer" />
-
-
-
-
-
-
-
-
-
-
-
+<c:import url = "/footer"/>
+</body>
+</html>
 

@@ -8,6 +8,7 @@
 
 
 
+
 <div class="userInfo">
 	<h1>마이 페이지 </h1>
 	    <div class="petInfo">
@@ -63,6 +64,9 @@
 </div>	
 
 <c:import url="/footer"/>
+
+
+
 
 
 

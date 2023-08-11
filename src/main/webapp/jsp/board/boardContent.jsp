@@ -1,61 +1,93 @@
-<%@page import="java.io.OutputStream"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:import url="/header" />
 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link href="/css/board.css" rel="stylesheet" type="text/css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+</style>
+<c:import url = "/header"/>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>boardContent</title>
 <script>
-	function deleteCheck(){
-		result = confirm('진짜로 삭제하겠습니까?');
-		if(result == true){
-			location.href='boardDeleteProc?no=${board.no}'
-		}
+function deleteCheck(){
+	result = confirm('진짜로 삭제할거임? 진짜??');
+	if (result == true){
+		location.href='boardDeleteProc?no=${board.no}';
 	}
+}
+
+
 </script>
-<div align="center">
-	<h1>글 내용</h1>
-	<table border='1'>
-		<tr>
-			<th width="100">작성자</th>
-			<td width="200">${board.id }</td>
-			<th width="100">조회수</th>
-			<td width="200">${board.hits }</td>
-		</tr>
-		<tr>
-			<th>작성일</th>
-			<td>${board.writeDate }</td>
-			<th>다운로드</th>
+<script src="/dbQuiz.js"></script>
+</head>
+<body>
+
+	<div class="boardContent">
+	<h1>${board.category}</h1>
+	 <ul>
+	   <li>제목<span>${board.title} </span></li>
+	   <li>작성자<span> ${board.id }</span></li>
+	   <li>작성일<span> ${board.writeDate }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회수<span> ${board.hits}</span></li>
+	   </ul>
+	   <div class="content">
+	   ${board.content} <br><br>
+	<c:choose>
+    <c:when test="${board.fileName == '파일 없음'}">
+        <!-- 파일이 없을 때는 아무것도 출력하지 않음 -->
+    </c:when>
+    <c:otherwise>
+        <img id="img" src="/image/${board.fileName}" alt="petImage" />
+
+    </c:otherwise>
+</c:choose>
+	   </div>
+	   <div class="likeB"><button class="likes" type="button" ><img src="/image/made.png" alt="하트" style="width:70px; height:70px; ">추천수:<span>${board.likes}</span></button></div>
+	 
+	  <div class="contentB">
+			<button class="Clist" type="button" onclick="location.href='freeboardForm'">목록</button>
+			<button class="Cmodify"type="button"
+				onclick="location.href='boardModify?no=${board.no}'">수정</button>
+			<button class="Cdelete" type="button" onclick="deleteCheck()">삭제</button>
+		</div>
+	  <div class="comment">
+	  <h3>댓글</h3>
+		<form action="freecommentProc" method="post"  >	
+		<input type = "hidden" name = "no" value = "${board.no }">
+		<input type = "hidden" name = "category" value = "${board.category }">
+		<textarea rows="5" cols = "100" name = "commentContent" placeholder="댓글을 입력해주세요."></textarea>
+		<button type="submit" style="background:#fcd11e;font-family: 'Poor Story', cursive;border:none; 
+		width:50px;  height:25px;">등록</button>
+		</form>
+
 			<c:choose>
-				<c:when test="${empty board.fileName }">
-					<td></td>
+				<c:when test="${empty comments }">
+				등록된 댓글이 없습니다.
 				</c:when>
 				<c:otherwise>
-					<td onclick="location.href='boardDownload?no=${board.no }'">
-						${board.fileName }
-					</td>
+					<c:forEach var="comment" items="${comments}">
+						<ul>
+							<li><span>${comment.id}</span><b>${comment.writeDate}</b></li>
+							<li>${comment.commentContent}
+							
+								<button type="button" onclick="commentDelete(${comment.commentId})">삭제</button>
+							
+						</ul>
+					</c:forEach>
 				</c:otherwise>
 			</c:choose>
-		</tr>
-		<tr>
-			<th>제목</th>
-			<td colspan="3">${board.title }</td>
-		</tr>
-		<tr>
-			<th>문서내용</th>
-			<td colspan="3">${board.content }</td>
-		</tr>
-		<tr>
-			<td colspan="4">
-				<button type="button" onclick="location.href='boardForm'">목록</button>
-				<button type="button" onclick="location.href='boardModify?no=${board.no }'">수정</button>
-				<button type="button" onclick="deleteCheck()">삭제</button> 
-			</td>
-		</tr>
-	</table>
-</div>
-<c:import url="/footer" />
+		</div>
+       
+       <div class="commentView">
+			
+	
+		</div>
+	</div>
 
 
-
-
-
-
+<c:import url = "/footer"/>
+</body>
+</html>

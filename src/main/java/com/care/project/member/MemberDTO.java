@@ -72,7 +72,8 @@ public class MemberDTO {
 	public void setPetFile(String petFile) {
 		this.petFile = petFile;
 	}
-	
-	
-	
 }
+	
+	
+	
+

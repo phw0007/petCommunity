@@ -4,12 +4,6 @@ package com.care.project;
 
 
 
-
-
-
-
-
-
 import java.io.File;
 
 
@@ -160,6 +154,8 @@ public class MemberService {
 		         }
 		      }
 		   }
+
+
 	
 
 
