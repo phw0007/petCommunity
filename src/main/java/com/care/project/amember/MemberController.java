@@ -28,12 +28,12 @@ public class MemberController {
 		return "aindex/aindex";
 	}
 
-	@RequestMapping("header")
+	@RequestMapping("aheader")
 	public String header() {
 		return "default/header";
 	}
 	
-	@RequestMapping("main")
+	@RequestMapping("amain")
 	public String main() {
 		return "default/main";
 	}

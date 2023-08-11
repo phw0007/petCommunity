@@ -9,8 +9,8 @@
 <title>index</title>
 </head>
 <body>
-	<c:import url="/header"/>
-	<c:import url="/main"/>
+	<c:import url="/aheader"/>
+	<c:import url="/amain"/>
 </body>
 </html>
 
