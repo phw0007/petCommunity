@@ -19,8 +19,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class MemberController {
-	@Autowired private MemberService service;
+public class AMemberController {
+	@Autowired private AMemberService service;
 	@Autowired private HttpSession session;
 	
 	@RequestMapping("aindex")
@@ -30,12 +30,12 @@ public class MemberController {
 
 	@RequestMapping("aheader")
 	public String header() {
-		return "default/header";
+		return "default/aheader";
 	}
 	
 	@RequestMapping("amain")
 	public String main() {
-		return "default/main";
+		return "default/amain";
 	}
 	
 	@RequestMapping({ "/amember", "/amemberDelete", "/amemberMail" })
@@ -55,7 +55,7 @@ public class MemberController {
 	@RequestMapping("amemberInfo")
 	public String amember_info(String id, Model model,
 			@RequestParam(value="currentPage", required = false)String cp) {
-		MemberDTO member = service.amemberInfo(id);		
+		AMemberDTO member = service.amemberInfo(id);		
 		model.addAttribute("member", member);
 		model.addAttribute("cp", cp);
 		return "amember/amemberInfo";
@@ -102,7 +102,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("loginProc")
-	public String loginProc(MemberDTO member) {
+	public String loginProc(AMemberDTO member) {
 		String result = service.loginProc(member);
 		if(result.equals("로그인 성공")) {
 			return "redirect:amember";

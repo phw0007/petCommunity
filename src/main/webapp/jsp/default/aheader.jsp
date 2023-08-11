@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="css/reset.css" rel="stylesheet" type="text/css">
+	<link href="/css/reset.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="/css/aindex.css" type="text/css">
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="header">
-	<a href="aindex"><img src="/image/logo.png" alt="logo" width=90px height=90px/></a>
+	<a href="aindex"><img src="/image/logo2.png" alt="logo" width=90px height=90px/></a>
 	<ul>
 		<li><a href="amember">회원 관리</a></li>
 		<li><a href="aboard">커뮤니티 관리</a></li>

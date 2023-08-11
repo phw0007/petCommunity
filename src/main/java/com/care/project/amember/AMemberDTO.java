@@ -1,6 +1,6 @@
 package com.care.project.amember;
 
-public class MemberDTO {
+public class AMemberDTO {
 /*
 	id varchar2(20),
 	pw varchar2(100),

@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.mail.internet.MimeMessage;
 
 @Service
-public class MailService {
+public class AMailService {
 	@Autowired	private JavaMailSender mailSender;
 
 	public String sendMail(String email, String title, String content, MultipartFile emailFile) {

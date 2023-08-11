@@ -1,7 +1,9 @@
 package com.care.project.aboard;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,8 @@ import com.care.project.common.PageService;
 import jakarta.servlet.http.HttpSession;
 
 @Service
-public class BoardService {
-	@Autowired private BoardMapper boardMapper;
+public class ABoardService {
+	@Autowired private ABoardMapper boardMapper;
 	@Autowired private HttpSession session;
 	public void aboard(String cp, String select, String search, Model model, String requestUrl) {
 		if(select == null){
@@ -37,7 +39,7 @@ public class BoardService {
 		
 		int begin = end - pageBlock + 1; 
 		int no = 0;
-		ArrayList<BoardDTO> boards = boardMapper.boardData(begin, end, select, search);
+		ArrayList<ABoardDTO> boards = boardMapper.boardData(begin, end, select, search);
 		int totalCount = boardMapper.count(select, search);
 		String url = requestUrl+"?select="+select+"&search="+search+"&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
@@ -58,8 +60,9 @@ public class BoardService {
 			currentPage = 1;
 		}
 		
-		BoardDTO board = boardMapper.aboardInfo(id, category, no);
-		ArrayList<BoardDTO> comments = boardMapper.aboardComment(id, category, no);
+		ABoardDTO board = boardMapper.aboardInfo(id, category, no);
+		ArrayList<ABoardDTO> comments = boardMapper.aboardComment(id, category, no);
+		
 		model.addAttribute("comments", comments);
 		model.addAttribute("board", board);
 		model.addAttribute("cp", cp);
@@ -73,6 +76,9 @@ public class BoardService {
 			no -= sub;
 			String id = checkData[i-2];
 			String category = checkData[i-1];
+			System.out.println(no);
+			System.out.println(id);
+			System.out.println(category);
 			boardMapper.aboardDelete(id, category, no);
 			boardMapper.aboardCommentDelete(id, category, no);
 			boardMapper.aboardNoUpdate(no);
@@ -90,28 +96,6 @@ public class BoardService {
 		String writeDate = checkData[4];
 		boardMapper.commentDeleteButton(id, category, no, writeDate);
 		return "id="+id+"&category="+category+"&no="+no+"&currentPage="+cp;
-	}
-
-	public void aboardAnno(String cp, String select, String search, Model model) {
-		int currentPage = 1;
-		try{
-			currentPage = Integer.parseInt(cp);
-		}catch(Exception e){
-			currentPage = 1;
-		}
-		
-		int pageBlock = 3; // 한 페이지에 보일 데이터의 수 
-		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
-		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
-	
-		ArrayList<BoardDTO> boards = boardMapper.boardData(begin, end, select, search);
-		int totalCount = boardMapper.count(select, search);
-		String url = "boardForm?currentPage=";
-		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
-		
-		model.addAttribute("boards", boards);
-		model.addAttribute("result", result);
-		model.addAttribute("currentPage", currentPage);
 	}
 }
 

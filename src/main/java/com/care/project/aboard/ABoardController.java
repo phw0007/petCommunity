@@ -15,8 +15,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class BoardController {
-	@Autowired private BoardService service;
+public class ABoardController {
+	@Autowired private ABoardService service;
 	@Autowired private HttpSession session;
 	
 	@RequestMapping({"/aboard", "/aboardDelete"})
@@ -31,13 +31,6 @@ public class BoardController {
 		}else {
 			return "aboard/aboardAnnoDel";
 		}
-	}
-	
-	@RequestMapping("aboardAnno")
-	public String aboardAnno(@RequestParam(value="currentPage", required = false)String cp,
-			String select, String search, Model model) {
-		service.aboardAnno(cp, select, search, model);
-		return "aboard/aboardAnno";
 	}
 
 	@RequestMapping("aboardViews")
@@ -62,31 +55,29 @@ public class BoardController {
 	}
 	
 	/*삭제버튼 클릭시 삭제*/
-	@PostMapping(value = "boardDeleteComment", produces = "text/plain; charset=utf-8")
+	@PostMapping("boardDeleteComment")
 	public String boardDeleteComment(String selectedValues) {
 		String url = service.boardDeleteComment(selectedValues);
-		System.out.println(url);
 		return "forward:aboardViews?"+url;
 	}
 	
-	//공지사항 화면
+	@RequestMapping("aboardAnno")
+	public String aboardAnno() {
+		return "aboard/aboardAnno";
+	}
+	
 	@RequestMapping("aboardAnnoViews")
-	public String aboard_anno_views() {
+	public String aboardAnnoViews() {
 		return "aboard/aboardAnnoViews";
 	}
 	
 	@RequestMapping("aboardAnnoDel")
-	public String aboard_anno_del() {
+	public String aboardAnnoDel() {
 		return "aboard/aboardAnnoDel";
 	}
 	
-	@RequestMapping("aboardAnnoRegister")
-	public String aboardAnnoRegister() {
-		return "aboard/aboardAnnoRegister";
-	}
-	
 	@RequestMapping("aboardAnnoUpdate")
-	public String aboard_anno_update() {
+	public String aboardAnnoUpdate() {
 		return "aboard/aboardAnnoUpdate";
 	}
 

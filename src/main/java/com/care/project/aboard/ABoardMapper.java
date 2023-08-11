@@ -6,16 +6,16 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
-public interface BoardMapper {
+public interface ABoardMapper {
 	int count(@Param("select")String select, @Param("search")String search);
 
-	BoardDTO aboardInfo(@Param("id")String id, @Param("category")String category,
+	ABoardDTO aboardInfo(@Param("id")String id, @Param("category")String category,
 			@Param("no")int no);
 
-	ArrayList<BoardDTO> boardData(@Param("begin")int begin, @Param("end")int end, 
+	ArrayList<ABoardDTO> boardData(@Param("begin")int begin, @Param("end")int end, 
 			@Param("select")String select, @Param("search")String search);
 
-	ArrayList<BoardDTO> aboardComment(@Param("id")String id, @Param("category")String category, 
+	ArrayList<ABoardDTO> aboardComment(@Param("id")String id, @Param("category")String category, 
 			@Param("no")int no);
 
 	void boardDelete(String name);

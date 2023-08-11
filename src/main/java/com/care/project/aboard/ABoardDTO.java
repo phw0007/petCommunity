@@ -1,6 +1,6 @@
 package com.care.project.aboard;
 
-public class BoardDTO {
+public class ABoardDTO {
 /*
 CREATE TABLE project_board(
 id VARCHAR2(21),
