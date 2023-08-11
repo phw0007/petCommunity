@@ -28,14 +28,14 @@ public class AMemberController {
 		return "aindex/aindex";
 	}
 
-	@RequestMapping("header")
+	@RequestMapping("aheader")
 	public String header() {
-		return "default/header";
+		return "default/aheader";
 	}
 	
-	@RequestMapping("main")
+	@RequestMapping("amain")
 	public String main() {
-		return "default/main";
+		return "default/amain";
 	}
 	
 	@RequestMapping({ "/amember", "/amemberDelete", "/amemberMail" })

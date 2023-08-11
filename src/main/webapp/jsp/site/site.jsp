@@ -13,7 +13,7 @@
 <title>index</title>
 </head>
 <body>
-<c:import url="/header" />
+<c:import url="/aheader" />
 <div class="member">
 	<div class="member_item">
 		<h3>사이트 관리</h3>

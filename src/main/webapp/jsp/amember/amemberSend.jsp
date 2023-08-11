@@ -13,7 +13,7 @@
 </head>
 <body>
 <script src="/dbQuiz.js"></script>
-<c:import url="/header" />
+<c:import url="/aheader" />
 	<div class="member">
 	<div class="memberItem">
 		<h3>회원 관리</h3>

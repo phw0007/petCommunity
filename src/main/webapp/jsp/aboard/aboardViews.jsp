@@ -44,7 +44,7 @@ function getDeleteBoard(url, selectedValues) {
 	}
 }
 </script>
-<c:import url="/header" />
+<c:import url="/aheader" />
 	<div class="member">
 	<div class="memberItem">
 		<h3>커뮤니티 관리</h3>

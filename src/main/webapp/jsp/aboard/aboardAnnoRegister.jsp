@@ -45,8 +45,9 @@
 					</div>
 				</li>
 				<li>
-					<input type="button" value="수정완료" class="selectEnd" onclick="location.href='aboardAnno'"
-					style="float: right; margin-right:80px;"/>
+					<input type="button" value="취소" class="selectEnd" onclick="location.href='aboardAnno'"
+					style="margin-left:20px; margin-right:80px;"/>
+					<input type="button" value="작성완료" class="selectEnd" onclick="location.href='aboardAnno'"/>
 				</li>
 			</ul>
 		</div>
