@@ -168,5 +168,14 @@ public class BoardController {
 	   
 		return "board/boardContent";
 	}
+	
+	@PostMapping("commentDelete")
+	public String commentDelete(String selectedValues) {
+		
+		String url= service.commentDeleteProc(selectedValues);
+		System.out.println(url);
+      return "forward:boardContent?"+url;
+      
+	}
 	   
 }

@@ -18,10 +18,32 @@ function deleteCheck(){
 		location.href='boardDeleteProc?no=${board.no}';
 	}
 }
-
+function commentDelete(writeDate){
+	let selectedValues = ['${board.no}','${board.id}','${board.category}','${cp}',writeDate];
+	url="commentDelete"
+	commentDeleteProc(url,selectedValues);
+}
+function commentDeleteProc(url,selectedValues){
+	if(window.confirm("삭제하시겠습니까?")){
+	    const form = document.createElement('form'); // form 태그 생성
+	    form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
+	    form.setAttribute('action', url); // 전송할 url 지정
+	    
+	    const data = document.createElement('input'); // input 태그 생성
+	    data.setAttribute('type', 'hidden'); // type = hidden
+	    data.setAttribute('name', 'selectedValues'); // 데이터의 key
+	   	data.setAttribute('value', selectedValues); // 데이터의 value (여기서는 data1)
+	
+	    form.appendChild(data);
+		
+	    document.body.appendChild(form);
+	
+	    form.submit();      
+	}
+}
 
 </script>
-<script src="/dbQuiz.js"></script>
+
 </head>
 <body>
 
@@ -71,19 +93,17 @@ function deleteCheck(){
 						<ul>
 							<li><span>${comment.id}</span><b>${comment.writeDate}</b></li>
 							<li>${comment.commentContent}
-							
-								<button type="button" onclick="commentDelete(${comment.commentId})">삭제</button>
-							
+							 <input type="button" value="X" onclick="commentDelete('${comment.writeDate}')"/>
+							  <!--   <form action="commentDelete" method="post">
+							  
+								<button type="button" onclick="commentDelete('${comment.writeDate}')">삭제</button>
+							  </form>-->
 						</ul>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
 		</div>
-       
-       <div class="commentView">
-			
-	
-		</div>
+ 
 	</div>
 
 

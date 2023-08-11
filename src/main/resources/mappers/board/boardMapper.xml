@@ -69,4 +69,8 @@
       <select id="freeComment" resultMap="boardDto">
 		select no,id,write_date,comment_content from project_board_comment where category=#{category} AND no=#{no} order by write_date desc
 	</select>
+	
+	<delete id="commentDeleteProc">
+	   DELETE FROM project_board_comment WHERE id=#{id} AND category=#{category} AND no=#{no} AND write_date=#{writeDate}
+	</delete>
 </mapper>

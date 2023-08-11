@@ -20,4 +20,6 @@ public interface BoardMapper {
 	void boardDeleteProc(int no);
 	void freecommentProc(BoardDTO board);
 	ArrayList<BoardDTO> freeComment(int no,String category);
+	void commentDeleteProc(@Param("id")String id, @Param("category")String category, 
+			@Param("no")int no, @Param("writeDate")String writeDate);
 }

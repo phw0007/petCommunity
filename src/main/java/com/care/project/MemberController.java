@@ -93,6 +93,10 @@ public class MemberController {
 	public String bag() {
 		return "member/bag";
 	}
+	@GetMapping("info")
+	public String info() {
+		return "mall/info";
+	}
 	@GetMapping("shopping")
 	public String shopping() {
 		return "mall/shopping";

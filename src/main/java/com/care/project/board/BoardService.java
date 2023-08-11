@@ -194,37 +194,7 @@ public class BoardService {
 		return "게시글 수정 완료";
 	}
 
-	public String boardDeleteProc(String n) {
-		String id = (String)session.getAttribute("id");
-		if(id == null || id.isEmpty()) {
-			return "로그인";
-		}
-		
-		int no = 0;
-		try{
-			no = Integer.parseInt(n);
-		}catch(Exception e){
-			return "게시글 번호에 문제가 생겼습니다.";
-		}
-		
-		BoardDTO board = boardMapper.boardContent(no);
-		if(board == null)
-			return "게시글 번호에 문제가 생겼습니다.";
-		
-		if(id.equals(board.getId()) == false)
-			return "작성자만 삭제 할 수 있습니다.";
-		
-		boardMapper.boardDeleteProc(no);
-		
-		String path = "/opt/tomcat/tomcat-10/webapps/upload/" + board.getFileName();
-		File file = new File(path);
-		if(file.exists() == true) {
-			file.delete();
-		}
-		
-		return "게시글 삭제 완료";
-	}
-
+	
 	public void freeboardForm(String cp, Model model) {
 		int currentPage = 1;
 		try{
@@ -300,6 +270,52 @@ public class BoardService {
       ArrayList<BoardDTO> comments = boardMapper.freeComment(no,c);
       return comments;
    }
+
+	  public String boardDeleteProc(String n) {
+			String id = (String)session.getAttribute("id");
+			if(id == null || id.isEmpty()) {
+				return "로그인";
+			}
+			
+			int no = 0;
+			try{
+				no = Integer.parseInt(n);
+			}catch(Exception e){
+				return "게시글 번호에 문제가 생겼습니다.";
+			}
+			
+			BoardDTO board = boardMapper.boardContent(no);
+			if(board == null)
+				return "게시글 번호에 문제가 생겼습니다.";
+			
+			if(id.equals(board.getId()) == false)
+				return "작성자만 삭제 할 수 있습니다.";
+			
+			boardMapper.boardDeleteProc(no);
+			
+			String path = "/opt/tomcat/tomcat-10/webapps/upload/" + board.getFileName();
+			File file = new File(path);
+			if(file.exists() == true) {
+				file.delete();
+			}
+			
+			return "게시글 삭제 완료";
+		}
+
+	public String commentDeleteProc(String selectedValues) {
+		String[] check = selectedValues.split(",");
+		int no = Integer.parseInt(check[0]);
+		String id=check[1];
+		String category=check[2];
+		String cp=check[3];
+		String writeDate=check[4];
+		boardMapper.commentDeleteProc(id,category,no,writeDate);
+//String id = (String)session.getAttribute("id");
+//		if(id == null || id.isEmpty()) {
+//			return "로그인";
+//		}
+		return "id="+id+"&category="+category+"&no="+no+"&currentPage="+cp;
+	}
 }
 
 
