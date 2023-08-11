@@ -32,6 +32,13 @@ public class BoardController {
 			return "aboard/aboardAnnoDel";
 		}
 	}
+	
+	@RequestMapping("aboardAnno")
+	public String aboardAnno(@RequestParam(value="currentPage", required = false)String cp,
+			String select, String search, Model model) {
+		service.aboardAnno(cp, select, search, model);
+		return "aboard/aboardAnno";
+	}
 
 	@RequestMapping("aboardViews")
 	public String aboard_views(String id, String category, int no, Model model,
@@ -62,10 +69,6 @@ public class BoardController {
 		return "forward:aboardViews?"+url;
 	}
 	
-	@RequestMapping("aboardAnno")
-	public String aboard_anno() {
-		return "aboard/aboardAnno";
-	}
 	//공지사항 화면
 	@RequestMapping("aboardAnnoViews")
 	public String aboard_anno_views() {
@@ -75,6 +78,11 @@ public class BoardController {
 	@RequestMapping("aboardAnnoDel")
 	public String aboard_anno_del() {
 		return "aboard/aboardAnnoDel";
+	}
+	
+	@RequestMapping("aboardAnnoRegister")
+	public String aboardAnnoRegister() {
+		return "aboard/aboardAnnoRegister";
 	}
 	
 	@RequestMapping("aboardAnnoUpdate")

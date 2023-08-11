@@ -91,6 +91,28 @@ public class BoardService {
 		boardMapper.commentDeleteButton(id, category, no, writeDate);
 		return "id="+id+"&category="+category+"&no="+no+"&currentPage="+cp;
 	}
+
+	public void aboardAnno(String cp, String select, String search, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 3; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+	
+		ArrayList<BoardDTO> boards = boardMapper.boardData(begin, end, select, search);
+		int totalCount = boardMapper.count(select, search);
+		String url = "boardForm?currentPage=";
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("boards", boards);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+	}
 }
 
 
