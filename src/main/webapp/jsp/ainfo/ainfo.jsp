@@ -50,11 +50,11 @@
 				<c:forEach var="info" items="${infos}">
 					<tr onclick="location.href=''">
 						<td>${no=no+1}</td>
-						<td>${board.category }</td>
-						<td>${board.name }</td>
-						<td>${board.email }</td>
-						<td>${board.address }</td>
-						<td>${board.mobile }</td>
+						<td>${info.category }</td>
+						<td>${info.name }</td>
+						<td>${info.email }</td>
+						<td>${info.address }</td>
+						<td>${info.mobile }</td>
 					</tr>
 				</c:forEach>
 				</tbody>

@@ -22,7 +22,7 @@ public class AInfoController {
 			String select, String search, Model model, HttpServletRequest request) {
 		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		service.ainfo(cp, select, search, model, requestUrl);
-		if("/aboard".equals(requestUrl)) {
+		if("/ainfo".equals(requestUrl)) {
 			return "ainfo/ainfo";
 		}else {
 			return "ainfo/ainfoDelete";

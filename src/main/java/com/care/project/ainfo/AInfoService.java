@@ -37,12 +37,12 @@ public class AInfoService {
 		
 		int begin = end - pageBlock + 1; 
 		int no = 0;
-		ArrayList<ABoardDTO> boards = infoMapper.boardData(begin, end, select, search);
+		ArrayList<AInfoDTO> infos = infoMapper.AInfoData(begin, end, select, search);
 		int totalCount = infoMapper.count(select, search);
 		String url = requestUrl+"?select="+select+"&search="+search+"&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		no = (currentPage-1)*14;
-		model.addAttribute("boards", boards);
+		model.addAttribute("infos", infos);
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("no", no);
