@@ -35,20 +35,22 @@
 			</ul>
 		</div>
 		<div class="memberViews">
-			<ul>
-				<li><span>제목</span><input type="text" value="안녕하세요" style="font-size: 22px; font-family: 'Poor Story';"></li>
-				<li><span>작성일</span>2023-07-31</li>
-				<li><span>작성자</span><input type="text" value="관리자" style="font-size: 22px; font-family: 'Poor Story';"></li>
-				<li style="float: none;"><span style="float: left;">내용</span>
-					<div class="AnnoContent">
-						<textarea></textarea>
-					</div>
-				</li>
-				<li>
-					<input type="button" value="수정완료" class="selectEnd" onclick="location.href='aboardAnno'"
-					style="float: right; margin-right:80px;"/>
-				</li>
-			</ul>
+			<form class="annoUpdate" action="aboardAnnoUpdateProc">
+				<ul>
+					<li><span>제목</span><input type="text" id="title" name="title" value="${title }" style="font-size: 22px; font-family: 'Poor Story';"></li>
+					<li><span>작성일</span>${writeDate}</li>
+					<li><span>작성자</span><input type="text" value="${id }" id="id" name="id" style="font-size: 22px; font-family: 'Poor Story';" readonly="readonly"></li>
+					<li style="float: none;"><span style="float: left;">내용</span>
+						<div class="AnnoContent">
+							<textarea name="text" id="text">${content }</textarea>
+						</div>
+					</li>
+					<li>
+						<input type="submit" value="수정완료" class="selectEnd" style="float: right; margin-right:60px;"/>
+						<input type="hidden" name="no" id="no" value="${no}">
+					</li>
+				</ul>
+			</form>
 		</div>
 	</div>
 </div>

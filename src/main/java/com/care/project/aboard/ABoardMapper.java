@@ -31,10 +31,12 @@ public interface ABoardMapper {
 	void commentDeleteButton(@Param("id")String id, @Param("category")String category, 
 			@Param("no")int no, @Param("writeDate")String writeDate);
 
-	
-	
 	ArrayList<ABoardDTO> boardAnnoData(@Param("begin")int begin, @Param("end")int end, 
 			@Param("select")String select, @Param("search")String search);
 
 	int annoCount(@Param("select")String select, @Param("search")String search);
+
+	void aboardAnnoRegister(ABoardDTO aboardDto);
+
+	void aboardAnnoUpdate(ABoardDTO aboardDto);
 }

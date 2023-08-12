@@ -75,7 +75,9 @@ function getDeleteBoard(url, selectedValues) {
 				<li><span>추천수</span>${board.likes }</li>
 				<li><span>내용</span>
 					<div class="content">
-						<img src=${board.fileName } alt="pet" width=140px height=200px/><br>
+						<c:if test="${board.fileName != null}">
+							<img src=${board.fileName } alt="pet" width=140px height=200px/><br>
+						</c:if>
 						${board.content }
 					</div>
 				</li>

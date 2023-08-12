@@ -132,6 +132,49 @@ public class ABoardService {
 		model.addAttribute("select", select);
 		model.addAttribute("search", search);
 	}
+
+
+	public void aboardAnnoRegister(String id, String title, String content) {
+		ABoardDTO aboardDto = new ABoardDTO();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    String writeDate = sdf.format(new Date());
+	    aboardDto.setId(id);
+	    aboardDto.setTitle(title);
+	    aboardDto.setContent(content);
+	    aboardDto.setCategory("공지사항");
+	    aboardDto.setFileName("");
+	    aboardDto.setWriteDate(writeDate);
+	    boardMapper.aboardAnnoRegister(aboardDto);
+	}
+
+	public void aboardAnnoUpdate(String selectedValues, Model model) {
+		String[] checkData = selectedValues.split(",");
+		String id = checkData[0];
+		String title = checkData[1];
+		String writeDate = checkData[2];
+		String content = checkData[3];
+		String no = checkData[4];
+		model.addAttribute("no", no);
+		model.addAttribute("id", id);
+		model.addAttribute("title", title);
+		model.addAttribute("writeDate", writeDate);
+		model.addAttribute("content", content);
+	}
+
+	public void aboardAnnoUpdate(String no, String id, String title, String content) {
+		ABoardDTO aboardDto = new ABoardDTO();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    String writeDate = sdf.format(new Date());
+	    int noData = Integer.parseInt(no);
+	    aboardDto.setNo(noData);
+	    aboardDto.setId(id);
+	    aboardDto.setTitle(title);
+	    aboardDto.setContent(content);
+	    aboardDto.setCategory("공지사항");
+	    aboardDto.setFileName("");
+	    aboardDto.setWriteDate(writeDate);
+	    boardMapper.aboardAnnoUpdate(aboardDto);
+	}
 }
 
 

@@ -35,11 +35,10 @@
 			</ul>
 		</div>
 		<div class="memberViews">
-			<form action="aboardAnnoRegister">
+			<form class="annoRegister" action="aboardAnnoRegisterProc">
 				<ul>
 					<li><span>제목</span><input type="text" id="title" name="title" style="font-size: 22px; font-family: 'Poor Story';"></li>
-					<li><span>작성일</span></li>
-					<li><span>작성자</span><input type="text" id="id" name="id" style="font-size: 22px; font-family: 'Poor Story';"></li>
+					<li><span>작성자</span><input type="text" id="id" name="id" value="admin" readonly="readonly" style="font-size: 22px; font-family: 'Poor Story';"></li>
 					<li style="float: none;"><span style="float: left;">내용</span>
 						<div class="AnnoContent">
 							<textarea name="text" id="text"></textarea>

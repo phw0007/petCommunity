@@ -7,14 +7,13 @@
 	<resultMap type="com.care.project.aboard.ABoardDTO" id="boardDto">
 		<id column="no" property="no"/>
 		<result column="id" property="id"/>
-		<result column="no" property="no"/>
+		<result column="category" property="category"/>
 		<result column="title" property="title"/>
 		<result column="content" property="content"/>
 		<result column="file_name" property="fileName"/>
 		<result column="write_date" property="writeDate"/>
 		<result column="hits" property="hits"/>
 		<result column="likes" property="likes"/>
-		<result column="category" property="category"/>
 		<result column="comment_id" property="commentId"/>
 		<result column="comment_content" property="commentContent"/>
 	</resultMap>
@@ -137,5 +136,16 @@
 	  		</otherwise>
 		</choose>
 	</select>
+	
+	<insert id="aboardAnnoRegister">
+		<selectKey order="BEFORE" keyProperty="no" resultType="int">
+			SELECT nvl(max(no),0) + 1 FROM project_board
+		</selectKey>
+		INSERT INTO project_board VALUES(#{no}, #{id}, #{category}, #{title}, #{content}, #{fileName}, #{writeDate}, 0, 0)
+	</insert>
+	
+	<update id="aboardAnnoUpdate">
+		UPDATE project_board SET title=#{title}, content=#{content}, write_date=#{writeDate} WHERE no=#{no}
+	</update>
 	
 </mapper>
