@@ -15,26 +15,26 @@
 <body>
 <c:import url="/aheader" />
 <div class="member">
-	<div class="member_item">
+	<div class="memberItem">
 		<h3>업체정보 관리</h3>
 		<ul>
 			<li><a href="ainfo" >업체 목록</a></li>
-			<li><a href="ainfo_register">업체정보 등록</a></li>
-			<li><a href="ainfo_delete" style="font-weight: bold;">업체정보 삭제</a></li>
+			<li><a href="ainfoRegister">업체정보 등록</a></li>
+			<li><a href="ainfoDelete" style="font-weight: bold;">업체정보 삭제</a></li>
 		</ul>
 	</div>
-	<div class="member_main">
-		<div class="member_title">
+	<div class="memberMain">
+		<div class="memberTitle">
 			<p>업체정보 삭제</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
 				<li>></li>
 				<li><a href="ainfo">업체정보 관리</a></li>
 				<li>></li>
-				<li><a href="ainfo_delete">업체정보 삭제</a></li>
+				<li><a href="ainfoDelete">업체정보 삭제</a></li>
 			</ul>
 		</div>
-		<div class="member_info">
+		<div class="memberInfo">
 			<table>
 				<thead>
 			    	<tr>
@@ -59,20 +59,20 @@
 			    	</tr>
 			</table>
 		</div>
-		<div class="member_search">
+		<div class="memberSearch">
 			<a href=""><</a><a href="">1</a><a href="">></a>
-			<div class="select_search">
+			<div class="selectSearch">
 				<form action="memberSelect">
-					<select name="select" class="select_option">
+					<select name="select" class="selectOption">
 						<option value="">전체</option>
 						<option value="id">업체 분류</option>
 						<option value="name">업체 이름</option>
 						<option value="address">주소</option>
 						<option value="mobile">전화번호</option>
 					</select>
-					<input type="text" name="search" class="search_option"/>
-					<input type="submit" value="검색" class="submit_option"/>
-					<input type="button" value="삭제" class="delete_option" onclick="location.href='delete'"/>
+					<input type="text" name="search" class="searchOption"/>
+					<input type="submit" value="검색" class="submitOption"/>
+					<input type="button" value="삭제" class="deleteOption" onclick="location.href='delete'"/>
 				</form>
 			</div>
 		</div>

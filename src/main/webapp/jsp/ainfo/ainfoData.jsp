@@ -15,16 +15,16 @@
 <body>
 <c:import url="/aheader" />
 <div class="member">
-	<div class="member_item">
+	<div class="memberItem">
 		<h3>업체정보 관리</h3>
 		<ul>
 			<li><a href="ainfo" style="font-weight: bold;">업체 목록</a></li>
-			<li><a href="ainfo_register" >업체정보 등록</a></li>
-			<li><a href="ainfo_delete">업체정보 삭제</a></li>
+			<li><a href="ainfoRegister" >업체정보 등록</a></li>
+			<li><a href="ainfoDelete">업체정보 삭제</a></li>
 		</ul>
 	</div>
-	<div class="member_main">
-		<div class="member_title">
+	<div class="memberMain">
+		<div class="memberTitle">
 			<p>업체 목록</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
@@ -42,7 +42,7 @@
 				<li><span>홈페이지</span>동물병원@naver.com</li>
 				<li><span>비고</span>비고</li>
 			</ul>
-			<input type="button" value="확인" class="info_button" onclick="location.href='ainfo'"/>
+			<input type="button" value="확인" class="infoButton" onclick="location.href='ainfo'"/>
 		</div>
 	</div>
 </div>

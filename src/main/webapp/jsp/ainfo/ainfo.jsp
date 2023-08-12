@@ -15,16 +15,16 @@
 <body>
 <c:import url="/aheader" />
 <div class="member">
-	<div class="member_item">
+	<div class="memberItem">
 		<h3>업체정보 관리</h3>
 		<ul>
 			<li><a href="ainfo" style="font-weight: bold;">업체 목록</a></li>
-			<li><a href="ainfo_register">업체정보 등록</a></li>
-			<li><a href="ainfo_delete">업체정보 삭제</a></li>
+			<li><a href="ainfoRegister">업체정보 등록</a></li>
+			<li><a href="ainfoDelete">업체정보 삭제</a></li>
 		</ul>
 	</div>
-	<div class="member_main">
-		<div class="member_title">
+	<div class="memberMain">
+		<div class="memberTitle">
 			<p>업체 목록</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
@@ -34,7 +34,7 @@
 				<li><a href="ainfo">업체 목록</a></li>
 			</ul>
 		</div>
-		<div class="member_info">
+		<div class="memberInfo">
 			<table>
 				<thead>
 			    	<tr>
@@ -47,29 +47,64 @@
 			    	</tr>
 			    </thead>
 			    <tbody>
-			    	<tr>
-			    		<td>1</td>
-			    		<td>동물병원</td>
-			    		<td onclick="location.href='ainfo_data'">동물병원</td>
-			    		<td>1234@naver.com</td>
-			    		<td>서울특별시</td>
-			    		<td>010-1234-1234</td>
-			    	</tr>
+				<c:forEach var="info" items="${infos}">
+					<tr onclick="location.href=''">
+						<td>${no=no+1}</td>
+						<td>${board.category }</td>
+						<td>${board.name }</td>
+						<td>${board.email }</td>
+						<td>${board.address }</td>
+						<td>${board.mobile }</td>
+					</tr>
+				</c:forEach>
+				</tbody>
 			</table>
 		</div>
-		<div class="member_search">
-			<a href=""><</a><a href="">1</a><a href="">></a>
-			<div class="select_search">
-				<form action="memberSelect">
-					<select name="select" class="select_option">
-						<option value="">전체</option>
-						<option value="id">업체 분류</option>
-						<option value="name">업체 이름</option>
-						<option value="address">주소</option>
-						<option value="mobile">전화번호</option>
+		<div class="memberSearch">
+					<div> ${result}	</div>
+			<div class="selectSearch">
+				<form action="aboard">
+					<select name="select" class="selectOption">
+						<c:choose>
+							<c:when test="${select == 'category'}">
+								<option value="">전체</option>
+								<option value="category" selected="selected">게시판명</option>
+								<option value="name">업체 이름</option>
+								<option value="address">주소</option>
+								<option value="mobile">전화번호</option>
+							</c:when>
+							<c:when test="${select == 'name'}">
+								<option value="">전체</option>
+								<option value="category">게시판명</option>
+								<option value="name" selected="selected">업체 이름</option>
+								<option value="address">주소</option>
+								<option value="mobile">전화번호</option>
+							</c:when>
+							<c:when test="${select == 'address'}">
+								<option value="">전체</option>
+								<option value="category">게시판명</option>
+								<option value="name">업체 이름</option>
+								<option value="address" selected="selected">주소</option>
+								<option value="mobile">전화번호</option>
+							</c:when>
+							<c:when test="${select == 'mobile'}">
+								<option value="">전체</option>
+								<option value="category">게시판명</option>
+								<option value="name">업체 이름</option>
+								<option value="address">주소</option>
+								<option value="mobile" selected="selected">전화번호</option>
+							</c:when>
+							<c:otherwise>
+								<option value="">전체</option>
+								<option value="category">게시판명</option>
+								<option value="name">업체 이름</option>
+								<option value="address">주소</option>
+								<option value="mobile">전화번호</option>
+							</c:otherwise>
+						</c:choose>
 					</select>
-					<input type="text" name="search" class="search_option"/>
-					<input type="submit" value="검색" class="submit_option"/>
+					<input type="text" name="search" class="searchOption" value="${search}"/>
+					<input type="submit" value="검색" class="submitOption"/>
 				</form>
 			</div>
 		</div>
