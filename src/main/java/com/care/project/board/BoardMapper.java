@@ -18,4 +18,6 @@ public interface BoardMapper {
 	String boardDownload(int no);
 	void boardModifyProc(BoardDTO board);
 	void boardDeleteProc(int no);
+	void freecommentProc(BoardDTO board);
+	ArrayList<BoardDTO> freeComment(int no,String category);
 }

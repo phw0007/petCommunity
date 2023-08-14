@@ -1,6 +1,7 @@
 package com.care.project.board;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,8 +28,8 @@ public class BoardController {
 		return "board/boardForm";
 	}
 	
-	@GetMapping("freeboardForm")
-	public String freeboardForm(@RequestParam(value="currentPage", required=false)String cp, Model model) {
+	@RequestMapping("freeboardForm")
+	public String freeboardForm(@RequestParam(value="currentPage", required=false)String cp,Model model) {
 		service.freeboardForm(cp, model);
 		return "board/freeboardForm";
 	}
@@ -50,24 +51,29 @@ public class BoardController {
 			return "redirect:login";
 		}
 		if(msg.equals("게시글 작성 완료")) {
-			return "redirect:boardForm"; //forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
+			return "redirect:freeboardForm"; //forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
 		}
 		model.addAttribute("msg", msg);
 		return "board/boardWrite";
 	}
 	
-	@RequestMapping("boardContent")
-	public String boardContent(
-			@RequestParam(value="no", required = false)String n, Model model) {
-		BoardDTO board = service.boardContent(n);
-		System.out.println(n);
-		if(board == null) {
-			System.out.println("boardContent 게시글 번호 : " + n);
-			return "redirect:freeboardForm";
-		}
-		model.addAttribute("board", board);
-		return "board/boardContent";
-	}
+	   @RequestMapping("boardContent")
+	   public String boardContent(
+	         @RequestParam(value="no", required = false)String n,
+	         @RequestParam(value="category")String c,  
+	         Model model) {
+	      BoardDTO board = service.boardContent(n);
+	      BoardDTO boards = new BoardDTO();
+	      ArrayList<BoardDTO> comments = service.boardComments(c,n);
+	      System.out.println(n);
+	      if(board == null) {
+	         System.out.println("boardContent 게시글 번호 : " + n);
+	         return "redirect:freeboardForm";
+	      }
+	      model.addAttribute("board", board);
+	      model.addAttribute("comments", comments);
+	      return "board/boardContent";
+	   }
 	
 	
 	@RequestMapping("boardDownload")
@@ -139,12 +145,28 @@ public class BoardController {
 		return "redirect:boardContent";
 	}
 	
-	   @ResponseBody
-	    @PostMapping(value = "uploadImage", produces = "text/plain; charset=utf-8")
-	    public String uploadImage(@RequestParam(value="imageFile", required = false) MultipartFile emailFile,
-	                         @RequestParam("fileName") String fileName) {
-	         System.out.println(fileName);
-	         service.uploadImage(emailFile, fileName);
-	        return "redirect:boardContent";
-	    }
+	@ResponseBody
+	@PostMapping(value = "uploadImage2", produces = "text/plain; charset=utf-8")
+	public String uploadImage(@RequestParam(value = "imageFile", required = false) MultipartFile emailFile,
+			@RequestParam("fileName") String fileName) {
+		System.out.println(fileName);
+		service.uploadImage(emailFile, fileName);
+		return "redirect:boardContent";
+	}
+	
+	@PostMapping("freecommentProc")
+	public String freecommentProc(@RequestParam(value="no", required = false)String n,BoardDTO board, Model model) {
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.isEmpty()) {
+			return "redirect:login";
+		}
+		String result = service.freecommtentProc(board);
+
+		if(result.equals("댓글 작성 완료")) {
+			return "redirect:boardContent?no="+n; //forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
+		}
+	   
+		return "board/boardContent";
+	}
+	   
 }

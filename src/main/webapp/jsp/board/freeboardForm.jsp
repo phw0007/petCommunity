@@ -11,6 +11,7 @@
 	<h1>자유게시판</h1>
 	<div class="boardCategory">
 		<ul>
+			<li><a href="location.href=''">공지사항</a></li>
 			<li><a href="location.href='freeboardForm'">자유게시판</a></li>
 			<li><a href="location.href=''">Q&A</a></li>
 			<li><a href="location.href=''">강아지</a></li>
@@ -38,7 +39,7 @@
 		
 				<tr>
 					<td>${totalCount - ((currentPage-1) * 10 + status.index)}</td>
-					<td onclick="location.href='boardContent?no=${freeboard.no}'">${freeboard.title }</td>
+					<td onclick="location.href='boardContent?no=${freeboard.no}&category=${freeboard.category}'">${freeboard.title }</td>
 					<td>${freeboard.id }</td>
 					<td>${freeboard.writeDate }</td>
 					<td>${freeboard.likes }</td>

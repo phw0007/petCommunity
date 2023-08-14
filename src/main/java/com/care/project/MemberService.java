@@ -4,12 +4,13 @@ package com.care.project;
 
 
 
+import java.io.File;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.care.project.member.MemberDTO;
 
@@ -73,6 +74,7 @@ public class MemberService {
 		 평문 비밀번호 : 1111
 		 ALTER TABLE session_quiz MODIFY pw varchar2(60);
 		 */
+		member.setPetFile("/image/"+member.getPetFile());
 		MemberDTO result = memberMapper.loginProc(member.getId());
 		if(result == null) {
 			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
@@ -98,7 +100,71 @@ public class MemberService {
 		return memberMapper.loginProc(id);
 	}
 
+	public String updateProc(MemberDTO member, String confirm) {
+		if(member.getPw() == null || member.getPw().isEmpty()) {
+			return "비밀번호를 입력하세요.";
+		}
+		
+		if(member.getPw().equals(confirm) == false) {
+			return "두 비밀번호를 일치하여 입력하세요.";
+		}
+		
+		if(member.getUserName() == null || member.getUserName().isEmpty()) {
+			return "이름을 입력하세요.";
+		}
+		
+		BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+		String cryptPassword = bpe.encode(member.getPw());
+		member.setPw(cryptPassword);
+		
+		int result = memberMapper.updateProc(member);
+		if(result == 1)
+			return "회원 정보 수정 완료";
+		return "회원 정보 수정 실패";
+	}
 
+	public String deleteProc(String id, String pw, String confirmPw) {
+		if(pw == null || pw.isEmpty()) {
+			return "비밀번호를 입력하세요.";
+		}
+		
+		if(pw.equals(confirmPw) == false) {
+			return "두 비밀번호를 일치하여 입력하세요.";
+		}
+		BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+		MemberDTO member = memberMapper.loginProc(id);
+		if(member != null && bpe.matches(pw, member.getPw())) {
+			memberMapper.delete(id);
+			return "회원 정보 삭제 완료";
+		}
+		return "비밀번호를 확인 후 다시 시도하세요.";
+	}
+	
+	   public void uploadImage(MultipartFile imageFile, String fileName) { //변경
+		      if(imageFile.isEmpty()) {
+		         return;
+		      }
+		      if(imageFile.getSize() != 0) {
+		         String fileLocation = "C:\\javas\\boot_workspace\\project\\src\\main\\webapp\\image\\"+fileName;
+		         File save = new File(fileLocation);
+		         try {
+		            imageFile.transferTo(save);
+		         } catch (Exception e) {
+		            e.printStackTrace();
+		         }
+		      }
+		   }
+
+
+	
+
+
+
+
+
+
+	
+	
 	
 	
 	
@@ -107,6 +173,7 @@ public class MemberService {
 	
 	
 }
+
 
 
 

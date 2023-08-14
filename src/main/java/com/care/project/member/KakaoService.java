@@ -1,6 +1,6 @@
 package com.care.project.member;
 
-import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,6 +14,10 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+
+import java.io.BufferedReader;
+
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
 @Service
@@ -173,3 +177,4 @@ public class KakaoService {
 	}
 	
 }
+

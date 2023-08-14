@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+	.member {font-family: 'Poor Story';}
+	.member a{text-decoration: none; color:black; position: relative;}
+	.member_item{width: 300px; height: 840px; border-right: 2px solid #000; float: left;
+	text-align: center; padding-top:30px;}
+	.member_item h3{font-size: 26px; padding-bottom:30px; border-bottom: 2px solid #000;
+	font-weight:bold;}
+	.member_item ul li{font-size: 22px; padding-top: 30px;}
+	
+	.header ul li:nth-child(5){font-size: 36px;}
+	
+	
+	.member_main{display: inline-block; width: 1500px; height: 600px; padding: 30px; text-align: center;}
+	.member_title{height: 56px; border-bottom: 2px solid #000; }
+	.member_title p{font-size: 24px; font-weight: bold; float: left; }
+	.member_title ul{float:right;}
+	.member_title ul li{display: inline-block; vertical-align: middle; padding-left: 10px;}
+	
+	.member_info{height: 650px;}
+	.member_info table{margin:0 auto; font-size: 20px;}
+	.member_info tr th:nth-child(1){width: 100px;}
+	.member_info tr th:nth-child(3){width: 650px;}
+	.member_info tr th:nth-child(7){width: 200px;}
+	.member_info tr{border-bottom: 1px solid #000;}
+	.member_info tr th{width: 150px; padding: 10px 0 10px 0;}
+	.member_info tr td{padding: 10px 0 10px 0;}
+	.member_info tr td:nth-child(8) input{display: inline-block; width: 20px; height: 20px;
+	vertical-align: middle; margin:-10px 0 -5px 0;}
+	
+	.member_search{font-family: 'Poor Story'; font-size: 26px; }
+	.member_search a{padding: 10px; display: inline-block;}
+	
+	.select_option{vertical-align: middle; border: 2px solid #000; 
+	height: 36px; width: 100px; font-family: 'Poor Story'; font-size: 18px;font-weight:bold;}
+	.search_option{border: 2px solid #000; border-right: 0;border-left: 0;  margin:-7px; height: 30px; width: 300px;font-family: 'Poor Story'; font-size: 18px;}
+	.submit_option{vertical-align: middle; border: 2px solid #000; height: 36px; width: 100px;
+	font-family: 'Poor Story'; font-size: 18px; background-color: #fcd11e;font-weight:bold;}
+	.delete_option{float: right; vertical-align: middle; border: 2px solid #000; height: 36px; width: 100px;
+	font-family: 'Poor Story'; font-size: 18px; background-color: #fcd11e;font-weight:bold;
+	margin-left: -100px;}
+	
+	.member_views{float: left; text-align: left; font-size: 22px; width: 100%; padding-left: 20px; padding-top: 20px;}
+	.member_views ul li {padding-bottom: 20px;}
+	.member_views > ul > li:nth-child(1) {float: left; width: 83%;}
+	.member_views > ul > li:nth-child(2) {float: right;width: 17%;}
+	.member_views > ul > li:nth-child(6) {float: right; width: 25%;}
+	
+	.member_views ul li p{padding-top: 10px;}
+	.member_views > ul > li > span{display: inline-block; width: 100px;}
+	.member_views > ul > li:nth-child(3) {float: left; width: 100%;}
+	.member_views > ul > li:nth-child(4) > span{float: left;}
+	.member_views > ul > li > textarea{width: 90%; height: 250px; resize: none; border:2px solid #000;
+	font-size: 22px; font-family: 'Poor Story';}
+	
+	.member_views > ul > li:nth-child(1) input{border:2px solid #000; height: 25px; width: 500px;}
+	.member_views > ul > li:nth-child(3) input{border:2px solid #000; height: 25px; width: 500px;}
+	
+	.comment{width: 89%; margin-left: 100px; border:2px solid #000; padding:10px;}
+	.comment > ul > li:nth-child(1) {float: left; width: 83%;}
+	.comment > ul > li:nth-child(2) {float: right;width: 17%;}
+	.comment > ul > li > span{display: inline-block; width: 80px;}
+	.comment > ul > li > a{margin-left: 25px;}
+	
+	.comment > p > span {float: left; width: 80px;}
+	.comment > p > textarea{width: 93%; height: 100px; resize: none; border:none; font-size: 22px; font-family: 'Poor Story';}
+	
+	.select_end{font-size: 18px; background-color: #fcd11e; font-weight:bold; height: 36px; width: 100px;}
+	.aboard_delete{font-size: 18px; background-color: #fcd11e; font-weight:bold; height: 36px; width: 100px;}
+	.aboard_anno_update{font-size: 18px; background-color: #fcd11e; font-weight:bold; height: 36px; width: 100px;}

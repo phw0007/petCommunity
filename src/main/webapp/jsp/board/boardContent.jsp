@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -21,7 +22,7 @@ function deleteCheck(){
 
 
 </script>
-
+<script src="/dbQuiz.js"></script>
 </head>
 <body>
 
@@ -30,10 +31,22 @@ function deleteCheck(){
 	 <ul>
 	   <li>제목<span>${board.title} </span></li>
 	   <li>작성자<span> ${board.id }</span></li>
-	   <li>작성일<span> ${board.writeDate }</span>조회수<span>조회수 들어갈 곳${borad.hits}</span></li>
-	   <li>${board.content} </li>
-	   <li><button class="likes" type="button" ><img src="/image/made.png" alt="하트" style="width:70px; height:70px; ">추천수:<span>${board.likes}</span></button></li>
-	 </ul>
+	   <li>작성일<span> ${board.writeDate }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회수<span> ${board.hits}</span></li>
+	   </ul>
+	   <div class="content">
+	   ${board.content} <br><br>
+	<c:choose>
+    <c:when test="${board.fileName == '파일 없음'}">
+        <!-- 파일이 없을 때는 아무것도 출력하지 않음 -->
+    </c:when>
+    <c:otherwise>
+        <img id="img" src="/image/${board.fileName}" alt="petImage" />
+
+    </c:otherwise>
+</c:choose>
+	   </div>
+	   <div class="likeB"><button class="likes" type="button" ><img src="/image/made.png" alt="하트" style="width:70px; height:70px; ">추천수:<span>${board.likes}</span></button></div>
+	 
 	  <div class="contentB">
 			<button class="Clist" type="button" onclick="location.href='freeboardForm'">목록</button>
 			<button class="Cmodify"type="button"
@@ -42,21 +55,35 @@ function deleteCheck(){
 		</div>
 	  <div class="comment">
 	  <h3>댓글</h3>
-		<form action="commentProc" method="post"  >	
-		<textarea rows="5" cols = "100" name = "comment" placeholder="댓글을 입력해주세요."></textarea>
-		<button type="submit" style="background:#fcd11e;font-family: 'Poor Story', cursive; 
+		<form action="freecommentProc" method="post"  >	
+		<input type = "hidden" name = "no" value = "${board.no }">
+		<input type = "hidden" name = "category" value = "${board.category }">
+		<textarea rows="5" cols = "100" name = "commentContent" placeholder="댓글을 입력해주세요."></textarea>
+		<button type="submit" style="background:#fcd11e;font-family: 'Poor Story', cursive;border:none; 
 		width:50px;  height:25px;">등록</button>
-		</form>	
-       </div>
+		</form>
+
+			<c:choose>
+				<c:when test="${empty comments }">
+				등록된 댓글이 없습니다.
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="comment" items="${comments}">
+						<ul>
+							<li><span>${comment.id}</span><b>${comment.writeDate}</b></li>
+							<li>${comment.commentContent}
+							
+								<button type="button" onclick="commentDelete(${comment.commentId})">삭제</button>
+							
+						</ul>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+		</div>
        
        <div class="commentView">
-		<ul>
-		  <li>댓글 들어갈 곳${comment.content } <span>작성자${comment.id}</span><b>날짜</b>
-		  <div class="delete">
-		     <button type="button" onclick="commentDelete()">삭제</button>
-		</div>
-		  </li>
-		</ul>
+			
+	
 		</div>
 	</div>
 

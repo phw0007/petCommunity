@@ -13,28 +13,31 @@
 
 
 /*boardContent 게시글 보이는 곳*/
-.boardContent{width:1200px; margin:0 auto; height:1200px;padding-top:100px;font-family: 'Poor Story'}
+.boardContent{width:1200px; margin:0 auto; padding-top:100px;font-family: 'Poor Story'}
 .boardContent ul{padding-top:50px;} 
-.boardContent > ul li{list-style:none;border-bottom:1px solid black; width:800px; height:30px;font-size:20px;line-height:30px;padding:3px;} 
+.boardContent > ul li{list-style:none;border-bottom:1px solid #e6e6e6; width:1000px; height:30px;font-size:18px;line-height:30px;padding:3px;} 
 .boardContent > ul li span{padding-left:50px;}
-.boardContent > ul li:nth-child(3),
-.boardContent > ul li:nth-child(4){border-bottom: 0;}
-.boardContent > ul li:nth-child(4){padding-top:50px;}
-.boardContent > ul li:last-child{border-bottom:0; padding-top:50px; text-align:center;}
-.contentB{padding-left:700px;padding-bottom:50px;}
+.boardContent > ul li:last-child{border-bottom:0;}
+.boardContent > ul li > div{margin-left:20px; width:50px;}
+.content{text-align:center;font-size:25px;}
+.likeB{text-align:center; margin-top:100px;}
+.contentB{padding-left:900px;padding-bottom:50px;padding-top:100px;}
 .likes{border:none; background:none;vertical-align:middle; width:70px; height:70px;cursor:pointer}
- .Clist,.Cmodify,.Cdelete{background:#fcd11e; width:60px; height:40px;
-                          font-family: 'Poor Story', cursive;font-size:20px;}
+ .Clist,.Cmodify,.Cdelete{background:#fcd11e; width:50px; height:30px; border:none;
+                          font-family: 'Poor Story', cursive;font-size:15px;}
                           
 
 /*comment댓글*/
-.comment{margin-left:50px;border-top:1px solid #e6e6e6;}
-.commentView > ul li{list-style:none;width:750px;padding:5px 0 5px 0;border-bottom:1px solid #e6e6e6;}
-.commentView > ul li span{padding-left:500px; padding-right:30px;}
-.commentView > ul li b{font-weight:200; padding-right:20px;}
+.comment{border-top:1px solid #e6e6e6;margin-left:50px;}
+.comment ul li{list-style:none;width:750px;padding:5px 0 5px 0;border-bottom:1px solid #e6e6e6; }
+.comment ul li:first-child{border-bottom:0;}
+.comment ul li > span{font-size:18px;}
+.comment ul li> b{font-weight:100; padding-left:30px; font-size:15px;}
+
+
 
 /*boardForm*/
-.boardForm{width:1200px;margin:0 auto; height:1200px;padding-top:100px;
+.boardForm{width:1200px;margin:0 auto; height:800px;padding-top:100px;
           font-family: 'Poor Story', cursive;}
 .boardForm > h1{border-bottom:2px solid black; width:500px; padding-bottom:20px;}
 .boardForm ul{list-style: none;}

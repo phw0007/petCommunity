@@ -14,6 +14,7 @@
 		<result column="write_date" property="writeDate"/>
 		<result column="hits" property="hits"/>
 		<result column="likes" property="likes"/>
+		<result column="comment_content" property="commentContent"/>
 	</resultMap>
     
     <insert id="boardWriteProc">
@@ -34,7 +35,7 @@
  
 	<select id="freeboardForm" resultMap="boardDto">
 	SELECT freeboard. * FROM 
-	(SELECT rownum as rn, free. * FROM (select no,title,id,write_date,hits,likes from project_board where category='자유게시판' order by no desc)free)
+	(SELECT rownum as rn, free. * FROM (select no,title,id,category,write_date,hits,likes from project_board where category='자유게시판' order by no desc)free)
 	freeboard WHERE freeboard.rn BETWEEN #{begin} AND #{end}
 	</select>
 
@@ -60,5 +61,11 @@
 		UPDATE project_board SET title = #{title}, content = #{content} WHERE no = #{no}
 	</update>
 
+    <insert id="freecommentProc">
+      INSERT INTO project_board_comment VALUES(#{id}, #{no}, #{category}, #{writeDate}, #{commentContent})
+    </insert>
+    
+      <select id="freeComment" resultMap="boardDto">
+		select no,id,write_date,comment_content from project_board_comment where category=#{category} AND no=#{no} order by write_date desc
+	</select>
 </mapper>
-

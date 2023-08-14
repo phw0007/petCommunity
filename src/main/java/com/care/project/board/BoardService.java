@@ -257,7 +257,7 @@ public class BoardService {
 	         return;
 	      }
 	      if(imageFile.getSize() != 0) {
-	         String fileLocation = "C:\\javas\\boot_workspace\\project\\src\\main\\webapp\\image\\"+fileName;
+	         String fileLocation = "C:\\javas\\boot_workspace\\petCommunity\\src\\main\\webapp\\image\\"+fileName;
 	         File save = new File(fileLocation);
              System.out.println(fileLocation);
 	         try {
@@ -267,8 +267,40 @@ public class BoardService {
 	         }
 	      }
 	   }
-}
+    
+	/*자유게시판 댓글 등록*/
+	public String freecommtentProc(BoardDTO board) {
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.isEmpty()) {
+			return "로그인";
+		}
+        
+		BoardDTO free= new BoardDTO();
+		free.setId(id);
+		free.setCategory(board.getCategory());
+		free.setNo(board.getNo());
+		free.setCommentContent(board.getCommentContent());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		free.setWriteDate(sdf.format(new Date()));
 
+		boardMapper.freecommentProc(free);
+	
+		return "댓글 작성 완료";
+	}
+	
+
+
+	  public ArrayList<BoardDTO> boardComments(String c,String n) {
+      int no = 0;
+      try{
+         no = Integer.parseInt(n);
+      }catch(Exception e){
+         return null;
+      }
+      ArrayList<BoardDTO> comments = boardMapper.freeComment(no,c);
+      return comments;
+   }
+}
 
 
 
