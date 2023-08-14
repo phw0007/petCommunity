@@ -23,7 +23,11 @@ function commentDelete(writeDate){
 	url="commentDelete"
 	commentDeleteProc(url,selectedValues);
 }
-function commentDeleteProc(url,selectedValues){
+function commentDeleteProc(url,selectedValues)
+   if(${comment.id}!==sessionScope.id){
+	   alter('작성자만 삭제할 수 있습니다.');
+   }
+   else{
 	if(window.confirm("삭제하시겠습니까?")){
 	    const form = document.createElement('form'); // form 태그 생성
 	    form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
@@ -40,6 +44,7 @@ function commentDeleteProc(url,selectedValues){
 	
 	    form.submit();      
 	}
+   }
 }
 
 </script>
