@@ -1,7 +1,8 @@
 
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <c:import url="/header" />
 <link rel="stylesheet" href="/css/login.css" type="text/css">
 <style>
@@ -12,7 +13,7 @@
     <p><img src="/image/logo2.png" alt="logo"></p>
 	<h1>로그인</h1>
 	<table ><tr><td> 
-	<form action="loginProc" method="post" id="f">
+	<form action="mloginProc" method="post" id="f">
 		<input type="text" name="id" placeholder="아이디" id="id" style="width: 200px; height: 30px; padding-left:10px; font-family: 'Poor Story', cursive;"><br>
 		<input type="password" name="pw" placeholder="비밀번호" id="pw" style="width: 200px; height: 30px; padding-left:10px; font-family: 'Poor Story', cursive;"><br>
 		<input type="button" value="회원가입" onclick="location.href='register'" style="width: 80px; height: 30px; font-family: 'Poor Story', cursive;  cursor: pointer;">
@@ -38,7 +39,6 @@
 </div>
 
 <c:import url="/footer" />
-
 
 
 

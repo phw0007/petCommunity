@@ -28,14 +28,14 @@ public class AMemberController {
 		return "aindex/aindex";
 	}
 
-	@RequestMapping("header")
+	@RequestMapping("aheader")
 	public String header() {
-		return "default/header";
+		return "default/aheader";
 	}
 	
-	@RequestMapping("main")
+	@RequestMapping("amain")
 	public String main() {
-		return "default/main";
+		return "default/amain";
 	}
 	
 	@RequestMapping({ "/amember", "/amemberDelete", "/amemberMail" })
@@ -96,18 +96,18 @@ public class AMemberController {
         return "amemberMail";
     }
 	
-	@GetMapping("login")
-	public String login() {
-		return "member/login";
-	}
-	
-	@PostMapping("loginProc")
-	public String loginProc(AMemberDTO member) {
-		String result = service.loginProc(member);
-		if(result.equals("로그인 성공")) {
-			return "redirect:amember";
-		}
-		return "member/login";
-	}
-	
+//	@GetMapping("login")
+//	public String login() {
+//		return "member/login";
+//	}
+//	
+//	@PostMapping("loginProc")
+//	public String loginProc(AMemberDTO member) {
+//		String result = service.loginProc(member);
+//		if(result.equals("로그인 성공")) {
+//			return "redirect:amember";
+//		}
+//		return "member/login";
+//	}
+//	
 }

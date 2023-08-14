@@ -13,7 +13,7 @@
 <title>index</title>
 </head>
 <body>
-<c:import url="/header"/>
+<c:import url="/aheader"/>
 <div class="member">
 	<ul>
 		<li><img src="/image/logo.png" alt="logo" width=300px height=300px/></li>

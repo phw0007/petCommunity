@@ -61,7 +61,6 @@
 		UPDATE project_board SET title = #{title}, content = #{content} WHERE no = #{no}
 	</update>
 
-
     <insert id="freecommentProc">
       INSERT INTO project_board_comment VALUES(#{id}, #{no}, #{category}, #{writeDate}, #{commentContent})
     </insert>
@@ -74,3 +73,5 @@
 	   DELETE FROM project_board_comment WHERE id=#{id} AND category=#{category} AND no=#{no} AND write_date=#{writeDate}
 	</delete>
 </mapper>
+
+

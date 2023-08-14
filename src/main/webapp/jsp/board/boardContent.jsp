@@ -23,10 +23,10 @@ function commentDelete(writeDate){
 	url="commentDelete"
 	commentDeleteProc(url,selectedValues);
 }
-function commentDeleteProc(url,selectedValues)
-   if(${comment.id}!==sessionScope.id){
-	   alter('작성자만 삭제할 수 있습니다.');
-   }
+function commentDeleteProc(url,selectedValues){
+if ('${comment.id}' === null && '${comment.id}' !== '${sessionScope.id}') {
+    alert('작성자만 삭제할 수 있습니다.');
+}
    else{
 	if(window.confirm("삭제하시겠습니까?")){
 	    const form = document.createElement('form'); // form 태그 생성
@@ -45,6 +45,13 @@ function commentDeleteProc(url,selectedValues)
 	    form.submit();      
 	}
    }
+}
+function checkCommentLength(textarea) {
+    const maxLength = 100;
+    if (textarea.value.length > maxLength) {
+        alert('댓글은 100자 이내로 입력해주세요.');
+        textarea.value = textarea.value.substring(0, maxLength);
+    }
 }
 
 </script>
@@ -84,7 +91,7 @@ function commentDeleteProc(url,selectedValues)
 		<form action="freecommentProc" method="post"  >	
 		<input type = "hidden" name = "no" value = "${board.no }">
 		<input type = "hidden" name = "category" value = "${board.category }">
-		<textarea rows="5" cols = "100" name = "commentContent" placeholder="댓글을 입력해주세요."></textarea>
+		<textarea rows="5" cols = "100" name = "commentContent" oninput="checkCommentLength(this)"  placeholder="댓글을 입력해주세요.(100자 이내)"></textarea>
 		<button type="submit" style="background:#fcd11e;font-family: 'Poor Story', cursive;border:none; 
 		width:50px;  height:25px;">등록</button>
 		</form>

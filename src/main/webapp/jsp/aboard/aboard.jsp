@@ -13,7 +13,7 @@
 <title>index</title>
 </head>
 <body>
-<c:import url="/header" />
+<c:import url="/aheader" />
 <div class="member">
 	<div class="memberItem">
 		<h3>커뮤니티 관리</h3>
@@ -65,10 +65,11 @@
 								<td>${board.writeDate }</td>
 							</tr>
 						</c:forEach>
-					</table>
-				</c:otherwise>
-			</c:choose>
-		</div>
+					</tbody>
+				</table>
+			</c:otherwise>
+		</c:choose>
+	</div>
 		<div class="memberSearch">
 			<div> ${result}	</div>
 			<div class="selectSearch">
