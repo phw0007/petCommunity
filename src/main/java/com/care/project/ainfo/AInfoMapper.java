@@ -15,4 +15,10 @@ public interface AInfoMapper {
 
 	int count(@Param("select")String select, @Param("search")String search);
 
+	ArrayList<AInfoDTO> infoCheck();
+
+	void insertInfo(@Param("subjectCategory")String subjectCategory, 
+			@Param("title")String title, @Param("venue")String venue, 
+			@Param("reference")String reference, @Param("source")String source);
+
 }

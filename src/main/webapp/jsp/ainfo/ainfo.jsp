@@ -19,7 +19,6 @@
 		<h3>업체정보 관리</h3>
 		<ul>
 			<li><a href="ainfo" style="font-weight: bold;">업체 목록</a></li>
-			<li><a href="ainfoRegister">업체정보 등록</a></li>
 			<li><a href="ainfoDelete">업체정보 삭제</a></li>
 		</ul>
 	</div>
@@ -41,18 +40,16 @@
 			    		<th>번호</th>
 			    		<th>업체 분류</th>
 			    		<th>업체 이름</th>
-			    		<th>업체 이메일</th>
 			    		<th>주소</th>
 			    		<th>전화번호</th>
 			    	</tr>
 			    </thead>
 			    <tbody>
 				<c:forEach var="info" items="${infos}">
-					<tr onclick="location.href=''">
+					<tr onclick="location.href='ainfoData'">
 						<td>${no=no+1}</td>
 						<td>${info.category }</td>
 						<td>${info.name }</td>
-						<td>${info.email }</td>
 						<td>${info.address }</td>
 						<td>${info.mobile }</td>
 					</tr>
@@ -63,7 +60,7 @@
 		<div class="memberSearch">
 					<div> ${result}	</div>
 			<div class="selectSearch">
-				<form action="aboard">
+				<form action="ainfo">
 					<select name="select" class="selectOption">
 						<c:choose>
 							<c:when test="${select == 'category'}">

@@ -16,7 +16,6 @@ primary key(no)
 	private int no;
 	private String category;
 	private String name;
-	private String email;
 	private String address;
 	private String mobile;
 	
@@ -37,12 +36,6 @@ primary key(no)
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	public String getAddress() {
 		return address;

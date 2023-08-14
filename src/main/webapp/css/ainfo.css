@@ -19,9 +19,9 @@
 	
 	.memberInfo{height: 650px;}
 	.memberInfo table{margin:0 auto; font-size: 20px;}
-	.memberInfo tr th:nth-child(3){width: 250px;}
-	.memberInfo tr th:nth-child(4){width: 250px;}
-	.memberInfo tr th:nth-child(5){width: 490px;}
+	.memberInfo tr th:nth-child(3){width: 300px;}
+	.memberInfo tr th:nth-child(4){width: 600px;}
+	.memberInfo tr th:nth-child(5){width: 300px;}
 	.memberInfo tr{border-bottom: 1px solid #000;}
 	.memberInfo tr th{width: 170px; padding: 10px 0 10px 0;}
 	.memberInfo tr td{padding: 10px 0 10px 0;}

@@ -3,8 +3,10 @@ package com.care.project.ainfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.HandlerMapping;
 
 import com.care.project.aboard.ABoardService;
@@ -21,6 +23,7 @@ public class AInfoController {
 	public String ainfo(@RequestParam(value="currentPage", required = false)String cp,
 			String select, String search, Model model, HttpServletRequest request) {
 		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		service.xmlInsert();
 		service.ainfo(cp, select, search, model, requestUrl);
 		if("/ainfo".equals(requestUrl)) {
 			return "ainfo/ainfo";

@@ -8,7 +8,6 @@
 		<id column="no" property="no"/>
 		<result column="category" property="category"/>
 		<result column="name" property="name"/>
-		<result column="email" property="email"/>
 		<result column="address" property="address"/>
 		<result column="mobile" property="mobile"/>
 	</resultMap>
@@ -17,31 +16,31 @@
 		<choose>
 			<when test="select == 'category'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, category, name, email, address, mobile 
+				(SELECT rownum as rn, category, name, address, mobile 
 				FROM project_info WHERE category like ('%' ||  #{search} || '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'name'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, category, name, email, address, mobile 
+				(SELECT rownum as rn, category, name, address, mobile 
 				FROM project_info WHERE name like ('%' ||  #{search} || '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'address'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, category, name, email, address, mobile 
+				(SELECT rownum as rn, category, name, address, mobile 
 				FROM project_info WHERE address like ('%' ||  #{search} || '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'mobile'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, category, name, email, address, mobile 
+				(SELECT rownum as rn, category, name, address, mobile 
 				FROM project_info WHERE mobile like ('%' ||  #{search} || '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<otherwise>
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, category, name, email, address, mobile
+				(SELECT rownum as rn, category, name, address, mobile
 				FROM project_info WHERE category like ('%' ||  #{search} || '%') or name like ('%' ||  #{search} || '%') or
 				address like ('%' ||  #{search} || '%') or mobile like ('%' ||  #{search} || '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
@@ -71,6 +70,16 @@
 		</choose>
 	</select>
 	
+	<select id="infoCheck">
+		SELECT * from project_info
+	</select>
+	
+	<insert id="insertInfo">
+		<selectKey order="BEFORE" keyProperty="no" resultType="int">
+			SELECT nvl(max(no),0) + 1 FROM project_info
+		</selectKey>
+		INSERT INTO project_info VALUES(#{no}, #{subjectCategory}, #{title}, #{venue}, #{reference}, #{source})
+	</insert>
 </mapper>
 
 

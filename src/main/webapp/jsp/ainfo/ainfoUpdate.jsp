@@ -18,8 +18,7 @@
 	<div class="memberItem">
 		<h3>업체정보 관리</h3>
 		<ul>
-			<li><a href="ainfo" >업체 목록</a></li>
-			<li><a href="ainfoRegister" style="font-weight: bold;">업체정보 등록</a></li>
+			<li><a href="ainfo" style="font-weight: bold;">업체 목록</a></li>
 			<li><a href="ainfoDelete">업체정보 삭제</a></li>
 		</ul>
 	</div>
@@ -31,7 +30,7 @@
 				<li>></li>
 				<li><a href="ainfo">업체정보 관리</a></li>
 				<li>></li>
-				<li><a href="ainfoRegister">업체정보 등록</a></li>
+				<li><a href="ainfo">업체 목록</a></li>
 			</ul>
 		</div>
 		<div class="ainfo">
