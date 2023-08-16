@@ -16,44 +16,44 @@ public class ShopController {
 		return "ashop/ashop";
 	}
 	
-	@RequestMapping("ashop_register")
+	@RequestMapping("ashopRegister")
 	public String ashop_register() {
-		return "ashop/ashop_register";
+		return "ashop/ashopRegister";
 	}
 	
-	@RequestMapping("ashop_delete")
+	@RequestMapping("ashopDelete")
 	public String ashop_delete() {
-		return "ashop/ashop_delete";
+		return "ashop/ashopDelete";
 	}
 	
-	@RequestMapping("ashop_order")
+	@RequestMapping("ashopOrder")
 	public String ashop_order() {
-		return "ashop/ashop_order";
+		return "ashop/ashopOrder";
 	}
 	
-	@RequestMapping("ashop_order_del")
+	@RequestMapping("ashopOrderDel")
 	public String ashop_order_del() {
-		return "ashop/ashop_order_del";
+		return "ashop/ashopOrderDel";
 	}
 	
-	@RequestMapping("ashop_info")
+	@RequestMapping("ashopInfo")
 	public String ashop_info() {
-		return "ashop/ashop_info";
+		return "ashop/ashopInfo";
 	}
 	
-	@RequestMapping("ashop_update")
+	@RequestMapping("ashopUpdate")
 	public String ashop_update() {
-		return "ashop/ashop_update";
+		return "ashop/ashopUpdate";
 	}
 	
-	@RequestMapping("ashop_order_info")
+	@RequestMapping("ashopOrderInfo")
 	public String ashop_order_info() {
-		return "ashop/ashop_order_info";
+		return "ashop/ashopOrderInfo";
 	}
 	
-	@RequestMapping("ashop_order_update")
+	@RequestMapping("ashopOrderUpdate")
 	public String ashop_order_update() {
-		return "ashop/ashop_order_update";
+		return "ashop/ashopOrderUpdate";
 	}
 	
 	@ResponseBody

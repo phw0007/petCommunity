@@ -148,4 +148,8 @@
 		UPDATE project_board SET title=#{title}, content=#{content}, write_date=#{writeDate} WHERE no=#{no}
 	</update>
 	
+	<update id = "aboardHit">
+		UPDATE project_board SET hits=hits+1 WHERE id=#{id} AND category=#{category} AND no=#{no}
+	</update>
+	
 </mapper>

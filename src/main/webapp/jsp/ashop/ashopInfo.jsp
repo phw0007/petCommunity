@@ -15,18 +15,18 @@
 <body>
 <c:import url="/aheader" />
 <div class="member">
-	<div class="member_item">
+	<div class="memberItem">
 		<h3>쇼핑몰 관리</h3>
 		<ul>
 			<li><a href="ashop" style="font-weight: bold;">상품 목록</a></li>
-			<li><a href="ashop_register">상품 등록</a></li>
-			<li><a href="ashop_delete">등록상품 삭제</a></li>
-			<li><a href="ashop_order">주문 목록</a></li>
-			<li><a href="ashop_order_del">주문 취소</a></li>
+			<li><a href="ashopRegister">상품 등록</a></li>
+			<li><a href="ashopDelete">등록상품 삭제</a></li>
+			<li><a href="ashopOrder">주문 목록</a></li>
+			<li><a href="ashopOrderDel">주문 취소</a></li>
 		</ul>
 	</div>
-	<div class="member_main">
-		<div class="member_title">
+	<div class="memberMain">
+		<div class="memberTitle">
 			<p>상품 목록</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
@@ -36,8 +36,8 @@
 				<li><a href="ashop">상품 목록</a></li>
 			</ul>
 		</div>
-		<div class="member_info">
-			<div class="ashop_left">
+		<div class="memberInfo">
+			<div class="ashopLeft">
 				<p><img src="/image/pet.jpg" alt="pet" width=180px height=240px/></p>
 				<ul>
 					<li><span>상품 이름</span>성견용 사료</li>
@@ -47,12 +47,12 @@
 					<li><span>재고</span>10</li>
 				</ul>
 			</div>
-			<div class="ashop_right">
+			<div class="ashopRight">
 				<p>상품 상제정보</p>
-				<p><textarea class="text_info" readonly="readonly">안녕하세요</textarea></p>
+				<p><textarea class="textInfo" readonly="readonly">안녕하세요</textarea></p>
 			</div>
-			<input type="button" value="확인" class="ashop_select" onclick="location.href='ashop'"/>
-			<input type="button" value="수정" class="ashop_update" onclick="location.href='ashop_update'"/>
+			<input type="button" value="확인" class="ashopSelect" onclick="location.href='ashop'"/>
+			<input type="button" value="수정" class="ashopUpdate" onclick="location.href='ashopUpdate'"/>
 		</div>
 	</div>
 </div>

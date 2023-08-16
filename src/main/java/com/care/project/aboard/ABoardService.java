@@ -61,6 +61,7 @@ public class ABoardService {
 			currentPage = 1;
 		}
 		
+		boardMapper.aboardHit(id, category, no);
 		ABoardDTO board = boardMapper.aboardInfo(id, category, no);
 		ArrayList<ABoardDTO> comments = boardMapper.aboardComment(id, category, no);
 		

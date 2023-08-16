@@ -15,29 +15,29 @@
 <body>
 <c:import url="/aheader" />
 <div class="member">
-	<div class="member_item">
+	<div class="memberItem">
 		<h3>쇼핑몰 관리</h3>
 		<ul>
 			<li><a href="ashop">상품 목록</a></li>
-			<li><a href="ashop_register">상품 등록</a></li>
-			<li><a href="ashop_delete">등록상품 삭제</a></li>
-			<li><a href="ashop_order" style="font-weight: bold;">주문 목록</a></li>
-			<li><a href="ashop_order_del">주문 취소</a></li>
+			<li><a href="ashopRegister">상품 등록</a></li>
+			<li><a href="ashopDelete">등록상품 삭제</a></li>
+			<li><a href="ashopOrder" style="font-weight: bold;">주문 목록</a></li>
+			<li><a href="ashopOrderDel">주문 취소</a></li>
 		</ul>
 	</div>
-	<div class="member_main">
-		<div class="member_title">
+	<div class="memberMain">
+		<div class="memberTitle">
 			<p>주문 목록</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
 				<li>></li>
 				<li><a href="ashop">쇼핑몰 관리</a></li>
 				<li>></li>
-				<li><a href="ashop_order">주문 목록</a></li>
+				<li><a href="ashopOrder">주문 목록</a></li>
 			</ul>
 		</div>
-		<div class="member_info">
-			<div class="info_top">
+		<div class="memberInfo">
+			<div class="infoTop">
 				<table>
 					<thead>
 				    	<tr>
@@ -51,14 +51,14 @@
 				    <tbody>
 				    	<tr>
 				    		<td>관리자</td>
-				    		<td><input type="text" value="서울특별시"></td>
+				    		<td>서울특별시</td>
 				    		<td>010-1234-1234</td>
 				    		<td>신용카드</td>
 				    		<td>결재확인</td>
 				    	</tr>
 				</table>
 			</div>
-			<div class="info_bottom">
+			<div class="infoBottom">
 				<p>구매 항목</p>
 				<table>
 					<thead>
@@ -78,11 +78,12 @@
 				    		<td>아투</td>
 				    		<td>성견용 사료</td>
 				    		<td>43,000</td>
-				    		<td><input type="text" value="1"></td>
+				    		<td>1</td>
 				    	</tr>
 				</table>
 			</div>
-			<input type="button" value="수정완료" class="ashop_update" onclick="location.href=''"/>
+			<input type="button" value="확인" class="ashopSelect" onclick="location.href='ashopOrder'"/>
+			<input type="button" value="수정" class="ashopUpdate" onclick="location.href='ashopOrderUpdate'"/>
 		</div>
 	</div>
 </div>

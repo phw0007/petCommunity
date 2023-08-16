@@ -60,8 +60,8 @@
 								<td>${board.category }</td>
 								<td>${board.title }</td>
 								<td>${board.id }</td>
-								<td>${board.hits }</td>
 								<td>${board.likes }</td>
+								<td>${board.hits }</td>
 								<td>${board.writeDate }</td>
 							</tr>
 						</c:forEach>

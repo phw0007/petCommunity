@@ -15,28 +15,28 @@
 <body>
 <c:import url="/aheader" />
 <div class="member">
-	<div class="member_item">
+	<div class="memberItem">
 		<h3>쇼핑몰 관리</h3>
 		<ul>
 			<li><a href="ashop">상품 목록</a></li>
-			<li><a href="ashop_register">상품 등록</a></li>
-			<li><a href="ashop_delete">등록상품 삭제</a></li>
-			<li><a href="ashop_order" style="font-weight: bold;">주문 목록</a></li>
-			<li><a href="ashop_order_del">주문 취소</a></li>
+			<li><a href="ashopRegister">상품 등록</a></li>
+			<li><a href="ashopDelete">등록상품 삭제</a></li>
+			<li><a href="ashopOrder" style="font-weight: bold;">주문 목록</a></li>
+			<li><a href="ashopOrderDel">주문 취소</a></li>
 		</ul>
 	</div>
-	<div class="member_main">
-		<div class="member_title">
+	<div class="memberMain">
+		<div class="memberTitle">
 			<p>주문 목록</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
 				<li>></li>
 				<li><a href="ashop">쇼핑몰 관리</a></li>
 				<li>></li>
-				<li><a href="ashop_order">주문 목록</a></li>
+				<li><a href="ashopOrder">주문 목록</a></li>
 			</ul>
 		</div>
-		<div class="member_info">
+		<div class="memberInfo">
 			<table>
 				<thead>
 			    	<tr>
@@ -49,7 +49,7 @@
 			    	</tr>
 			    </thead>
 			    <tbody>
-			    	<tr onclick="location.href='ashop_order_info'">
+			    	<tr onclick="location.href='ashopOrderInfo'">
 			    		<td>1</td>
 			    		<td>관리자</td>
 			    		<td>성견용 사료</td>
@@ -59,18 +59,18 @@
 			    	</tr>
 			</table>
 		</div>
-		<div class="member_search">
+		<div class="memberSearch">
 			<a href=""><</a><a href="">1</a><a href="">></a>
-			<div class="select_search">
+			<div class="selectSearch">
 				<form action="memberSelect">
-					<select name="select" class="select_option">
+					<select name="select" class="selectOption">
 						<option value="">전체</option>
 						<option value="id">구매회원</option>
 						<option value="name">상품이름</option>
 						<option value="address">주소</option>
 					</select>
-					<input type="text" name="search" class="search_option"/>
-					<input type="submit" value="검색" class="submit_option"/>
+					<input type="text" name="search" class="searchOption"/>
+					<input type="submit" value="검색" class="submitOption"/>
 				</form>
 			</div>
 		</div>

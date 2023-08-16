@@ -13,32 +13,33 @@
 <title>index</title>
 </head>
 <body>
+<script src="/dbQuiz.js"></script>
 <c:import url="/aheader" />
 <div class="member">
-	<div class="member_item">
+	<div class="memberItem">
 		<h3>쇼핑몰 관리</h3>
 		<ul>
-			<li><a href="ashop" style="font-weight: bold;">상품 목록</a></li>
-			<li><a href="ashop_register">상품 등록</a></li>
-			<li><a href="ashop_delete">등록상품 삭제</a></li>
-			<li><a href="ashop_order">주문 목록</a></li>
-			<li><a href="ashop_order_del">주문 취소</a></li>
+			<li><a href="ashop">상품 목록</a></li>
+			<li><a href="ashopRegister" style="font-weight: bold;">상품 등록</a></li>
+			<li><a href="ashopDelete">등록상품 삭제</a></li>
+			<li><a href="ashopOrder">주문 목록</a></li>
+			<li><a href="ashopOrderDel">주문 취소</a></li>
 		</ul>
 	</div>
-	<div class="member_main">
-		<div class="member_title">
-			<p>상품 목록</p>
+	<div class="memberMain">
+		<div class="memberTitle">
+			<p>상품 등록</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
 				<li>></li>
 				<li><a href="ashop">쇼핑몰 관리</a></li>
 				<li>></li>
-				<li><a href="ashop">상품 목록</a></li>
+				<li><a href="ashopRegister">상품 등록</a></li>
 			</ul>
 		</div>
-		<div class="member_info">
-			<div class="ashop_left">
-				<p><img src="/image/pet.jpg" alt="pet" width=180px height=240px/></p>
+		<div class="memberInfo">
+			<div class="ashopLeft">
+				<p><img id="img" src="/image/pet.jpg" alt="petImage" width=180px height=240px/></p>
 				<ul>
 					<li><span>상품 이름</span><input type="text" value="성견용 사료"></li>
 					<li><span>상품 분류</span><input type="text" value="애견 사료"></li>
@@ -46,13 +47,13 @@
 					<li><span>상품 가격</span><input type="text" value="43,000"></li>
 					<li><span>재고</span><input type="text" value="10"></li>
 				</ul>
-				<p><input type="file" name="file" id="file" class="ashop_file"></p>
+				<p><input type="file" id="fileImg" class="ashopFile" onchange="fileURL()" accept="image/*"/></p>
 			</div>
-			<div class="ashop_right">
+			<div class="ashopRight">
 				<p>상품 상제정보</p>
-				<p><textarea class="info_update">안녕하세요</textarea></p>
+				<p><textarea class="infoUpdate">안녕하세요</textarea></p>
 			</div>
-			<input type="button" value="수정 완료" class="ashop_select" onclick="location.href=''"/>
+			<input type="button" value="등록" class="ashopSelect" onclick="uploadImage()"/>
 		</div>
 	</div>
 </div>
