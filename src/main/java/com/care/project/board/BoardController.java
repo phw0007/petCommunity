@@ -180,5 +180,13 @@ public class BoardController {
       return "forward:boardContent?"+url;
       
 	}
+	
+	   @PostMapping("clickLike")
+	   public String clickLikeButton(String selectedValues, Model model) {
+		   System.out.println(selectedValues);
+	      String url = service.boardLikeButton(selectedValues);
+	      
+	      return "forward:boardContent"+url;
+	   }
 	   
 }

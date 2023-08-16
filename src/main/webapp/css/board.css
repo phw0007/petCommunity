@@ -56,9 +56,10 @@
 .boardFormT{width:850px; margin-left:50px; margin-bottom:15px; }
 .boardFormT > span{ margin-left:400px; font-size:20px;}
 /*게시판에 있는 table */
-.formTable{border:1px solid black;padding:20px;font-size:20px;}
+.formTable{border:1px solid black;padding:20px;font-size:20px;margin-bottom:30px;}
 .formTable th{border-bottom:1px solid #e6e6e6; padding-bottom:10px;}
 .formTable td{border-bottom:1px solid #e6e6e6; padding:5px 0 5px 0; text-align: center;}
+.formTable > span{padding-right:100px;}
 .writeB{background:#fcd11e; margin-top:50px;width:70px; height:40px;
          margin-left:750px; font-family: 'Poor Story', cursive;font-size:20px;border:none;}
          

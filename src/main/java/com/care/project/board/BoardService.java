@@ -316,6 +316,17 @@ public class BoardService {
 //		}
 		return "id="+id+"&category="+category+"&no="+no+"&currentPage="+cp;
 	}
+	
+	 public String boardLikeButton(String selectedValues) {
+	      String[] checkData = selectedValues.split(",");
+	      int no = Integer.parseInt(checkData[0]);
+	      String id = checkData[1];
+	      String category = checkData[2];
+	      String cp = checkData[3];
+	      boardMapper.boardLike(id, category, no);
+	      
+	      return "id="+id+"&category="+category+"&no="+no+"&currentPage="+cp;
+	   }
 }
 
 
