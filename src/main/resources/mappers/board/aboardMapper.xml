@@ -152,4 +152,7 @@
 		UPDATE project_board SET hits=hits+1 WHERE id=#{id} AND category=#{category} AND no=#{no}
 	</update>
 	
+	<update id = "boardLike">
+		UPDATE project_board SET likes=likes+1, hits=hits-1 WHERE id=#{id} AND category=#{category} AND no=#{no}
+	</update>
 </mapper>

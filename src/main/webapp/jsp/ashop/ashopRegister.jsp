@@ -41,17 +41,26 @@
 			<div class="ashopLeft">
 				<p><img id="img" src="/image/pet.jpg" alt="petImage" width=180px height=240px/></p>
 				<ul>
-					<li><span>상품 이름</span><input type="text" value="성견용 사료"></li>
-					<li><span>상품 분류</span><input type="text" value="애견 사료"></li>
-					<li><span>판매 업체</span><input type="text" value="아투"></li>
-					<li><span>상품 가격</span><input type="text" value="43,000"></li>
-					<li><span>재고</span><input type="text" value="10"></li>
+					<li><span>상품 이름</span><input type="text" id="name" value="성견용 사료"></li>
+					<li><span>상품 분류</span>
+						<select id="category" class="ashopOption">
+							<option value="사료">사료</option>
+							<option value="간식">간식</option>
+							<option value="의류">의류</option>
+							<option value="약품">약품</option>
+							<option value="배변패드">배변패드</option>
+							<option value="생활용품">생활용품</option>
+						</select>
+					</li>
+					<li><span>판매 업체</span><input type="text" id="company" value="아투"></li>
+					<li><span>상품 가격</span><input type="text" id="pay"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
+					<li><span>재고</span><input type="text" id="inventory" value="10"></li>
 				</ul>
 				<p><input type="file" id="fileImg" class="ashopFile" onchange="fileURL()" accept="image/*"/></p>
 			</div>
 			<div class="ashopRight">
 				<p>상품 상제정보</p>
-				<p><textarea class="infoUpdate">안녕하세요</textarea></p>
+				<p><textarea class="infoUpdate" id="info">안녕하세요</textarea></p>
 			</div>
 			<input type="button" value="등록" class="ashopSelect" onclick="uploadImage()"/>
 		</div>

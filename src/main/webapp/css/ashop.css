@@ -55,10 +55,12 @@
 	
 	.infoUpdate {border: 2px solid #000; font-family: 'Poor Story'; font-size: 20px; 
 	margin-top: 20px; width: 95.5%; height: 200px; resize: none;}
-	.ashopLeft ul > li > input{font-family: 'Poor Story'; font-size: 20px; border: 2px solid #000; height: 24px; width: 380px;}
+	.ashopLeft ul > li > input{font-family: 'Poor Story'; font-size: 20px; border: 2px solid #000; height: 34px; width: 380px;}
 	input[type=file]::file-selector-button{background-color: #fcd11e; font-weight:bold; height: 26px; width: 80px;
 	font-size: 12px;}
 	.ashopFile{float: left; font-family: 'Poor Story'; font-size: 18px;}
+	.ashopOption{vertical-align: middle; border: 2px solid #000; margin-left:-5px;
+	height: 34px; width: 100px; font-family: 'Poor Story'; font-size: 18px;}
 	
 	.infoTop tr th:nth-child(1) {width: 200px;}
 	.infoTop tr th:nth-child(2) {width: 650px;}

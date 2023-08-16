@@ -117,4 +117,10 @@ public class ABoardController {
 		return "redirect:aboardAnno";
 	}
 	
+	@PostMapping("clickLikeButton")
+	public String clickLikeButton(String selectedValues, Model model) {
+		String url = service.boardLikeButton(selectedValues);
+		return "forward:aboardViews?"+url;
+	}
+	
 }

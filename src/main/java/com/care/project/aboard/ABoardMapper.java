@@ -41,4 +41,6 @@ public interface ABoardMapper {
 	void aboardAnnoUpdate(ABoardDTO aboardDto);
 
 	void aboardHit(@Param("id")String id, @Param("category")String category, @Param("no")int no);
+
+	void boardLike(@Param("id")String id, @Param("category")String category, @Param("no")int no);
 }

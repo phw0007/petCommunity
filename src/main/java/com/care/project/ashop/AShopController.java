@@ -1,5 +1,7 @@
 package com.care.project.ashop;
 
+import java.text.DecimalFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-public class ShopController {
-	@Autowired private ShopService service;
+public class AShopController {
+	@Autowired private AShopService service;
 	@RequestMapping("ashop")
 	public String ashop() {
 		return "ashop/ashop";
@@ -58,10 +60,10 @@ public class ShopController {
 	
 	@ResponseBody
     @PostMapping(value = "uploadImage", produces = "text/plain; charset=utf-8")
-    public String uploadImage(@RequestParam(value="imageFile", required = false) MultipartFile emailFile,
-    							@RequestParam("fileName") String fileName) {
-			System.out.println(fileName);
-			service.uploadImage(emailFile, fileName);
+    public String uploadImage(@RequestParam(value="imageFile", required = false) MultipartFile imageFile,
+    							@RequestParam(value="fileName", required = false) String fileName, 
+    							@RequestParam("selectedValues") String selectedValues) {
+		service.uploadImage(selectedValues, imageFile, fileName);
         return "amemberMail";
     }
 }
