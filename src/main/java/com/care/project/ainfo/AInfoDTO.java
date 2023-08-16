@@ -17,6 +17,7 @@ primary key(no)
 	private String category;
 	private String name;
 	private String address;
+	private String homePage;
 	private String mobile;
 	
 	public int getNo() {
@@ -42,6 +43,12 @@ primary key(no)
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getHomePage() {
+		return homePage;
+	}
+	public void setHomePage(String homePage) {
+		this.homePage = homePage;
 	}
 	public String getMobile() {
 		return mobile;

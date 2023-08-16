@@ -4,43 +4,44 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.care.project.ainfo.AInfoMapper">
-	<resultMap type="com.care.project.ainfo.AInfoDTO" id="InfoDTO">
+	<resultMap type="com.care.project.ainfo.AInfoDTO" id="infoDTO">
 		<id column="no" property="no"/>
 		<result column="category" property="category"/>
 		<result column="name" property="name"/>
 		<result column="address" property="address"/>
+		<result column="home_page" property="homePage"/>
 		<result column="mobile" property="mobile"/>
 	</resultMap>
 
-	<select id="AInfoData" resultMap="InfoDTO">
+	<select id="AInfoData" resultMap="infoDTO">
 		<choose>
 			<when test="select == 'category'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, category, name, address, mobile 
+				(SELECT rownum as rn, category, name, address, home_page,mobile 
 				FROM project_info WHERE category like ('%' ||  #{search} || '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'name'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, category, name, address, mobile 
+				(SELECT rownum as rn, category, name, address, home_page, mobile 
 				FROM project_info WHERE name like ('%' ||  #{search} || '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'address'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, category, name, address, mobile 
+				(SELECT rownum as rn, category, name, address, home_page, mobile 
 				FROM project_info WHERE address like ('%' ||  #{search} || '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'mobile'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, category, name, address, mobile 
+				(SELECT rownum as rn, category, name, address, home_page, mobile 
 				FROM project_info WHERE mobile like ('%' ||  #{search} || '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<otherwise>
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, category, name, address, mobile
+				(SELECT rownum as rn, category, name, address, home_page, mobile
 				FROM project_info WHERE category like ('%' ||  #{search} || '%') or name like ('%' ||  #{search} || '%') or
 				address like ('%' ||  #{search} || '%') or mobile like ('%' ||  #{search} || '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
@@ -80,6 +81,22 @@
 		</selectKey>
 		INSERT INTO project_info VALUES(#{no}, #{subjectCategory}, #{title}, #{venue}, #{reference}, #{source})
 	</insert>
+	
+	<select id="ainfoData" resultMap="infoDTO">
+		SELECT * FROM project_info WHERE name=#{name} AND category=#{category} AND address=#{address}
+	</select>
+	
+	<update id="ainfoUpdateProc">
+		UPDATE project_info SET category=#{category}, name=#{name}, address=#{address}, mobile=#{mobile}, home_page=#{homePage} WHERE no=#{no}
+	</update>
+	
+	<delete id="ainfoDelete">
+		DELETE FROM project_info WHERE no=#{no}
+	</delete>	
+			
+	<update id="ainfoNoUpdate">
+		UPDATE project_info SET no = no - 1 WHERE no >= #{no}
+	</update>
 </mapper>
 
 

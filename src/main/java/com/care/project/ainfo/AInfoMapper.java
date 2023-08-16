@@ -21,4 +21,13 @@ public interface AInfoMapper {
 			@Param("title")String title, @Param("venue")String venue, 
 			@Param("reference")String reference, @Param("source")String source);
 
+	AInfoDTO ainfoData(@Param("name")String name, @Param("category")String category, 
+			@Param("address")String address);
+
+	void ainfoUpdateProc(AInfoDTO info);
+
+	void ainfoDelete(int no);
+
+	void ainfoNoUpdate(int no);
+
 }

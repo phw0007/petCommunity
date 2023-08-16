@@ -24,6 +24,8 @@ import java.io.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+
+import com.care.project.aboard.ABoardDTO;
 import com.care.project.common.PageService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -147,6 +149,31 @@ public class AInfoService {
 				}
 			}
 		}
+	}
+	public void ainfoData(String cp, String name, String category, String address, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		AInfoDTO info = infoMapper.ainfoData(name, category, address);
+		
+		model.addAttribute("info", info);
+		model.addAttribute("cp", cp);
+	}
+	public void ainfoUpdateProc(AInfoDTO info) {
+		infoMapper.ainfoUpdateProc(info);
+	}
+	public void infoDelete(String selectedValues) {
+		String[] checkData = selectedValues.split(",");
+		for(int i = 0; i < checkData.length; i++) {
+			int no = Integer.parseInt(checkData[i]);
+			System.out.println(no);
+			infoMapper.ainfoDelete(no);
+			infoMapper.ainfoNoUpdate(no);
+		}
+		
 	}
 
 }

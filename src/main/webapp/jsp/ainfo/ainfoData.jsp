@@ -13,6 +13,32 @@
 <title>index</title>
 </head>
 <body>
+<script>
+function getDeleteInfoButton() {
+	let selectedValues = ['${info.no}'];
+	url="infoDeleteButton";
+	getDeleteInfo(url, selectedValues);
+}
+
+function getDeleteInfo(url, selectedValues) {
+	if (window.confirm("정말로 삭제하시겠습니까?")) {
+	    const form = document.createElement('form'); // form 태그 생성
+	    form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
+	    form.setAttribute('action', url); // 전송할 url 지정
+	    
+	    const data = document.createElement('input'); // input 태그 생성
+	    data.setAttribute('type', 'hidden'); // type = hidden
+	    data.setAttribute('name', 'selectedValues'); // 데이터의 key
+	   	data.setAttribute('value', selectedValues); // 데이터의 value (여기서는 data1)
+	
+	    form.appendChild(data);
+		
+	    document.body.appendChild(form);
+	
+	    form.submit();      
+	}
+}
+</script>
 <c:import url="/aheader" />
 <div class="member">
 	<div class="memberItem">
@@ -35,41 +61,17 @@
 		</div>
 		<div class="ainfo">
 			<ul>
-				<li><span>업체명</span>동물병원</li>
-				<li><span>주소</span>서울특별시</li>
-				<li><span>업종</span>동물병원</li>
-				<li><span>홈페이지</span>동물병원@naver.com</li>
-				<li><span>비고</span>비고</li>
+				<li><span>업체명</span>${info.name }</li>
+				<li><span>주소</span>${info.address }</li>
+				<li><span>업종</span>${info.category }</li>
+				<li><span>홈페이지</span>${info.homePage }</li>
+				<li><span>전화번호</span>${info.mobile }</li>
 			</ul>
-			<input type="button" value="확인" class="infoButton" onclick="location.href='ainfo'"/>
+			<input type="button" value="확인" class="infoButton" onclick="location.href='ainfo?currentPage=${cp}'"/>
+			<input type="button" value="수정" class="infoButton" style="margin-left:20px; margin-right:20px;" onclick="location.href='ainfoUpdate?name=${info.name}&category=${info.category}&address=${info.address}&homePage=${info.homePage}&mobile=${info.mobile}&currentPage=${currentPage}'"/>
+			<input type="button" value="삭제" class="infoButton" onclick="getDeleteInfoButton()"/>
 		</div>
 	</div>
 </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

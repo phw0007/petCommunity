@@ -34,51 +34,61 @@
 			</ul>
 		</div>
 		<div class="ainfo">
-			<ul>
-				<li><span>업체명</span><input type="text" class="infoName"></li>
-				<li><span>주소</span><input type="text" class="infoAddress"></li>
-				<li>
-					<span>업종</span>
-					<select name="select" class="ainfoOption">
-						<option value="hospital">동물병원</option>
-						<option value="store">반려용품</option>
-						<option value="acco">펜션/숙소</option>
-						<option value="cafe">카페</option>
-						<option value="diner">식당</option>
-					</select>
-				</li>
-				<li><span>홈페이지</span><input type="text" class="infoPage"></li>
-				<li><span>비고</span><input type="text" class="infoNote"></li>
-			</ul>
-			<input type="button" value="등록" class="infoButton" onclick="location.href='ainfo'"/>
+			<form action="ainfoUpdateProc" method="post">
+				<ul>
+					<li><span>번호</span><input type="text" name="no" class="infoName" value="${info.no}" readonly="readonly"></li>
+					<li><span>업체명</span><input type="text" name="name" class="infoName" value="${info.name}" ></li>
+					<li><span>주소</span><input type="text" name="address" class="infoAddress" value="${info.address}"></li>
+					<li>
+						<span>업종</span>
+						<select name="category" class="ainfoOption">
+							<c:choose>
+								<c:when test="${info.category == '동물병원'}">
+									<option value="동물병원" selected="selected">동물병원</option>
+									<option value="동물약국">동물약국</option>
+									<option value="학교체육시설">학교체육시설</option>
+									<option value="수영장">수영장</option>
+									<option value="축구장">축구장</option>
+								</c:when>
+								<c:when test="${info.category == '동물약국'}">
+									<option value="동물병원">동물병원</option>
+									<option value="동물약국" selected="selected">동물약국</option>
+									<option value="학교체육시설">학교체육시설</option>
+									<option value="수영장">수영장</option>
+									<option value="축구장">축구장</option>
+								</c:when>
+								<c:when test="${info.category == '학교체육시설'}">
+									<option value="동물병원">동물병원</option>
+									<option value="동물약국">동물약국</option>
+									<option value="학교체육시설" selected="selected">학교체육시설</option>
+									<option value="수영장">수영장</option>
+									<option value="축구장">축구장</option>
+								</c:when>
+								<c:when test="${info.category == '수영장'}">
+									<option value="동물병원">동물병원</option>
+									<option value="동물약국">동물약국</option>
+									<option value="학교체육시설">학교체육시설</option>
+									<option value="수영장" selected="selected">수영장</option>
+									<option value="축구장">축구장</option>
+								</c:when>
+								<c:otherwise>
+									<option value="동물병원">동물병원</option>
+									<option value="동물약국">동물약국</option>
+									<option value="학교체육시설">학교체육시설</option>
+									<option value="수영장">수영장</option>
+									<option value="축구장" selected="selected">축구장</option>
+								</c:otherwise>
+							</c:choose>
+						</select>
+					</li>
+					<li><span>홈페이지</span><input type="text" name="homePage" class="infoPage" value="${info.homePage}"></li>
+					<li><span>전화번호</span><input type="text" name="mobile" class="infoNote" value="${info.mobile}"></li>
+				</ul>
+				<input type="submit" value="수정" class="infoButton"/>
+				<input type="button" value="취소" class="infoButton" onclick="history.back()"/>
+			</form>
 		</div>
 	</div>
 </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
