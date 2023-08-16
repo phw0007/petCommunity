@@ -15,6 +15,54 @@
 		<result column="info" property="info"/>
 	</resultMap>
 	
+		<select id="shopData" resultMap="ashopDto">
+		<choose>
+			<when test="select == 'category'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, category, name, company, pay, inventory
+				, image_file, info FROM project_shop WHERE category like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<when test="select == 'company'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, category, name, company, pay, inventory
+				, image_file, info FROM project_shop WHERE company like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<when test="select == 'name'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, category, name, company, pay, inventory
+				, image_file, info FROM project_shop WHERE name like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<otherwise>
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, category, name, company, pay, inventory
+				, image_file, info FROM project_shop WHERE category like ('%' ||  #{search} || '%') or
+				company like ('%' ||  #{search} || '%') or name like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="count">
+		<choose>
+	  		<when test="select == 'category'">
+	  			SELECT count(name) FROM project_shop WHERE category like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<when test="select == 'company'">
+	  			SELECT count(name) FROM project_shop WHERE company like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<when test="select == 'name'">
+	  			SELECT count(name) FROM project_shop WHERE name like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<otherwise>
+	  			SELECT count(name) FROM project_shop WHERE category like ('%' ||  #{search} || '%') or
+	  			company like ('%' ||  #{search} || '%') or name like ('%' ||  #{search} || '%')
+	  		</otherwise>
+		</choose>
+	</select>
+	
 	<insert id="insertShop">
 		<selectKey order="BEFORE" keyProperty="no" resultType="int">
 			SELECT nvl(max(no),0) + 1 FROM project_shop
