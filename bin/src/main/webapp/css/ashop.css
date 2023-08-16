@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+	.member {font-family: 'Poor Story';}
+	.member a{text-decoration: none; color:black; position: relative;}
+	.memberItem{width: 300px; height: 840px; border-right: 2px solid #000; float: left;
+	text-align: center; padding-top:30px;}
+	.memberItem h3{font-size: 26px; padding-bottom:30px; border-bottom: 2px solid #000;
+	font-weight:bold;}
+	.memberItem ul li{font-size: 22px; padding-top: 30px;}
+	
+	.header ul li:nth-child(4){font-size: 36px;}
+	
+	.memberMain{display: inline-block; width: 1500px; height: 600px; padding: 30px; text-align: center;}
+	.memberTitle{height: 56px; border-bottom: 2px solid #000; }
+	.memberTitle p{font-size: 24px; font-weight: bold; float: left; }
+	.memberTitle ul{float:right;}
+	.memberTitle ul li{display: inline-block; vertical-align: middle; padding-left: 10px;}
+	
+	.memberInfo{height: 650px;}
+	.memberInfo table{margin:0 auto; font-size: 20px;}
+	.memberInfo tr th:nth-child(1){width: 100px;}
+	.memberInfo tr th:nth-child(3){width: 250px;}
+	.memberInfo tr th:nth-child(4){width: 550px;}
+	.memberInfo tr th:nth-child(5){width: 260px;}
+	.memberInfo tr{border-bottom: 1px solid #000;}
+	.memberInfo tr th{width: 170px; padding: 10px 0 10px 0;}
+	.memberInfo tr td{padding: 10px 0 10px 0;}
+	.memberInfo tr th:nth-child(7){width: 80px;}
+	.memberInfo tr td:nth-child(7) input{display: inline-block; width: 20px; height: 20px;
+	vertical-align: middle; margin:-10px 0 -5px 0;}
+	
+	.memberSearch{font-family: 'Poor Story'; font-size: 26px; }
+	.memberSearch a{padding: 10px; display: inline-block;}
+	
+	.selectOption{vertical-align: middle; border: 2px solid #000; 
+	height: 36px; width: 100px; font-family: 'Poor Story'; font-size: 18px;font-weight:bold;}
+	.searchOption{border: 2px solid #000; border-right: 0;border-left: 0;  margin:-7px; height: 30px; width: 300px;font-family: 'Poor Story'; font-size: 18px;}
+	.submitOption{vertical-align: middle; border: 2px solid #000; height: 36px; width: 100px;
+	font-family: 'Poor Story'; font-size: 18px; background-color: #fcd11e;font-weight:bold;}
+	.deleteOption{float: right; vertical-align: middle; border: 2px solid #000; height: 36px; width: 100px;
+	font-family: 'Poor Story'; font-size: 18px; background-color: #fcd11e;font-weight:bold;
+	margin-left: -100px;}
+	
+	.ashopLeft {float: left; width: 47%; text-align: left; padding: 20px; height: 650px;
+	font-size: 22px;}
+	.ashopLeft p{float: left; margin-right: 20px;}
+	.ashopLeft p img{display: inline-block; width:180px; height:240px;}
+	.ashopLeft ul li span {width: 100px; display: inline-block; margin-bottom: 20px;}
+	.ashopLeft ul{height: 250px;}
+	.ashopRight {float: right; width: 47%; text-align: left; padding: 20px; height: 650px; font-size: 22px;}
+	.textInfo {margin-top: 20px; width: 95.5%; height: 200px; resize: none; border: 0;
+	font-size: 20px; font-family: 'Poor Story';}
+	.memberInfo > input{float: right; vertical-align: middle; border: 2px solid #000; height: 36px; width: 100px;
+	font-family: 'Poor Story'; font-size: 18px; background-color: #fcd11e;font-weight:bold; margin-left: 20px;}
+	
+	.infoUpdate {border: 2px solid #000; font-family: 'Poor Story'; font-size: 20px; 
+	margin-top: 20px; width: 95.5%; height: 200px; resize: none;}
+	.ashopLeft ul > li > input{font-family: 'Poor Story'; font-size: 20px; border: 2px solid #000; height: 34px; width: 380px;}
+	input[type=file]::file-selector-button{background-color: #fcd11e; font-weight:bold; height: 26px; width: 80px;
+	font-size: 12px;}
+	.ashopFile{float: left; font-family: 'Poor Story'; font-size: 18px;}
+	.ashopOption{vertical-align: middle; border: 2px solid #000; margin-left:-5px;
+	height: 34px; width: 100px; font-family: 'Poor Story'; font-size: 18px;}
+	
+	.infoTop tr th:nth-child(1) {width: 200px;}
+	.infoTop tr th:nth-child(2) {width: 650px;}
+	.infoTop tr th:nth-child(3) {width: 250px;}
+	.infoTop tr th:nth-child(4) {width: 200px;}
+	.infoTop tr th:nth-child(5) {width: 200px;}
+	
+	.infoBottom p{font-size: 26px; font-weight: bold; text-align: left; width: 100%; border-bottom: 2px solid #000;
+	padding:30px 0 30px 0;}
+	.infoBottom {margin-bottom: 20px;}
+	.infoTop tr td input{height: 22px; width: 600px; border: 2px solid #000; font-family: 'Poor Story';
+	font-size: 20px;}
+	.infoBottom tr td input{height: 22px; width: 60px; border: 2px solid #000;}

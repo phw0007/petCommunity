@@ -1,0 +1,12 @@
+@charset "UTF-8";
+/*header*/
+#header{position:absolute;top:0;  width:100%; background:#fcd11e;}
+.inner{ position:relative;bottom:20px;width:1200px;margin:0 auto;}
+.inner a{text-decoration:none; color:black; padding:30px 20px 10px 20px;}
+.inner ul{padding: 20px; height:100px;}
+.inner ul li{display:inline; padding-top:20px; font-size:30px;}
+.inner img{width:50px; height:50px;}
+.inner ul li a:hover{color:black; border-bottom:3px solid black;}
+
+
+

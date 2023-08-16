@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.care.project.ashop.AShopMapper">
+	<resultMap type="com.care.project.ashop.AShopDTO" id="ashopDto">
+		<id column="no" property="no"/>
+		<result column="category" property="category"/>
+		<result column="name" property="name"/>
+		<result column="company" property="company"/>
+		<result column="pay" property="pay"/>
+		<result column="inventory" property="inventory"/>
+		<result column="image_file" property="imageFile"/>
+		<result column="info" property="info"/>
+	</resultMap>
+	
+	<insert id="insertShop">
+		<selectKey order="BEFORE" keyProperty="no" resultType="int">
+			SELECT nvl(max(no),0) + 1 FROM project_shop
+		</selectKey>
+		INSERT INTO project_shop VALUES(#{no}, #{category}, #{name}, #{company}, #{pay}, #{inventory}, #{imageFile}, #{info})
+	</insert>
+	
+	<select id="checkShop" resultMap="ashopDto">
+		SELECT * FROM project_shop WHERE name=#{name}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+  
