@@ -18,12 +18,11 @@ public class AShopService {
 		String name = checkData[0];
 		String category = checkData[1];
 		String company = checkData[2];
-		int pay = Integer.parseInt(checkData[3]);
+		int payData = Integer.parseInt(checkData[3]);
+		String pay = forematter.format(payData);
 		int inventory = Integer.parseInt(checkData[4]);
 		String info = checkData[5];
-		if(fileName == null) {
-			fileName = "";
-		}else {
+		if(imageFile != null) {
 			if(imageFile.getSize() != 0) {
 				String fileLocation = "C:\\javas\\boot_workspace\\project\\src\\main\\webapp\\image\\"+fileName;
 				File save = new File(fileLocation);
@@ -33,9 +32,24 @@ public class AShopService {
 					e.printStackTrace();
 				}
 			}
-			fileName = "/image/"+fileName;
-			
 		}
 		
+		if(fileName == null) {
+			fileName = "";
+		}else {
+			fileName = "/image/"+fileName;
+		}
+		AShopDTO shopDto = new AShopDTO();
+		shopDto.setCategory(category);
+		shopDto.setName(name);
+		shopDto.setCompany(company);
+		shopDto.setPay(pay);
+		shopDto.setInventory(inventory);
+		shopDto.setImageFile(fileName);
+		shopDto.setInfo(info);
+		AShopDTO check = shopMapper.checkShop(shopDto);
+		if(check == null) {
+			shopMapper.insertShop(shopDto);		
+		}
 	}
 }

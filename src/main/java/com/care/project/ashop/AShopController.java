@@ -64,6 +64,6 @@ public class AShopController {
     							@RequestParam(value="fileName", required = false) String fileName, 
     							@RequestParam("selectedValues") String selectedValues) {
 		service.uploadImage(selectedValues, imageFile, fileName);
-        return "amemberMail";
+        return "ashop";
     }
 }

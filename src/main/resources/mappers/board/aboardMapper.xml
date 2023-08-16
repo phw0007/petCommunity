@@ -100,7 +100,7 @@
 	</delete>	
 	
 	
-		<select id="boardAnnoData" resultMap="boardDto">
+	<select id="boardAnnoData" resultMap="boardDto">
 		<choose>
 			<when test="select == 'title'">
 				SELECT AAA.* FROM 
