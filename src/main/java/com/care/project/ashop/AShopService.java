@@ -163,4 +163,18 @@ public class AShopService {
 		}
 		return "상품수정 완료되었습니다.";
 	}
+	
+	public void shopDeleteCheckBoxes(String selectedValues) {
+		String[] checkData = selectedValues.split(",");
+		int sub = 0;
+		for(int i = 3; i <= checkData.length; i+=3) {
+			String name = checkData[i-3];
+			String category = checkData[i-2];
+			int no = Integer.parseInt(checkData[i-1]);
+			no -= sub;
+			shopMapper.ashopDelete(name, category, no);
+			shopMapper.ashopNoUpdate(no);
+			sub++;
+		}
+	}
 }

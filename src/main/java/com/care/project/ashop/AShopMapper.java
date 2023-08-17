@@ -26,4 +26,8 @@ public interface AShopMapper {
 
 	void updateShop(AShopDTO shopDto);
 
+	void ashopDelete(@Param("name")String name, @Param("category")String category, @Param("no")int no);
+
+	void ashopNoUpdate(int no);
+
 }

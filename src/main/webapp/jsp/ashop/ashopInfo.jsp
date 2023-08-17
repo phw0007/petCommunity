@@ -31,6 +31,29 @@ function ashopUpdateButton() {
     document.body.appendChild(form);
     form.submit();   
 }
+
+function deleteShopButton() {
+	let selectedValues = ['${shop.name}','${shop.category}','${shop.no}'];
+	url="deleteShopButton";
+	getDeleteShop(url, selectedValues);
+}
+
+function getDeleteShop(url, selectedValues) {
+	if (window.confirm("정말로 삭제하시겠습니까?")) {
+	    const form = document.createElement('form'); // form 태그 생성
+	    form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
+	    form.setAttribute('action', url); // 전송할 url 지정
+	    
+	    const data = document.createElement('input'); // input 태그 생성
+	    data.setAttribute('type', 'hidden'); // type = hidden
+	    data.setAttribute('name', 'selectedValues'); // 데이터의 key
+	   	data.setAttribute('value', selectedValues); // 데이터의 value (여기서는 data1)
+	
+	    form.appendChild(data);
+	    document.body.appendChild(form);
+	    form.submit();      
+	}
+}
 </script>
 <c:import url="/aheader" />
 <div class="member">
@@ -79,6 +102,7 @@ function ashopUpdateButton() {
 			</div>
 			<input type="button" value="확인" class="ashopSelect" onclick="location.href='ashop?currentPage=${cp}'"/>
 			<input type="button" value="수정" class="ashopUpdate" onclick="ashopUpdateButton()"/>
+			<input type="button" value="삭제" class="ashopUpdate" onclick="deleteShopButton()"/>
 		</div>
 	</div>
 </div>

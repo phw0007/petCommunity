@@ -85,6 +85,15 @@
 	<update id="updateShop">
 		UPDATE project_shop SET category=#{category}, company=#{company}, pay=#{pay}, inventory=#{inventory}, info=#{info} WHERE name=#{name}
 	</update>
+	
+	<delete id="ashopDelete">
+		DELETE FROM project_shop WHERE name=#{name} AND category=#{category} AND no=#{no}
+	</delete>	
+		
+	<update id="ashopNoUpdate">
+		UPDATE project_shop SET no = no - 1 WHERE no >= #{no}
+	</update>
+	
 </mapper>
 
 

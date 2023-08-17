@@ -15,10 +15,10 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 public class AShopController {
 	@Autowired private AShopService service;
-	@RequestMapping({"/ashop"})
+	
+	@RequestMapping({"/ashop", "/ashopDelete"})
 	public String ashop(@RequestParam(value="currentPage", required = false)String cp,
-			String select, String search, Model model, HttpServletRequest request,
-			String msg) {
+			String select, String search, Model model, HttpServletRequest request, String msg) {
 		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		service.ashop(cp, select, search, model, requestUrl);
 		if(msg != null) {
@@ -34,11 +34,6 @@ public class AShopController {
 	@RequestMapping("ashopRegister")
 	public String ashop_register() {
 		return "ashop/ashopRegister";
-	}
-	
-	@RequestMapping("ashopDelete")
-	public String ashop_delete() {
-		return "ashop/ashopDelete";
 	}
 	
 	@RequestMapping("ashopOrder")
@@ -72,6 +67,17 @@ public class AShopController {
 	@RequestMapping("ashopOrderUpdate")
 	public String ashop_order_update() {
 		return "ashop/ashopOrderUpdate";
+	}
+	
+	@RequestMapping({"/shopDeleteCheckBoxes", "/deleteShopButton"})
+	public String shopDeleteCheckBoxes(String selectedValues, HttpServletRequest request) {
+		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		service.shopDeleteCheckBoxes(selectedValues);
+		if("/shopDeleteCheckBoxes".equals(requestUrl)) {
+			return "redirect:ashopDelete";
+		}else {
+			return "redirect:ashop";
+		}
 	}
 	
 	@ResponseBody
