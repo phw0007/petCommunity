@@ -15,7 +15,7 @@
 <body>
 <script>
 function ashopUpdateButton() {
-	let selectedValues = ['${shop.no}','${shop.category}','${shop.name}','${shop.company}',
+	let selectedValues = ['${shop.no}','${shop.category}','${shop.product}','${shop.company}',
 		'${shop.inventory}','${shop.imageFile}','${shop.info}'];
 	url="ashopUpdate?pay=${shop.pay}";
     const form = document.createElement('form'); // form 태그 생성
@@ -33,7 +33,7 @@ function ashopUpdateButton() {
 }
 
 function deleteShopButton() {
-	let selectedValues = ['${shop.name}','${shop.category}','${shop.no}'];
+	let selectedValues = ['${shop.product}','${shop.category}','${shop.no}'];
 	url="deleteShopButton";
 	getDeleteShop(url, selectedValues);
 }
@@ -89,7 +89,7 @@ function getDeleteShop(url, selectedValues) {
 					</c:otherwise>
 				</c:choose>
 				<ul>
-					<li><span>상품 이름</span>${shop.name}</li>
+					<li><span>상품 이름</span>${shop.product}</li>
 					<li><span>상품 분류</span>${shop.category }</li>
 					<li><span>판매 업체</span>${shop.company }</li>
 					<li><span>상품 가격</span>${shop.pay }</li>

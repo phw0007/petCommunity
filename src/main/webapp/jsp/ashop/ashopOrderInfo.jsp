@@ -41,21 +41,24 @@
 				<table>
 					<thead>
 				    	<tr>
+				    		<th>아이디</th>
 				    		<th>주문자명</th>
-				    		<th>주소</th>
-				    		<th>전화번호</th>
+				    		<th style="width: 700px;">주소</th>
+				    		<th style="width: 200px;">전화번호</th>
 				    		<th>결재방식</th>
 				    		<th>결재상태</th>
 				    	</tr>
 				    </thead>
 				    <tbody>
 				    	<tr>
+				    		<td>admin</td>
 				    		<td>관리자</td>
 				    		<td>서울특별시</td>
 				    		<td>010-1234-1234</td>
 				    		<td>신용카드</td>
 				    		<td>결재확인</td>
 				    	</tr>
+				    </tbody>
 				</table>
 			</div>
 			<div class="infoBottom">

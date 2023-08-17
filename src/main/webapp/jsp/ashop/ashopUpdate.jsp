@@ -48,7 +48,7 @@
 					</c:otherwise>
 				</c:choose>
 				<ul>
-					<li><span>상품 이름</span><input type="text" readonly="readonly" id="name" value="${shop.name }"></li>
+					<li><span>상품 이름</span><input type="text" readonly="readonly" id="product" value="${shop.product }"></li>
 					<li>
 						<span>상품 분류</span>
 						<select id="category" class="ashopOption">
@@ -61,7 +61,7 @@
 						</select>
 					</li>
 					<li><span>판매 업체</span><input type="text" id="company" value="${shop.company }"></li>
-					<li><span>상품 가격</span><input type="text" id="pay" value="${shop.pay }"></li>
+					<li><span>상품 가격</span><input type="text" id="pay" value="${shop.pay }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></li>
 					<li><span>재고</span><input type="text" id="inventory" value="${shop.inventory }"></li>
 				</ul>
 				<p><input type="file" id="fileImg" class="ashopFile" onchange="fileURL()" accept="image/*"></p>

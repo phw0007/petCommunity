@@ -36,9 +36,16 @@ public class AShopController {
 		return "ashop/ashopRegister";
 	}
 	
-	@RequestMapping("ashopOrder")
-	public String ashop_order() {
-		return "ashop/ashopOrder";
+	@RequestMapping({"/ashopOrder"})
+	public String ashop_order(@RequestParam(value="currentPage", required = false)String cp,
+			String select, String search, Model model, HttpServletRequest request) {
+		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		service.ashopOrder(cp, select, search, model, requestUrl);
+		if("/ashopOrder".equals(requestUrl)) {
+			return "ashop/ashopOrder";
+		}else {
+			return "ashop/ashopOrderDel";
+		}
 	}
 	
 	@RequestMapping("ashopOrderDel")

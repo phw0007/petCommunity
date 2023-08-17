@@ -19,15 +19,20 @@ public interface AShopMapper {
 
 	int count(@Param("select")String select, @Param("search")String search);
 
-	AShopDTO ashopInfo(@Param("name")String name, @Param("category")String category, 
+	AShopDTO ashopInfo(@Param("product")String product, @Param("category")String category, 
 			@Param("company")String company);
 
 	void updateShopImage(AShopDTO shopDto);
 
 	void updateShop(AShopDTO shopDto);
 
-	void ashopDelete(@Param("name")String name, @Param("category")String category, @Param("no")int no);
+	void ashopDelete(@Param("product")String product, @Param("category")String category, @Param("no")int no);
 
 	void ashopNoUpdate(int no);
+
+	ArrayList<AShopDTO> shopOrderData(@Param("begin")int begin, @Param("end")int end, 
+			@Param("select")String select, @Param("search")String search);
+
+	int orderCount(@Param("select")String select, @Param("search")String search);
 
 }

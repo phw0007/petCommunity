@@ -224,19 +224,19 @@ function fileURL() {
 
 
 function uploadImage() {
-	var name = document.getElementById('name').value;
+	var product = document.getElementById('product').value;
 	var category = document.getElementById('category').value;
 	var company = document.getElementById('company').value;
 	var pay = document.getElementById('pay').value;
 	var inventory = document.getElementById('inventory').value;
 	var info = document.getElementById('info').value;
-	let selectedValues = [name,category,company,pay,inventory,info];
+	let selectedValues = [product,category,company,pay,inventory,info];
 	
 	var fileInput = document.getElementById('fileImg');
 	var imageFile = fileInput.files[0];
 
 	var formData = new FormData();
-	if (name == "") {
+	if (product == "") {
 		alert('제품명은 필수 입력사항 입니다.');
 	}else if (company == "") {
 		alert('판매 업체는 필수 입력사항 입니다.');
@@ -263,17 +263,17 @@ function uploadImage() {
 
 function updateShop() {
 	var fileInput = document.getElementById('fileImg');
-	var name = document.getElementById('name').value;
+	var product = document.getElementById('product').value;
 	var category = document.getElementById('category').value;
 	var company = document.getElementById('company').value;
 	var pay = document.getElementById('pay').value;
 	var inventory = document.getElementById('inventory').value;
 	var info = document.getElementById('info').value;
-	let selectedValues = [name,category,company,pay,inventory,info];
+	let selectedValues = [product,category,company,pay,inventory,info];
 	var imageFile = fileInput.files[0];
 
 	var formData = new FormData();
-	if (name == "") {
+	if (product == "") {
 		alert('제품명은 필수 입력사항 입니다.');
 	}else if (company == "") {
 		alert('판매 업체는 필수 입력사항 입니다.');

@@ -13,6 +13,28 @@
 <title>index</title>
 </head>
 <body>
+<script>
+function orderCheck() {
+	let selectedValues = ['${shop.product}','${shop.category}','${shop.no}'];
+	url="deleteShopButton";
+	getDeleteShop(url, selectedValues);
+}
+
+function getDeleteShop(url, selectedValues) {
+	const form = document.createElement('form'); // form 태그 생성
+	form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
+	form.setAttribute('action', url); // 전송할 url 지정
+		    
+	const data = document.createElement('input'); // input 태그 생성
+	data.setAttribute('type', 'hidden'); // type = hidden
+	data.setAttribute('name', 'selectedValues'); // 데이터의 key
+	data.setAttribute('value', selectedValues); // 데이터의 value (여기서는 data1)
+		
+	form.appendChild(data);
+	document.body.appendChild(form);
+	form.submit();      
+}
+</script>
 <c:import url="/aheader" />
 <div class="member">
 	<div class="memberItem">
@@ -41,35 +63,60 @@
 				<thead>
 			    	<tr>
 			    		<th>번호</th>
-			    		<th>구매회원</th>
-			    		<th>상품이름</th>
+			    		<th>아이디</th>
+			    		<th>사용자명</th>
 			    		<th>주소</th>
 			    		<th>전화번호</th>
-			    		<th>상품 가격</th>
+			    		<th>주문날짜</th>
 			    	</tr>
 			    </thead>
 			    <tbody>
-			    	<tr onclick="location.href='ashopOrderInfo'">
-			    		<td>1</td>
-			    		<td>관리자</td>
-			    		<td>성견용 사료</td>
-			    		<td>서울특별시</td>
-			    		<td>010-1234-1234</td>
-			    		<td>43,000</td>
-			    	</tr>
+			    	<c:forEach var="order" items="${orders}">
+						<tr onclick="orderCheck()">
+							<td>${no=no+1}</td>
+							<td>${order.id}</td>
+							<td>${order.userName}</td>
+							<td>${order.address}</td>
+							<td>${order.mobile}</td>
+							<td>${order.writeDate}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
 			</table>
 		</div>
 		<div class="memberSearch">
-			<a href=""><</a><a href="">1</a><a href="">></a>
+			<div> ${result}	</div>
 			<div class="selectSearch">
-				<form action="memberSelect">
+				<form action="ashopOrder">
 					<select name="select" class="selectOption">
-						<option value="">전체</option>
-						<option value="id">구매회원</option>
-						<option value="name">상품이름</option>
-						<option value="address">주소</option>
+						<c:choose>
+							<c:when test="${select == 'id'}">
+								<option value="">전체</option>
+								<option value="id" selected="selected">아이디</option>
+								<option value="userName">사용자명</option>
+								<option value="writeDate">주문날짜</option>
+							</c:when>
+							<c:when test="${select == 'userName'}">
+								<option value="">전체</option>
+								<option value="id">아이디</option>
+								<option value="userName" selected="selected">사용자명</option>
+								<option value="writeDate">주문날짜</option>
+							</c:when>
+							<c:when test="${select == 'writeDate'}">
+								<option value="">전체</option>
+								<option value="id">아이디</option>
+								<option value="userName">사용자명</option>
+								<option value="writeDate" selected="selected">주문날짜</option>
+							</c:when>
+							<c:otherwise>
+								<option value="">전체</option>
+								<option value="id">아이디</option>
+								<option value="userName">사용자명</option>
+								<option value="writeDate">주문날짜</option>
+							</c:otherwise>
+						</c:choose>
 					</select>
-					<input type="text" name="search" class="searchOption"/>
+					<input type="text" name="search" class="searchOption" value="${search}"/>
 					<input type="submit" value="검색" class="submitOption"/>
 				</form>
 			</div>

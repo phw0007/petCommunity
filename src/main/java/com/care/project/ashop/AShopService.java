@@ -20,7 +20,7 @@ public class AShopService {
 	public String uploadImage(String selectedValues, MultipartFile imageFile, String fileName) {
 		DecimalFormat forematter = new DecimalFormat("###,###");
 		String[] checkData = selectedValues.split(",");
-		String name = checkData[0];
+		String product = checkData[0];
 		String category = checkData[1];
 		String company = checkData[2];
 		int payData = Integer.parseInt(checkData[3]);
@@ -46,7 +46,7 @@ public class AShopService {
 		}
 		AShopDTO shopDto = new AShopDTO();
 		shopDto.setCategory(category);
-		shopDto.setName(name);
+		shopDto.setProduct(product);
 		shopDto.setCompany(company);
 		shopDto.setPay(pay);
 		shopDto.setInventory(inventory);
@@ -92,7 +92,6 @@ public class AShopService {
 		model.addAttribute("no", no);
 		model.addAttribute("select", select);
 		model.addAttribute("search", search);
-		
 	}
 	
 	public void ashopInfo(String name, String category, String company, String cp, Model model) {
@@ -113,8 +112,9 @@ public class AShopService {
 		AShopDTO shop = new AShopDTO();
 		shop.setNo(Integer.parseInt(checkData[0]));
 		shop.setCategory(checkData[1]);
-		shop.setName(checkData[2]);
+		shop.setProduct(checkData[2]);
 		shop.setCompany(checkData[3]);
+		pay = pay.replaceAll("[^\\w+]","");
 		shop.setPay(pay);
 		shop.setInventory(Integer.parseInt(checkData[4]));
 		shop.setImageFile(checkData[5]);
@@ -124,7 +124,7 @@ public class AShopService {
 	public String updateShop(String selectedValues, MultipartFile imageFile, String fileName) {
 		DecimalFormat forematter = new DecimalFormat("###,###");
 		String[] checkData = selectedValues.split(",");
-		String name = checkData[0];
+		String product = checkData[0];
 		String category = checkData[1];
 		String company = checkData[2];
 		int payData = Integer.parseInt(checkData[3]);
@@ -150,7 +150,7 @@ public class AShopService {
 		}
 		AShopDTO shopDto = new AShopDTO();
 		shopDto.setCategory(category);
-		shopDto.setName(name);
+		shopDto.setProduct(product);
 		shopDto.setCompany(company);
 		shopDto.setPay(pay);
 		shopDto.setInventory(inventory);
@@ -168,13 +168,46 @@ public class AShopService {
 		String[] checkData = selectedValues.split(",");
 		int sub = 0;
 		for(int i = 3; i <= checkData.length; i+=3) {
-			String name = checkData[i-3];
+			String product = checkData[i-3];
 			String category = checkData[i-2];
 			int no = Integer.parseInt(checkData[i-1]);
 			no -= sub;
-			shopMapper.ashopDelete(name, category, no);
+			shopMapper.ashopDelete(product, category, no);
 			shopMapper.ashopNoUpdate(no);
 			sub++;
 		}
+	}
+	public void ashopOrder(String cp, String select, String search, Model model, String requestUrl) {
+		if(select == null){
+			select = "";
+		}
+		
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+			
+		if(search == null) {
+			search = "";
+		}
+		requestUrl = requestUrl.substring(1);
+		int pageBlock = 14; 
+		int end = pageBlock * currentPage; 
+		
+		int begin = end - pageBlock + 1; 
+		int no = 0;
+		ArrayList<AShopDTO> orders = shopMapper.shopOrderData(begin, end, select, search);
+		int totalCount = shopMapper.orderCount(select, search);
+		String url = requestUrl+"?select="+select+"&search="+search+"&currentPage=";
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		no = (currentPage-1)*14;
+		model.addAttribute("orders", orders);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("no", no);
+		model.addAttribute("select", select);
+		model.addAttribute("search", search);
 	}
 }

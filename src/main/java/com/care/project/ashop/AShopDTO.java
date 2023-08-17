@@ -16,12 +16,21 @@ primary key(no)
 */		
 	private int no;
 	private String category;
-	private String name;
+	private String product;
 	private String company;
 	private String pay;
 	private int inventory;
 	private String imageFile;
 	private String info;
+	private String id;
+	private String userName;
+	private String address;
+	private String mobile;
+	private String payType;
+	private String payCheck;
+	private String orderCount;
+	private String writeDate;
+	
 	public int getNo() {
 		return no;
 	}
@@ -34,11 +43,11 @@ primary key(no)
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public String getName() {
-		return name;
+	public String getProduct() {
+		return product;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setProduct(String product) {
+		this.product = product;
 	}
 	public String getCompany() {
 		return company;
@@ -70,6 +79,53 @@ primary key(no)
 	public void setInfo(String info) {
 		this.info = info;
 	}
-
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	public String getPayType() {
+		return payType;
+	}
+	public void setPayType(String payType) {
+		this.payType = payType;
+	}
+	public String getPayCheck() {
+		return payCheck;
+	}
+	public void setPayCheck(String payCheck) {
+		this.payCheck = payCheck;
+	}
+	public String getOrderCount() {
+		return orderCount;
+	}
+	public void setOrderCount(String orderCount) {
+		this.orderCount = orderCount;
+	}
+	public String getWriteDate() {
+		return writeDate;
+	}
+	public void setWriteDate(String writeDate) {
+		this.writeDate = writeDate;
+	}
 	
 }
