@@ -13,7 +13,7 @@
 		<ul>
 			<li><a href="location.href=''">공지사항</a></li>
 			<li><a href="location.href='freeboardForm'">자유게시판</a></li>
-			<li><a href="location.href='qnaoardForm'">Q&A</a></li>
+			<li><a href="location.href=''">Q&A</a></li>
 			<li><a href="location.href=''">강아지</a></li>
 			<li><a href="location.href=''">고양이</a></li>
 			<li><a href="location.href=''">파충류</a></li>
@@ -39,7 +39,7 @@
 		
 				<tr>
 					<td>${totalCount - ((currentPage-1) * 10 + status.index)}</td>
-					<td onclick="location.href='boardContent?no=${freeboard.no}&category=${freeboard.category}&cp=${currentPage }'">${freeboard.title }</td>
+					<td onclick="location.href='boardContent?no=${freeboard.no}&category=${freeboard.category}'">${freeboard.title }</td>
 					<td>${freeboard.id }</td>
 					<td>${freeboard.writeDate }</td>
 					<td>${freeboard.likes }</td>
@@ -47,7 +47,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<div class="result">${result }</div>
+		<span>${result }</span>
 	<form>
 		<button class="writeB" type="button"
 			onclick="location.href='boardWrite'">글쓰기</button>

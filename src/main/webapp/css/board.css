@@ -46,6 +46,7 @@
 .boardCategory,
 .boardFormT{float:left;margin-top:50px;}
 
+
 /*카테고리 선택하는 곳*/
 .boardCategory{background:#ffeda1;width:170px;font-size:20px;}
 .boardCategory > ul li a{text-decoration: none;color:black;padding-right:30px;}
@@ -62,7 +63,7 @@
 .formTable > span{padding-right:100px;}
 .writeB{background:#fcd11e; margin-top:50px;width:70px; height:40px;
          margin-left:750px; font-family: 'Poor Story', cursive;font-size:20px;border:none;}
-         
+.result{text-align:center;font-size:18px;text-decoration:none; color:black;}
 /*boardModify글 수정 */
 .boardModify{width:1200px; margin:0 auto; height:1200px;padding-top:100px;font-family: 'Poor Story'}
 .boardModify{margin-top:50px;}

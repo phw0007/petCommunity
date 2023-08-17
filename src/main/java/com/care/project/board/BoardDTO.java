@@ -43,21 +43,8 @@ public class BoardDTO {
     private int likes;
     private String commentId;
     private String commentContent;
-    private int llikeno;
-    private int likeChech;
+    private String likesId;
     
-	public int getLlikeno() {
-		return llikeno;
-	}
-	public void setLlikeno(int llikeno) {
-		this.llikeno = llikeno;
-	}
-	public int getLikeChech() {
-		return likeChech;
-	}
-	public void setLikeChech(int likeChech) {
-		this.likeChech = likeChech;
-	}
 	public String getCommentId() {
 		return commentId;
 	}
@@ -66,6 +53,12 @@ public class BoardDTO {
 	}
 	public String getCommentContent() {
 		return commentContent;
+	}
+	public String getLikesId() {
+		return likesId;
+	}
+	public void setLikesId(String likesId) {
+		this.likesId = likesId;
 	}
 	public void setCommentContent(String commentContent) {
 		this.commentContent = commentContent;

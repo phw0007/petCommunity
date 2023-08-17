@@ -23,5 +23,15 @@ public interface BoardMapper {
 	void commentDeleteProc(@Param("id")String id, @Param("category")String category, 
 			@Param("no")int no, @Param("writeDate")String writeDate);
 	
-	void boardLike(@Param("id")String id, @Param("category")String category, @Param("no")int no);
+	
+	   void boardLike(@Param("id")String id, @Param("category")String category, @Param("no")int no);
+
+	   BoardDTO boardLikeCheck(@Param("id")String id, @Param("category")String category, 
+	         @Param("no")int no, String likesId);
+	   
+	   void boardHitDown(@Param("id")String id, @Param("category")String category, @Param("no")int no);
+	   
+	   void boardLikeUserInsert(@Param("id")String id, @Param("category")String category, 
+	         @Param("no")int no,String likesId);
+
 }

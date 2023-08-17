@@ -17,6 +17,7 @@
 		<result column="comment_content" property="commentContent"/>
 		<result column="likeno" property="likeno"/>
 		<result column="like_check" property="likeCheck"/>
+		<result column="likes_id" property="likesId"/>
 	</resultMap>
     
     <insert id="boardWriteProc">
@@ -75,8 +76,24 @@
 	   DELETE FROM project_board_comment WHERE id=#{id} AND category=#{category} AND no=#{no} AND write_date=#{writeDate}
 	</delete>
 	
-<update id = "boardLike">
+<!--  <update id = "boardLike">
       UPDATE project_board SET likes=likes+1, hits=hits-1 WHERE id=#{id} AND category=#{category} AND no=#{no}
+   </update>-->
+	   <select id = "boardLikeCheck" resultMap="boardDto">
+      SELECT * FROM (SELECT * FROM project_board_likes 
+      WHERE id=#{id} AND category=#{category} AND no=#{no})WHERE likes_id=#{likesId}
+   </select>
+   
+   <update id = "boardHitDown">
+      UPDATE project_board SET hits=hits-1 WHERE id=#{id} AND category=#{category} AND no=#{no}
+   </update>
+   
+   <insert id="boardLikeUserInsert">
+      INSERT INTO project_board_likes VALUES(#{id}, #{no}, #{category}, #{likesId})
+   </insert>
+   
+   <update id = "boardLike">
+      UPDATE project_board SET likes=likes+1 WHERE id=#{id} AND category=#{category} AND no=#{no}
    </update>
 	
 </mapper>

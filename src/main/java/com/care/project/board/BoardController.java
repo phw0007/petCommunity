@@ -33,7 +33,11 @@ public class BoardController {
 		service.freeboardForm(cp, model);
 		return "board/freeboardForm";
 	}
-	
+	@RequestMapping("qnaboardForm")
+	public String qnaboardForm(@RequestParam(value="currentPage", required=false)String cp,Model model) {
+		service.freeboardForm(cp, model);
+		return "board/qnaboardForm";
+	}
 	
 	@GetMapping("boardWrite")
 	public String boardWrite() {
@@ -60,18 +64,21 @@ public class BoardController {
 	   @RequestMapping("boardContent")
 	   public String boardContent(
 	         @RequestParam(value="no", required = false)String n,
-	         @RequestParam(value="category")String c,  
+	         @RequestParam(value="category")String c,
+	         @RequestParam(value="cp", required=false)String cp,
 	         Model model) {
-	      BoardDTO board = service.boardContent(n);
+	      BoardDTO board = service.boardContent(n,cp);
 	      BoardDTO boards = new BoardDTO();
 	      ArrayList<BoardDTO> comments = service.boardComments(c,n);
 	      System.out.println(n);
+	      System.out.println("페이지"+cp);
 	      if(board == null) {
 	         System.out.println("boardContent 게시글 번호 : " + n);
 	         return "redirect:freeboardForm";
 	      }
 	      model.addAttribute("board", board);
 	      model.addAttribute("comments", comments);
+	      model.addAttribute("cp",cp);
 	      return "board/boardContent";
 	   }
 	
@@ -183,10 +190,15 @@ public class BoardController {
 	
 	   @PostMapping("clickLike")
 	   public String clickLikeButton(String selectedValues, Model model) {
+		   
 		   System.out.println(selectedValues);
 	      String url = service.boardLikeButton(selectedValues);
-	      
-	      return "forward:boardContent"+url;
+	      if(url.equals("로그인이 필요합니다.")) {
+	    	  model.addAttribute("errorMessage", "로그인이 필요한 작업입니다."); // 에러 메시지 모델에 추가
+	    	  return "redirect:freeboardForm";
+	      }
+	      System.out.println(url);
+	      return "forward:boardContent?"+url;
 	   }
 	   
 }

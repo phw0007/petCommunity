@@ -25,27 +25,27 @@ public class BoardService {
 	@Autowired private BoardMapper boardMapper;
 	@Autowired private HttpSession session;
 	
-	public void boardForm(String cp, Model model) {
-		int currentPage = 1;
-		try{
-			currentPage = Integer.parseInt(cp);
-		}catch(Exception e){
-			currentPage = 1;
-		}
-		
-		int pageBlock = 10; // 한 페이지에 보일 데이터의 수 
-		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
-		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
-	
-		ArrayList<BoardDTO> boards = boardMapper.boardForm(begin, end);
-		int totalCount = boardMapper.count();
-		String url = "boardForm?currentPage=";
-		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
-		
-		model.addAttribute("boards", boards);
-		model.addAttribute("result", result);
-		model.addAttribute("currentPage", currentPage);
-	}
+//	public void boardForm(String cp, Model model) {
+//		int currentPage = 1;
+//		try{
+//			currentPage = Integer.parseInt(cp);
+//		}catch(Exception e){
+//			currentPage = 1;
+//		}
+//		
+//		int pageBlock = 10; // 한 페이지에 보일 데이터의 수 
+//		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+//		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+//	
+//		ArrayList<BoardDTO> boards = boardMapper.boardForm(begin, end);
+//		int totalCount = boardMapper.count();
+//		String url = "boardForm?currentPage=";
+//		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+//		
+//		model.addAttribute("boards", boards);
+//		model.addAttribute("result", result);
+//		model.addAttribute("currentPage", currentPage);
+//	}
 
 	public String boardWriteProc(MultipartHttpServletRequest multi) {
 		
@@ -97,12 +97,18 @@ public class BoardService {
 		return "게시글 작성 완료";
 	}
 
-	public BoardDTO boardContent(String n) {
+	public BoardDTO boardContent(String n,String cp) {
 		int no = 0;
 		try{
 			no = Integer.parseInt(n);
 		}catch(Exception e){
 			return null;
+		}
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
 		}
 		
 		BoardDTO board = boardMapper.boardContent(no);
@@ -207,7 +213,6 @@ public class BoardService {
 		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
 		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
 	    
-	
 		
 		
 		ArrayList<BoardDTO> freeboards = boardMapper.freeboardForm(begin, end);
@@ -309,24 +314,36 @@ public class BoardService {
 		String category=check[2];
 		String cp=check[3];
 		String writeDate=check[4];
+		System.out.println(writeDate);
 		boardMapper.commentDeleteProc(id,category,no,writeDate);
 //String id = (String)session.getAttribute("id");
 //		if(id == null || id.isEmpty()) {
 //			return "로그인";
 //		}
 		return "id="+id+"&category="+category+"&no="+no+"&currentPage="+cp;
+		//return "no="+no+"&category="+category+"&currentPage="+cp;
 	}
 	
-	 public String boardLikeButton(String selectedValues) {
-	      String[] checkData = selectedValues.split(",");
-	      int no = Integer.parseInt(checkData[0]);
-	      String id = checkData[1];
-	      String category = checkData[2];
-	      String cp = checkData[3];
-	      boardMapper.boardLike(id, category, no);
-	      
-	      return "id="+id+"&category="+category+"&no="+no+"&currentPage="+cp;
-	   }
+	   public String boardLikeButton(String selectedValues) {
+		      String[] checkData = selectedValues.split(",");
+		      int no = Integer.parseInt(checkData[0]);
+		      String id = checkData[1];
+		      String category = checkData[2];
+		      String cp = checkData[3];
+		    
+		      String likesId = (String)session.getAttribute("id");
+		      if(likesId==null || likesId.isEmpty()) {
+		    	  return "로그인이 필요합니다.";
+		      }
+		      BoardDTO boardDto = boardMapper.boardLikeCheck(id, category, no, likesId);
+		      boardMapper.boardHitDown(id, category, no);
+		      if(boardDto == null) {
+		         boardMapper.boardLikeUserInsert(id, category, no, likesId);
+		         boardMapper.boardLike(id, category, no);
+		      }
+		      return "id="+id+"&category="+category+"&no="+no+"&currentPage="+cp;
+		   }
+
 }
 
 
