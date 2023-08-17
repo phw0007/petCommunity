@@ -98,11 +98,3 @@
 		UPDATE project_info SET no = no - 1 WHERE no >= #{no}
 	</update>
 </mapper>
-
-
-
-
-
-
-
-  

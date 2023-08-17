@@ -13,6 +13,12 @@
 <title>index</title>
 </head>
 <body>
+<c:if test="${msg != null}">
+	<script>
+		window.confirm('${msg}')
+		location.href = "ashop";
+	</script>
+</c:if>
 <c:import url="/aheader" />
 <div class="member">
 	<div class="memberItem">
@@ -49,27 +55,52 @@
 			    	</tr>
 			    </thead>
 			    <tbody>
-			    	<tr onclick="location.href='ashopInfo'">
-			    		<td>1</td>
-			    		<td>애견사료</td>
-			    		<td>아투</td>
-			    		<td>성견용 사료</td>
-			    		<td>43,000</td>
-			    		<td>10</td>
-			    	</tr>
+			    	<c:forEach var="shop" items="${shops}">
+						<tr onclick="location.href='ashopInfo?name=${shop.name}&category=${shop.category}&company=${shop.company}&currentPage=${currentPage }'">
+							<td>${no=no+1}</td>
+							<td>${shop.category }</td>
+							<td>${shop.company }</td>
+							<td>${shop.name }</td>
+							<td>${shop.pay }</td>
+							<td>${shop.inventory }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
 			</table>
 		</div>
 		<div class="memberSearch">
-			<a href=""><</a><a href="">1</a><a href="">></a>
+			<div> ${result}	</div>
 			<div class="selectSearch">
-				<form action="memberSelect">
+				<form action="ashop">
 					<select name="select" class="selectOption">
-						<option value="">전체</option>
-						<option value="id">상품분류</option>
-						<option value="name">판매업체</option>
-						<option value="address">상품명</option>
+						<c:choose>
+							<c:when test="${select == 'category'}">
+								<option value="">전체</option>
+								<option value="category" selected="selected">상품분류</option>
+								<option value="company">판매업체</option>
+								<option value="name">상품명</option>
+							</c:when>
+							<c:when test="${select == 'company'}">
+								<option value="">전체</option>
+								<option value="category">상품분류</option>
+								<option value="company" selected="selected">판매업체</option>
+								<option value="name">상품명</option>
+							</c:when>
+							<c:when test="${select == 'name'}">
+								<option value="">전체</option>
+								<option value="category">상품분류</option>
+								<option value="company">판매업체</option>
+								<option value="name" selected="selected">상품명</option>
+							</c:when>
+							<c:otherwise>
+								<option value="">전체</option>
+								<option value="category">상품분류</option>
+								<option value="company">판매업체</option>
+								<option value="name">상품명</option>
+							</c:otherwise>
+						</c:choose>
 					</select>
-					<input type="text" name="search" class="searchOption"/>
+					<input type="text" name="search" class="searchOption" value="${search}"/>
 					<input type="submit" value="검색" class="submitOption"/>
 				</form>
 			</div>

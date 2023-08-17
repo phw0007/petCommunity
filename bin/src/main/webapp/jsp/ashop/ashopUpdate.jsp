@@ -13,6 +13,7 @@
 <title>index</title>
 </head>
 <body>
+<script src="/dbQuiz.js"></script>
 <c:import url="/aheader" />
 <div class="member">
 	<div class="memberItem">
@@ -27,7 +28,7 @@
 	</div>
 	<div class="memberMain">
 		<div class="memberTitle">
-			<p>상품 목록</p>
+			<p>상품정보 수정</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
 				<li>></li>
@@ -38,21 +39,39 @@
 		</div>
 		<div class="memberInfo">
 			<div class="ashopLeft">
-				<p><img src="/image/pet.jpg" alt="pet" width=180px height=240px/></p>
+				<c:choose>
+					<c:when test="${shop.imageFile == '' || shop.imageFile == null}">
+						<p><img id="img" src="/image/pet.jpg" alt="petImage" width=180px height=240px/></p>	
+					</c:when>
+					<c:otherwise>
+						<p><img id="img" src="${shop.imageFile}" alt="petImage" width=180px height=240px/></p>
+					</c:otherwise>
+				</c:choose>
 				<ul>
-					<li><span>상품 이름</span><input type="text" value="성견용 사료"></li>
-					<li><span>상품 분류</span><input type="text" value="애견 사료"></li>
-					<li><span>판매 업체</span><input type="text" value="아투"></li>
-					<li><span>상품 가격</span><input type="text" value="43,000"></li>
-					<li><span>재고</span><input type="text" value="10"></li>
+					<li><span>상품 이름</span><input type="text" readonly="readonly" id="name" value="${shop.name }"></li>
+					<li>
+						<span>상품 분류</span>
+						<select id="category" class="ashopOption">
+							<option value="사료">사료</option>
+							<option value="간식">간식</option>
+							<option value="의류">의류</option>
+							<option value="약품">약품</option>
+							<option value="배변패드">배변패드</option>
+							<option value="생활용품">생활용품</option>
+						</select>
+					</li>
+					<li><span>판매 업체</span><input type="text" id="company" value="${shop.company }"></li>
+					<li><span>상품 가격</span><input type="text" id="pay" value="${shop.pay }"></li>
+					<li><span>재고</span><input type="text" id="inventory" value="${shop.inventory }"></li>
 				</ul>
-				<p><input type="file" name="file" id="file" class="ashopFile"></p>
+				<p><input type="file" id="fileImg" class="ashopFile" onchange="fileURL()" accept="image/*"></p>
 			</div>
 			<div class="ashopRight">
 				<p>상품 상제정보</p>
-				<p><textarea class="infoUpdate">안녕하세요</textarea></p>
+				<p><textarea class="infoUpdate" id="info">${shop.info }</textarea></p>
 			</div>
-			<input type="button" value="수정 완료" class="ashopSelect" onclick="location.href=''"/>
+			<input type="button" value="수정 완료" class="ashopSelect" onclick="updateShop()"/>
+			<input type="button" value="취소" class="ashopSelect" onclick="history.back()"/>
 		</div>
 	</div>
 </div>

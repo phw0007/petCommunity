@@ -24,7 +24,7 @@
 	</div>
 	<div class="memberMain">
 		<div class="memberTitle">
-			<p>업체정보 등록</p>
+			<p>업체정보 수정</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
 				<li>></li>

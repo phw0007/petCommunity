@@ -41,6 +41,7 @@ function getDeleteBoardComment(writeDate) {
 	url="boardDeleteComment";
 	getDeleteBoard(url, selectedValues);
 }
+
 function getDeleteBoard(url, selectedValues) {
 	if (window.confirm("정말로 삭제하시겠습니까?")) {
 	    const form = document.createElement('form'); // form 태그 생성
