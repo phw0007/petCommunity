@@ -1,5 +1,6 @@
 package com.care.project.ashop;
 
+import java.awt.Window;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import com.care.project.common.PageService;
 @Service
 public class AShopService {
 	@Autowired private AShopMapper shopMapper;
-	public void uploadImage(String selectedValues, MultipartFile imageFile, String fileName) {
+	public String uploadImage(String selectedValues, MultipartFile imageFile, String fileName) {
 		DecimalFormat forematter = new DecimalFormat("###,###");
 		String[] checkData = selectedValues.split(",");
 		String name = checkData[0];
@@ -28,7 +29,7 @@ public class AShopService {
 		String info = checkData[5];
 		if(imageFile != null) {
 			if(imageFile.getSize() != 0) {
-				String fileLocation = "C:\\javas\\boot_workspace\\project\\src\\main\\webapp\\image\\"+fileName;
+				String fileLocation = "C:\\Users\\hi\\git\\petCommunity\\src\\main\\webapp\\image\\"+fileName;
 				File save = new File(fileLocation);
 				try {
 					imageFile.transferTo(save);
@@ -54,7 +55,10 @@ public class AShopService {
 		AShopDTO check = shopMapper.checkShop(shopDto);
 		if(check == null) {
 			shopMapper.insertShop(shopDto);		
+		}else {
+			return "이미 존재하는 상품입니다.";
 		}
+		return "상품등록 완료되었습니다.";
 	}
 	public void ashop(String cp, String select, String search, Model model, String requestUrl) {
 		if(select == null){
@@ -89,5 +93,74 @@ public class AShopService {
 		model.addAttribute("select", select);
 		model.addAttribute("search", search);
 		
+	}
+	
+	public void ashopInfo(String name, String category, String company, String cp, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		AShopDTO shop = shopMapper.ashopInfo(name, category, company);
+
+		model.addAttribute("shop", shop);
+		model.addAttribute("cp", cp);
+	}
+	
+	public void ashopUpdate(String pay, String selectedValues, Model model) {
+		String[] checkData = selectedValues.split(",");
+		AShopDTO shop = new AShopDTO();
+		shop.setNo(Integer.parseInt(checkData[0]));
+		shop.setCategory(checkData[1]);
+		shop.setName(checkData[2]);
+		shop.setCompany(checkData[3]);
+		shop.setPay(pay);
+		shop.setInventory(Integer.parseInt(checkData[4]));
+		shop.setImageFile(checkData[5]);
+		shop.setInfo(checkData[6]);
+		model.addAttribute("shop",shop);
+	}
+	public String updateShop(String selectedValues, MultipartFile imageFile, String fileName) {
+		DecimalFormat forematter = new DecimalFormat("###,###");
+		String[] checkData = selectedValues.split(",");
+		String name = checkData[0];
+		String category = checkData[1];
+		String company = checkData[2];
+		int payData = Integer.parseInt(checkData[3]);
+		String pay = forematter.format(payData);
+		int inventory = Integer.parseInt(checkData[4]);
+		String info = checkData[5];
+		if(imageFile != null) {
+			if(imageFile.getSize() != 0) {
+				String fileLocation = "C:\\Users\\hi\\git\\petCommunity\\src\\main\\webapp\\image\\"+fileName;
+				File save = new File(fileLocation);
+				try {
+					imageFile.transferTo(save);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		if(fileName == null) {
+			fileName = "";
+		}else {
+			fileName = "/image/"+fileName;
+		}
+		AShopDTO shopDto = new AShopDTO();
+		shopDto.setCategory(category);
+		shopDto.setName(name);
+		shopDto.setCompany(company);
+		shopDto.setPay(pay);
+		shopDto.setInventory(inventory);
+		shopDto.setInfo(info);
+		if(fileName != "") {
+			shopDto.setImageFile(fileName);
+			shopMapper.updateShopImage(shopDto);
+		}else {
+			shopMapper.updateShop(shopDto);
+		}
+		return "상품수정 완료되었습니다.";
 	}
 }

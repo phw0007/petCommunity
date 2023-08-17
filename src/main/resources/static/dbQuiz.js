@@ -205,7 +205,6 @@ function fileURL() {
 
 
 function uploadImage() {
-	var fileInput = document.getElementById('fileImg');
 	var name = document.getElementById('name').value;
 	var category = document.getElementById('category').value;
 	var company = document.getElementById('company').value;
@@ -213,6 +212,8 @@ function uploadImage() {
 	var inventory = document.getElementById('inventory').value;
 	var info = document.getElementById('info').value;
 	let selectedValues = [name,category,company,pay,inventory,info];
+	
+	var fileInput = document.getElementById('fileImg');
 	var imageFile = fileInput.files[0];
 
 	var formData = new FormData();
@@ -239,7 +240,44 @@ function uploadImage() {
 		};
 		xhr.send(formData);
 	}
+}
 
+function updateShop() {
+	var fileInput = document.getElementById('fileImg');
+	var name = document.getElementById('name').value;
+	var category = document.getElementById('category').value;
+	var company = document.getElementById('company').value;
+	var pay = document.getElementById('pay').value;
+	var inventory = document.getElementById('inventory').value;
+	var info = document.getElementById('info').value;
+	let selectedValues = [name,category,company,pay,inventory,info];
+	var imageFile = fileInput.files[0];
+
+	var formData = new FormData();
+	if (name == "") {
+		alert('제품명은 필수 입력사항 입니다.');
+	}else if (company == "") {
+		alert('판매 업체는 필수 입력사항 입니다.');
+	}else if(pay == ""){
+		alert('상품가격은 필수 입력사항 입니다.');
+	}else if(inventory == ""){
+		alert('상품재고는 필수 입력사항 입니다.');
+	}else {
+		formData.append('selectedValues', selectedValues);
+		if (imageFile) {
+			formData.append('imageFile', imageFile);
+			formData.append('fileName', imageFile.name);
+		}
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', 'updateShop');
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				location.href = xhr.responseText
+			}
+		};
+		xhr.send(formData);
+	}
+}
 
 	function uploadImage2() {
 		var fileInput = document.getElementById('fileImg');
@@ -260,9 +298,8 @@ function uploadImage() {
 			}
 		};
 		xhr.send(formData);
-
 	}
-}
+
 function commentDelete(commentId) {
 	if (confirm("댓글을 삭제하시겠습니까?")) {
 		// 서버로 삭제 요청 보내기 (AJAX 또는 Fetch API 사용)
@@ -283,6 +320,5 @@ function commentDelete(commentId) {
 			.catch(error => {
 				console.error('댓글 삭제 오류', error);
 			});
+		}
 	}
-
-}

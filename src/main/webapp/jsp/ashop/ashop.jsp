@@ -13,6 +13,12 @@
 <title>index</title>
 </head>
 <body>
+<c:if test="${msg != null}">
+	<script>
+		window.confirm('${msg}')
+		location.href = "ashop";
+	</script>
+</c:if>
 <c:import url="/aheader" />
 <div class="member">
 	<div class="memberItem">
@@ -50,7 +56,7 @@
 			    </thead>
 			    <tbody>
 			    	<c:forEach var="shop" items="${shops}">
-						<tr onclick="location.href='ashopInfo?id=${board.id}&category=${board.category}&no=${board.no}&currentPage=${currentPage }'">
+						<tr onclick="location.href='ashopInfo?name=${shop.name}&category=${shop.category}&company=${shop.company}&currentPage=${currentPage }'">
 							<td>${no=no+1}</td>
 							<td>${shop.category }</td>
 							<td>${shop.company }</td>

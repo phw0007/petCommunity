@@ -74,6 +74,17 @@
 		SELECT * FROM project_shop WHERE name=#{name}
 	</select>
 	
+	<select id="ashopInfo" resultMap="ashopDto">
+		SELECT * FROM project_shop WHERE name=#{name} AND category=#{category} AND company=#{company}
+	</select>
+	
+	<update id="updateShopImage">
+		UPDATE project_shop SET category=#{category}, company=#{company}, pay=#{pay}, inventory=#{inventory}, image_file=#{imageFile}, info=#{info} WHERE name=#{name}
+	</update>
+	
+	<update id="updateShop">
+		UPDATE project_shop SET category=#{category}, company=#{company}, pay=#{pay}, inventory=#{inventory}, info=#{info} WHERE name=#{name}
+	</update>
 </mapper>
 
 

@@ -25,6 +25,7 @@ public class AMemberController {
 	
 	@RequestMapping("aindex")
 	public String aindex() {
+		session.setAttribute("id", "admin");
 		return "aindex/aindex";
 	}
 

@@ -17,9 +17,13 @@ public class AShopController {
 	@Autowired private AShopService service;
 	@RequestMapping({"/ashop"})
 	public String ashop(@RequestParam(value="currentPage", required = false)String cp,
-			String select, String search, Model model, HttpServletRequest request) {
+			String select, String search, Model model, HttpServletRequest request,
+			String msg) {
 		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		service.ashop(cp, select, search, model, requestUrl);
+		if(msg != null) {
+			model.addAttribute("msg", msg);
+		}
 		if("/ashop".equals(requestUrl)) {
 			return "ashop/ashop";
 		}else {
@@ -48,12 +52,15 @@ public class AShopController {
 	}
 	
 	@RequestMapping("ashopInfo")
-	public String ashop_info() {
+	public String ashop_info(String name, String category, String company, Model model,
+			@RequestParam(value="currentPage", required = false)String cp) {
+		service.ashopInfo(name, category, company, cp, model);
 		return "ashop/ashopInfo";
 	}
 	
 	@RequestMapping("ashopUpdate")
-	public String ashop_update() {
+	public String ashop_update(String selectedValues, Model model, String pay) {
+		service.ashopUpdate(pay, selectedValues, model);
 		return "ashop/ashopUpdate";
 	}
 	
@@ -72,7 +79,16 @@ public class AShopController {
     public String uploadImage(@RequestParam(value="imageFile", required = false) MultipartFile imageFile,
     							@RequestParam(value="fileName", required = false) String fileName, 
     							@RequestParam("selectedValues") String selectedValues) {
-		service.uploadImage(selectedValues, imageFile, fileName);
-        return "ashop";
+		String msg = service.uploadImage(selectedValues, imageFile, fileName);
+        return "ashop?msg="+msg;
+    }
+	
+	@ResponseBody
+    @PostMapping(value = "updateShop", produces = "text/plain; charset=utf-8")
+    public String updateShop(@RequestParam(value="imageFile", required = false) MultipartFile imageFile,
+    							@RequestParam(value="fileName", required = false) String fileName, 
+    							@RequestParam("selectedValues") String selectedValues) {
+		String msg = service.updateShop(selectedValues, imageFile, fileName);
+        return "ashop?msg="+msg;
     }
 }

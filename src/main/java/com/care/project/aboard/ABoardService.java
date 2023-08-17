@@ -183,7 +183,13 @@ public class ABoardService {
 		String id = checkData[1];
 		String category = checkData[2];
 		String cp = checkData[3];
-		boardMapper.boardLike(id, category, no);
+		String likesId = (String)session.getAttribute("id");
+		ABoardDTO aboardDto = boardMapper.boardLikeCheck(id, category, no, likesId);
+		boardMapper.boardHitDown(id, category, no);
+		if(aboardDto == null) {
+			boardMapper.boardLikeUserInsert(id, category, no, likesId);
+			boardMapper.boardLike(id, category, no);
+		}
 		return "id="+id+"&category="+category+"&no="+no+"&currentPage="+cp;
 	}
 }

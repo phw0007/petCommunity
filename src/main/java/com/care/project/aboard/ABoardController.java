@@ -33,7 +33,7 @@ public class ABoardController {
 	}
 
 	@RequestMapping("aboardViews")
-	public String aboard_views(String id, String category, int no, Model model,
+	public String aboardViews(String id, String category, int no, Model model,
 			@RequestParam(value="currentPage", required = false)String cp) {
 		service.aboardInfo(id, category, no, model, cp);	
 		return "aboard/aboardViews";
