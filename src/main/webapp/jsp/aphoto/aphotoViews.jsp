@@ -14,15 +14,15 @@
 <body>
 <c:import url="/aheader" />
 	<div class="member">
-	<div class="member_item">
+	<div class="memberItem">
 		<h3>반려앨범 관리</h3>
 		<ul>
 			<li><a href="aphoto" style="font-weight: bold;">게시글 목록</a></li>
-			<li><a href="aphoto_delete">게시글 삭제</a></li>
+			<li><a href="aphotoDelete">게시글 삭제</a></li>
 		</ul>
 	</div>
-	<div class="member_main">
-		<div class="member_title">
+	<div class="memberMain">
+		<div class="memberTitle">
 			<p>게시글 목록</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
@@ -32,7 +32,7 @@
 				<li><a href="aphoto">게시글 목록</a></li>
 			</ul>
 		</div>
-		<div class="member_views">
+		<div class="memberViews">
 			<ul>
 				<li><span>제목</span>안녕하세요</li>
 				<li><span>작성일</span>2023-07-31</li>
@@ -48,9 +48,9 @@
 					</div>
 				</li>
 				<li>
-					<input type="button" value="확인" class="select_end" onclick="location.href='aphoto'"
+					<input type="button" value="확인" class="selectEnd" onclick="location.href='aphoto'"
 					style="margin-left:100px"/>
-					<input type="button" value="삭제" class="aboard_delete" onclick="location.href=''"/>
+					<input type="button" value="삭제" class="aboardDelete" onclick="location.href=''"/>
 				</li>
 			</ul>
 		</div>

@@ -11,13 +11,13 @@ public class PhotoController {
 		return "aphoto/aphoto";
 	}
 	
-	@RequestMapping("aphoto_views")
-	public String aphoto_views() {
-		return "aphoto/aphoto_views";
+	@RequestMapping("aphotoViews")
+	public String aphotoViews() {
+		return "aphoto/aphotoViews";
 	}
 	
-	@RequestMapping("aphoto_delete")
-	public String aphoto_delete() {
-		return "aphoto/aphoto_delete";
+	@RequestMapping("aphotoDelete")
+	public String aphotoDelete() {
+		return "aphoto/aphotoDelete";
 	}
 }
