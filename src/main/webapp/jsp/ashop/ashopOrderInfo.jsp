@@ -13,6 +13,28 @@
 <title>index</title>
 </head>
 <body>
+<script>
+function ashopOrderUpdate(no) {
+	let selectedValues = no;
+	url="ashopOrderInfo";
+	getDeleteShop(url, selectedValues);
+}
+
+function getDeleteShop(url, selectedValues) {
+	const form = document.createElement('form'); // form 태그 생성
+	form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
+	form.setAttribute('action', url); // 전송할 url 지정
+		    
+	const data = document.createElement('input'); // input 태그 생성
+	data.setAttribute('type', 'hidden'); // type = hidden
+	data.setAttribute('name', 'selectedValues'); // 데이터의 key
+	data.setAttribute('value', selectedValues); // 데이터의 value (여기서는 data1)
+		
+	form.appendChild(data);
+	document.body.appendChild(form);
+	form.submit();      
+}
+</script>
 <c:import url="/aheader" />
 <div class="member">
 	<div class="memberItem">
@@ -47,16 +69,18 @@
 				    		<th style="width: 200px;">전화번호</th>
 				    		<th>결재방식</th>
 				    		<th>결재상태</th>
+				    		<th>주문날짜</th>
 				    	</tr>
 				    </thead>
 				    <tbody>
 				    	<tr>
-				    		<td>admin</td>
-				    		<td>관리자</td>
-				    		<td>서울특별시</td>
-				    		<td>010-1234-1234</td>
-				    		<td>신용카드</td>
-				    		<td>결재확인</td>
+				    		<td>${order.id}</td>
+				    		<td>${order.userName}</td>
+				    		<td>${order.address}</td>
+				    		<td>${order.mobile}</td>
+				    		<td>${order.payType}</td>
+				    		<td>${order.payCheck}</td>
+				    		<td>${order.writeDate}</td>
 				    	</tr>
 				    </tbody>
 				</table>
@@ -76,17 +100,18 @@
 				    </thead>
 				    <tbody>
 				    	<tr>
-				    		<td>1</td>
-				    		<td>애견사료</td>
-				    		<td>아투</td>
-				    		<td>성견용 사료</td>
-				    		<td>43,000</td>
-				    		<td>1</td>
+				    		<td>${listNo=listNo+1}</td>
+				    		<td>${list.category}</td>
+				    		<td>${list.company}</td>
+				    		<td>${list.product}</td>
+				    		<td>${list.pay}</td>
+				    		<td>${list.orderCount}</td>
 				    	</tr>
 				</table>
 			</div>
-			<input type="button" value="확인" class="ashopSelect" onclick="location.href='ashopOrder'"/>
-			<input type="button" value="수정" class="ashopUpdate" onclick="location.href='ashopOrderUpdate'"/>
+			<input type="button" value="확인" class="ashopSelect" onclick="history.back()"/>
+			<input type="button" value="수정" class="ashopUpdate" onclick="ashopOrderUpdate(${no})"/>
+			<input type="button" value="삭제" class="ashopUpdate" onclick="location.href='ashopOrderUpdate'"/>
 		</div>
 	</div>
 </div>

@@ -62,7 +62,7 @@
 	.ashopOption{vertical-align: middle; border: 2px solid #000; margin-left:-5px;
 	height: 34px; width: 100px; font-family: 'Poor Story'; font-size: 18px;}
 
-	.infoTop tr th:nth-child(1n) {width: 150px;}
+	.infoTop tr th:nth-child(1n) {width: 140px;}
 	
 	.infoBottom p{font-size: 26px; font-weight: bold; text-align: left; width: 100%; border-bottom: 2px solid #000;
 	padding:30px 0 30px 0;}

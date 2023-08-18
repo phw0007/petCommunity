@@ -35,4 +35,8 @@ public interface AShopMapper {
 
 	int orderCount(@Param("select")String select, @Param("search")String search);
 
+	AShopDTO ashopOrderInfo(int no);
+
+	AShopDTO ashopOrderList(int no);
+
 }

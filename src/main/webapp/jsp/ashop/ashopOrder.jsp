@@ -14,9 +14,9 @@
 </head>
 <body>
 <script>
-function orderCheck() {
-	let selectedValues = ['${shop.product}','${shop.category}','${shop.no}'];
-	url="deleteShopButton";
+function orderCheck(no) {
+	let selectedValues = no;
+	url="ashopOrderInfo";
 	getDeleteShop(url, selectedValues);
 }
 
@@ -72,7 +72,7 @@ function getDeleteShop(url, selectedValues) {
 			    </thead>
 			    <tbody>
 			    	<c:forEach var="order" items="${orders}">
-						<tr onclick="orderCheck()">
+						<tr onclick="orderCheck(${order.no})">
 							<td>${no=no+1}</td>
 							<td>${order.id}</td>
 							<td>${order.userName}</td>

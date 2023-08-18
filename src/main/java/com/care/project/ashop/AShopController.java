@@ -66,8 +66,15 @@ public class AShopController {
 		return "ashop/ashopUpdate";
 	}
 	
-	@RequestMapping("ashopOrderInfo")
-	public String ashop_order_info() {
+	@RequestMapping({"/ashopOrderInfo", "/ashopOrderUpdate"})
+	public String ashop_order_info(String selectedValues, Model model, HttpServletRequest request) {
+		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		service.ashopOrderInfo(selectedValues, model);
+		if("/ashopOrderInfo".equals(requestUrl)) {
+			return "ashop/ashopOrderInfo";
+		}else if("/ashopOrderUpdate".equals(requestUrl)){
+			return "ashop/ashopOrderUpdate";
+		}
 		return "ashop/ashopOrderInfo";
 	}
 	

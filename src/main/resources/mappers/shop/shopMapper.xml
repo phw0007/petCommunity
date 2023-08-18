@@ -150,6 +150,13 @@
 		</choose>
 	</select>
 	
+	<select id="ashopOrderInfo" resultMap="ashopDto">
+		SELECT * FROM project_order WHERE no=#{no}
+	</select>
+	
+	<select id="ashopOrderList" resultMap="ashopDto">
+		SELECT * FROM project_order_list WHERE no=#{no}
+	</select>
 </mapper>
 
 

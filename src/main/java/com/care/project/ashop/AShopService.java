@@ -210,4 +210,14 @@ public class AShopService {
 		model.addAttribute("select", select);
 		model.addAttribute("search", search);
 	}
+	public void ashopOrderInfo(String selectedValues, Model model) {
+		int no = Integer.parseInt(selectedValues);
+		int listNo = 0;
+		AShopDTO order = shopMapper.ashopOrderInfo(no);
+		AShopDTO list = shopMapper.ashopOrderList(no);
+		model.addAttribute("no",no);
+		model.addAttribute("order",order);
+		model.addAttribute("list",list);
+		model.addAttribute("listNo",listNo);
+	}
 }
