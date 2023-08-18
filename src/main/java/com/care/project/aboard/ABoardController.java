@@ -40,30 +40,22 @@ public class ABoardController {
 	}	
 	
 	/*체크된 게시글 삭제*/
-	@RequestMapping({"/boardDelete", "/boardAnnoDelete"})
+	@RequestMapping({"/boardDelete", "/boardAnnoDelete", "/boardDeleteButton", "/boardAnnoDeleteButton"})
 	public String boardDelete(String selectedValues, HttpServletRequest request) {
 		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		service.boardDelete(selectedValues);
 		if("/boardDelete".equals(requestUrl)) {
 			return "redirect:aboardDelete";
-		}else {
+		}else if("/boardAnnoDelete".equals(requestUrl)){
 			return "redirect:aboardAnnoDel";
-		}
-	}
-	
-	/*삭제버튼 클릭시 삭제*/
-	@RequestMapping({"/boardDeleteButton", "/boardAnnoDeleteButton"})
-	public String boardDeleteButton(String selectedValues, HttpServletRequest request) {
-		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-		service.boardDelete(selectedValues);
-		if("/boardDeleteButton".equals(requestUrl)) {
+		}else if("/boardDeleteButton".equals(requestUrl)) {
 			return "redirect:aboard";
 		}else {
 			return "redirect:aboardAnno";
 		}
 	}
-	
-	/*삭제버튼 클릭시 삭제*/
+		
+	/*댓글 삭제버튼 클릭시 삭제*/
 	@RequestMapping({"/boardDeleteComment", "/boardAnnoDeleteComment"})
 	public String boardDeleteComment(String selectedValues, HttpServletRequest request) {
 		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
@@ -115,12 +107,6 @@ public class ABoardController {
 	public String aboardAnnoRegisterProc(String id, String title, String text) {
 		service.aboardAnnoRegister(id, title, text);
 		return "redirect:aboardAnno";
-	}
-	
-	@PostMapping("clickLikeButton")
-	public String clickLikeButton(String selectedValues, Model model) {
-		String url = service.boardLikeButton(selectedValues);
-		return "forward:aboardViews?"+url;
 	}
 	
 }

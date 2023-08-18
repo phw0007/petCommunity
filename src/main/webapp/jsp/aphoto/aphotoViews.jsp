@@ -12,6 +12,36 @@
 <title>index</title>
 </head>
 <body>
+<script>
+function getDeleteBoardButton() {
+	let selectedValues = ['${photo.no}','${photo.id}','${photo.category}'];
+	url="photoDeleteButton";
+	getDeleteBoard(url, selectedValues);
+}
+
+function getDeleteBoardComment(writeDate) {
+	let selectedValues = ['${photo.no}','${photo.id}','${photo.category}','${cp}',writeDate];
+	url="photoDeleteComment";
+	getDeleteBoard(url, selectedValues);
+}
+
+function getDeleteBoard(url, selectedValues) {
+	if (window.confirm("정말로 삭제하시겠습니까?")) {
+	    const form = document.createElement('form'); // form 태그 생성
+	    form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
+	    form.setAttribute('action', url); // 전송할 url 지정
+	    
+	    const data = document.createElement('input'); // input 태그 생성
+	    data.setAttribute('type', 'hidden'); // type = hidden
+	    data.setAttribute('name', 'selectedValues'); // 데이터의 key
+	   	data.setAttribute('value', selectedValues); // 데이터의 value (여기서는 data1)
+	
+	    form.appendChild(data);
+	    document.body.appendChild(form);
+	    form.submit();      
+	}
+}
+</script>
 <c:import url="/aheader" />
 	<div class="member">
 	<div class="memberItem">
@@ -34,23 +64,40 @@
 		</div>
 		<div class="memberViews">
 			<ul>
-				<li><span>제목</span>안녕하세요</li>
-				<li><span>작성일</span>2023-07-31</li>
-				<li><span>작성자</span>관리자</li>
-				<li><span>내용</span><textarea readonly="readonly"></textarea></li>
-				<li>
-					<div class="comment">
-						<ul>
-							<li><span>작성자</span>관리자</li>
-							<li><span>작성일</span>2023-07-31<a href="">X</a></li>
-						</ul>
-						<p><span>댓글내용</span><textarea readonly="readonly"></textarea></p>
+				<li><span>제목</span>${photo.title }</li>
+				<li><span>작성일</span>${photo.writeDate }</li>
+				<li><span>작성자</span>${photo.id }</li>
+				<li><span>조회수</span>${photo.hits }</li>
+				<li><span>추천수</span>${photo.likes }</li>
+				<li><span>내용</span>
+					<div class="content">
+						<c:if test="${photo.fileName != null}">
+							<img src=${photo.fileName } alt="pet" width=140px height=200px/><br>
+						</c:if>
+						${photo.content }
 					</div>
 				</li>
+				<c:choose>
+					<c:when test="${empty comments }">
+					</c:when>
+					<c:otherwise>
+						<li>
+							<c:forEach var="comment" items="${comments}">
+								<div class="comment">
+									<ul>
+										<li><span>작성자</span>${comment.commentId }</li>
+										<li><span>작성일</span>${comment.writeDate }<input type="button" value="X" onclick="getDeleteBoardComment('${comment.writeDate}')"/></li>
+									</ul>
+									<p><span>댓글내용</span><textarea readonly="readonly">${comment.commentContent }</textarea></p>
+								</div>
+							</c:forEach>
+						</li>
+					</c:otherwise>
+				</c:choose>
 				<li>
-					<input type="button" value="확인" class="selectEnd" onclick="location.href='aphoto'"
-					style="margin-left:100px"/>
-					<input type="button" value="삭제" class="aboardDelete" onclick="location.href=''"/>
+					<input type="button" value="확인" class="selectEnd" onclick="location.href='aboard?currentPage=${cp}'"
+					style="margin-left:20px; margin-right:40px;"/>
+					<input type="button" value="삭제" class="aboardDelete" onclick="getDeleteBoardButton()"/>
 				</li>
 			</ul>
 		</div>
