@@ -32,7 +32,7 @@ public class MemberService {
 			return "비밀번호를 입력하세요.";
 		}
 		
-		MemberDTO result = memberMapper.loginProc(member.getId());
+		MemberDTO result = memberMapper.mloginProc(member.getId());
 		if(result != null) {
 			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
 			
@@ -75,7 +75,7 @@ public class MemberService {
 		 ALTER TABLE session_quiz MODIFY pw varchar2(60);
 		 */
 		member.setPetFile("/image/"+member.getPetFile());
-		MemberDTO result = memberMapper.loginProc(member.getId());
+		MemberDTO result = memberMapper.mloginProc(member.getId());
 		if(result == null) {
 			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
 			String cryptPassword = bpe.encode(member.getPw());
@@ -97,7 +97,7 @@ public class MemberService {
 			return null;
 		
 //		MemberDTO result = memberMapper.loginProc(id);
-		return memberMapper.loginProc(id);
+		return memberMapper.mloginProc(id);
 	}
 
 	public String updateProc(MemberDTO member, String confirm) {
@@ -132,7 +132,7 @@ public class MemberService {
 			return "두 비밀번호를 일치하여 입력하세요.";
 		}
 		BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
-		MemberDTO member = memberMapper.loginProc(id);
+		MemberDTO member = memberMapper.mloginProc(id);
 		if(member != null && bpe.matches(pw, member.getPw())) {
 			memberMapper.delete(id);
 			return "회원 정보 삭제 완료";

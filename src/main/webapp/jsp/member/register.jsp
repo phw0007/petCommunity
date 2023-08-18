@@ -29,37 +29,44 @@
     }
     
     var xhr;
-    function sendEmail(){
-    	xhr = new XMLHttpRequest();
-    	xhr.open('post', 'sendEmail')
-    	xhr.send(document.getElementById('email').value)
-    	xhr.onreadystatechange = resProc
+    function sendEmail() {
+        xhr = new XMLHttpRequest();
+        xhr.open('post', 'sendEmail');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // 요청 헤더 설정
+        var email = document.getElementById('email').value;
+        xhr.send('email=' + encodeURIComponent(email)); // 이메일 주소 전송
+        xhr.onreadystatechange = resProc;
     }
-    function resProc(){
-    	if(xhr.readyState === 4 && xhr.status === 200){
-    		document.getElementById('msg').innerHTML = xhr.responseText;
-    	}
+
+    function resProc() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById('msg').innerHTML = xhr.responseText;
+        }
     }
-    
-    function sendAuth(){
-    	if(xhr == null){
-    		document.getElementById('msg').innerHTML = '이메일 주소를 전송 후 이용하세요.'
-    		return;
-    	}
-    	xhr.open('post', 'sendAuth');
-    	xhr.send(document.getElementById('auth').value);
-    	xhr.onreadystatechange = sendAuthProc
+
+    function sendAuth() {
+        if (xhr == null) {
+            document.getElementById('msg').innerHTML = '이메일 주소를 전송 후 이용하세요.';
+            return;
+        }
+        xhr = new XMLHttpRequest(); // xhr 초기화
+        xhr.open('post', 'sendAuth');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // 요청 헤더 설정
+        var auth = document.getElementById('auth').value;
+        xhr.send('auth=' + encodeURIComponent(auth)); // 인증 번호 전송
+        xhr.onreadystatechange = sendAuthProc;
     }
-    function sendAuthProc(){
-    	if(xhr.readyState === 4 && xhr.status === 200){
-    		document.getElementById('msg').innerHTML = xhr.responseText;
-    	}
-    	if(xhr.responseText === '인증 성공'){
-	    	document.getElementById('auth').style='display:none';
-	    	document.getElementById('authBtn').style='display:none';
-	    	document.getElementById('email').style='display:none';
-	    	document.getElementById('emailBtn').style='display:none';
-	    }
+
+    function sendAuthProc() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById('msg').innerHTML = xhr.responseText;
+            if (xhr.responseText === '인증 성공') {
+                document.getElementById('auth').style.display = 'none';
+                document.getElementById('authBtn').style.display = 'none';
+                document.getElementById('email').style.display = 'none';
+                document.getElementById('emailBtn').style.display = 'none';
+            }
+        }
     }
 </script>
 <div class="register" align="center">
@@ -80,9 +87,9 @@
 		<input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소" style="width: 308px; height: 30px;"><br>
 		<input type="text" name="mobile"  placeholder="전화번호" style="width: 308px; height: 30px;"><br>
 		<input type="text" id="email" placeholder="이메일">
-		<input type="button" id="emailBtn" onclick="sendEmail()" value="전송" style="width: 100px; height: 30px; border: 1px solid #000000; font-family: 'Poor Story', cursive;"><br>
+		<input type="button" id="emailBtn" onclick="sendEmail()" value="전송" style="width: 100px; height: 30px; border: 1px solid #000000; font-family: 'Poor Story', cursive; cursor: pointer;"><br>
 		<input type="text" id="auth" placeholder="인증번호">
-		<input type="button" id="authBtn" onclick="sendAuth()" value="인증번호 전송" style="width: 100px; height: 30px; border: 1px solid #000000; font-family: 'Poor Story', cursive;"><br>
+		<input type="button" id="authBtn" onclick="sendAuth()" value="인증번호 전송" style="width: 100px; height: 30px; border: 1px solid #000000; font-family: 'Poor Story', cursive; cursor: pointer;"><br>
 
 		<h4 align="center">강아지 정보</h4>
 		<input type="text" name="petName" id="petName" placeholder="이름" style="width: 308px; height: 30px;"><br>
@@ -97,8 +104,8 @@
          <option value="기타동물">기타동물</option>
         </select> <br>
         <h5>프로필 사진</h5><input type="file" id="fileImg" name="petFile" onchange="fileURL()" style="background: none; font-family: 'Poor Story', cursive;" accept="image/*"/><br>
-		<input type="submit" value="회원가입" onclick="allCheck()" style="width: 150px; height: 30px; font-family: 'Poor Story', cursive; border: 1px solid #000000;">
-		<input type="button" value="취소" onclick="location.href='login'" style="width: 150px; height: 30px; font-family: 'Poor Story', cursive; border: 1px solid #000000;"><br>
+		<input type="submit" value="회원가입" onclick="allCheck()" style="width: 150px; height: 30px; font-family: 'Poor Story', cursive; border: 1px solid #000000; cursor: pointer;">
+		<input type="button" value="취소" onclick="location.href='login'" style="width: 150px; height: 30px; font-family: 'Poor Story', cursive; border: 1px solid #000000; cursor: pointer;"><br>
 	</form>
 	</td></tr></table>
 	

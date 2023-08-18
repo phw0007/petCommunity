@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import com.care.project.member.MemberDTO;
 
 import jakarta.servlet.http.HttpSession;
@@ -18,6 +19,7 @@ import jakarta.servlet.http.HttpSession;
 public class MemberController {
 	@Autowired private MemberService service;
 	@Autowired private HttpSession session;
+	
 
 	@RequestMapping("index")
 	public String index() {
@@ -158,9 +160,13 @@ public class MemberController {
 		public String photoAlbum() {
 			return "member/photoAlbum";
 		}
-
-	
-	 
+        
+	   @GetMapping("shopping")
+		public String shopping() {
+			return "mall/shopping";
+		}
+	   
+	   
 	
 
 	

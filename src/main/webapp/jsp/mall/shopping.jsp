@@ -45,6 +45,48 @@
            <span>가격 : </span>
         </a>
       </li> 
+      <li>
+        <a href="#">
+          <b>이미지 들어갈 곳</b><br>
+           <span>상품이름 : </span><br>
+           <span>가격 : </span>
+        </a>
+      </li> 
+      <li>
+        <a href="#">
+          <b>이미지 들어갈 곳</b><br>
+           <span>상품이름 : </span><br>
+           <span>가격 : </span>
+        </a>
+      </li> 
+      <li>
+        <a href="#">
+          <b>이미지 들어갈 곳</b><br>
+           <span>상품이름 : </span><br>
+           <span>가격 : </span>
+        </a>
+      </li> 
+      <li>
+        <a href="#">
+          <b>이미지 들어갈 곳</b><br>
+           <span>상품이름 : </span><br>
+           <span>가격 : </span>
+        </a>
+      </li> 
+      <li>
+        <a href="#">
+          <b>이미지 들어갈 곳</b><br>
+           <span>상품이름 : </span><br>
+           <span>가격 : </span>
+        </a>
+      </li> 
+      <li>
+        <a href="#">
+          <b>이미지 들어갈 곳</b><br>
+           <span>상품이름 : </span><br>
+           <span>가격 : </span>
+        </a>
+      </li> 
     </ul>
   </div>
   ${result }
@@ -55,7 +97,7 @@
 			<option value="id">아이디</option>
 			<option value="title">제목</option>
 		</select> <input type="text" name=search style="width:500px; height:30px;"> 
-		<input type="submit" value="검색" style="width:100px; height:30px; font-family:'Poor Story';background:#fcd11e;">
+		<input type="submit" value="검색" style="width:100px; height:30px; font-family:'Poor Story';background:#FFEDA1;">
 	</form>
 	</div>
 </div>

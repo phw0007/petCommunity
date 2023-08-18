@@ -41,11 +41,6 @@ function loginCheck(){
 	}else if(pw.value == ""){
 		alert('비밀번호는 필수 항목입니다.');
 	}else{
-		
-		if (id.value !== '올바른아이디'){
-			alert('로그인 성공');
-			return;
-		}
 		var f = document.getElementById('f');
 		f.submit();
 	}
