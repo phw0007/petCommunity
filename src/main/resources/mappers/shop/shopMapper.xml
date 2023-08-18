@@ -157,6 +157,23 @@
 	<select id="ashopOrderList" resultMap="ashopDto">
 		SELECT * FROM project_order_list WHERE no=#{no}
 	</select>
+	
+	<delete id="orderDelete">
+		DELETE FROM project_order WHERE no=#{no}
+	</delete>	
+		
+	<update id="orderNoUpdate">
+		UPDATE project_order SET no = no - 1 WHERE no >= #{no}
+	</update>
+	
+	<delete id="orderListDelete">
+		DELETE FROM project_order_list WHERE no=#{no}
+	</delete>	
+		
+	<update id="orderListNoUpdate">
+		UPDATE project_order_list SET no = no - 1 WHERE no >= #{no}
+	</update>
+	
 </mapper>
 
 

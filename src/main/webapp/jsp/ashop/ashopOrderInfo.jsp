@@ -14,25 +14,27 @@
 </head>
 <body>
 <script>
-function ashopOrderUpdate(no) {
+function orderDeleteButton(no) {
 	let selectedValues = no;
-	url="ashopOrderInfo";
+	url="orderDeleteButton";
 	getDeleteShop(url, selectedValues);
 }
 
 function getDeleteShop(url, selectedValues) {
-	const form = document.createElement('form'); // form 태그 생성
-	form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
-	form.setAttribute('action', url); // 전송할 url 지정
-		    
-	const data = document.createElement('input'); // input 태그 생성
-	data.setAttribute('type', 'hidden'); // type = hidden
-	data.setAttribute('name', 'selectedValues'); // 데이터의 key
-	data.setAttribute('value', selectedValues); // 데이터의 value (여기서는 data1)
-		
-	form.appendChild(data);
-	document.body.appendChild(form);
-	form.submit();      
+	if (window.confirm("정말로 취소하시겠습니까?")) {
+		const form = document.createElement('form'); // form 태그 생성
+		form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
+		form.setAttribute('action', url); // 전송할 url 지정
+			    
+		const data = document.createElement('input'); // input 태그 생성
+		data.setAttribute('type', 'hidden'); // type = hidden
+		data.setAttribute('name', 'selectedValues'); // 데이터의 key
+		data.setAttribute('value', selectedValues); // 데이터의 value (여기서는 data1)
+			
+		form.appendChild(data);
+		document.body.appendChild(form);
+		form.submit();     
+	}
 }
 </script>
 <c:import url="/aheader" />
@@ -99,6 +101,7 @@ function getDeleteShop(url, selectedValues) {
 				    	</tr>
 				    </thead>
 				    <tbody>
+				    <c:forEach var="list" items="${lists}">
 				    	<tr>
 				    		<td>${listNo=listNo+1}</td>
 				    		<td>${list.category}</td>
@@ -107,11 +110,11 @@ function getDeleteShop(url, selectedValues) {
 				    		<td>${list.pay}</td>
 				    		<td>${list.orderCount}</td>
 				    	</tr>
+				    </c:forEach>
 				</table>
 			</div>
+			<input type="button" value="삭제" class="ashopUpdate" onclick="orderDeleteButton(${order.no})"/>
 			<input type="button" value="확인" class="ashopSelect" onclick="history.back()"/>
-			<input type="button" value="수정" class="ashopUpdate" onclick="ashopOrderUpdate(${no})"/>
-			<input type="button" value="삭제" class="ashopUpdate" onclick="location.href='ashopOrderUpdate'"/>
 		</div>
 	</div>
 </div>

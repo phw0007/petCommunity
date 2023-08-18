@@ -37,6 +37,14 @@ public interface AShopMapper {
 
 	AShopDTO ashopOrderInfo(int no);
 
-	AShopDTO ashopOrderList(int no);
+	ArrayList<AShopDTO> ashopOrderList(int no);
+
+	void orderDelete(int no);
+
+	void orderNoUpdate(int no);
+
+	void orderListDelete(int no);
+
+	void orderListNoUpdate(int no);
 
 }

@@ -36,7 +36,7 @@ public class AShopController {
 		return "ashop/ashopRegister";
 	}
 	
-	@RequestMapping({"/ashopOrder"})
+	@RequestMapping({"/ashopOrder","/ashopOrderDel"})
 	public String ashop_order(@RequestParam(value="currentPage", required = false)String cp,
 			String select, String search, Model model, HttpServletRequest request) {
 		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
@@ -47,12 +47,7 @@ public class AShopController {
 			return "ashop/ashopOrderDel";
 		}
 	}
-	
-	@RequestMapping("ashopOrderDel")
-	public String ashop_order_del() {
-		return "ashop/ashopOrderDel";
-	}
-	
+
 	@RequestMapping("ashopInfo")
 	public String ashop_info(String name, String category, String company, Model model,
 			@RequestParam(value="currentPage", required = false)String cp) {
@@ -66,21 +61,10 @@ public class AShopController {
 		return "ashop/ashopUpdate";
 	}
 	
-	@RequestMapping({"/ashopOrderInfo", "/ashopOrderUpdate"})
-	public String ashop_order_info(String selectedValues, Model model, HttpServletRequest request) {
-		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+	@RequestMapping("ashopOrderInfo")
+	public String ashop_order_info(String selectedValues, Model model) {
 		service.ashopOrderInfo(selectedValues, model);
-		if("/ashopOrderInfo".equals(requestUrl)) {
-			return "ashop/ashopOrderInfo";
-		}else if("/ashopOrderUpdate".equals(requestUrl)){
-			return "ashop/ashopOrderUpdate";
-		}
 		return "ashop/ashopOrderInfo";
-	}
-	
-	@RequestMapping("ashopOrderUpdate")
-	public String ashop_order_update() {
-		return "ashop/ashopOrderUpdate";
 	}
 	
 	@RequestMapping({"/shopDeleteCheckBoxes", "/deleteShopButton"})
@@ -91,6 +75,17 @@ public class AShopController {
 			return "redirect:ashopDelete";
 		}else {
 			return "redirect:ashop";
+		}
+	}
+	
+	@RequestMapping({"/orderDeleteCheckboxes", "/orderDeleteButton"})
+	public String orderDeleteCheckboxes(String selectedValues, HttpServletRequest request) {
+		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		service.orderDeleteCheckboxes(selectedValues);
+		if("/orderDeleteCheckboxes".equals(requestUrl)) {
+			return "redirect:ashopOrderDel";
+		}else {
+			return "redirect:ashopOrder";
 		}
 	}
 	

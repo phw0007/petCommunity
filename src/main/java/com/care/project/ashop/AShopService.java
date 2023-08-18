@@ -177,6 +177,7 @@ public class AShopService {
 			sub++;
 		}
 	}
+	
 	public void ashopOrder(String cp, String select, String search, Model model, String requestUrl) {
 		if(select == null){
 			select = "";
@@ -210,14 +211,30 @@ public class AShopService {
 		model.addAttribute("select", select);
 		model.addAttribute("search", search);
 	}
+	
 	public void ashopOrderInfo(String selectedValues, Model model) {
 		int no = Integer.parseInt(selectedValues);
 		int listNo = 0;
 		AShopDTO order = shopMapper.ashopOrderInfo(no);
-		AShopDTO list = shopMapper.ashopOrderList(no);
+		ArrayList<AShopDTO> lists = shopMapper.ashopOrderList(no);
 		model.addAttribute("no",no);
 		model.addAttribute("order",order);
-		model.addAttribute("list",list);
+		model.addAttribute("lists",lists);
 		model.addAttribute("listNo",listNo);
+	}
+	
+	public void orderDeleteCheckboxes(String selectedValues) {
+		String[] checkData = selectedValues.split(",");
+		int sub = 0;
+		for(int i = 1; i <= checkData.length; i++) {
+			int no = Integer.parseInt(checkData[i-1]);
+			no -= sub;
+			System.out.println(no);
+			shopMapper.orderDelete(no);
+			shopMapper.orderNoUpdate(no);
+			shopMapper.orderListDelete(no);
+			shopMapper.orderListNoUpdate(no);
+			sub++;
+		}
 	}
 }
