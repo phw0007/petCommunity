@@ -26,8 +26,9 @@
 	            <li>전화번호 <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1;">${member.mobile }</span></li>
 	        </ul>
 	        <ul class="ownerRight">
-	            <li>주소 &nbsp; &nbsp; <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1;">${member.address }</span></li>
+	            <li>주소 &nbsp; &nbsp; <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${member.address }</span></li>
 	            <li>아이디 <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1;">${member.id }</span></li>
+	            <li>이메일 ${member.email }</li>
 	        </ul>
 	    </div>
 	    <div class="infoButton" align="center">

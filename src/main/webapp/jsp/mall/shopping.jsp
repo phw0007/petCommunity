@@ -92,10 +92,10 @@
   ${result }
   <div class="serch">
 	<form action="Info">
-		<select name="select" style="width:100px; height:30px;font-family:'Poor Story';">
+		<select name="select" style="width:100px; height:30px;font-family:'Poor Story'; margin-left: -150px;">
 			<option value="" >전체</option>
-			<option value="id">아이디</option>
-			<option value="title">제목</option>
+			<option value="id">가격</option>
+			<option value="title">상품 이름</option>
 		</select> <input type="text" name=search style="width:500px; height:30px;"> 
 		<input type="submit" value="검색" style="width:100px; height:30px; font-family:'Poor Story';background:#FFEDA1;">
 	</form>

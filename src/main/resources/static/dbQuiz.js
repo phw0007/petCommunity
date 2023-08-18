@@ -13,7 +13,7 @@ function allCheck(){
    }else if(userName.value == ""){
       alert('이름은 필수 항목입니다.');
    }else{
-      uploadImage() //추가
+      uploadImage3() //추가
       var f = document.getElementById('f');
       f.submit();
    }
@@ -192,7 +192,27 @@ function sendEmail() {
 	xhr.send(formData);
 }
 
+	function uploadImage3() {
+		var fileInput = document.getElementById('fileImg');
+		var imageFile = fileInput.files[0];
 
+		var formData = new FormData();
+
+		if (imageFile) {
+			formData.append('imageFile', imageFile);
+			formData.append('fileName', imageFile.name);
+		}
+
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', 'uploadImage3');
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				location.href = xhr.responseText
+			}
+		};
+		xhr.send(formData);
+
+	}
 
 
 

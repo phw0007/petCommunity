@@ -1,29 +1,39 @@
 package com.care.project.member;
 
-/*
- *CREATE TABLE project_register(
-id varchar2(20),
-pw varchar2(20),
-user_name varchar2(21),
-address varchar2(200),
-mobile varchar2(11),
-pet_name varchar2(20),
-pet_category varchar2(50),
-pet_file varchar2(255),
-PRIMARY KEY(id)
-);
-COMMIT; 
- */
-
 public class MemberDTO {
+/*
+	no INTEGER,
+    id varchar2(20),
+	pw varchar2(100),
+	user_name varchar2(21),
+	register_day VARCHAR2(20), 
+	birth VARCHAR2(20), 
+	address varchar2(200),
+	email VARCHAR2(100), 
+	mobile varchar2(20),
+	pet_name varchar2(20),
+	pet_category varchar2(50),
+	pet_file varchar2(255),
+	PRIMARY KEY(id) 
+*/	
+	private int no;
 	private String id;
 	private String pw;
 	private String userName;
+	private String registerDay;
+	private String birth;
 	private String address;
+	private String email;
 	private String mobile;
 	private String petName;
 	private String petCategory;
 	private String petFile;
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
 	public String getId() {
 		return id;
 	}
@@ -42,11 +52,30 @@ public class MemberDTO {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	public String getRegisterDay() {
+		return registerDay;
+	}
+	public void setRegisterDay(String registerDay) {
+		this.registerDay = registerDay;
+	}
+	
+	public String getBirth() {
+		return birth;
+	}
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
 	public String getAddress() {
 		return address;
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getMobile() {
 		return mobile;
@@ -72,8 +101,5 @@ public class MemberDTO {
 	public void setPetFile(String petFile) {
 		this.petFile = petFile;
 	}
+	
 }
-	
-	
-	
-

@@ -8,8 +8,11 @@
 		<id column="id" property="id"/>
 		<result column="pw" property="pw"/>
 		<result column="user_name" property="userName"/>
+		<result column="register_day" property="registerDay"/>
+		<result column="birth" property="birth"/>
 		<result column="address" property="address"/>
 		<result column="mobile" property="mobile"/>
+		<result column="email" property="email"/>
 		<result column="pet_name" property="petName"/>
 		<result column="pet_category" property="petCategory"/>
 		<result column="pet_file" property="petFile"/>
@@ -19,26 +22,30 @@
 	</select>
 	
 	<insert id="registerProc" parameterType="com.care.project.member.MemberDTO">
-		INSERT INTO project_register VALUES(#{id}, #{pw}, #{userName}, #{address}, #{mobile}, #{petName}, #{petCategory}, #{petFile})
+	      <selectKey order="BEFORE" keyProperty="no" resultType="int">
+         SELECT nvl(max(no),0) + 1 FROM project_register
+      </selectKey>
+		INSERT INTO project_register VALUES(#{no}, #{id}, #{pw}, #{userName}, #{registerDay}, #{birth}, #{address}, #{mobile}, #{email}, #{petName}, #{petCategory}, #{petFile})
+		
 	</insert>
 	
 	<select id="memberInfo" resultMap="memberDto">
 		<choose>
 			<when test="select == 'id'">
 				SELECT AAA.* FROM 
-				(SELECT ROWNUM() as rn, id, pw, userName, address, mobile, petName, petCategory, petFile
+				(SELECT ROWNUM() as rn, no, id, pw, userName, registerDay, birth, address, mobile, email, petName, petCategory, petFile
 				FROM project_register WHERE id like CONCAT('%', #{search}, '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'mobile'">
 				SELECT AAA.* FROM 
-				(SELECT ROWNUM() as rn, id, pw, userName, address, mobile, petName, petCategory, petFile 
+				(SELECT ROWNUM() as rn, no, id, pw, userName, registerDay, birth, address, mobile, email, petName, petCategory, petFile 
 				FROM project_register WHERE mobile like CONCAT('%', #{search}, '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<otherwise>
 				SELECT AAA.* FROM 
-				(SELECT ROWNUM() as rn, id, pw, userName, address, mobile, petName, petCategory, petFile  
+				(SELECT ROWNUM() as rn, no, id, pw, userName, registerDay, birth, address, mobile, email, petName, petCategory, petFile  
 				FROM project_register )AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</otherwise>
@@ -53,5 +60,7 @@
 	<delete id="delete">
 		DELETE FROM project_register WHERE id=#{id}
 	</delete>
+	
+	
 	
 </mapper>
