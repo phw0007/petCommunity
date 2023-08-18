@@ -365,18 +365,21 @@ public class BoardService {
 		int end = pageBlock * currentPage; 
 		
 		int begin = end - pageBlock + 1; 
-		int no = 0;
+		//int no = 0;
 		ArrayList<BoardDTO> boards = boardMapper.boardSearch(begin, end, select, search);
+		
 		int totalCount = boardMapper.searchCount(select, search);
+		System.out.println("길이뭘깡?"+totalCount);
 		String url = "boardContent?select="+select+"&search="+search+"&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
-		no = (currentPage-1)*10;
-		model.addAttribute("boards", boards);
+		//no = (currentPage-1)*10;
+		model.addAttribute("freeboards", boards);
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("no", no);
+		//model.addAttribute("no", no);
 		model.addAttribute("select", select);
 		model.addAttribute("search", search);
+		model.addAttribute("totalCount", totalCount);
 		
 	}
 

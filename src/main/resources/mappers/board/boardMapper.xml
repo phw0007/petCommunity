@@ -96,10 +96,10 @@
 	<select id="boardSearch" resultMap="boardDto">
 		<choose>
 			<when test="select == 'title'">
-				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_board WHERE title like ('%' ||  #{search} || '%'))AAA 
-				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+	SELECT BBB.* FROM ( SELECT rownum as rn, AAA.* FROM
+       (SELECT no, id, category, title, content, file_name, write_date, hits, likes FROM project_board WHERE title like ('%' || #{search} || '%')
+        ORDER BY no DESC) AAA) BBB
+WHERE BBB.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'id'">
 				SELECT AAA.* FROM 
@@ -107,6 +107,13 @@
 				, write_date, hits, likes FROM project_board WHERE id like ('%' ||  #{search} || '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
+				<otherwise>
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE category like ('%' ||  #{search} || '%') or
+				title like ('%' ||  #{search} || '%') or id like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</otherwise>
 		</choose>
 	</select>
 	
