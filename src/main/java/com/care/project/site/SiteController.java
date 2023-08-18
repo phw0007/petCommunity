@@ -26,13 +26,13 @@ public class SiteController {
 		return "site/site_update";
 	}
 	
-	@RequestMapping("site_update02")
-	public String site_update02() {
-		return "site/site_update02";
+	@RequestMapping("siteUpdate02")
+	public String siteUpdate02() {
+		return "site/siteUpdate02";
 	}
 	
-	@RequestMapping("site_update03")
-	public String site_update03() {
-		return "site/site_update03";
+	@RequestMapping("siteUpdate03")
+	public String siteUpdate03() {
+		return "site/siteUpdate03";
 	}
 }
