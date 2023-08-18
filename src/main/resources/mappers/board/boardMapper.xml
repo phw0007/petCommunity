@@ -76,9 +76,6 @@
 	   DELETE FROM project_board_comment WHERE id=#{id} AND category=#{category} AND no=#{no} AND write_date=#{writeDate}
 	</delete>
 	
-<!--  <update id = "boardLike">
-      UPDATE project_board SET likes=likes+1, hits=hits-1 WHERE id=#{id} AND category=#{category} AND no=#{no}
-   </update>-->
 	   <select id = "boardLikeCheck" resultMap="boardDto">
       SELECT * FROM (SELECT * FROM project_board_likes 
       WHERE id=#{id} AND category=#{category} AND no=#{no})WHERE likes_id=#{likesId}
@@ -95,6 +92,34 @@
    <update id = "boardLike">
       UPDATE project_board SET likes=likes+1 WHERE id=#{id} AND category=#{category} AND no=#{no}
    </update>
+	
+	<select id="boardSearch" resultMap="boardDto">
+		<choose>
+			<when test="select == 'title'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE title like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<when test="select == 'id'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE id like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+		</choose>
+	</select>
+	
+	<select id="searchCount">
+		<choose>
+	  		<when test="select == 'title'">
+	  			SELECT count(no) FROM project_board WHERE title like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<when test="select == 'id'">
+	  			SELECT count(no) FROM project_board WHERE category='자유게시판' AND id like ('%' ||  #{search} || '%')
+	  		</when>
+		</choose>
+	</select>
 	
 </mapper>
 

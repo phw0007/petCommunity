@@ -200,5 +200,13 @@ public class BoardController {
 	      System.out.println(url);
 	      return "forward:boardContent?"+url;
 	   }
-	   
+	  
+	@RequestMapping("boardSearch")
+	public String boardSearch(@RequestParam(value="currentPage", required=false)String cp, 
+			String select, String search, Model model) {
+		System.out.println("알려쥬" + select);
+		System.out.println("이것동"+search);
+		service.boardSearch(cp, select, search, model);
+		return "board/freeboardForm";
+	}
 }

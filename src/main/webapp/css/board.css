@@ -39,7 +39,7 @@
 
 
 /*boardForm*/
-.boardForm{width:1200px;margin:0 auto; height:800px;padding-top:100px;
+.boardForm{width:1200px;margin:0 auto; height:900px;padding-top:100px;
           font-family: 'Poor Story', cursive;}
 .boardForm > h1{border-bottom:2px solid black; width:500px; padding-bottom:20px;}
 .boardForm ul{list-style: none;}
@@ -49,9 +49,10 @@
 
 /*카테고리 선택하는 곳*/
 .boardCategory{background:#ffeda1;width:170px;font-size:20px;}
-.boardCategory > ul li a{text-decoration: none;color:black;padding-right:30px;}
+.boardCategory > ul li a{text-decoration: none;color:black;padding-right:15px;padding-left:15px;}
 .boardCategory > ul{text-align:center;}
-.boardCategory > ul li{padding-bottom:10px;}
+.boardCategory > ul li{padding-bottom:10px;padding-right:15px;}
+
 
 /*게시판 div*/
 .boardFormT{width:850px; margin-left:50px; margin-bottom:15px; }
@@ -76,4 +77,5 @@
 .Mlist,.modi,.back{background:#fcd11e; width:70px; height:40px;
                         font-family: 'Poor Story', cursive;font-size:20px;}
                         
-
+.searchBoard{height:20px; margin-top:20px;margin-left:40px;}
+.search{width:100px; height:30px;font-family:'Poor Story';}

@@ -341,8 +341,44 @@ public class BoardService {
 		         boardMapper.boardLikeUserInsert(id, category, no, likesId);
 		         boardMapper.boardLike(id, category, no);
 		      }
-		      return "id="+id+"&category="+category+"&no="+no+"&currentPage="+cp;
+		      return "id="+id+"&category="+category+"&no="+no+"&cp="+cp;
+		      
 		   }
+
+	public void boardSearch(String cp, String select, String search, Model model) {
+		if(select == null){
+			select = "";
+		}
+		
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+			
+		if(search == null) {
+			search = "";
+		}
+		
+		int pageBlock = 10; 
+		int end = pageBlock * currentPage; 
+		
+		int begin = end - pageBlock + 1; 
+		int no = 0;
+		ArrayList<BoardDTO> boards = boardMapper.boardSearch(begin, end, select, search);
+		int totalCount = boardMapper.searchCount(select, search);
+		String url = "boardContent?select="+select+"&search="+search+"&currentPage=";
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		no = (currentPage-1)*10;
+		model.addAttribute("boards", boards);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("no", no);
+		model.addAttribute("select", select);
+		model.addAttribute("search", search);
+		
+	}
 
 }
 
