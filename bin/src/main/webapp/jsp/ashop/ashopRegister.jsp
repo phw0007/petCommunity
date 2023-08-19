@@ -41,7 +41,7 @@
 			<div class="ashopLeft">
 				<p><img id="img" src="/image/pet.jpg" alt="petImage" width=180px height=240px/></p>
 				<ul>
-					<li><span>상품 이름</span><input type="text" id="name"></li>
+					<li><span>상품 이름</span><input type="text" id="product"></li>
 					<li><span>상품 분류</span>
 						<select id="category" class="ashopOption">
 							<option value="사료">사료</option>

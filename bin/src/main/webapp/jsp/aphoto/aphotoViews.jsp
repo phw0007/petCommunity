@@ -4,7 +4,7 @@
 <html>
 <head>
 <link href="css/reset.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="/css/aboard.css">
+<link rel="stylesheet" href="/css/aphoto.css">
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 </style>
@@ -14,14 +14,14 @@
 <body>
 <script>
 function getDeleteBoardButton() {
-	let selectedValues = ['${board.no}','${board.id}','${board.category}'];
-	url="boardDeleteButton";
+	let selectedValues = ['${photo.no}','${photo.id}','${photo.category}'];
+	url="photoDeleteButton";
 	getDeleteBoard(url, selectedValues);
 }
 
 function getDeleteBoardComment(writeDate) {
-	let selectedValues = ['${board.no}','${board.id}','${board.category}','${cp}',writeDate];
-	url="boardDeleteComment";
+	let selectedValues = ['${photo.no}','${photo.id}','${photo.category}','${cp}',writeDate];
+	url="photoDeleteComment";
 	getDeleteBoard(url, selectedValues);
 }
 
@@ -45,13 +45,11 @@ function getDeleteBoard(url, selectedValues) {
 <c:import url="/aheader" />
 	<div class="member">
 	<div class="memberItem">
-		<h3>커뮤니티 관리</h3>
+		<h3>반려앨범 관리</h3>
 		<ul>
-			<li><a href="aboard" style="font-weight: bold;">게시글 목록</a></li>
-			<li><a href="aboardDelete">게시글 삭제</a></li>
-			<li><a href="aboardAnno">공지사항 관리</a></li>
-			<li><a href="aboardAnnoDel">공지사항 삭제</a></li>
-		</ul>			
+			<li><a href="aphoto" style="font-weight: bold;">게시글 목록</a></li>
+			<li><a href="aphotoDelete">게시글 삭제</a></li>
+		</ul>
 	</div>
 	<div class="memberMain">
 		<div class="memberTitle">
@@ -59,24 +57,24 @@ function getDeleteBoard(url, selectedValues) {
 			<ul>
 				<li><a href="aindex">홈</a></li>
 				<li>></li>
-				<li><a href="aboard">커뮤니티 관리</a></li>
+				<li><a href="aphoto">반려앨범 관리</a></li>
 				<li>></li>
-				<li><a href="aboard">게시글 목록</a></li>
+				<li><a href="aphoto">게시글 목록</a></li>
 			</ul>
 		</div>
 		<div class="memberViews">
 			<ul>
-				<li><span>제목</span>${board.title }</li>
-				<li><span>작성일</span>${board.writeDate }</li>
-				<li><span>작성자</span>${board.id }</li>
-				<li><span>조회수</span>${board.hits }</li>
-				<li><span>추천수</span>${board.likes }</li>
+				<li><span>제목</span>${photo.title }</li>
+				<li><span>작성일</span>${photo.writeDate }</li>
+				<li><span>작성자</span>${photo.id }</li>
+				<li><span>조회수</span>${photo.hits }</li>
+				<li><span>추천수</span>${photo.likes }</li>
 				<li><span>내용</span>
 					<div class="content">
-						<c:if test="${board.fileName != null}">
-							<img src=${board.fileName } alt="pet" width=140px height=200px/><br>
+						<c:if test="${photo.fileName != null}">
+							<img src=${photo.fileName } alt="pet" width=140px height=200px/><br>
 						</c:if>
-						${board.content }
+						${photo.content }
 					</div>
 				</li>
 				<c:choose>

@@ -13,13 +13,14 @@
 <title>index</title>
 </head>
 <body>
+<script src="/dbQuiz.js"></script>
 <c:import url="/aheader" />
 <div class="member">
 	<div class="memberItem">
 		<h3>반려앨범 관리</h3>
 		<ul>
-			<li><a href="aphoto" style="font-weight: bold;">게시글 목록</a></li>
-			<li><a href="aphotoDelete">게시글 삭제</a></li>
+			<li><a href="aphoto" >게시글 목록</a></li>
+			<li><a href="aphotoDelete" style="font-weight: bold;">게시글 삭제</a></li>
 		</ul>
 	</div>
 	<div class="memberMain">
@@ -30,7 +31,7 @@
 				<li>></li>
 				<li><a href="aphoto">반려앨범 관리</a></li>
 				<li>></li>
-				<li><a href="aphoto">게시글 목록</a></li>
+				<li><a href="aphotoDelete">게시글 삭제</a></li>
 			</ul>
 		</div>
 		<div class="memberInfo">
@@ -44,18 +45,20 @@
 			    		<th>추천수</th>
 			    		<th>조회수</th>
 			    		<th>작성일</th>
+			    		<th>선택</th>
 			    	</tr>
 			    </thead>
 			    <tbody>
-			    	<c:forEach var="photo" items="${photos}">
-						<tr onclick="location.href='aphotoViews?id=${photo.id}&category=${photo.category}&no=${photo.no}&currentPage=${currentPage}'">
+					<c:forEach var="photo" items="${photos}">
+						<tr>
 							<td>${no=no+1}</td>
 							<td>${photo.category }</td>
 							<td>${photo.title }</td>
 							<td>${photo.id }</td>
-							<td>${photo.likes }</td>
 							<td>${photo.hits }</td>
+							<td>${photo.likes }</td>
 							<td>${photo.writeDate }</td>
+							<td><input type="checkbox" class="member-checkbox" value="${photo.no},${photo.id},${photo.category}"></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -64,7 +67,7 @@
 		<div class="memberSearch">
 			<div> ${result}	</div>
 			<div class="selectSearch">
-				<form action="aboard">
+				<form action="aboardDelete">
 					<select name="select" class="selectOption">
 						<c:choose>
 							<c:when test="${select == 'category'}">
@@ -95,6 +98,7 @@
 					</select>
 					<input type="text" name="search" class="searchOption" value="${search}"/>
 					<input type="submit" value="검색" class="submitOption"/>
+					<input type="button" value="삭제" class="deleteOption" onclick="getPhotoDeleteCheckBoxes()"/>
 				</form>
 			</div>
 		</div>

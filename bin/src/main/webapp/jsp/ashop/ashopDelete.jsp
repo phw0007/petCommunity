@@ -56,10 +56,10 @@
 							<td>${no=no+1}</td>
 							<td>${shop.category }</td>
 							<td>${shop.company }</td>
-							<td>${shop.name }</td>
+							<td>${shop.product }</td>
 							<td>${shop.pay }</td>
 							<td>${shop.inventory }</td>
-							<td><input type="checkbox" class="member-checkbox" value="${shop.name},${shop.category},${shop.no}"></td>
+							<td><input type="checkbox" class="member-checkbox" value="${shop.product},${shop.category},${shop.no}"></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -75,25 +75,25 @@
 								<option value="">전체</option>
 								<option value="category" selected="selected">상품분류</option>
 								<option value="company">판매업체</option>
-								<option value="name">상품명</option>
+								<option value="product">상품명</option>
 							</c:when>
 							<c:when test="${select == 'company'}">
 								<option value="">전체</option>
 								<option value="category">상품분류</option>
 								<option value="company" selected="selected">판매업체</option>
-								<option value="name">상품명</option>
+								<option value="product">상품명</option>
 							</c:when>
-							<c:when test="${select == 'name'}">
+							<c:when test="${select == 'product'}">
 								<option value="">전체</option>
 								<option value="category">상품분류</option>
 								<option value="company">판매업체</option>
-								<option value="name" selected="selected">상품명</option>
+								<option value="product" selected="selected">상품명</option>
 							</c:when>
 							<c:otherwise>
 								<option value="">전체</option>
 								<option value="category">상품분류</option>
 								<option value="company">판매업체</option>
-								<option value="name">상품명</option>
+								<option value="product">상품명</option>
 							</c:otherwise>
 						</c:choose>
 					</select>

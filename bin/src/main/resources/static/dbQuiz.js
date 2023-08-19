@@ -83,6 +83,25 @@ function getBoardDeleteCheckboxes() {
 	}
 }
 
+function getPhotoDeleteCheckBoxes() {
+	let checkboxes = document.getElementsByClassName('member-checkbox');
+	let selectedValues = [];
+
+	if (window.confirm("정말로 삭제하시겠습니까?")) {
+		for (let i = 0; i < checkboxes.length; i++) {
+			if (checkboxes[i].checked) {
+				selectedValues.push(checkboxes[i].value);
+			}
+		}
+		if (selectedValues[0] == null || selectedValues[0] == "") {
+			window.confirm("삭제할 회원을 선택해주세요.")
+		} else {
+			const url = "photoDeleteCheckBoxes";
+			getCheckBoxesData(url, selectedValues);
+		}
+	}
+}
+
 function getBoardAnnoDeleteCheckboxes() {
 	let checkboxes = document.getElementsByClassName('member-checkbox');
 	let selectedValues = [];
@@ -140,6 +159,25 @@ function getShopDeleteCheckBoxes() {
 	}
 }
 
+function getOrderDeleteCheckboxes() {
+	let checkboxes = document.getElementsByClassName('member-checkbox');
+	let selectedValues = [];
+
+	if (window.confirm("정말로 삭제하시겠습니까?")) {
+		for (let i = 0; i < checkboxes.length; i++) {
+			if (checkboxes[i].checked) {
+				selectedValues.push(checkboxes[i].value);
+			}
+		}
+		if (selectedValues[0] == null || selectedValues[0] == "") {
+			window.confirm("삭제할 회원을 선택해주세요.")
+		} else {
+			const url = "orderDeleteCheckboxes";
+			getCheckBoxesData(url, selectedValues);
+		}
+	}
+}
+
 function getCheckBoxesData(url, selectedValues) {
 	const data = document.createElement('input');
 	data.setAttribute('type', 'hidden');
@@ -153,7 +191,6 @@ function getCheckBoxesData(url, selectedValues) {
 	document.body.appendChild(form);
 	form.submit();
 }
-
 
 function getSelectedEmailCheckboxes() {
 	let checkboxes = document.getElementsByClassName('member-checkbox');
@@ -209,8 +246,6 @@ function sendEmail() {
 	xhr.send(formData);
 }
 
-
-
 function fileURL() {
 	const fileInput = document.getElementById('fileImg');
 	const petImage = document.getElementById('img');
@@ -221,22 +256,20 @@ function fileURL() {
 	}
 }
 
-
-
 function uploadImage() {
-	var name = document.getElementById('name').value;
+	var product = document.getElementById('product').value;
 	var category = document.getElementById('category').value;
 	var company = document.getElementById('company').value;
 	var pay = document.getElementById('pay').value;
 	var inventory = document.getElementById('inventory').value;
 	var info = document.getElementById('info').value;
-	let selectedValues = [name,category,company,pay,inventory,info];
+	let selectedValues = [product,category,company,pay,inventory,info];
 	
 	var fileInput = document.getElementById('fileImg');
 	var imageFile = fileInput.files[0];
 
 	var formData = new FormData();
-	if (name == "") {
+	if (product == "") {
 		alert('제품명은 필수 입력사항 입니다.');
 	}else if (company == "") {
 		alert('판매 업체는 필수 입력사항 입니다.');
@@ -263,17 +296,17 @@ function uploadImage() {
 
 function updateShop() {
 	var fileInput = document.getElementById('fileImg');
-	var name = document.getElementById('name').value;
+	var product = document.getElementById('product').value;
 	var category = document.getElementById('category').value;
 	var company = document.getElementById('company').value;
 	var pay = document.getElementById('pay').value;
 	var inventory = document.getElementById('inventory').value;
 	var info = document.getElementById('info').value;
-	let selectedValues = [name,category,company,pay,inventory,info];
+	let selectedValues = [product,category,company,pay,inventory,info];
 	var imageFile = fileInput.files[0];
 
 	var formData = new FormData();
-	if (name == "") {
+	if (product == "") {
 		alert('제품명은 필수 입력사항 입니다.');
 	}else if (company == "") {
 		alert('판매 업체는 필수 입력사항 입니다.');

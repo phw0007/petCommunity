@@ -56,11 +56,11 @@
 			    </thead>
 			    <tbody>
 			    	<c:forEach var="shop" items="${shops}">
-						<tr onclick="location.href='ashopInfo?name=${shop.name}&category=${shop.category}&company=${shop.company}&currentPage=${currentPage }'">
+						<tr onclick="location.href='ashopInfo?name=${shop.product}&category=${shop.category}&company=${shop.company}&currentPage=${currentPage }'">
 							<td>${no=no+1}</td>
 							<td>${shop.category }</td>
 							<td>${shop.company }</td>
-							<td>${shop.name }</td>
+							<td>${shop.product }</td>
 							<td>${shop.pay }</td>
 							<td>${shop.inventory }</td>
 						</tr>
@@ -78,25 +78,25 @@
 								<option value="">전체</option>
 								<option value="category" selected="selected">상품분류</option>
 								<option value="company">판매업체</option>
-								<option value="name">상품명</option>
+								<option value="product">상품명</option>
 							</c:when>
 							<c:when test="${select == 'company'}">
 								<option value="">전체</option>
 								<option value="category">상품분류</option>
 								<option value="company" selected="selected">판매업체</option>
-								<option value="name">상품명</option>
+								<option value="product">상품명</option>
 							</c:when>
-							<c:when test="${select == 'name'}">
+							<c:when test="${select == 'product'}">
 								<option value="">전체</option>
 								<option value="category">상품분류</option>
 								<option value="company">판매업체</option>
-								<option value="name" selected="selected">상품명</option>
+								<option value="product" selected="selected">상품명</option>
 							</c:when>
 							<c:otherwise>
 								<option value="">전체</option>
 								<option value="category">상품분류</option>
 								<option value="company">판매업체</option>
-								<option value="name">상품명</option>
+								<option value="product">상품명</option>
 							</c:otherwise>
 						</c:choose>
 					</select>

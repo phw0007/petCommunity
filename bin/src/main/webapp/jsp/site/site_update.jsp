@@ -15,7 +15,7 @@
 <body>
 <c:import url="/aheader" />
 <div class="member">
-	<div class="member_item">
+	<div class="memberItem">
 		<h3>사이트 관리</h3>
 		<ul>
 			<li><a href="site" style="font-weight: bold;">회사소개</a></li>
@@ -23,8 +23,8 @@
 			<li><a href="site">이용약관</a></li>
 		</ul>
 	</div>
-	<div class="member_main">
-		<div class="member_title">
+	<div class="memberMain">
+		<div class="memberTitle">
 			<p>회사소개</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
@@ -34,9 +34,9 @@
 				<li><a href="site">회사소개</a></li>
 			</ul>
 		</div>
-		<div class="member_info">
-			<p><textarea class="site_info01" style="border:1px solid #000;">안녕하세요</textarea></p>
-			<p><input type="button" value="수정완료" class="site_update_btn" onclick="location.href='site'"/></p>
+		<div class="memberInfo">
+			<p><textarea class="siteInfo01" style="border:1px solid #000;">안녕하세요</textarea></p>
+			<p><input type="button" value="수정완료" class="siteUpdateBtn" onclick="location.href='site'"/></p>
 		</div>
 	</div>
 </div>
