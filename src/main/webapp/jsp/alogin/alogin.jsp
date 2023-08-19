@@ -18,7 +18,7 @@
 	<ul>
 		<li><img src="/image/logo.png" alt="logo" width=300px height=300px/></li>
 		<li>admin</li>
-		<li><a href="">로그아웃</a></li>
+		<li><a href="aloginOut">로그아웃</a></li>
 	</ul>
 </div>
 </body>

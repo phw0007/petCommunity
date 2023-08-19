@@ -35,7 +35,8 @@ public class AMemberController {
 	}
 	
 	@RequestMapping("amain")
-	public String main() {
+	public String main(Model model) {
+		service.amainMember(model);
 		return "default/amain";
 	}
 	
