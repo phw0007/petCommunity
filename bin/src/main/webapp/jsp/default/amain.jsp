@@ -17,15 +17,9 @@
 	<div class="main_left">
 		<p>회원관리<a href="amember"><span>더보기 ></span></a></p>
 		<ul>
-			<li>사용자명<span>가입일</span></li>
-			<li>사용자명<span>가입일</span></li>
-			<li>사용자명<span>가입일</span></li>
-			<li>사용자명<span>가입일</span></li>
-			<li>사용자명<span>가입일</span></li>
-			<li>사용자명<span>가입일</span></li>
-			<li>사용자명<span>가입일</span></li>
-			<li>사용자명<span>가입일</span></li>
-			<li>사용자명<span>가입일</span></li>
+			<c:forEach var="member" items="${members}">
+				<li>${member.id }<span>${member.registerDay }</span></li>
+			</c:forEach>
 		</ul>
 	</div>
 	<div class="main_rigth">
@@ -48,7 +42,7 @@
 			</ul>
 		</div>
 		<div class="photo">
-			<p>반려앨범 관리<a href="aphto"><span>더보기 ></span></a></p>
+			<p>반려앨범 관리<a href="aphoto"><span>더보기 ></span></a></p>
 			<ul>
 				<li>작성자&nbsp&nbsp게시글제목<span>작성날짜</span></li>
 			</ul>
