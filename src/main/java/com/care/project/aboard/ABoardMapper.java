@@ -42,14 +42,4 @@ public interface ABoardMapper {
 
 	void aboardHit(@Param("id")String id, @Param("category")String category, @Param("no")int no);
 
-	void boardLike(@Param("id")String id, @Param("category")String category, @Param("no")int no);
-
-	ABoardDTO boardLikeCheck(@Param("id")String id, @Param("category")String category, 
-			@Param("no")int no, @Param("likesId")String likesId);
-	
-	void boardHitDown(@Param("id")String id, @Param("category")String category, @Param("no")int no);
-	
-	void boardLikeUserInsert(@Param("id")String id, @Param("category")String category, 
-			@Param("no")int no, @Param("likesId")String likesId);
-
 }
