@@ -35,6 +35,7 @@ comment_content VARCHAR2(300)
 	private String category;
 	private String commentId;
 	private String commentContent;
+	private String likesId;
 	
 	public int getNo() {
 		return no;
@@ -102,5 +103,11 @@ comment_content VARCHAR2(300)
 	public void setCommentContent(String commentContent) {
 		this.commentContent = commentContent;
 	}
-	
+	public String getLikesId() {
+		return likesId;
+	}
+	public void setLikesId(String likesId) {
+		this.likesId = likesId;
+	}
+
 }

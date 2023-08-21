@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.care.project.aboard.ABoardDTO;
+import com.care.project.ainfo.AInfoDTO;
+import com.care.project.aphoto.APhotoDTO;
+import com.care.project.ashop.AShopDTO;
 import com.care.project.common.PageService;
 
 import jakarta.servlet.http.HttpSession;
@@ -101,6 +105,28 @@ public class AMemberService {
 		}
 		
 		return "아이디/비밀번호를 확인 후 다시 시도하세요.";
+	}
+
+	public void amainMember(Model model) {
+		int begin = 1;
+		int end = 22;
+		ArrayList<AMemberDTO> members = memberMapper.amaminMember(begin, end);
+		model.addAttribute("members", members);
+		
+		begin = 1;
+		end = 8;
+		ArrayList<ABoardDTO> boards = memberMapper.amaminBoard(begin, end);
+		model.addAttribute("boards", boards);
+		
+		ArrayList<AInfoDTO> infos = memberMapper.amaminInfo(begin, end);
+		model.addAttribute("infos", infos);
+		
+		ArrayList<AShopDTO> shops = memberMapper.amaminShop(begin, end);
+		model.addAttribute("shops", shops);
+		
+		ArrayList<APhotoDTO> photos = memberMapper.amaminPhoto(begin, end);
+		model.addAttribute("photos", photos);
+		
 	}
 
 }

@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+.kakaoRegister {margin-top: 100px; margin-bottom: 100px;}
+.kakaoRegister h1,
+.kakaoRegister h4{font-family: 'Poor Story', cursive;}
+.kakaoRegister form input{margin-bottom: 10px; background-color: #FFEDA1; border: none; margin-left: 10px; width: 190px; height: 30px; padding-left: 10px;}
+.kakaoRegister form select {font-family: 'Poor Story', cursive; margin-bottom: 10px; background-color: #FFEDA1; border: none; margin-left: 10px;}
+.kakaoRegister form h5 {font-family: 'Poor Story', cursive; padding-left: 10px;}

@@ -25,6 +25,7 @@ public class AMemberController {
 	
 	@RequestMapping("aindex")
 	public String aindex() {
+		session.setAttribute("id", "admin");
 		return "aindex/aindex";
 	}
 
@@ -34,7 +35,8 @@ public class AMemberController {
 	}
 	
 	@RequestMapping("amain")
-	public String main() {
+	public String main(Model model) {
+		service.amainMember(model);
 		return "default/amain";
 	}
 	
@@ -96,18 +98,5 @@ public class AMemberController {
         return "amemberMail";
     }
 	
-//	@GetMapping("login")
-//	public String login() {
-//		return "member/login";
-//	}
-//	
-//	@PostMapping("loginProc")
-//	public String loginProc(AMemberDTO member) {
-//		String result = service.loginProc(member);
-//		if(result.equals("로그인 성공")) {
-//			return "redirect:amember";
-//		}
-//		return "member/login";
-//	}
-//	
+
 }

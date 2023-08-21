@@ -7,16 +7,16 @@
 	<resultMap type="com.care.project.aboard.ABoardDTO" id="boardDto">
 		<id column="no" property="no"/>
 		<result column="id" property="id"/>
-		<result column="no" property="no"/>
+		<result column="category" property="category"/>
 		<result column="title" property="title"/>
 		<result column="content" property="content"/>
 		<result column="file_name" property="fileName"/>
 		<result column="write_date" property="writeDate"/>
 		<result column="hits" property="hits"/>
 		<result column="likes" property="likes"/>
-		<result column="category" property="category"/>
 		<result column="comment_id" property="commentId"/>
 		<result column="comment_content" property="commentContent"/>
+		<result column="likes_id" property="likesId"/>
 	</resultMap>
 	
 	<select id="boardData" resultMap="boardDto">
@@ -99,5 +99,58 @@
 	<delete id="commentDeleteButton">
 		DELETE FROM project_board_comment WHERE id=#{id} AND category=#{category} AND no=#{no} AND write_date=#{writeDate}
 	</delete>	
+	
+	
+	<select id="boardAnnoData" resultMap="boardDto">
+		<choose>
+			<when test="select == 'title'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE title like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<when test="select == 'id'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE id like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<otherwise>
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE category like ('%공지사항%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="annoCount">
+		<choose>
+	  		<when test="select == 'title'">
+	  			SELECT count(id) FROM project_board WHERE title like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<when test="select == 'id'">
+	  			SELECT count(id) FROM project_board WHERE id like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<otherwise>
+	  			SELECT count(id) FROM project_board WHERE category like ('%공지사항%')
+	  		</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="aboardAnnoRegister">
+		<selectKey order="BEFORE" keyProperty="no" resultType="int">
+			SELECT nvl(max(no),0) + 1 FROM project_board
+		</selectKey>
+		INSERT INTO project_board VALUES(#{no}, #{id}, #{category}, #{title}, #{content}, #{fileName}, #{writeDate}, 0, 0)
+	</insert>
+	
+	<update id="aboardAnnoUpdate">
+		UPDATE project_board SET title=#{title}, content=#{content}, write_date=#{writeDate} WHERE no=#{no}
+	</update>
+	
+	<update id = "aboardHit">
+		UPDATE project_board SET hits=hits+1 WHERE id=#{id} AND category=#{category} AND no=#{no}
+	</update>
 	
 </mapper>

@@ -24,9 +24,10 @@ a{text-decoration:none; color:black;}
 .shopping > ul{font-size:0;}
 .shopping > ul li{display:inline-block; font-size:25px;}
 .shopping > ul li a{padding:10px 40px;}
-.shopping > ul li a:hover{border-bottom:3px solid #c5b100;}
+.shopping > ul li a:hover{border-bottom:3px solid #FFEDA1;}
 
 .shoppingList{margin-top:50px; margin-bottom:50px;}
 .shoppingList > ul{font-size:0;}
 .shoppingList > ul li{width:200px; height:300px; background: #FFEDA1;
-                      display:inline-block; font-size:20px; margin-right:20px;margin-bottom:20px;} 
+                      display:inline-block; font-size:20px; margin-right:50px;margin-bottom:50px; margin-top: 50px;}
+ 
