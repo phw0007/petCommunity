@@ -27,7 +27,7 @@
 		</div>
 		<br>
 		<br>
-		<div class="btnbg"> <!--> 조 추 아이콘 버튼 클릭 <-->
+		<div class="btnbg"> <!-->아이콘 버튼 클릭 <-->
 			<ul>
 				<li></li>
 			</ul>

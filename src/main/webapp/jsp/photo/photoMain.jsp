@@ -37,22 +37,39 @@
 			
 		</ul>
 		<br>
+		
+		<%
+    int itemsPerPage = 6; // 페이지당 아이템 수
+    int currentPage = 2;   // 현재 페이지 번호
+    if (request.getParameter("page") != null) {
+        currentPage = Integer.parseInt(request.getParameter("page"));
+    }
+    
+    int startIndex = (currentPage - 1) * itemsPerPage; // 가져올 아이템의 시작 인덱스
+%>
+
 		<ul class="contentWeb">
-			<li>
-				<div class="liweb">
-					<div class="lititle">${nickname }  ${write_date}</div>
-					<div class="liimg"><a href="#"><img alt="이미지" src="/image/logo2.png" width="210" height="220"></a></div>
-					<div class="licont"><a href="#">${title} </a></div>
-					<div class="liicon">
-						<p class="see"><span class="material-symbols-outlined">visibility</span>&nbsp; ${hits} </p>
-						<p class="favorite"><span class="material-symbols-outlined">favorite</span>&nbsp; ${likes}</p>
-						<p class="comment"><span class="material-symbols-outlined">comment</span>&nbsp; ${0}</p>
-					</div>
-				</div>
-			</li>
-			
-			
-		</ul>
+    <c:forEach var="photo" items="${photos}" begin="${startIndex + 1}" end="${startIndex + itemsPerPage}" varStatus="loop">
+    <c:if test="${loop.index > startIndex + itemsPerPage}">
+        <c:break />
+    </c:if>
+        <li>
+            <div class="liweb">
+                <div class="lititle">${photo.write_date}</div>
+                <div class="liimg"><a href="#"><img alt="photoImg/${photo.file_name}" width="210" height="220" src="photoImg/${photo.file_name}"></a></div>
+                
+                <div class="licont"><a href="#">${photo.title}</a></div>
+                <div class="liicon">
+                    <p class="see"><span class="material-symbols-outlined">visibility</span>&nbsp;${hits}</p>
+                    <p class="favorite"><span class="material-symbols-outlined">favorite</span>&nbsp;${likes}</p>
+                    <p class="comment"><span class="material-symbols-outlined">comment</span>&nbsp;${0}</p>
+                </div>
+            </div>
+        </li>
+        
+    </c:forEach>
+</ul>
+
 		
 		<br><br><br><br>
 		<div class=	"photoFt">
@@ -69,13 +86,14 @@
 			<button id="goWrite" onclick="location.href='photoWrite'">글쓰기</button>
 		</div>
 		
-		<table>
-			<tr>
-				<td colspan="4">${result }</td>
-			</tr>
-		</table>
+		
 	</div>
 	
+<!-- <div> ${result}	</div> -->	
+
+	
+	
+
 </body>
 </html>
 <c:import url="/footer" />
