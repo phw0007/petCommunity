@@ -86,15 +86,24 @@
       </dependency>
       <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jasper -->
       <dependency>
-         <groupId>org.apache.tomcat</groupId>
-         <artifactId>tomcat-jasper</artifactId>
-         <version>9.0.78</version>
+          <groupId>org.apache.tomcat</groupId>
+          <artifactId>tomcat-jasper</artifactId>
+          <version>9.0.78</version>
       </dependency>
+      
+      <!-- https://mvnrepository.com/artifact/org.json/json -->
       <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-devtools</artifactId>
+          <groupId>org.json</groupId>
+          <artifactId>json</artifactId>
+          <version>20230618</version>
       </dependency>
-   </dependencies>
+
+      <dependency>
+          <groupId>com.googlecode.json-simple</groupId>
+          <artifactId>json-simple</artifactId>
+          <version>1.1.1</version>
+      </dependency>
+</dependencies>
 
    <build>
       <plugins>

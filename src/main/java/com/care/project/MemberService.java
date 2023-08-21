@@ -36,7 +36,15 @@ public class MemberService {
 		if(result != null) {
 			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
 			
-			if(bpe.matches(member.getPw(), result.getPw())) {
+//			if(bpe.matches(member.getPw(), result.getPw())) {
+//				session.setAttribute("id", result.getId());
+//				session.setAttribute("userName", result.getUserName());
+//				session.setAttribute("address", result.getAddress());
+//				session.setAttribute("mobile", result.getMobile());
+//				return "로그인 성공";
+//			}
+			
+			if(member.getPw().equals(result.getPw())) {
 				session.setAttribute("id", result.getId());
 				session.setAttribute("userName", result.getUserName());
 				session.setAttribute("address", result.getAddress());

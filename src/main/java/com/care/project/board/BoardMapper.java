@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 public interface BoardMapper {
 	ArrayList<BoardDTO> boardForm(@Param("begin")int begin, @Param("end")int end);
 	ArrayList<BoardDTO> freeboardForm(@Param("begin")int begin, @Param("end")int end);
-	int count();
+	//int count();
 	int freecount();
 	void boardWriteProc(BoardDTO board);
 	BoardDTO boardContent(int no);
@@ -20,4 +20,22 @@ public interface BoardMapper {
 	void boardDeleteProc(int no);
 	void freecommentProc(BoardDTO board);
 	ArrayList<BoardDTO> freeComment(int no,String category);
+	void commentDeleteProc(@Param("id")String id, @Param("category")String category, 
+			@Param("no")int no, @Param("writeDate")String writeDate);
+	
+	
+	   void boardLike(@Param("id")String id, @Param("category")String category, @Param("no")int no);
+
+	   BoardDTO boardLikeCheck(@Param("id")String id, @Param("category")String category, 
+	         @Param("no")int no, String likesId);
+	   
+	   void boardHitDown(@Param("id")String id, @Param("category")String category, @Param("no")int no);
+	   
+	   void boardLikeUserInsert(@Param("id")String id, @Param("category")String category, 
+	         @Param("no")int no,String likesId);
+	   /*board검색부분*/
+	ArrayList<BoardDTO> boardSearch(@Param("begin")int begin, @Param("end")int end, 
+			@Param("select")String select, @Param("search")String search);
+	int searchCount(@Param("select")String select, @Param("search")String search);
+
 }

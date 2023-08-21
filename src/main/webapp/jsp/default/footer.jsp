@@ -1,16 +1,16 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
    <style type = "text/css">
-   .footer{width:1200px; margin:0 auto;text-decoration:none;}
+   .footer{width:1200px; margin:0 auto;}
     .footer ul li{display:inline; list-style:none; font-color: black;}
+    .footer ul li a{text-decoration: none; color:black; }
 </style>
 <c:url var = "context" value= "/"/>
  <hr>
 <div class="footer" align="center">
-   <img src="/image/logo.png" alt="logo" width="100"; height="100";>
+   <img src="/image/logo2.png" alt="logo" width="100"; height="100";>
    <ul>
       <li><a href="${context }Company">회사소개</a></li>
       <li>|</li>

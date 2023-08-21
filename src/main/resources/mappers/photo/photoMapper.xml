@@ -2,8 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
- photo
+
 <mapper namespace="com.care.project.home.photoMapper">
 	<resultMap type="com.care.project.home.photoDTO" id="photoDto">
 		<id column="no" property="no"/>
@@ -29,14 +28,6 @@
 		SELECT * FROM project_board WHERE no=#{no}
 	</select>
 	
-	
-	
-
-
-
-	
-	
- main
 </mapper>
 
 

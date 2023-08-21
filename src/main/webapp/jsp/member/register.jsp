@@ -79,7 +79,7 @@
 		<input type="text" id="address" name="address"><br>
 		<input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소" style="width: 308px; height: 30px;"><br>
 		<input type="text" name="mobile"  placeholder="전화번호" style="width: 308px; height: 30px;"><br>
-		<input type="text" id="email" placeholder="이메일">
+		<input type="text" id="email" name="email" placeholder="이메일">
 		<input type="button" id="emailBtn" onclick="sendEmail()" value="전송" style="width: 100px; height: 30px; border: 1px solid #000000; font-family: 'Poor Story', cursive;"><br>
 		<input type="text" id="auth" placeholder="인증번호">
 		<input type="button" id="authBtn" onclick="sendAuth()" value="인증번호 전송" style="width: 100px; height: 30px; border: 1px solid #000000; font-family: 'Poor Story', cursive;"><br>

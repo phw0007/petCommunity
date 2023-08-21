@@ -55,6 +55,10 @@ public class MemberController {
 	@PostMapping("mloginProc")
 	public String mloginProc(MemberDTO member) {
 		String result = service.loginProc(member);
+		String id = (String)session.getAttribute("id");
+		if(id.endsWith("admin")) {
+			return "redirect:aindex";
+		}
 		if(result.equals("로그인 성공")) {
 			return "redirect:index2";
 		}
@@ -106,6 +110,15 @@ public class MemberController {
 		}
 		return "member/update";
 	}
+
+	@GetMapping("info")
+	public String info() {
+		return "mall/info";
+	}
+	@GetMapping("shopping")
+	public String shopping() {
+		return "mall/shopping";
+	}
 	@PostMapping("updateProc")
 	public String updateProc(MemberDTO member, String confirm) {
 		String id = (String)session.getAttribute("id");
@@ -118,6 +131,7 @@ public class MemberController {
 			return "forward:logout";
 		}
 		return "member/update";
+
 	}
 	
 	
