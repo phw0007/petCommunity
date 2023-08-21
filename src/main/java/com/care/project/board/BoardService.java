@@ -643,7 +643,7 @@ public class BoardService {
 		
 		int totalCount = boardMapper.searchCount(select, search);
 		System.out.println("길이뭘깡?"+totalCount);
-		String url = "catboardSearch?select="+select+"&search="+search+"&category="+category+"&currentPage=";
+		String url = "boardSearch?select="+select+"&search="+search+"&category="+category+"&currentPage=";
 		//String url = "memberInfo?select=" + select + "&search=" + search + "&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		//no = (currentPage-1)*10;

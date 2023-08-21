@@ -48,7 +48,7 @@
 			</c:forEach>
 		</table>
 			<div class="result">${result }</div>
-			   <form action="catboardSearch">
+			   <form action="boardSearch">
 		<!--  <select name="select" style="width:100px; height:30px;font-family:'Poor Story';">
 			<option value="" >전체</option>
 			<option value="id">아이디</option>

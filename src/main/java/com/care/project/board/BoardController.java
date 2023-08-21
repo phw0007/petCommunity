@@ -235,23 +235,57 @@ public class BoardController {
 	      System.out.println(url);
 	      return "forward:boardContent?"+url;
 	   }
-	  
-	@RequestMapping("freeboardSearch")
+	   
+	 /*board카테고리별 검색*/
+	@RequestMapping("boardSearch")
 	public String freeboardSearch(@RequestParam(value="currentPage", required=false)String cp, 
 			String select, @RequestParam(value = "category", required = false) String category, String search, Model model) {
 		System.out.println("알려쥬" + select);
 		System.out.println("이것동"+search);
 		System.out.println("카테고링"+category);
+		if(category.equals("자유게시판")) {
 		service.boardSearch(cp, select, search, model,category);
 		return "board/freeboardForm";
+		}else if(category.equals("QnA")) {
+			service.boardSearch(cp, select, search, model,category);
+			return "board/qNaboardForm";
+		}else if(category.equals("강아지")) {
+			service.boardSearch(cp, select, search, model,category);
+			return "board/dogboardForm";
+		}else if(category.equals("고양이")) {
+			service.boardSearch(cp, select, search, model,category);
+			return "board/catboardForm";
+		}else if(category.equals("파충류")) {
+			service.boardSearch(cp, select, search, model,category);
+			return "board/reptileboardForm";
+		}else if(category.equals("조류")) {
+			service.boardSearch(cp, select, search, model,category);
+			return "board/birdboardForm";
+		}else if(category.equals("수중생물")) {
+			service.boardSearch(cp, select, search, model,category);
+			return "board/fishboardForm";
+		}else if(category.equals("소동물")) {
+			service.boardSearch(cp, select, search, model,category);
+			return "board/smallboardForm";
+		}else if(category.equals("기타동물")) {
+			service.boardSearch(cp, select, search, model,category);
+			return "board/etcboardForm";
+		}
+		
+		return "board/freeboardForm";
 	}
-	@RequestMapping("catboardSearch")
-	public String catboardSearch(@RequestParam(value="currentPage", required=false)String cp, 
-			String select, @RequestParam(value = "category", required = false) String category, String search, Model model) {
-		System.out.println("알려쥬" + select);
-		System.out.println("이것동"+search);
-		System.out.println("카테고링"+category);
-		service.catboardSearch(cp, select, search, model,category);
-		return "board/catboardForm";
-	}
+	
+	
+	
+	
+	
+//	@RequestMapping("catboardSearch")
+//	public String catboardSearch(@RequestParam(value="currentPage", required=false)String cp, 
+//			String select, @RequestParam(value = "category", required = false) String category, String search, Model model) {
+//		System.out.println("알려쥬" + select);
+//		System.out.println("이것동"+search);
+//		System.out.println("카테고링"+category);
+//		service.catboardSearch(cp, select, search, model,category);
+//		return "board/catboardForm";
+//	}
 }

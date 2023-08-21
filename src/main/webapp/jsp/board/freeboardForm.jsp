@@ -50,7 +50,7 @@
 		</table>
 		<div class="result">${result }</div>
 		 <div class="searchBoard">
-	   <form action="freeboardSearch">
+	   <form action="boardSearch">
 	  
 		<!--  <select name="select" style="width:100px; height:30px;font-family:'Poor Story';">
 			<option value="" >전체</option>

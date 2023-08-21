@@ -205,7 +205,7 @@
 			<when test="select == 'id'">
 				SELECT AAA.* FROM 
 				(SELECT rownum as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_board WHERE id like ('%' ||  #{search} || '%')AND category='자유게시판')AAA 
+				, write_date, hits, likes FROM project_board WHERE id like ('%' ||  #{search} || '%')AND category=#{category})AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 				<otherwise>

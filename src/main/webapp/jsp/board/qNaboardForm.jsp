@@ -74,6 +74,7 @@
 							</c:otherwise>
 						</c:choose>
 					</select>
+					<input type="hidden" name="category" value="QnA">
 					<input type="text" name="search" style="width:600px; height:30px;" value="${search}"> 
 		<input type="submit" value="검색" style="width:100px; height:30px; font-family:'Poor Story';background:#fcd11e;">
 	</form>
