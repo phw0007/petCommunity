@@ -55,6 +55,10 @@ public class MemberController {
 	@PostMapping("mloginProc")
 	public String mloginProc(MemberDTO member) {
 		String result = service.loginProc(member);
+		String id = (String)session.getAttribute("id");
+		if(id.endsWith("admin")) {
+			return "redirect:aindex";
+		}
 		if(result.equals("로그인 성공")) {
 			return "redirect:index2";
 		}
