@@ -15,6 +15,9 @@
 		<result column="hits" property="hits"/>
 		<result column="likes" property="likes"/>
 		<result column="comment_content" property="commentContent"/>
+		<result column="likeno" property="likeno"/>
+		<result column="like_check" property="likeCheck"/>
+		<result column="likes_id" property="likesId"/>
 	</resultMap>
     
     <insert id="boardWriteProc">
@@ -68,4 +71,63 @@
       <select id="freeComment" resultMap="boardDto">
 		select no,id,write_date,comment_content from project_board_comment where category=#{category} AND no=#{no} order by write_date desc
 	</select>
+	
+	<delete id="commentDeleteProc">
+	   DELETE FROM project_board_comment WHERE id=#{id} AND category=#{category} AND no=#{no} AND write_date=#{writeDate}
+	</delete>
+	
+	   <select id = "boardLikeCheck" resultMap="boardDto">
+      SELECT * FROM (SELECT * FROM project_board_likes 
+      WHERE id=#{id} AND category=#{category} AND no=#{no})WHERE likes_id=#{likesId}
+   </select>
+   
+   <update id = "boardHitDown">
+      UPDATE project_board SET hits=hits-1 WHERE id=#{id} AND category=#{category} AND no=#{no}
+   </update>
+   
+   <insert id="boardLikeUserInsert">
+      INSERT INTO project_board_likes VALUES(#{id}, #{no}, #{category}, #{likesId})
+   </insert>
+   
+   <update id = "boardLike">
+      UPDATE project_board SET likes=likes+1 WHERE id=#{id} AND category=#{category} AND no=#{no}
+   </update>
+	
+	<select id="boardSearch" resultMap="boardDto">
+		<choose>
+			<when test="select == 'title'">
+	SELECT BBB.* FROM ( SELECT rownum as rn, AAA.* FROM
+       (SELECT no, id, category, title, content, file_name, write_date, hits, likes FROM project_board WHERE title like ('%' || #{search} || '%')
+        ORDER BY no DESC) AAA) BBB
+WHERE BBB.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<when test="select == 'id'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE id like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+				<otherwise>
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE category like ('%' ||  #{search} || '%') or
+				title like ('%' ||  #{search} || '%') or id like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="searchCount">
+		<choose>
+	  		<when test="select == 'title'">
+	  			SELECT count(no) FROM project_board WHERE title like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<when test="select == 'id'">
+	  			SELECT count(no) FROM project_board WHERE category='자유게시판' AND id like ('%' ||  #{search} || '%')
+	  		</when>
+		</choose>
+	</select>
+	
 </mapper>
+
+

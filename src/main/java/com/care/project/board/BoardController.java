@@ -33,7 +33,11 @@ public class BoardController {
 		service.freeboardForm(cp, model);
 		return "board/freeboardForm";
 	}
-	
+	@RequestMapping("qnaboardForm")
+	public String qnaboardForm(@RequestParam(value="currentPage", required=false)String cp,Model model) {
+		service.freeboardForm(cp, model);
+		return "board/qnaboardForm";
+	}
 	
 	@GetMapping("boardWrite")
 	public String boardWrite() {
@@ -60,18 +64,21 @@ public class BoardController {
 	   @RequestMapping("boardContent")
 	   public String boardContent(
 	         @RequestParam(value="no", required = false)String n,
-	         @RequestParam(value="category")String c,  
+	         @RequestParam(value="category")String c,
+	         @RequestParam(value="cp", required=false)String cp,
 	         Model model) {
-	      BoardDTO board = service.boardContent(n);
+	      BoardDTO board = service.boardContent(n,cp);
 	      BoardDTO boards = new BoardDTO();
 	      ArrayList<BoardDTO> comments = service.boardComments(c,n);
 	      System.out.println(n);
+	      System.out.println("페이지"+cp);
 	      if(board == null) {
 	         System.out.println("boardContent 게시글 번호 : " + n);
 	         return "redirect:freeboardForm";
 	      }
 	      model.addAttribute("board", board);
 	      model.addAttribute("comments", comments);
+	      model.addAttribute("cp",cp);
 	      return "board/boardContent";
 	   }
 	
@@ -155,18 +162,51 @@ public class BoardController {
 	}
 	
 	@PostMapping("freecommentProc")
-	public String freecommentProc(@RequestParam(value="no", required = false)String n,BoardDTO board, Model model) {
+	public String freecommentProc(@RequestParam(value="no", required = false)String n,
+		    @RequestParam(value = "category", required = false) String category,
+			BoardDTO board, Model model) {
 		String id = (String)session.getAttribute("id");
 		if(id == null || id.isEmpty()) {
 			return "redirect:login";
 		}
+		System.out.println(board.getCategory());
 		String result = service.freecommtentProc(board);
 
 		if(result.equals("댓글 작성 완료")) {
-			return "redirect:boardContent?no="+n; //forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
+			return "forward:boardContent?no="+n; //forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
 		}
 	   
 		return "board/boardContent";
 	}
-	   
+	
+	@PostMapping("commentDelete")
+	public String commentDelete(String selectedValues) {
+		
+		String url= service.commentDeleteProc(selectedValues);
+		System.out.println(url);
+      return "forward:boardContent?"+url;
+      
+	}
+	
+	   @PostMapping("clickLike")
+	   public String clickLikeButton(String selectedValues, Model model) {
+		   
+		   System.out.println(selectedValues);
+	      String url = service.boardLikeButton(selectedValues);
+	      if(url.equals("로그인이 필요합니다.")) {
+	    	  model.addAttribute("errorMessage", "로그인이 필요한 작업입니다."); // 에러 메시지 모델에 추가
+	    	  return "redirect:freeboardForm";
+	      }
+	      System.out.println(url);
+	      return "forward:boardContent?"+url;
+	   }
+	  
+	@RequestMapping("boardSearch")
+	public String boardSearch(@RequestParam(value="currentPage", required=false)String cp, 
+			String select, String search, Model model) {
+		System.out.println("알려쥬" + select);
+		System.out.println("이것동"+search);
+		service.boardSearch(cp, select, search, model);
+		return "board/freeboardForm";
+	}
 }

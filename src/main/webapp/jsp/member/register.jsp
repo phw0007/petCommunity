@@ -96,7 +96,7 @@
          <option value="소동물">소동물</option>
          <option value="기타동물">기타동물</option>
         </select> <br>
-        <h5>프로필 사진</h5><input type="file" name=petFile style="background: none; font-family: 'Poor Story', cursive;"><br>
+        <h5>프로필 사진</h5><input type="file" id="fileImg" name="petFile" onchange="fileURL()" style="background: none; font-family: 'Poor Story', cursive;" accept="image/*"/><br>
 		<input type="submit" value="회원가입" onclick="allCheck()" style="width: 150px; height: 30px; font-family: 'Poor Story', cursive; border: 1px solid #000000;">
 		<input type="button" value="취소" onclick="location.href='login'" style="width: 150px; height: 30px; font-family: 'Poor Story', cursive; border: 1px solid #000000;"><br>
 	</form>
