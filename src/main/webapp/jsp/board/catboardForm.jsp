@@ -7,7 +7,7 @@
 </style>
 <c:import url = "/header"/>
 <div class="boardForm">
-
+<input type="hidden" name="category" value="고양이">
 	<h1>고양이게시판</h1>
 	<div class="boardCategory">
 		<ul>
@@ -48,7 +48,7 @@
 			</c:forEach>
 		</table>
 			<div class="result">${result }</div>
-			   <form action="boardSearch">
+			   <form action="catboardSearch">
 		<!--  <select name="select" style="width:100px; height:30px;font-family:'Poor Story';">
 			<option value="" >전체</option>
 			<option value="id">아이디</option>
@@ -74,6 +74,7 @@
 							</c:otherwise>
 						</c:choose>
 					</select>
+					<input type="hidden" name="category" value="고양이">
 					<input type="text" name="search" style="width:600px; height:30px;" value="${search}"> 
 		<input type="submit" value="검색" style="width:100px; height:30px; font-family:'Poor Story';background:#fcd11e;">
 	</form>

@@ -7,7 +7,7 @@ reptileboardForm.jsp<%@ page language="java" contentType="text/html; charset=UTF
 </style>
 <c:import url = "/header"/>
 <div class="boardForm">
-
+<input type="hidden" name="category" value="소동물">
 	<h1>소동물게시판</h1>
 	<div class="boardCategory">
 		<ul>
@@ -74,6 +74,7 @@ reptileboardForm.jsp<%@ page language="java" contentType="text/html; charset=UTF
 							</c:otherwise>
 						</c:choose>
 					</select>
+					<input type="hidden" name="category" value="소동물">
 					<input type="text" name="search" style="width:600px; height:30px;" value="${search}"> 
 		<input type="submit" value="검색" style="width:100px; height:30px; font-family:'Poor Story';background:#fcd11e;">
 	</form>

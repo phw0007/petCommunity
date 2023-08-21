@@ -7,7 +7,7 @@
 </style>
 <c:import url = "/header"/>
 <div class="boardForm">
-
+<input type="hidden" name="category" value="조류">
 	<h1>조류게시판</h1>
 	<div class="boardCategory">
 		<ul>

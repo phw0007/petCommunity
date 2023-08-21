@@ -236,13 +236,22 @@ public class BoardController {
 	      return "forward:boardContent?"+url;
 	   }
 	  
-	@RequestMapping("boardSearch")
-	public String boardSearch(@RequestParam(value="currentPage", required=false)String cp, 
+	@RequestMapping("freeboardSearch")
+	public String freeboardSearch(@RequestParam(value="currentPage", required=false)String cp, 
 			String select, @RequestParam(value = "category", required = false) String category, String search, Model model) {
 		System.out.println("알려쥬" + select);
 		System.out.println("이것동"+search);
 		System.out.println("카테고링"+category);
 		service.boardSearch(cp, select, search, model,category);
 		return "board/freeboardForm";
+	}
+	@RequestMapping("catboardSearch")
+	public String catboardSearch(@RequestParam(value="currentPage", required=false)String cp, 
+			String select, @RequestParam(value = "category", required = false) String category, String search, Model model) {
+		System.out.println("알려쥬" + select);
+		System.out.println("이것동"+search);
+		System.out.println("카테고링"+category);
+		service.catboardSearch(cp, select, search, model,category);
+		return "board/catboardForm";
 	}
 }

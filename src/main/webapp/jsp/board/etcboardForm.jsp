@@ -7,7 +7,7 @@ reptileboardForm.jsp<%@ page language="java" contentType="text/html; charset=UTF
 </style>
 <c:import url = "/header"/>
 <div class="boardForm">
-
+<input type="hidden" name="category" value="기타동물">
 	<h1>기타동물게시판</h1>
 	<div class="boardCategory">
 		<ul>
