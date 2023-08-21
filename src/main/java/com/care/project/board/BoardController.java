@@ -243,6 +243,10 @@ public class BoardController {
 		System.out.println("알려쥬" + select);
 		System.out.println("이것동"+search);
 		System.out.println("카테고링"+category);
+		if(select == null || select.equals("")) {
+			service.freeboardForm(cp, model);
+			return "board/freeboardForm";
+		}
 		if(category.equals("자유게시판")) {
 		service.boardSearch(cp, select, search, model,category);
 		return "board/freeboardForm";
@@ -271,10 +275,11 @@ public class BoardController {
 			service.boardSearch(cp, select, search, model,category);
 			return "board/etcboardForm";
 		}
-		
+   
 		return "board/freeboardForm";
-	}
+		
 	
+}
 	
 	
 	

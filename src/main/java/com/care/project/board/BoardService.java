@@ -618,45 +618,7 @@ public class BoardService {
 		model.addAttribute("category", category);
 		
 	}
-	public void catboardSearch(String cp, String select, String search, Model model,String category) {
-		if(select == null){
-			select = "";
-		}
-		
-		int currentPage = 1;
-		try{
-			currentPage = Integer.parseInt(cp);
-		}catch(Exception e){
-			currentPage = 1;
-		}
-			
-		if(search == null) {
-			search = "";
-		}
-		System.out.println("카테고리 나올까? "+category);
-		int pageBlock = 10; 
-		int end = pageBlock * currentPage; 
-		
-		int begin = end - pageBlock + 1; 
-		//int no = 0;
-		ArrayList<BoardDTO> boards = boardMapper.boardSearch(begin, end, select, search,category);
-		
-		int totalCount = boardMapper.searchCount(select, search);
-		System.out.println("길이뭘깡?"+totalCount);
-		String url = "boardSearch?select="+select+"&search="+search+"&category="+category+"&currentPage=";
-		//String url = "memberInfo?select=" + select + "&search=" + search + "&currentPage=";
-		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
-		//no = (currentPage-1)*10;
-		model.addAttribute("boards", boards);
-		model.addAttribute("result", result);
-		model.addAttribute("currentPage", currentPage);
-		//model.addAttribute("no", no);
-		model.addAttribute("select", select);
-		model.addAttribute("search", search);
-		model.addAttribute("totalCount", totalCount);
-		model.addAttribute("category", category);
-		
-	}
+	
 	
 
 }

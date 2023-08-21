@@ -32,11 +32,11 @@
 		</select><br><br>
 		<input type="text" name="title" placeholder="제목을 입력해주세요." id="title" style="width: 800px; height: 30px;"><br><br>
 	    <textarea class="contentWrite" rows="20" cols="130" name="content" placeholder="내용을 입력해주세요."></textarea><br><br>
-	      파일 첨부 :<label class="input-file" for="upfile">
-          파일선택
-        </label>
-        <input type = "file" multiple="multiple" value = "파일 " name = "upfile">
-        <!--  <input type="file" id="fileImg" class="ashopFile" name="upfile" onchange="fileURL()" accept="image/*"/>-->
+	    <label class="input-file" for="upfile">
+    파일 선택
+</label>
+<input type="file" multiple="multiple" name="upfile" id="upfile">
+	
        <br><br>
        <input type="button" value="등록" class="ashop_select" onclick="uploadImage2()"/>
          <div class="button">
