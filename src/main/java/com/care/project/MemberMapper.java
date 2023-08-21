@@ -15,6 +15,8 @@ public interface MemberMapper {
 	MemberDTO mloginProc(String id);
 
 	void registerProc(MemberDTO member);
+	
+	void emailProc(MemberDTO member);
 
 	int updateProc(MemberDTO member);
 

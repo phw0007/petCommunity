@@ -261,3 +261,41 @@ function commentDelete(commentId) {
 	}
 
 }
+
+
+function next() {
+    var authCode = document.getElementById('auth').value;
+    if (authCode !== "") {
+        verifyAuthCode(authCode);
+    } else {
+        alert('인증번호를 입력하세요.');
+    }
+}
+
+function verifyAuthCode(authCode) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:8086/mySendAuth'); // 실제 서버 URL로 변경
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = xhr.responseText;
+            if (response === '인증 성공') {
+                // 인증 성공 시 회원가입 페이지로 이동
+                window.location.href = 'member/register.jsp'; // 실제 회원가입 페이지 URL로 변경
+            } else {
+                alert('인증 실패');
+            }
+        }
+    };
+    xhr.send('auth=' + encodeURIComponent(authCode)); // 파라미터명을 'auth'로 변경
+}
+
+
+
+
+
+
+
+
+
+

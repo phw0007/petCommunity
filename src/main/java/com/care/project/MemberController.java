@@ -62,11 +62,7 @@ public class MemberController {
 		return "member/login";
 	}
 
-	/* http://localhost:8086/dbQuiz/register */
-	@GetMapping("register")
-	public String register() {
-		return "member/register";
-	}
+
 
 	@PostMapping("registerProc")
 	public String registerProc(MemberDTO member, String confirm) {
@@ -172,8 +168,31 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping(value = "mySendAuth", produces = "text/plain; charset=utf-8")
 	public String sendAuth(@RequestBody(required = false) String auth) {
-		// System.out.println("sendAuth()");
-		return service.sendAuth(auth);
+	    String authResult = service.sendAuth(auth); // 인증 결과를 받아옴
+
+	    return authResult; // "인증 성공" 또는 "인증 실패" 반환
 	}
+	
+	
+	@GetMapping("email")
+	public String email() {
+		return "member/email";
+	}
+	
+	@GetMapping("register")
+	public String register() {
+	    return "member/register";
+	}
+	
+	@PostMapping(value = "emailProc", produces = "text/plain; charset=utf-8")
+    @ResponseBody
+    public String emailProc(@RequestBody(required = false) String email) {
+        // 여기서 인증 코드를 확인하고 처리하는 로직을 구현하세요.
+        // 예를 들어, 인증 코드가 일치하는 경우에 "인증 성공"을 반환하고, 그렇지 않은 경우 "인증 실패"를 반환합니다.
+        String authenticationResult = service.checkAuthenticationCode(email);
+        
+        return authenticationResult; // "인증 성공" 또는 "인증 실패"를 반환
+    }
+	
 
 }
