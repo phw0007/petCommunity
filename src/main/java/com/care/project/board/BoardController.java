@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
@@ -22,22 +23,54 @@ public class BoardController {
 	@Autowired private BoardService service;
 	@Autowired private HttpSession session;
 	
-	@RequestMapping("boardForm")
-	public String boardForm(@RequestParam(value="currentPage", required=false)String cp, Model model) {
-		//service.boardForm(cp, model);
-		return "board/boardForm";
-	}
-	
+
+	/*boardFormMapping*/
 	@RequestMapping("freeboardForm")
 	public String freeboardForm(@RequestParam(value="currentPage", required=false)String cp,Model model) {
 		service.freeboardForm(cp, model);
 		return "board/freeboardForm";
 	}
-	@RequestMapping("qnaboardForm")
-	public String qnaboardForm(@RequestParam(value="currentPage", required=false)String cp,Model model) {
-		service.freeboardForm(cp, model);
-		return "board/qnaboardForm";
+	@RequestMapping("qNaboardForm")
+	public String qNaboardForm(@RequestParam(value="currentPage", required=false)String cp,Model model) {
+		service.qNaboardForm(cp, model);
+		return "board/qNaboardForm";
 	}
+	@RequestMapping("dogboardForm")
+	public String dogboardForm(@RequestParam(value="currentPage", required=false)String cp,Model model) {
+		service.dogboardForm(cp, model);
+		return "board/dogboardForm";
+	}
+	@RequestMapping("catboardForm")
+	public String catboardForm(@RequestParam(value="currentPage", required=false)String cp,Model model) {
+		service.catboardForm(cp, model);
+		return "board/catboardForm";
+	}
+	@RequestMapping("reptileboardForm")
+	public String reptileboardForm(@RequestParam(value="currentPage", required=false)String cp,Model model) {
+		service.reptileboardForm(cp, model);
+		return "board/reptileboardForm";
+	}
+	@RequestMapping("birdboardForm")
+	public String birdboardForm(@RequestParam(value="currentPage", required=false)String cp,Model model) {
+		service.birdboardForm(cp, model);
+		return "board/birdboardForm";
+	}
+	@RequestMapping("fishboardForm")
+	public String fishboardForm(@RequestParam(value="currentPage", required=false)String cp,Model model) {
+		service.fishboardForm(cp, model);
+		return "board/fishboardForm";
+	}
+	@RequestMapping("smallboardForm")
+	public String smallboardForm(@RequestParam(value="currentPage", required=false)String cp,Model model) {
+		service.smallboardForm(cp, model);
+		return "board/smallboardForm";
+	}
+	@RequestMapping("etcboardForm")
+	public String etcboardForm(@RequestParam(value="currentPage", required=false)String cp,Model model) {
+		service.etcboardForm(cp, model);
+		return "board/etcboardForm";
+	}
+	///////////////////////////////////////////////////////////////////////
 	
 	@GetMapping("boardWrite")
 	public String boardWrite() {
@@ -49,12 +82,14 @@ public class BoardController {
 	}
 	
 	@PostMapping("boardWriteProc")
-	public String boardWriteProc(Model model, MultipartHttpServletRequest multi) {
+	public String boardWriteProc(Model model, MultipartHttpServletRequest multi,HttpServletRequest request) {
 		String msg = service.boardWriteProc(multi);
 		if(msg.equals("로그인")) {
 			return "redirect:login";
 		}
 		if(msg.equals("게시글 작성 완료")) {
+			 //String referer = request.getHeader("Referer");
+			//String referer = (String)request.getHeader("REFERER");
 			return "redirect:freeboardForm"; //forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
 		}
 		model.addAttribute("msg", msg);
@@ -203,10 +238,11 @@ public class BoardController {
 	  
 	@RequestMapping("boardSearch")
 	public String boardSearch(@RequestParam(value="currentPage", required=false)String cp, 
-			String select, String search, Model model) {
+			String select, @RequestParam(value = "category", required = false) String category, String search, Model model) {
 		System.out.println("알려쥬" + select);
 		System.out.println("이것동"+search);
-		service.boardSearch(cp, select, search, model);
+		System.out.println("카테고링"+category);
+		service.boardSearch(cp, select, search, model,category);
 		return "board/freeboardForm";
 	}
 }

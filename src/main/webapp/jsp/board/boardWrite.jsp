@@ -21,7 +21,7 @@
 		<select id="category" name="category" size="1" style="width:250px; height:30px;">
 			<option value="">카테고리</option>
 			<option value="자유게시판">자유게시판</option>
-			<option value="Q&A">Q&A</option>
+			<option value="QnA">Q&A</option>
 			<option value="강아지">강아지</option>
 			<option value="고양이">고양이</option>
 			<option value="파충류">파충류</option>
@@ -35,7 +35,8 @@
 	      파일 첨부 :<label class="input-file" for="upfile">
           파일선택
         </label>
-        <input type="file" id="fileImg" class="ashopFile" name="upfile" onchange="fileURL()" accept="image/*"/>
+        <input type = "file" multiple="multiple" value = "파일 " name = "upfile">
+        <!--  <input type="file" id="fileImg" class="ashopFile" name="upfile" onchange="fileURL()" accept="image/*"/>-->
        <br><br>
        <input type="button" value="등록" class="ashop_select" onclick="uploadImage2()"/>
          <div class="button">

@@ -7,11 +7,11 @@
 </style>
 <c:import url = "/header"/>
 <div class="boardForm">
-<input type="hidden" name="category" value="자유게시판">
-	<h1>자유게시판</h1>
+
+	<h1>강아지게시판</h1>
 	<div class="boardCategory">
 		<ul>
-			<li><a href="">공지사항</a></li>
+		    <li><a href="">공지사항</a></li>
 			<li><a href="freeboardForm">자유게시판</a></li>
 			<li><a href="qNaboardForm">Q&A</a></li>
 			<li><a href="dogboardForm">강아지</a></li>
@@ -35,23 +35,20 @@
 				<th width="50">추천수</th>
 				<th width="50">조회수</th>	
 			</tr>
-			<c:forEach var="freeboard" items="${boards}" varStatus="status">
+			<c:forEach var="board" items="${boards}" varStatus="status">
 		
 				<tr>
 					<td>${totalCount - ((currentPage-1) * 10 + status.index)}</td>
-					<td onclick="location.href='boardContent?no=${freeboard.no}&category=${freeboard.category}&cp=${currentPage }'">${freeboard.title }</td>
-					<td>${freeboard.id }</td>
-					<td>${freeboard.writeDate }</td>
-					<td>${freeboard.likes }</td>
-					<td>${freeboard.hits }</td>
-					
+					<td onclick="location.href='boardContent?no=${board.no}&category=${board.category}'">${board.title }</td>
+					<td>${board.id }</td>
+					<td>${board.writeDate }</td>
+					<td>${board.likes }</td>
+					<td>${board.hits }</td>
 				</tr>
 			</c:forEach>
 		</table>
-		<div class="result">${result }</div>
-		 <div class="searchBoard">
-	   <form action="boardSearch">
-	  
+			<div class="result">${result }</div>
+			   <form action="boardSearch">
 		<!--  <select name="select" style="width:100px; height:30px;font-family:'Poor Story';">
 			<option value="" >전체</option>
 			<option value="id">아이디</option>
@@ -59,7 +56,6 @@
 		</select> <input type="text" name=search style="width:500px; height:30px;"> 
 		<input type="submit" value="검색" style="width:100px; height:30px; font-family:'Poor Story';background:#fcd11e;">-->
 					<select name="select" class="search">
-					
 						<c:choose>
 							<c:when test="${select == 'title'}">
 								<option value="">전체</option>
@@ -78,18 +74,16 @@
 							</c:otherwise>
 						</c:choose>
 					</select>
-					 <input type="hidden" name="category" value="자유게시판">
 					<input type="text" name="search" style="width:600px; height:30px;" value="${search}"> 
 		<input type="submit" value="검색" style="width:100px; height:30px; font-family:'Poor Story';background:#fcd11e;">
 	</form>
 	</div>
 	<form>
+	<form>
 		<button class="writeB" type="button"
 			onclick="location.href='boardWrite'">글쓰기</button>
 	</form>
-	
 	</div>
-	
 
 </div>
 
