@@ -20,6 +20,14 @@ category VARCHAR2(30),
 write_date VARCHAR2(15),
 comment_content VARCHAR2(300)
 );
+CREATE TABLE liketo(
+    likeno NUMBER    NOT NULL PRIMARY KEY, 
+    no NUMBER    NOT NULL,    
+    id VARCHAR2(21),
+    like_check NUMBER DEFAULT 0 NULL,
+    FOREIGN KEY (id) REFERENCES project_register (id),
+    FOREIGN KEY (no) REFERENCES project_board (no)
+);
 
  */
 
@@ -35,6 +43,7 @@ public class BoardDTO {
     private int likes;
     private String commentId;
     private String commentContent;
+    private String likesId;
     
 	public String getCommentId() {
 		return commentId;
@@ -44,6 +53,12 @@ public class BoardDTO {
 	}
 	public String getCommentContent() {
 		return commentContent;
+	}
+	public String getLikesId() {
+		return likesId;
+	}
+	public void setLikesId(String likesId) {
+		this.likesId = likesId;
 	}
 	public void setCommentContent(String commentContent) {
 		this.commentContent = commentContent;

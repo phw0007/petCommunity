@@ -25,6 +25,7 @@ public class AMemberController {
 	
 	@RequestMapping("aindex")
 	public String aindex() {
+		session.setAttribute("id", "admin");
 		return "aindex/aindex";
 	}
 
@@ -34,7 +35,8 @@ public class AMemberController {
 	}
 	
 	@RequestMapping("amain")
-	public String main() {
+	public String main(Model model) {
+		service.amainMember(model);
 		return "default/amain";
 	}
 	

@@ -2,9 +2,31 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-<mapper namespace="com.care.aphoto.PhotoMapper">
+
+<mapper namespace="com.care.project.home.photoMapper">
+	<resultMap type="com.care.project.home.photoDTO" id="photoDto">
+		<id column="no" property="no"/>
+		<result column="id" property="id"/>
+		<result column="nickname" property="nickname"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="file_name" property="fileName"/>
+		<result column="write_date" property="writeDate"/>
+		<result column="hits" property="hits"/>
+		<result column="likes" property="likes"/>
+	</resultMap>
+
 	
+  <insert id="photoWriteProc">
+  	<selectKey order="BEFORE" keyProperty="no" resultType="int">
+			SELECT nvl(max(no),0) + 1 FROM project_board
+		</selectKey>
+		INSERT INTO project_board VALUES(#{no}, #{category}, #{title}, #{content}, #{file_name}, #{write_date} )
+  </insert>
+	
+	<select id="photo" resultMap="photoDto">
+		SELECT * FROM project_board WHERE no=#{no}
+	</select>
 	
 </mapper>
 
@@ -14,4 +36,3 @@
 
 
 
-  

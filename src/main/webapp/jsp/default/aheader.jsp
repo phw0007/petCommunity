@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+a<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="header">
-	<a href="aindex"><img src="/image/logo2.png" alt="logo" width=90px height=90px/></a>
+	<a href="aindex"><img src="/image/logo.png" alt="logo" width=90px height=90px/></a>
 	<ul>
 		<li><a href="amember">회원 관리</a></li>
 		<li><a href="aboard">커뮤니티 관리</a></li>

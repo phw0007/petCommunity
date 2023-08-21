@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -60,8 +60,8 @@
 								<td>${board.category }</td>
 								<td>${board.title }</td>
 								<td>${board.id }</td>
-								<td>${board.hits }</td>
 								<td>${board.likes }</td>
+								<td>${board.hits }</td>
 								<td>${board.writeDate }</td>
 							</tr>
 						</c:forEach>

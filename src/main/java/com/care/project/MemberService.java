@@ -20,11 +20,12 @@ import jakarta.servlet.http.HttpSession;
 
 @Service
 public class MemberService {
-   @Autowired
-   private MemberMapper memberMapper;
-   @Autowired
-   private HttpSession session;
 
+	@Autowired private MemberMapper memberMapper;
+	@Autowired private HttpSession session;
+	
+	
+	
    public String loginProc(MemberDTO member) {
       if (member.getId() == null || member.getId().isEmpty()) {
          return "아이디를 입력하세요.";
@@ -85,9 +86,9 @@ public class MemberService {
          System.out.println(member.getId());
          System.out.println(member.getPw());
          System.out.println(member.getUserName());
-               System.out.println(member.getRegisterDay());//null
+         System.out.println(member.getRegisterDay());
          System.out.println(member.getAddress());
-               System.out.println(member.getEmail());//null
+         System.out.println(member.getEmail());
          System.out.println(member.getMobile());
          System.out.println(member.getPetName());
          System.out.println(member.getPetCategory());
@@ -200,7 +201,7 @@ public class MemberService {
            return "인증번호를 입력 후 다시 시도하세요.";
 
        if (auth.equals(content)) {
-    	   content2 ="인증 성공";
+    	   
            return "인증 성공";
        }
 

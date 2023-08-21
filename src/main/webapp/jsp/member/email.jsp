@@ -67,35 +67,29 @@
     }
     
     function next() {
-        var authCode = document.getElementById('auth').value;
-        if (authCode !== "") {
-            verifyAuthCode(authCode);
-        } else {
-            alert('인증번호를 입력하세요.');
-        }
-    }
+        if(xhr == null){
+             document.getElementById('msg').innerHTML = '이메일 주소를 전송 후 이용하세요.'
+             return;
+          }
+          xhr.open('post', 'mySendAuth');
+          xhr.send(document.getElementById('auth').value);
+          xhr.onreadystatechange = verifyAuthCode
+     }
 
-    function verifyAuthCode(authCode) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://localhost:8086/mySendAuth'); // 여기에 실제 서버의 URL을 입력해야 함
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                var response = xhr.responseText;
-                if (response === '인증 성공') {
-                    // 인증 성공 시 회원가입 페이지로 이동
-                    window.location.href = 'http://localhost:8086/register'; // 실제 회원가입 페이지 URL로 변경
-                } else {
-                    alert('인증 실패');
-                }
-            }
-        };
-        xhr.send('auth=' + encodeURIComponent(authCode)); // 파라미터명을 'auth'로 변경
-    }
+     function verifyAuthCode() {
+        if(xhr.responseText === '인증 성공'){
+           var f = document.getElementById('f');
+            f.submit();
+          }
+     }
+
+    
+    
+    
 
 </script>
 <div class="email" align="center">
-   <form action="emailProc" method="post" id="f">
+   <form action="register" method="post" id="f">
       <h3>회원가입</h3>
       <h4>이메일 인증</h4>
       <input type="text" id="email" name="email" placeholder="이메일" style="margin-top:50px;">
@@ -103,7 +97,7 @@
       <input type="text" id="auth" placeholder="인증번호">
       <input type="button" id="authBtn" onclick="sendAuth()" value="인증번호 확인" style="width: 100px; height: 30px; border: 1px solid #000000; font-family: 'Poor Story', cursive; cursor: pointer;"><br>
       <h5 id="msg"></h5>
-      <input type="submit" value="다음" onclick="next()" style="width: 150px; height: 30px; font-family: 'Poor Story', cursive; border: 1px solid #000000; cursor: pointer; margin-top: 30px;">
+      <input type="button" value="다음" onclick="next()" style="width: 150px; height: 30px; font-family: 'Poor Story', cursive; border: 1px solid #000000; cursor: pointer; margin-top: 30px;">
 
      
    </form>

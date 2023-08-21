@@ -28,11 +28,10 @@
             }
         }).open();
     }
-    
-    
 
-</script>
+    </script>
 <div class="register" align="center">
+
    <h3 id="msg"></h3>
    <h1>회원가입</h1>
    <h4>주인정보</h4>
@@ -49,11 +48,7 @@
       <input type="text" id="address" name="address"><br>
       <input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소" style="width: 308px; height: 30px;"><br>
       <input type="text" name="mobile"  placeholder="전화번호" style="width: 308px; height: 30px;"><br>
-      <input type="text" id="email" name="email" placeholder="이메일">
-      <input type="button" id="emailBtn" onclick="sendEmail()" value="전송" style="width: 100px; height: 30px; border: 1px solid #000000; font-family: 'Poor Story', cursive; cursor: pointer;"><br>
-      <input type="text" id="auth" placeholder="인증번호">
-      <input type="button" id="authBtn" onclick="sendAuth()" value="인증번호 확인" style="width: 100px; height: 30px; border: 1px solid #000000; font-family: 'Poor Story', cursive; cursor: pointer;"><br>
-
+      <input type="text" id="email" name="email" placeholder="이메일" value="${email}" style="margin-top:50px;">
       <h4 align="center">강아지 정보</h4>
       <input type="text" name="petName" id="petName" placeholder="이름" style="width: 308px; height: 30px;"><br>
       <select id="category" name="petCategory" size="1" style="width: 308px; height: 30px;">

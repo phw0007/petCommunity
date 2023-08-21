@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url="/header" />
@@ -8,7 +7,9 @@
 </style>
 <script src="/dbQuiz.js"></script>
 <div class=login align="center">
-    <p><img src="image/logo.png" alt="logo"></p>
+
+    <p><img src="/image/logo2.png" alt="logo"></p>
+
 	<h1>로그인</h1>
 	<table ><tr><td> 
 	<form action="mloginProc" method="post" id="f">
@@ -37,14 +38,6 @@
 </div>
 
 <c:import url="/footer" />
-
-
-
-
-
-
-
-
 
 
 
