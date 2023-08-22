@@ -51,4 +51,15 @@ public class ShopController {
 		return "mall/shopLink";
 	}
 	
+	@RequestMapping("/shopIn")
+	public String shopIn(@RequestParam("productId") int productId, Model model) {
+	    // productId로 선택한 상품의 상세 정보를 가져옵니다.
+	    ShopDTO product = service.getProductDetails(productId);
+	    
+	    // 상품 정보를 모델에 추가합니다.
+	    model.addAttribute("product", product);
+	    
+	    return "mall/shopIn"; // 상세 페이지 JSP 파일의 이름을 반환합니다.
+	}
+	
 }

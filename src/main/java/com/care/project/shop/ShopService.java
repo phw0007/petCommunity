@@ -52,4 +52,7 @@ public class ShopService {
 		model.addAttribute("search", search);
 	}
 
+	public ShopDTO getProductDetails(int productId) {
+	    return shopMapper.getProductDetails(productId);
+	}
 }

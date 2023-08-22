@@ -34,7 +34,7 @@
   <div class="shoppingList">
     <ul> 
 		<c:forEach var="shop" items="${shops}">
-			<li onclick="location.href='shopLink'">
+			<li onclick="location.href='shopIn?productId=${shop.no}'">
 				<p><img src="${shop.imageFile}" alt="pet" width=200px height=260px/></p>
 				<span style="font-weight: bold;">${shop.company}</span>
 				<span>${shop.product}</span>

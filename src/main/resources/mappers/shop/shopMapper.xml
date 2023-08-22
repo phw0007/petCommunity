@@ -76,6 +76,10 @@
 		</choose>
 	</select>
 	
+	<select id="getProductDetails" resultMap="shopDto">
+    	SELECT * FROM project_shop WHERE no = #{productId}
+    </select>
+	
 </mapper>
 
 
