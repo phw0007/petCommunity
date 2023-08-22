@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class ShopController {
 	@Autowired private ShopService service;
 
-	@RequestMapping({"/shopping","/food"})
+	@RequestMapping({"/shopping", "/food"})
 	public String shopping(@RequestParam(value="currentPage", required = false)String cp,
 			String select, String search, Model model, HttpServletRequest request) {
 		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);

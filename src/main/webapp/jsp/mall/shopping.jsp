@@ -38,7 +38,7 @@
 				<p><img src="${shop.imageFile}" alt="pet" width=200px height=260px/></p>
 				<span style="font-weight: bold;">${shop.company}</span>
 				<span>${shop.product}</span>
-				<span>${shop.pay}</span>
+				<span>${shop.shopPay}</span>
 			</li>
 		</c:forEach>
     </ul>

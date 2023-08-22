@@ -29,7 +29,7 @@ public class ShopService {
 		if(search == null) {
 			search = "";
 		}
-
+		DecimalFormat forematter = new DecimalFormat("###,###");
 		int pageBlock = 8; 
 		int end = pageBlock * currentPage; 
 
@@ -39,6 +39,11 @@ public class ShopService {
 		int totalCount = shopMapper.count(select, search, category);
 		String url = page+"?select="+select+"&search="+search+"&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		for(int i = 0; i < shops.size(); i++) {
+			String pay = forematter.format(shops.get(i).getPay());
+			System.out.println(pay);
+			shops.get(i).setShopPay(pay);
+		}
 		no = (currentPage-1)*14;
 		model.addAttribute("shops", shops);
 		model.addAttribute("result", result);
