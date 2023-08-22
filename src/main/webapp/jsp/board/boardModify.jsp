@@ -16,6 +16,8 @@
  <div class="boardModify">
   <form action = "boardModifyProc" method = "post">
 	<input type = "hidden" name = "no" value = "${board.no }">
+	<input type = "hidden" name = "category" value = "${board.category }">
+	
      <div class="modifyContent">
 	<h1>글 수정</h1>
 	 <ul>
@@ -35,3 +37,4 @@
 <c:import url = "/footer"/>
 </body>
 </html>
+

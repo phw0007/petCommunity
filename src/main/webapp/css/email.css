@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+
+.email h3{margin-top: 200px; font-family: 'Poor Story', cursive; font-size: 35px;}
+.email h4{font-family: 'Poor Story', cursive; font-size: 20px;}
+.email form input{margin-bottom: 10px; background-color: #FFEDA1; border: none; margin-left: 10px; width: 190px; height: 30px; padding-left: 10px;}

@@ -60,3 +60,4 @@
 
 
 <c:import url = "/footer"/>
+

@@ -21,16 +21,10 @@
 	<ul>  					 <!-- 이미지 파일 경로가 다르신분은 수정해서 써주세요 -->
 	<li><a href="${context }home"><img src="/image/logo2.png" alt="logo" width="100" height="100" ></a></li>
 		<li><a href="${context }freeboardForm">커뮤니티</a></li>
-		<li><a href="${context }shop">쇼핑몰</a></li>
+		<li><a href="${context }shopping">쇼핑몰</a></li>
 		<li><a href="${context }photo">반려앨범</a></li>
 		<li><a href="${context }info">업체정보</a></li>
 		<li><a href="${context }login">로그인</a></li>
 	</ul>
 </div>
 </div>
-
-
-
-
-
-

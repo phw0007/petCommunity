@@ -1,3 +1,5 @@
+
+
 package com.care.project.common;
 
 public class PageService {
@@ -13,8 +15,12 @@ public class PageService {
 			totalPage++;
 		}
 		
-		for(int i = 1; i <= totalPage; i++){
-			result += "<a href = '"+ url +i+"'>[" + i + "] </a>";
+		if(totalPage == 0) {
+			result += "<a href='"+ url+"<b>"+1+"</b>"+"'>["+1+"] </a>";	
+		}else {
+			for(int i = 1; i <= totalPage; i++){
+				result += "<a href = '"+ url +i+"'>[" + i + "] </a>";
+			}
 		}
 		
 		if(currentPage >= totalPage){
@@ -28,3 +34,5 @@ public class PageService {
 	
 
 }
+
+

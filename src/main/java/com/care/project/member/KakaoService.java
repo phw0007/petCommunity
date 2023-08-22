@@ -1,35 +1,40 @@
 package com.care.project.member;
 
-import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
+
+
 
 @Service
 public class KakaoService {
 	private String accessToken;
 	private String scope;
-
+	
+	
 	public void getAccessToken(String code) {
 		/*
 		 * 액세스 토큰 가져오기
 		 * https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-token
+		 * https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-code-info
 		 */
 		String redirectUri = "http://localhost/kakaoLogin";
 		String reqUrl = "https://kauth.kakao.com/oauth/token";
 		String reqParam = "grant_type=authorization_code";
-		reqParam += "&client_id=b9d71d29d74bfc0303ee3ff60c8a9b4b";
+		reqParam += "&client_id=5fb646c4e122b6bf77a3b660ed215c0d";
 		reqParam += "&redirect_uri="+redirectUri;
 		reqParam += "&code=" + code;
 
@@ -83,7 +88,7 @@ public class KakaoService {
 
 		String redirectUri = "http://localhost/kakaoLogin";
 		String reqUrl = "https://kauth.kakao.com/oauth/authorize";
-		String reqParam = "?client_id=af3185dbf0396a5bf08b67e29a79b42";
+		String reqParam = "?client_id=5fb646c4e122b6bf77a3b660ed215c0d";
 		reqParam += "&redirect_uri=" + redirectUri;
 		reqParam += "&response_type=code&scope="+scope;
 		
@@ -142,6 +147,18 @@ public class KakaoService {
 		
 	}
 	
+
+    private Map<String, String> kakaoUserInfo = new HashMap<>();
+
+    public Map<String, String> getKakaoUserInfo() {
+        return kakaoUserInfo;
+    }
+
+    public void setKakaoUserInfo(Map<String, String> userInfo) {
+        this.kakaoUserInfo = userInfo;
+    }
+    
+	
 	public void unLink() {
 		/*
 		 * 연결 끊기
@@ -173,3 +190,4 @@ public class KakaoService {
 	}
 	
 }
+
