@@ -45,7 +45,7 @@
 				<div class="liweb">
 					<div class="lititle">${photo.id} &nbsp;&nbsp;  ${photo.write_date}</div>
 					<div class="liimg"><a href='photoContent?no=${photo.no}'><img alt="photoImg/${photo.file_name}" width="210" height="220" src=photoImg/${photo.file_name}></a></div>
-					"${photoContent?no=${photo.no}} "
+					
 					<div class="licont"><a href="#">${photo.title} </a></div>
 					<div class="liicon">
 						<p class="see"><span class="material-symbols-outlined">visibility</span>&nbsp; ${hits} </p>
