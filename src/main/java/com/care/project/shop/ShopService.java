@@ -35,7 +35,7 @@ public class ShopService {
 
 		int begin = end - pageBlock + 1; 
 		int no = 0;
-		ArrayList<AShopDTO> shops = shopMapper.shopData(begin, end, select, search, category);
+		ArrayList<ShopDTO> shops = shopMapper.shopData(begin, end, select, search, category);
 		int totalCount = shopMapper.count(select, search, category);
 		String url = page+"?select="+select+"&search="+search+"&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);

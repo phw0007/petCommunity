@@ -116,10 +116,6 @@ public class MemberController {
 	public String info() {
 		return "mall/info";
 	}
-	@GetMapping("shopping")
-	public String shopping() {
-		return "mall/shopping";
-	}
 
 	@PostMapping("updateProc")
 	public String updateProc(MemberDTO member, String confirm) {

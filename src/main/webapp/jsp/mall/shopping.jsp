@@ -20,15 +20,15 @@
     <li>ㅣ</li>
     <li><a href="food" style="${food}">사료</a></li>
     <li>ㅣ</li>
-    <li><a href="snack">간식</a></li>
+    <li><a href="snack" style="${snack}">간식</a></li>
     <li>ㅣ</li>
-    <li><a href="cloths">의류</a></li>
+    <li><a href="cloths" style="${cloths}">의류</a></li>
     <li>ㅣ</li>
-    <li><a href="medi">약품</a></li>
+    <li><a href="medi" style="${medi}">약품</a></li>
     <li>ㅣ</li>
-    <li><a href="pad">배변패드</a></li>
+    <li><a href="pad" style="${pad}">배변패드</a></li>
     <li>ㅣ</li>
-    <li><a href="living">생활용품</a></li>
+    <li><a href="living" style="${living}">생활용품</a></li>
   </ul>
   
   <div class="shoppingList">

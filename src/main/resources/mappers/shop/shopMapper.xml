@@ -68,8 +68,9 @@
 	  			AND category like ('%' ||  #{category} || '%')
 	  		</when>
 	  		<otherwise>
-	  			SELECT count(product) FROM project_shop WHERE company like ('%' ||  #{search} || '%') AND category like ('%' ||  #{category} || '%') or
-	  			product like ('%' ||  #{search} || '%') AND category like ('%' ||  #{category} || '%') or pay like ('%' ||  #{search} || '%') 
+	  			SELECT count(product) FROM project_shop WHERE company like ('%' ||  #{search} || '%') 
+	  			AND category like ('%' ||  #{category} || '%') or product like ('%' ||  #{search} || '%') 
+	  			AND category like ('%' ||  #{category} || '%') or pay like ('%' ||  #{search} || '%') 
 	  			AND category like ('%' ||  #{category} || '%')
 	  		</otherwise>
 		</choose>

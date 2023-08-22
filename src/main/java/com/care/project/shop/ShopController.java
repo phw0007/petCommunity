@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class ShopController {
 	@Autowired private ShopService service;
 
-	@RequestMapping({"/shopping", "/food"})
+	@RequestMapping({"/shopping", "/food", "/snack", "/cloths", "/medi", "/pad", "/living"})
 	public String shopping(@RequestParam(value="currentPage", required = false)String cp,
 			String select, String search, Model model, HttpServletRequest request) {
 		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
@@ -22,12 +22,26 @@ public class ShopController {
 		if("/shopping".equals(requestUrl)) {
 			page = "shopping";
 			category = "";
-			model.addAttribute("shopping","border-bottom: 3px solid #FFEDA1;");
 		}else if("/food".equals(requestUrl)) {
 			page = "food";
 			category = "사료";
-			model.addAttribute("food","border-bottom: 3px solid #FFEDA1;");
+		}else if("/snack".equals(requestUrl)) {
+			page = "snack";
+			category = "간식";
+		}else if("/cloths".equals(requestUrl)) {
+			page = "cloths";
+			category = "의류";
+		}else if("/medi".equals(requestUrl)) {
+			page = "medi";
+			category = "약품";
+		}else if("/pad".equals(requestUrl)) {
+			page = "pad";
+			category = "배변패드";
+		}else {
+			page = "living";
+			category = "생활용품";
 		}
+		model.addAttribute(page,"border-bottom: 3px solid #FFEDA1;");
 		service.shop(cp, select, search, model, category, page);
 		return "mall/shopping";
 	}

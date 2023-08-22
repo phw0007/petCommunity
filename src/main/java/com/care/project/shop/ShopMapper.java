@@ -10,7 +10,7 @@ import com.care.project.ashop.AShopDTO;
 @Mapper
 public interface ShopMapper {
 
-	ArrayList<AShopDTO> shopData(@Param("begin")int begin, @Param("end")int end, 
+	ArrayList<ShopDTO> shopData(@Param("begin")int begin, @Param("end")int end, 
 			@Param("select")String select, @Param("search")String search, @Param("category")String category);
 
 	int count(@Param("select")String select, @Param("search")String search, @Param("category")String category);
