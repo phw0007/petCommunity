@@ -22,19 +22,21 @@ public class photoService {
 	@Autowired private HttpSession session;
 	
 	public String photoWriteProc(MultipartHttpServletRequest multi){
-			
+		
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.isEmpty()) {
+			return "로그인";
+		}
 		
 		photoDTO photo = new photoDTO();
-	//	photo.setNickname(multi.getParameter("nickname"));
-	//	System.out.println(multi.getParameter("nickname"));
-		photo.setCategory(multi.getParameter("category"));
+		photo.setId(id);
 		
+		photo.setCategory(multi.getParameter("category"));
 		photo.setTitle(multi.getParameter("title"));
 		photo.setContent(multi.getParameter("content"));
 		SimpleDateFormat sdfDate  = new SimpleDateFormat("yyyy-MM-dd");
 		photo.setWrite_date(sdfDate .format(new Date()));
 		photo.setFile_name("");
-		System.out.println(multi.getParameter("category"));
 		  List<MultipartFile> files = multi.getFiles("upfile"); // 여러 개의 파일 가져오기
 		    List<String> savedFileNames = new ArrayList<>(); // 저장된 파일명들을 담을 리스트
 
@@ -83,8 +85,8 @@ public class photoService {
 		photo.setHits(photo.getHits()+1);
 		incHit(photo.getNo());
 		
-		System.out.println("board.getFileName() : " + photo.getFile_name());
-		System.out.println("board.getFileName() : " + photo.getFile_name().isEmpty());
+		System.out.println(" photo.getFile_name() : " + photo.getFile_name());
+		System.out.println(" photo.getFile_name() : " + photo.getFile_name().isEmpty());
 		if(photo.getFile_name() != null && photo.getFile_name().isEmpty() == false) {
 			String fn = photo.getFile_name();
 			String[] fileName = fn.split("-", 2);
@@ -138,6 +140,7 @@ public class photoService {
 		model.addAttribute("select", select);
 		model.addAttribute("search", search);
 	}
+	
 	
 	
 }

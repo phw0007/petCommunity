@@ -21,7 +21,7 @@
   	<selectKey order="BEFORE" keyProperty="no" resultType="int">
 			SELECT nvl(max(no),0) + 1 FROM project_photo
 		</selectKey>
-		INSERT INTO project_photo VALUES(#{no},  #{category}, #{title}, #{content}, #{file_name}, #{write_date} )
+		INSERT INTO project_photo VALUES(#{no}, #{id}, #{category}, #{title}, #{content}, #{file_name}, #{write_date} )
   </insert>
 	
 	<select id="photo" resultMap="photoDto">
