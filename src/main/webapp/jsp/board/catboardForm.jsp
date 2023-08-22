@@ -35,15 +35,15 @@
 				<th width="50">추천수</th>
 				<th width="50">조회수</th>	
 			</tr>
-			<c:forEach var="freeboard" items="${boards}" varStatus="status">
+			<c:forEach var="board" items="${boards}" varStatus="status">
 		
 				<tr>
 					<td>${totalCount - ((currentPage-1) * 10 + status.index)}</td>
-					<td onclick="location.href='boardContent?no=${freeboard.no}&category=${freeboard.category}'">${freeboard.title }</td>
-					<td>${freeboard.id }</td>
-					<td>${freeboard.writeDate }</td>
-					<td>${freeboard.likes }</td>
-					<td>${freeboard.hits }</td>
+					<td onclick="location.href='boardContent?no=${board.no}&category=${board.category}&cp=${currentPage }'">${board.title }</td>
+					<td>${board.id }</td>
+					<td>${board.writeDate }</td>
+					<td>${board.likes }</td>
+					<td>${board.hits }</td>
 				</tr>
 			</c:forEach>
 		</table>

@@ -159,14 +159,15 @@ public class BoardController {
 		if(id == null || id.isEmpty()) {
 			return "redirect:login";
 		}
-		
+		System.out.println(board.getCategory());
 		String result = service.boardModifyProc(board);
+		String category=board.getCategory();
+		int no=board.getNo();
 		if(result.equals("게시글 수정 완료")) {
-			return "redirect:boardContent?num="+board.getNo();
+			return "forward:boardContent?no="+no;
 		}
 		return "board/freeboardForm"; // 실패했을 때 게시글 수정하는 자리로 간다고 하면, board/boardModify가 될 수 없음(보드에 들어갈 내용이 없으니까. redirect로 가야 함)
 	}
-	
 	@RequestMapping("boardDeleteProc")
 	public String boardDeleteProc(@RequestParam(value="no", required = false)String n) {
 		String msg = service.boardDeleteProc(n);
@@ -174,18 +175,13 @@ public class BoardController {
 			return "redirect:login";
 		
 		if(msg.equals("작성자만 삭제 할 수 있습니다.")) {
-			System.out.println("게시글 번호 : " + n);
-			return "forward:boardContent";
+			String alert="작성자만 삭제할 수 있습니다.";
+			return "redirect:login";
 		}
 		
 		return "redirect:freeboardForm";
 	}
 	
-	@PostMapping("boardLikeProc")
-	public String boardLikeProc(@RequestParam(value="no", required = false)String n) {
-		
-		return "redirect:boardContent";
-	}
 	
 	@ResponseBody
 	@PostMapping(value = "uploadImage2", produces = "text/plain; charset=utf-8")
@@ -224,13 +220,14 @@ public class BoardController {
 	}
 	
 	   @PostMapping("clickLike")
-	   public String clickLikeButton(String selectedValues, Model model) {
+	   public String clickLikeButton(String selectedValues, Model model,HttpServletRequest request) {
 		   
 		   System.out.println(selectedValues);
 	      String url = service.boardLikeButton(selectedValues);
 	      if(url.equals("로그인이 필요합니다.")) {
 	    	  model.addAttribute("errorMessage", "로그인이 필요한 작업입니다."); // 에러 메시지 모델에 추가
-	    	  return "redirect:freeboardForm";
+	    	  String referer = request.getHeader("Referer");
+	    	    return "redirect:"+ referer;
 	      }
 	      System.out.println(url);
 	      return "forward:boardContent?"+url;
