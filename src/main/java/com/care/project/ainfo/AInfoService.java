@@ -150,6 +150,7 @@ public class AInfoService {
 			}
 		}
 	}
+	
 	public void ainfoData(String cp, String name, String category, String address, Model model) {
 		int currentPage = 1;
 		try{

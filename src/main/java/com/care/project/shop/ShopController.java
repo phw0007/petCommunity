@@ -45,4 +45,10 @@ public class ShopController {
 		service.shop(cp, select, search, model, category, page);
 		return "mall/shopping";
 	}
+	
+	@RequestMapping("shopLink")
+	public String shopLink() {
+		return "mall/shopLink";
+	}
+	
 }
