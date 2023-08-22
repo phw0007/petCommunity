@@ -35,8 +35,11 @@
 			</ul>
 		</div>
 		<div class="memberInfo">
-			<p><textarea class="siteInfo01" style="border:1px solid #000;">안녕하세요</textarea></p>
-			<p><input type="button" value="수정완료" class="siteUpdateBtn" onclick="location.href='site02'"/></p>
+			<form action="siteUpdateProc2" method="post">
+				<p><textarea class="siteInfo01" name="content" style="border:1px solid #000;">${siteInfo}</textarea></p>
+				<p><input type="button" value="취소" class="siteUpdateBtn" onclick="history.back()" style="margin-left:20px; margin-right:20px;"/></p>
+				<p><input type="submit" value="수정완료" class="siteUpdateBtn"/></p>
+			</form>
 		</div>
 	</div>
 </div>

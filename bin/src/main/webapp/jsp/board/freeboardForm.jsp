@@ -13,7 +13,7 @@
 		<ul>
 			<li><a href="location.href=''">공지사항</a></li>
 			<li><a href="location.href='freeboardForm'">자유게시판</a></li>
-			<li><a href="location.href=''">Q&A</a></li>
+			<li><a href="location.href='qnaoardForm'">Q&A</a></li>
 			<li><a href="location.href=''">강아지</a></li>
 			<li><a href="location.href=''">고양이</a></li>
 			<li><a href="location.href=''">파충류</a></li>
@@ -39,7 +39,7 @@
 		
 				<tr>
 					<td>${totalCount - ((currentPage-1) * 10 + status.index)}</td>
-					<td onclick="location.href='boardContent?no=${freeboard.no}&category=${freeboard.category}'">${freeboard.title }</td>
+					<td onclick="location.href='boardContent?no=${freeboard.no}&category=${freeboard.category}&cp=${currentPage }'">${freeboard.title }</td>
 					<td>${freeboard.id }</td>
 					<td>${freeboard.writeDate }</td>
 					<td>${freeboard.likes }</td>
@@ -47,12 +47,45 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<span>${result }</span>
+		<div class="result">${result }</div>
+		 <div class="searchBoard">
+	   <form action="boardSearch">
+		<!--  <select name="select" style="width:100px; height:30px;font-family:'Poor Story';">
+			<option value="" >전체</option>
+			<option value="id">아이디</option>
+			<option value="title">제목</option>
+		</select> <input type="text" name=search style="width:500px; height:30px;"> 
+		<input type="submit" value="검색" style="width:100px; height:30px; font-family:'Poor Story';background:#fcd11e;">-->
+					<select name="select" class="search">
+						<c:choose>
+							<c:when test="${select == 'title'}">
+								<option value="">전체</option>
+								<option value="title" selected="selected">제목</option>
+								<option value="id">작성자</option>
+							</c:when>
+							<c:when test="${select == 'id'}">
+								<option value="">전체</option>
+								<option value="title">제목</option>
+								<option value="id" selected="selected">작성자</option>
+							</c:when>
+							<c:otherwise>
+								<option value="">전체</option>
+								<option value="title">제목</option>
+								<option value="id">작성자</option>
+							</c:otherwise>
+						</c:choose>
+					</select>
+					<input type="text" name="search" style="width:500px; height:30px;" value="${search}"> 
+		<input type="submit" value="검색" style="width:100px; height:30px; font-family:'Poor Story';background:#fcd11e;">
+	</form>
+	</div>
 	<form>
 		<button class="writeB" type="button"
 			onclick="location.href='boardWrite'">글쓰기</button>
 	</form>
+	
 	</div>
+	
 
 </div>
 
