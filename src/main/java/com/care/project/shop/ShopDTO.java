@@ -18,7 +18,8 @@ primary key(no)
 	private String category;
 	private String product;
 	private String company;
-	private String pay;
+	private int pay;
+	private String shopPay;
 	private int inventory;
 	private String imageFile;
 	private String info;
@@ -30,7 +31,6 @@ primary key(no)
 	private String payCheck;
 	private String orderCount;
 	private String writeDate;
-	
 	public int getNo() {
 		return no;
 	}
@@ -55,11 +55,17 @@ primary key(no)
 	public void setCompany(String company) {
 		this.company = company;
 	}
-	public String getPay() {
+	public int getPay() {
 		return pay;
 	}
-	public void setPay(String pay) {
+	public void setPay(int pay) {
 		this.pay = pay;
+	}
+	public String getShopPay() {
+		return shopPay;
+	}
+	public void setShopPay(String shopPay) {
+		this.shopPay = shopPay;
 	}
 	public int getInventory() {
 		return inventory;
@@ -127,5 +133,5 @@ primary key(no)
 	public void setWriteDate(String writeDate) {
 		this.writeDate = writeDate;
 	}
-	
+
 }
