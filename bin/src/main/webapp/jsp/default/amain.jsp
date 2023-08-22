@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -29,7 +28,7 @@
 			<ul>
 				<c:forEach var="board" items="${boards}">
 					<li><span>${board.category}</span><span style="overflow: hidden; text-overflow: ellipsis;white-space: nowrap; width: 360px;">${board.title}</span>
-					<span style="float: right; text-align: right;">${board.writeDate}</span></li>
+					<span style="float: right; text-align: right; width: 120px;">${board.writeDate}</span></li>
 				</c:forEach>
 			</ul>
 		</div>
