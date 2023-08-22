@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url="/header" />
@@ -5,9 +6,6 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 </style>
-
-
-
 
 <div class="userInfo">
 	<h1>마이 페이지 </h1>
@@ -36,11 +34,6 @@
 	    </div>
 	    <hr>
 
-	
-	
-	
-	
-	
 	<div class="album" align="right">
 	    <input type="button" value="더보기>" onclick="location.href='photoAlbum'" style="background: none; border: none; font-family: 'Poor Story', cursive; 
           cursor: pointer; font-size:20px; margin: 20px 0 20px 0;"><br>
@@ -58,31 +51,6 @@
 	<div class="basket">
 	</div>
 	    
-	   
-	    
-	
 </div>	
 
 <c:import url="/footer"/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
