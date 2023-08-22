@@ -56,8 +56,8 @@ public class AShopController {
 	}
 	
 	@RequestMapping("ashopUpdate")
-	public String ashop_update(String selectedValues, Model model, String pay) {
-		service.ashopUpdate(pay, selectedValues, model);
+	public String ashop_update(String selectedValues, Model model, String shopPay) {
+		service.ashopUpdate(shopPay, selectedValues, model);
 		return "ashop/ashopUpdate";
 	}
 	
