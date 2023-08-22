@@ -4,32 +4,70 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.care.project.home.photoMapper">
-	<resultMap type="com.care.project.home.photoDTO" id="photoDto">
-		<id column="no" property="no"/>
-		<result column="id" property="id"/>
-		<result column="nickname" property="nickname"/>
-		<result column="title" property="title"/>
-		<result column="content" property="content"/>
-		<result column="file_name" property="fileName"/>
-		<result column="write_date" property="writeDate"/>
-		<result column="hits" property="hits"/>
-		<result column="likes" property="likes"/>
-	</resultMap>
+   <resultMap type="com.care.project.home.photoDTO" id="photoDto">
+      <id column="no" property="no"/>
+      <result column="id" property="id"/>
+      <result column="nickname" property="nickname"/>
+      <result column="title" property="title"/>
+      <result column="content" property="content"/>
+      <result column="file_name" property="fileName"/>
+      <result column="write_date" property="writeDate"/>
+      <result column="hits" property="hits"/>
+      <result column="likes" property="likes"/>
+   </resultMap>
 
-	
+   
   <insert id="photoWriteProc">
-  	<selectKey order="BEFORE" keyProperty="no" resultType="int">
-			SELECT nvl(max(no),0) + 1 FROM project_board
-		</selectKey>
-		INSERT INTO project_board VALUES(#{no}, #{category}, #{title}, #{content}, #{file_name}, #{write_date} )
+     <selectKey order="BEFORE" keyProperty="no" resultType="int">
+         SELECT nvl(max(no),0) + 1 FROM project_photo
+      </selectKey>
+      INSERT INTO project_photo VALUES(#{no}, #{id}, #{category}, #{title}, #{content}, #{fileName}, #{writeDate} )
   </insert>
-	
-	<select id="photo" resultMap="photoDto">
-		SELECT * FROM project_board WHERE no=#{no}
-	</select>
-	
-</mapper>
+   
+   <select id="photo" resultMap="photoDto">
+      SELECT * FROM project_photo WHERE no=#{no}
+   </select>
+   
+   <select id="getAllPhotos" resultType="com.care.project.home.photoDTO">
+      SELECT * FROM project_photo ORDER BY no DESC
+    </select>
+    
+<!--     <select id="getAllImages" resultType="com.care.project.home.photoDTO">
+        SELECT no, category, title, content, file_name, write_date FROM project_photo
+    </select>
+   -->
 
+   <!-- SELECT 문을 정의합니다. -->
+
+   <select id="photoData" resultMap="photoDto">
+      <choose>
+         <when test="select == 'id'">
+            SELECT AAA.* FROM 
+            (SELECT rownum as rn, no, id, category, title, content, file_name
+            , write_date, hits, likes FROM project_photo WHERE id like ('%' ||  #{search} || '%'))AAA 
+            WHERE AAA.rn BETWEEN #{begin} AND #{end}
+         </when>
+         <otherwise>
+            SELECT AAA.* FROM 
+            (SELECT rownum as rn, no, id, category, title, content, file_name
+            , write_date, hits, likes FROM project_photo WHERE id like ('%' ||  #{search} || '%'))AAA 
+            WHERE AAA.rn BETWEEN #{begin} AND #{end}
+         </otherwise>
+      </choose>
+   </select>
+   
+   <select id="count">
+      <choose>
+           <when test="select == 'id'">
+              SELECT count(id) FROM project_photo WHERE id like ('%' ||  #{search} || '%')
+           </when>
+           <otherwise>
+              SELECT count(id) FROM project_photo WHERE id like ('%' ||  #{search} || '%')
+           </otherwise>
+      </choose>
+   </select>
+   
+</mapper>
 
 
 
