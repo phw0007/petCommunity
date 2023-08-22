@@ -19,15 +19,45 @@
 	
   <insert id="photoWriteProc">
   	<selectKey order="BEFORE" keyProperty="no" resultType="int">
-			SELECT nvl(max(no),0) + 1 FROM project_board
+			SELECT nvl(max(no),0) + 1 FROM project_photo
 		</selectKey>
-		INSERT INTO project_board VALUES(#{no}, #{category}, #{title}, #{content}, #{file_name}, #{write_date} )
+		INSERT INTO project_photo VALUES(#{no}, #{id}, #{category}, #{title}, #{content}, #{file_name}, #{write_date} )
   </insert>
 	
 	<select id="photo" resultMap="photoDto">
-		SELECT * FROM project_board WHERE no=#{no}
+		SELECT * FROM project_photo WHERE no=#{no}
 	</select>
 	
+	<select id="getAllPhotos" resultType="com.care.project.home.photoDTO">
+      SELECT * FROM project_photo ORDER BY no DESC
+    </select>
+	 
+<!--  	<select id="getAllImages" resultType="com.care.project.home.photoDTO">
+        SELECT no, category, title, content, file_name, write_date FROM project_photo
+    </select>
+	-->
+	
+	<select id="getAllImages" resultType="com.care.project.home.photoDTO">
+        SELECT * FROM project_photo
+    </select>
+
+	<!-- SELECT 문을 정의합니다. -->
+     <select id="photoData" parameterType="map" resultType="com.care.project.home.photoDTO">
+        SELECT *
+        FROM project_photo
+        WHERE category = #{select}
+        AND (title LIKE '%' || #{search} || '%' OR content LIKE '%' || #{search} || '%')
+        ORDER BY no DESC
+        OFFSET #{begin} ROWS FETCH NEXT #{pageBlock} ROWS ONLY
+    </select>
+
+    <select id="count" parameterType="map" resultType="int">
+        SELECT COUNT(*)
+        FROM project_photo
+        WHERE category = #{select}
+        AND (title LIKE '%' || #{search} || '%' OR content LIKE '%' || #{search} || '%')
+    </select>
+
 </mapper>
 
 

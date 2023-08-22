@@ -1,3 +1,4 @@
+photo
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -14,20 +15,21 @@
 </head>
 <body>
 	<div class="boardContent">
-		<h1>카테고리</h1>
+		<h1>${photo.category} </h1>
 		<p><span>제목</span>${photo.title} </p> 
-		<p><span>작성자</span>${photo.nickname}</p>
+		<p><span>작성자</span>${photo.id}</p>
 		<p><span>작성일</span>${photo.write_date}</p>
 		
 		<div class="seeboard">
-			
+			<img alt="photoImg/${photo.file_name}" width="210" height="220" src=photoImg/${photo.file_name}>
+			<br>
 			${photo.content}
 			
 			
 		</div>
 		<br>
 		<br>
-		<div class="btnbg"> <!--> 조 추 아이콘 버튼 클릭 <-->
+		<div class="btnbg"> <!-->아이콘 버튼 클릭 <-->
 			<ul>
 				<li></li>
 			</ul>
@@ -52,4 +54,3 @@
 
 </body>
 </html>
-<c:import url="/footer" />

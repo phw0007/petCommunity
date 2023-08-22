@@ -1,3 +1,4 @@
+ photo
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -37,19 +38,26 @@
 			
 		</ul>
 		<br>
+		
 		<ul class="contentWeb">
+		<c:forEach var="photo" items="${photos}" >
 			<li>
 				<div class="liweb">
-					<div class="lititle">${nickname }  ${write_date}</div>
-					<div class="liimg"><a href="#"><img alt="이미지" src="/image/logo2.png" width="210" height="220"></a></div>
-					<div class="licont"><a href="#">${title} </a></div>
+					<div class="lititle">${photo.id} &nbsp;&nbsp;  ${photo.write_date}</div>
+					<div class="liimg"><a href='photoContent?no=${photo.no}'><img alt="photoImg/${photo.file_name}" width="210" height="220" src=photoImg/${photo.file_name}></a></div>
+					"${photoContent?no=${photo.no}} "
+					<div class="licont"><a href="#">${photo.title} </a></div>
 					<div class="liicon">
 						<p class="see"><span class="material-symbols-outlined">visibility</span>&nbsp; ${hits} </p>
 						<p class="favorite"><span class="material-symbols-outlined">favorite</span>&nbsp; ${likes}</p>
 						<p class="comment"><span class="material-symbols-outlined">comment</span>&nbsp; ${0}</p>
 					</div>
 				</div>
+				</c:forEach>
 			</li>
+			
+			<br>
+		
 			
 			
 		</ul>
@@ -69,13 +77,13 @@
 			<button id="goWrite" onclick="location.href='photoWrite'">글쓰기</button>
 		</div>
 		
-		<table>
-			<tr>
-				<td colspan="4">${result }</td>
-			</tr>
-		</table>
+		
 	</div>
 	
+<!-- <div> ${result}	</div> -->	
+
+	
+	
+
 </body>
 </html>
-<c:import url="/footer" />
