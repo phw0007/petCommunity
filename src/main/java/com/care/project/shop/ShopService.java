@@ -41,7 +41,6 @@ public class ShopService {
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		for(int i = 0; i < shops.size(); i++) {
 			String pay = forematter.format(shops.get(i).getPay());
-			System.out.println(pay);
 			shops.get(i).setShopPay(pay);
 		}
 		no = (currentPage-1)*14;
