@@ -15,15 +15,15 @@
 <body>
 <c:import url="/aheader" />
 <div class="member">
-	<div class="member_item">
+	<div class="memberItem">
 		<h3>반려앨범 관리</h3>
 		<ul>
 			<li><a href="aphoto" style="font-weight: bold;">게시글 목록</a></li>
-			<li><a href="aphoto_delete">게시글 삭제</a></li>
+			<li><a href="aphotoDelete">게시글 삭제</a></li>
 		</ul>
 	</div>
-	<div class="member_main">
-		<div class="member_title">
+	<div class="memberMain">
+		<div class="memberTitle">
 			<p>게시글 목록</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
@@ -33,7 +33,7 @@
 				<li><a href="aphoto">게시글 목록</a></li>
 			</ul>
 		</div>
-		<div class="member_info">
+		<div class="memberInfo">
 			<table>
 				<thead>
 			    	<tr>
@@ -47,30 +47,54 @@
 			    	</tr>
 			    </thead>
 			    <tbody>
-			    	<tr onclick="location.href='aphoto_views'">
-			    		<td>1</td>
-			    		<td>강아지</td>
-			    		<td>안녕하세요</td>
-			    		<td>관리자</td>
-			    		<td>0</td>
-			    		<td>0</td>
-			    		<td>2023-07-26</td>
-			    	</tr>
+			    	<c:forEach var="photo" items="${photos}">
+						<tr onclick="location.href='aphotoViews?id=${photo.id}&category=${photo.category}&no=${photo.no}&currentPage=${currentPage}'">
+							<td>${no=no+1}</td>
+							<td>${photo.category }</td>
+							<td>${photo.title }</td>
+							<td>${photo.id }</td>
+							<td>${photo.likes }</td>
+							<td>${photo.hits }</td>
+							<td>${photo.writeDate }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
 			</table>
 		</div>
-		<div class="member_search">
-			<a href=""><</a><a href="">1</a><a href="">></a>
-			<div class="select_search">
-				<form action="memberSelect">
-					<select name="select" class="select_option">
-						<option value="">전체</option>
-						<option value="id">아이디</option>
-						<option value="name">사용자명</option>
-						<option value="address">주소</option>
-						<option value="mobile">전화번호</option>
+		<div class="memberSearch">
+			<div> ${result}	</div>
+			<div class="selectSearch">
+				<form action="aboard">
+					<select name="select" class="selectOption">
+						<c:choose>
+							<c:when test="${select == 'category'}">
+								<option value="">전체</option>
+								<option value="category" selected="selected">게시판명</option>
+								<option value="title">제목</option>
+								<option value="id">작성자</option>
+							</c:when>
+							<c:when test="${select == 'title'}">
+								<option value="">전체</option>
+								<option value="category">게시판명</option>
+								<option value="title" selected="selected">제목</option>
+								<option value="id">작성자</option>
+							</c:when>
+							<c:when test="${select == 'id'}">
+								<option value="">전체</option>
+								<option value="category">게시판명</option>
+								<option value="title">제목</option>
+								<option value="id" selected="selected">작성자</option>
+							</c:when>
+							<c:otherwise>
+								<option value="">전체</option>
+								<option value="category">게시판명</option>
+								<option value="title">제목</option>
+								<option value="id">작성자</option>
+							</c:otherwise>
+						</c:choose>
 					</select>
-					<input type="text" name="search" class="search_option"/>
-					<input type="submit" value="검색" class="submit_option"/>
+					<input type="text" name="search" class="searchOption" value="${search}"/>
+					<input type="submit" value="검색" class="submitOption"/>
 				</form>
 			</div>
 		</div>

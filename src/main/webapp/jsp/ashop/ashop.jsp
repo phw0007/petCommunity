@@ -13,20 +13,26 @@
 <title>index</title>
 </head>
 <body>
+<c:if test="${msg != null}">
+	<script>
+		window.confirm('${msg}')
+		location.href = "ashop";
+	</script>
+</c:if>
 <c:import url="/aheader" />
 <div class="member">
-	<div class="member_item">
+	<div class="memberItem">
 		<h3>쇼핑몰 관리</h3>
 		<ul>
 			<li><a href="ashop" style="font-weight: bold;">상품 목록</a></li>
-			<li><a href="ashop_register">상품 등록</a></li>
-			<li><a href="ashop_delete">등록상품 삭제</a></li>
-			<li><a href="ashop_order">주문 목록</a></li>
-			<li><a href="ashop_order_del">주문 취소</a></li>
+			<li><a href="ashopRegister">상품 등록</a></li>
+			<li><a href="ashopDelete">등록상품 삭제</a></li>
+			<li><a href="ashopOrder">주문 목록</a></li>
+			<li><a href="ashopOrderDel">주문 취소</a></li>
 		</ul>
 	</div>
-	<div class="member_main">
-		<div class="member_title">
+	<div class="memberMain">
+		<div class="memberTitle">
 			<p>상품 목록</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
@@ -36,7 +42,7 @@
 				<li><a href="ashop">상품 목록</a></li>
 			</ul>
 		</div>
-		<div class="member_info">
+		<div class="memberInfo">
 			<table>
 				<thead>
 			    	<tr>
@@ -49,28 +55,53 @@
 			    	</tr>
 			    </thead>
 			    <tbody>
-			    	<tr onclick="location.href='ashop_info'">
-			    		<td>1</td>
-			    		<td>애견사료</td>
-			    		<td>아투</td>
-			    		<td>성견용 사료</td>
-			    		<td>43,000</td>
-			    		<td>10</td>
-			    	</tr>
+			    	<c:forEach var="shop" items="${shops}">
+						<tr onclick="location.href='ashopInfo?name=${shop.product}&category=${shop.category}&company=${shop.company}&currentPage=${currentPage }'">
+							<td>${no=no+1}</td>
+							<td>${shop.category }</td>
+							<td>${shop.company }</td>
+							<td>${shop.product }</td>
+							<td>${shop.shopPay}</td>
+							<td>${shop.inventory }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
 			</table>
 		</div>
-		<div class="member_search">
-			<a href=""><</a><a href="">1</a><a href="">></a>
-			<div class="select_search">
-				<form action="memberSelect">
-					<select name="select" class="select_option">
-						<option value="">전체</option>
-						<option value="id">상품분류</option>
-						<option value="name">판매업체</option>
-						<option value="address">상품명</option>
+		<div class="memberSearch">
+			<div> ${result}	</div>
+			<div class="selectSearch">
+				<form action="ashop">
+					<select name="select" class="selectOption">
+						<c:choose>
+							<c:when test="${select == 'category'}">
+								<option value="">전체</option>
+								<option value="category" selected="selected">상품분류</option>
+								<option value="company">판매업체</option>
+								<option value="product">상품명</option>
+							</c:when>
+							<c:when test="${select == 'company'}">
+								<option value="">전체</option>
+								<option value="category">상품분류</option>
+								<option value="company" selected="selected">판매업체</option>
+								<option value="product">상품명</option>
+							</c:when>
+							<c:when test="${select == 'product'}">
+								<option value="">전체</option>
+								<option value="category">상품분류</option>
+								<option value="company">판매업체</option>
+								<option value="product" selected="selected">상품명</option>
+							</c:when>
+							<c:otherwise>
+								<option value="">전체</option>
+								<option value="category">상품분류</option>
+								<option value="company">판매업체</option>
+								<option value="product">상품명</option>
+							</c:otherwise>
+						</c:choose>
 					</select>
-					<input type="text" name="search" class="search_option"/>
-					<input type="submit" value="검색" class="submit_option"/>
+					<input type="text" name="search" class="searchOption" value="${search}"/>
+					<input type="submit" value="검색" class="submitOption"/>
 				</form>
 			</div>
 		</div>

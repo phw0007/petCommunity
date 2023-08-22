@@ -1,0 +1,7 @@
+@charset "UTF-8";
+ul,li{list-style:none;}
+a{text-decoration:none; color:black;}
+.shopping{width:800px; margin:0 auto; padding-top:100px;
+      font-family: 'Poor Story';}
+.shopTopLift {float: left;}
+.shopTopRight {float:right;}

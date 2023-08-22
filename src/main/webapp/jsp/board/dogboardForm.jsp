@@ -39,7 +39,7 @@
 		
 				<tr>
 					<td>${totalCount - ((currentPage-1) * 10 + status.index)}</td>
-					<td onclick="location.href='boardContent?no=${board.no}&category=${board.category}'">${board.title }</td>
+					<td onclick="location.href='boardContent?no=${board.no}&category=${board.category}&cp=${currentPage }'">${board.title }</td>
 					<td>${board.id }</td>
 					<td>${board.writeDate }</td>
 					<td>${board.likes }</td>

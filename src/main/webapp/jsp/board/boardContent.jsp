@@ -103,9 +103,7 @@ function commentDeleteProc(url, selectedValues, commentId) {
         <!-- 파일이 없을 때는 아무것도 출력하지 않음 -->
     </c:when>
     <c:otherwise>
-		<c:forEach items="${board.fileName}" var="fileName">
-    <img id="img" src="/image/${fileName}" alt="petImage" /><br>
-</c:forEach>
+        <img id="img" src="/image/${board.fileName}" alt="petImage" />
 
     </c:otherwise>
 </c:choose>

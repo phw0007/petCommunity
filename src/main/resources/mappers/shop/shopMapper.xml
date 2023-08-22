@@ -3,8 +3,78 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.care.amember.MemberMapper">
+<mapper namespace="com.care.project.shop.ShopMapper">
+	<resultMap type="com.care.project.shop.ShopDTO" id="shopDto">
+		<id column="no" property="no"/>
+		<result column="category" property="category"/>
+		<result column="product" property="product"/>
+		<result column="company" property="company"/>
+		<result column="pay" property="pay"/>
+		<result column="inventory" property="inventory"/>
+		<result column="image_file" property="imageFile"/>
+		<result column="info" property="info"/>
+		<result column="id" property="id"/>
+		<result column="user_name" property="userName"/>
+		<result column="address" property="address"/>
+		<result column="mobile" property="mobile"/>
+		<result column="pay_type" property="payType"/>
+		<result column="pay_check" property="payCheck"/>
+		<result column="order_count" property="orderCount"/>
+		<result column="write_date" property="writeDate"/>
+	</resultMap>
 	
+		<select id="shopData" resultMap="shopDto">
+		<choose>
+			<when test="select == 'company'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, category, product, company, pay, inventory
+				, image_file, info FROM project_shop WHERE company like ('%' ||  #{search} || '%') 
+				AND category like ('%' ||  #{category} || '%'))AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<when test="select == 'product'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, category, product, company, pay, inventory
+				, image_file, info FROM project_shop WHERE product like ('%' ||  #{search} || '%') 
+				AND category like ('%' ||  #{category} || '%'))AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<when test="select == 'pay'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, category, product, company, pay, inventory
+				, image_file, info FROM project_shop WHERE pay like ('%' ||  #{search} || '%') 
+				AND category like ('%' ||  #{category} || '%'))AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<otherwise>
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, category, product, company, pay, inventory
+				, image_file, info FROM project_shop WHERE company like ('%' ||  #{search} || '%') AND category like ('%' ||  #{category} || '%') or
+				product like ('%' ||  #{search} || '%') AND category like ('%' ||  #{category} || '%') or pay like ('%' ||  #{search} || '%') 
+				AND category like ('%' ||  #{category} || '%'))AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="count">
+		<choose>
+	  		<when test="select == 'company'">
+	  			SELECT count(product) FROM project_shop WHERE company like ('%' ||  #{search} || '%') 
+	  			AND category like ('%' ||  #{category} || '%')
+	  		</when>
+	  		<when test="select == 'product'">
+	  			SELECT count(product) FROM project_shop WHERE product like ('%' ||  #{search} || '%') 
+	  			AND category like ('%' ||  #{category} || '%')
+	  		</when>
+	  		<when test="select == 'pay'">
+	  			SELECT count(product) FROM project_shop WHERE pay like ('%' ||  #{search} || '%') 
+	  			AND category like ('%' ||  #{category} || '%')
+	  		</when>
+	  		<otherwise>
+	  			SELECT count(product) FROM project_shop WHERE company like ('%' ||  #{search} || '%') 
+	  			AND category like ('%' ||  #{category} || '%') or product like ('%' ||  #{search} || '%') 
+	  			AND category like ('%' ||  #{category} || '%') or pay like ('%' ||  #{search} || '%') 
+	  			AND category like ('%' ||  #{category} || '%')
+	  		</otherwise>
+		</choose>
+	</select>
 	
 </mapper>
 

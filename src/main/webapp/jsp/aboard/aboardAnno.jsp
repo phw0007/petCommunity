@@ -50,7 +50,7 @@
 			    </thead>
 			    <tbody>
 					<c:forEach var="board" items="${boards}">
-						<tr onclick="location.href='aboardViews?id=${board.id}&category=${board.category}&no=${board.no}&currentPage=${currentPage }'">
+						<tr onclick="location.href='aboardAnnoViews?id=${board.id}&category=${board.category}&no=${board.no}&currentPage=${currentPage }'">
 							<td>${no=no+1}</td>
 							<td>${board.category }</td>
 							<td>${board.title }</td>
@@ -88,8 +88,7 @@
 					</select>
 					<input type="text" name="search" class="searchOption" value="${search}"/>
 					<input type="submit" value="검색" class="submitOption"/>
-					<input type="button" value="글쓰기" class="selectEnd" onclick="location.href='aboardAnno'"
-					style="float: right;"/>
+					<input type="button" value="글쓰기" class="deleteOption" onclick="location.href='aboardAnnoRegister'"/>
 				</form>
 			</div>
 		</div>

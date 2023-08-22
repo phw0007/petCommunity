@@ -37,9 +37,7 @@ function getDeleteBoard(url, selectedValues) {
 	   	data.setAttribute('value', selectedValues); // 데이터의 value (여기서는 data1)
 	
 	    form.appendChild(data);
-		
 	    document.body.appendChild(form);
-	
 	    form.submit();      
 	}
 }
@@ -75,7 +73,9 @@ function getDeleteBoard(url, selectedValues) {
 				<li><span>추천수</span>${board.likes }</li>
 				<li><span>내용</span>
 					<div class="content">
-						<img src=${board.fileName } alt="pet" width=140px height=200px/><br>
+						<c:if test="${board.fileName != null}">
+							<img src=${board.fileName } alt="pet" width=140px height=200px/><br>
+						</c:if>
 						${board.content }
 					</div>
 				</li>

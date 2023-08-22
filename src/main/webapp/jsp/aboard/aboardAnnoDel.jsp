@@ -13,6 +13,7 @@
 <title>index</title>
 </head>
 <body>
+<script src="/dbQuiz.js"></script>
 <c:import url="/aheader" />
 <div class="member">
 	<div class="memberItem">
@@ -50,32 +51,47 @@
 			    	</tr>
 			    </thead>
 			    <tbody>
-			    	<tr>
-			    		<td>1</td>
-			    		<td>강아지</td>
-			    		<td>안녕하세요</td>
-			    		<td>관리자</td>
-			    		<td>0</td>
-			    		<td>0</td>
-			    		<td>2023-07-26</td>
-			    		<td><input type="checkbox" ></td>
-			    	</tr>
+			    	<c:forEach var="board" items="${boards}">
+						<tr>
+							<td>${no=no+1}</td>
+							<td>${board.category }</td>
+							<td>${board.title }</td>
+							<td>${board.id }</td>
+							<td>${board.hits }</td>
+							<td>${board.likes }</td>
+							<td>${board.writeDate }</td>
+							<td><input type="checkbox" class="member-checkbox" value="${board.no},${board.id},${board.category}"></td>
+						</tr>
+					</c:forEach>
+				</tbody>
 			</table>
 		</div>
 		<div class="memberSearch">
-			<a href=""><</a><a href="">1</a><a href="">></a>
+			<div> ${result}	</div>
 			<div class="selectSearch">
-				<form action="memberSelect">
+				<form action="aboardAnno">
 					<select name="select" class="selectOption">
-						<option value="">전체</option>
-						<option value="id">아이디</option>
-						<option value="name">사용자명</option>
-						<option value="address">주소</option>
-						<option value="mobile">전화번호</option>
+						<c:choose>
+							<c:when test="${select == 'title'}">
+								<option value="">전체</option>
+								<option value="title" selected="selected">제목</option>
+								<option value="id">작성자</option>
+							</c:when>
+							<c:when test="${select == 'id'}">
+								<option value="">전체</option>
+								<option value="title">제목</option>
+								<option value="id" selected="selected">작성자</option>
+							</c:when>
+							<c:otherwise>
+								<option value="">전체</option>
+								<option value="title">제목</option>
+								<option value="id">작성자</option>
+							</c:otherwise>
+						</c:choose>
 					</select>
-					<input type="text" name="search" class="searchOption"/>
+					<input type="text" name="search" class="searchOption" value="${search}"/>
 					<input type="submit" value="검색" class="submitOption"/>
-					<input type="button" value="삭제" class="deleteOption" onclick="location.href='delete'"/>
+					<input type="button" value="삭제" class="deleteOption" onclick="getBoardAnnoDeleteCheckboxes()"/>
 				</form>
 			</div>
 		</div>

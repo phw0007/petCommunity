@@ -449,6 +449,7 @@ public class BoardService {
 	}
 	
 	public String boardModifyProc(BoardDTO board) {
+		
 		if(board.getTitle() == null || board.getTitle().isEmpty())
 			return "제목을 입력하세요.";
 		
@@ -622,7 +623,6 @@ public class BoardService {
 	
 
 }
-
 
 
 

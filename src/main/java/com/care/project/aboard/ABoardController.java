@@ -26,59 +26,87 @@ public class ABoardController {
 		service.aboard(cp, select, search, model, requestUrl);
 		if("/aboard".equals(requestUrl)) {
 			return "aboard/aboard";
-		}else if("/aboardDelete".equals(requestUrl)){
-			return "aboard/aboardDelete";
 		}else {
-			return "aboard/aboardAnnoDel";
+			return "aboard/aboardDelete";
 		}
+
 	}
 
 	@RequestMapping("aboardViews")
-	public String aboard_views(String id, String category, int no, Model model,
+	public String aboardViews(String id, String category, int no, Model model,
 			@RequestParam(value="currentPage", required = false)String cp) {
 		service.aboardInfo(id, category, no, model, cp);	
 		return "aboard/aboardViews";
 	}	
 	
 	/*체크된 게시글 삭제*/
-	@PostMapping("boardDelete")
-	public String boardDelete(String selectedValues) {
+	@RequestMapping({"/boardDelete", "/boardAnnoDelete", "/boardDeleteButton", "/boardAnnoDeleteButton"})
+	public String boardDelete(String selectedValues, HttpServletRequest request) {
+		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		service.boardDelete(selectedValues);
-		return "redirect:aboardDelete";
+		if("/boardDelete".equals(requestUrl)) {
+			return "redirect:aboardDelete";
+		}else if("/boardAnnoDelete".equals(requestUrl)){
+			return "redirect:aboardAnnoDel";
+		}else if("/boardDeleteButton".equals(requestUrl)) {
+			return "redirect:aboard";
+		}else {
+			return "redirect:aboardAnno";
+		}
 	}
-	
-	/*삭제버튼 클릭시 삭제*/
-	@PostMapping("boardDeleteButton")
-	public String boardDeleteButton(String selectedValues) {
-		service.boardDelete(selectedValues);
-		return "redirect:aboard";
-	}
-	
-	/*삭제버튼 클릭시 삭제*/
-	@PostMapping("boardDeleteComment")
-	public String boardDeleteComment(String selectedValues) {
+		
+	/*댓글 삭제버튼 클릭시 삭제*/
+	@RequestMapping({"/boardDeleteComment", "/boardAnnoDeleteComment"})
+	public String boardDeleteComment(String selectedValues, HttpServletRequest request) {
+		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		String url = service.boardDeleteComment(selectedValues);
-		return "forward:aboardViews?"+url;
+		if("/boardDeleteComment".equals(requestUrl)) {
+			return "forward:aboardViews?"+url;
+		}else {
+			return "forward:aboardAnnoViews?"+url;
+		}
 	}
 	
-	@RequestMapping("aboardAnno")
-	public String aboardAnno() {
-		return "aboard/aboardAnno";
+	@RequestMapping({"/aboardAnno", "/aboardAnnoDel"})
+	public String aboardAnno(@RequestParam(value="currentPage", required = false)String cp,
+		String select, String search, Model model, HttpServletRequest request) {
+		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		service.aboardAnno(cp, select, search, model, request);
+		if("/aboardAnno".equals(requestUrl)) {
+			return "aboard/aboardAnno";
+		}else {
+			return "aboard/aboardAnnoDel";
+		}
 	}
 	
 	@RequestMapping("aboardAnnoViews")
-	public String aboardAnnoViews() {
+	public String aboardAnnoViews(String id, String category, int no, Model model,
+			@RequestParam(value="currentPage", required = false)String cp) {
+		service.aboardInfo(id, category, no, model, cp); 
 		return "aboard/aboardAnnoViews";
 	}
 	
-	@RequestMapping("aboardAnnoDel")
-	public String aboardAnnoDel() {
-		return "aboard/aboardAnnoDel";
-	}
-	
 	@RequestMapping("aboardAnnoUpdate")
-	public String aboardAnnoUpdate() {
+	public String aboardAnnoUpdate(String selectedValues, Model model) {
+		service.aboardAnnoUpdate(selectedValues, model);
 		return "aboard/aboardAnnoUpdate";
 	}
-
+	
+	@RequestMapping("aboardAnnoUpdateProc")
+	public String aboardAnnoUpdateProc(String no, String id, String title, String text) {
+		service.aboardAnnoUpdate(no, id, title, text);
+		return "redirect:aboardAnno";
+	}
+	
+	@RequestMapping("aboardAnnoRegister")
+	public String aboardAnnoRegister() {
+		return "aboard/aboardAnnoRegister";
+	}
+	
+	@RequestMapping("aboardAnnoRegisterProc")
+	public String aboardAnnoRegisterProc(String id, String title, String text) {
+		service.aboardAnnoRegister(id, title, text);
+		return "redirect:aboardAnno";
+	}
+	
 }

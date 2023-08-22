@@ -28,8 +28,8 @@ public class MailService {
 			return "이메일 주소가 잘못된 주소입니다.";
 		} catch(Exception e) {
 			e.printStackTrace();
-			return "전송 중 문제가 발생했네요. 관리자에게 문의하세요;;";
+			return "전송 중 문제가 발생했네요. 관리자에게 문의하세요";
 		}
-		return "입력한 이메일에서 인증번호를 확인하세요 쫌";
+		return "입력한 이메일에서 인증번호를 확인하세요";
 	}
 }

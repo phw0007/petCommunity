@@ -12,6 +12,61 @@
 <title>index</title>
 </head>
 <body>
+<script>
+function getBoardAnnoUpdateButton() {
+	let selectedValues = ['${board.id}','${board.title}','${board.writeDate}','${board.content}','${board.no}'];
+	url="aboardAnnoUpdate";
+	getUpdateBoard(url, selectedValues);
+}
+
+function getBoardAnnoDeleteButton() {
+	let selectedValues = ['${board.no}','${board.id}','${board.category}'];
+	url="boardAnnoDeleteButton";
+	getDeleteBoard(url, selectedValues);
+}
+
+function getDoardAnnoDeleteComment(writeDate) {
+	let selectedValues = ['${board.no}','${board.id}','${board.category}','${cp}',writeDate];
+	url="boardAnnoDeleteComment";
+	getDeleteBoard(url, selectedValues);
+}
+
+function getDeleteBoard(url, selectedValues) {
+	if (window.confirm("정말로 삭제하시겠습니까?")) {
+		const form = document.createElement('form'); // form 태그 생성
+		form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
+		form.setAttribute('action', url); // 전송할 url 지정
+	    
+		const data = document.createElement('input'); // input 태그 생성
+		data.setAttribute('type', 'hidden'); // type = hidden
+		data.setAttribute('name', 'selectedValues'); // 데이터의 key
+		data.setAttribute('value', selectedValues); // 데이터의 value (여기서는 data1)
+	
+		form.appendChild(data);
+		
+		document.body.appendChild(form);
+	
+		form.submit();      
+	}
+}
+
+function getUpdateBoard(url, selectedValues) {
+	const form = document.createElement('form'); // form 태그 생성
+	form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
+	form.setAttribute('action', url); // 전송할 url 지정
+		    
+	const data = document.createElement('input'); // input 태그 생성
+	data.setAttribute('type', 'hidden'); // type = hidden
+	data.setAttribute('name', 'selectedValues'); // 데이터의 key
+	data.setAttribute('value', selectedValues); // 데이터의 value (여기서는 data1)
+		
+	form.appendChild(data);
+			
+	document.body.appendChild(form);
+		
+	form.submit();      
+}
+</script>
 <c:import url="/aheader" />
 	<div class="member">
 	<div class="memberItem">
@@ -43,7 +98,7 @@
 				<li><span>추천수</span>${board.likes }</li>
 				<li><span>내용</span>
 					<div class="AnnoContent">
-						<textarea></textarea>
+						<textarea readonly="readonly">${board.content }</textarea>
 					</div>
 				</li>
 				<c:choose>
@@ -55,7 +110,7 @@
 								<div class="comment">
 									<ul>
 										<li><span>작성자</span>${comment.commentId }</li>
-										<li><span>작성일</span>${comment.writeDate }<input type="button" value="X" onclick="getDeleteBoardComment('${comment.writeDate}')"/></li>
+										<li><span>작성일</span>${comment.writeDate }<input type="button" value="X" onclick="getDoardAnnoDeleteComment('${comment.writeDate}')"/></li>
 									</ul>
 									<p><span>댓글내용</span><textarea readonly="readonly">${comment.commentContent }</textarea></p>
 								</div>
@@ -65,8 +120,8 @@
 				</c:choose>
 				<li>
 					<input type="button" value="확인" class="selectEnd" onclick="location.href='aboardAnno'" style="margin-left:20px; margin-right:40px;"/>
-					<input type="button" value="삭제" class="aboardDelete" onclick="location.href=''" style="margin-left:20px;"/>
-					<input type="button" value="수정" class="aboardAnnoUpdate" onclick="location.href='aboardAnnoUpdate'"/>
+					<input type="button" value="삭제" class="aboardDelete" onclick="getBoardAnnoDeleteButton()" style="margin-left:20px;"/>
+					<input type="button" value="수정" class="aboardAnnoUpdate" onclick="getBoardAnnoUpdateButton()"/>
 				</li>
 			</ul>
 		</div>
