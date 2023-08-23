@@ -14,6 +14,7 @@
 </head>
 <body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script>
 function execDaumPostcode() {
 	new daum.Postcode({
@@ -50,25 +51,29 @@ var IMP = window.IMP;
 IMP.init("imp07740386");
 
 function requestPay() {
-  IMP.request_pay(
+	let mobile = document.getElementById('mobile');
+	let postcode = document.getElementById('postcode');
+	let address = document.getElementById('address');
+	let detailAddress = document.getElementById('detailAddress');
+	IMP.request_pay(
     {
-      pg: "html5_inicis.INIBillTst",
-      pay_method: "card", // 생략가
-      merchant_uid: "order_no_0002", // 상점에서 생성한 고유 주문번호
-      name: "주문명:결제테스트",
-      amount: 1004,
-      buyer_email: "test@portone.io",
-      buyer_name: "구매자이름",
-      buyer_tel: "010-1234-5678",
-      buyer_addr: "서울특별시 강남구 삼성동",
-      buyer_postcode: "123-456",
+		pg: "kcp.A52CY",
+		pay_method: "card", // 생략가
+		merchant_uid: "order_no_0003", // 상점에서 생성한 고유 주문번호
+		name: "결제테스트",
+		amount: '${totalPay}',                         // 숫자 타입
+		buyer_email: '${user.email }',
+		buyer_name: '${user.userName }',
+		buyer_tel: mobile.value,
+		buyer_addr: address.value + detailAddress.value,
+		buyer_postcode: postcode.value,
     },
     function (rsp) {
 		rsp => {
 			if (rsp.success) {   
     		// axios로 HTTP 요청
     			axios({
-    				url: "https://api.iamport.kr",
+    				url: "callback",
     			    method: "post",
     			    headers: { "Content-Type": "application/json" },
     			    data: {
@@ -120,13 +125,13 @@ function requestPay() {
 			</thead>
 			<tbody>
 				<tr>
-					<td>1</td>
-					<td><img src="/image/pet.jpg" alt="pet" width=100px height=100px/></i></td>
-					<td>강아지사료</td>
-					<td>사료업체</td>
-					<td>1</td>
-					<td>3,000</td>
-					<td>40,000</td>
+					<td>${number=number+1}</td>
+					<td><img src="${product.imageFile}" alt="pet" width=100px height=100px/></i></td>
+					<td>${product.product}</td>
+					<td>${product.company}</td>
+					<td>${num}</td>
+					<td>${shippingFee }</td>
+					<td>${productAllPay }</td>
 				</tr>
 			</tbody>
 		</table>
@@ -137,7 +142,7 @@ function requestPay() {
 		<p>배송지정보</p>
 			<ul>
 				<li><span>수령인</span>
-					<input type="text" id="name" name="name" value="홍길동">
+					<input type="text" id="name" name="name" placeholder="홍길동">
 				</li>
 				<li><span>연락처</span>
 					<input type="text" id="mobile" name="mobile" placeholder="-없이 숫자만 입력" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
@@ -175,9 +180,9 @@ function requestPay() {
 		<div class="shopAddressRight">
 		<p>주문자 정보</p>
 			<ul>
-				<li>홍길동</li>
-				<li>010-1234-5678</li>
-				<li>adimn@naver.com</li>
+				<li>${user.userName }</li>
+				<li>${user.mobile }</li>
+				<li>${user.email }</li>
 			</ul>
 		</div>
 	</div>
@@ -196,10 +201,10 @@ function requestPay() {
 		<div class="paymentRight">
 			<p>결제상세</p>
 			<ul>
-				<li><span>상품금액</span>30,500</li>
-				<li><span>배송비용</span>3,000</li>
-				<li><span>주문금액</span>33,500</li>
-				<li><input type="button" value="결제하기"></li>
+				<li><span>상품금액</span>${productPay }</li>
+				<li><span>배송비용</span>${shippingFee }</li>
+				<li><span>주문금액</span>${shippingPay }</li>
+				<li><input type="button" value="결제하기" onclick="requestPay()"></li>
 			</ul>
 		</div>
 	</div>

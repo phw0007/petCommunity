@@ -1,18 +1,26 @@
 package com.care.project.shop;
 
+import java.text.DecimalFormat;
+import java.util.Map;
+
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.HandlerMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ShopController {
 	@Autowired private ShopService service;
-
+	@Autowired private HttpSession session;
 	@RequestMapping({"/shopping", "/food", "/snack", "/cloths", "/medi", "/pad", "/living"})
 	public String shopping(@RequestParam(value="currentPage", required = false)String cp,
 			String select, String search, Model model, HttpServletRequest request) {
@@ -63,14 +71,23 @@ public class ShopController {
 	}
 	
 	@RequestMapping("shopBuy")
-	public String shopBuy(String productPrice, String productId, String quantity) {
-		int pay = Integer.parseInt(productPrice);
-		int num = Integer.parseInt(quantity);
-		System.out.println(productPrice);
-		System.out.println(productId);
-		System.out.println(quantity);
-		System.out.println(pay*num);
+	public String shopBuy(String productPrice, String productId, String quantity, Model model) {
+		String id = (String)session.getAttribute("id");
+		if (id == null || id.isEmpty()) {
+			return "redirect:login";
+		}
+		service.getProduct(productPrice, productId, quantity, id, model);
 		return "mall/shopBuy";
 	}
 	
+//	@RequestMapping(value="callback", produces = "application/text; charset=utf8")
+//	public void callback(@RequestParam(required = false) String imp_uid) {
+//	
+//	}
+	@RequestMapping("callback")
+	public void callback(@RequestBody Map<String, Object> model) {
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "application/json; charset=UTF-8");
+		JSONObject responseObj = new JSONObject();
+	}
 }

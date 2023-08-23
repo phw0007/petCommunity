@@ -24,10 +24,4 @@ public interface MemberMapper {
 	ArrayList<MemberDTO> memberInfo(@Param("begin")int begin, @Param("end")int end, @Param("select")String select, @Param("search")String search);
 	int count(@Param("select")String select, @Param("search")String search);
 
-
-	
-
 }
-
-	
-
