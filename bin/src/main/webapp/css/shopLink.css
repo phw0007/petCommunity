@@ -1,0 +1,23 @@
+@charset "UTF-8";
+ul,li{list-style:none;}
+a{text-decoration:none; color:black;}
+.shopping{width:1000px; margin:0 auto; padding-top:100px; font-family: 'Poor Story';  text-align: center;}
+.shopping h1{width: 1000px; font-size: 32px; border-bottom: 2px solid #fcd11e; padding-bottom: 20px;}
+.shopTop{height: 500px; display: block;}
+.shopTopLift {float: left; width: 460px; padding: 20px;}
+.shopTopRight {float:right; width: 460px; padding: 20px;}
+.shopTopRight > p{font-size: 28px; padding-bottom: 10px; margin: 0; border-bottom: 2px solid #ddd;}
+.shopTopRight tr th{font-size: 22px; width: 120px; padding: 10px;}
+.shopTopRight tr td{font-size: 22px; width: 120px; text-align: center; padding-bottom: 10px;}
+
+.shopBottom > p{font-size: 28px; width:1000px; border: 2px solid #fcd11e; padding: 10px;
+border-left: 0; border-right: 0; }
+
+.shopbottom{height: 500px;}
+.shopBottomLift {float: left; width: 498px; text-align: left; font-size: 20px; margin-top: 20px; 
+padding-top: 10px; padding-bottom: 20px; border-right: 2px solid #000;}
+.shopBottomLift ul li{border-bottom: 2px solid #000; border-top: 0; padding: 10px; margin-right: 30;}
+.shopBottomLift span{display:inline-block; width: 140px;}
+.shopBottomRight {float:right; width: 460px; margin-top: 20px; padding: 20px;}
+.shopBottomRight p{font-size: 24px; font-weight: bold; padding-bottom: 15px;}
+.shopBottomRight div{text-align:left; font-size: 20px; padding-bottom: 10px;}

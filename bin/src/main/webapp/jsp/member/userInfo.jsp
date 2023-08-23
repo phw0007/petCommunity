@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url="/header" />
@@ -6,6 +5,9 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 </style>
+
+
+
 
 <div class="userInfo">
 	<h1>마이 페이지 </h1>
@@ -24,8 +26,9 @@
 	            <li>전화번호 <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1;">${member.mobile }</span></li>
 	        </ul>
 	        <ul class="ownerRight">
-	            <li>주소 &nbsp; &nbsp; <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1;">${member.address }</span></li>
+	            <li>주소 &nbsp; &nbsp; <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${member.address }</span></li>
 	            <li>아이디 <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1;">${member.id }</span></li>
+	            <li>이메일 ${member.email }</li>
 	        </ul>
 	    </div>
 	    <div class="infoButton" align="center">
@@ -34,6 +37,11 @@
 	    </div>
 	    <hr>
 
+	
+	
+	
+	
+	
 	<div class="album" align="right">
 	    <input type="button" value="더보기>" onclick="location.href='photoAlbum'" style="background: none; border: none; font-family: 'Poor Story', cursive; 
           cursor: pointer; font-size:20px; margin: 20px 0 20px 0;"><br>
@@ -51,6 +59,31 @@
 	<div class="basket">
 	</div>
 	    
+	   
+	    
+	
 </div>	
 
 <c:import url="/footer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

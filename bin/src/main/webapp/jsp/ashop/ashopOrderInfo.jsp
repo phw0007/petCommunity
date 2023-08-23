@@ -107,7 +107,7 @@ function getDeleteShop(url, selectedValues) {
 				    		<td>${list.category}</td>
 				    		<td>${list.company}</td>
 				    		<td>${list.product}</td>
-				    		<td>${list.pay}</td>
+				    		<td>${list.shopPay}</td>
 				    		<td>${list.orderCount}</td>
 				    	</tr>
 				    </c:forEach>

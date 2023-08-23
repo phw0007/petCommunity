@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 
@@ -22,4 +21,8 @@
       <li><a href="${context }Terms">이용약관</a></li>
    </ul>
    <p>이메일무단수집거부 문의 : DDobongjagyu@naver.com Copyrightⓒ 2023 Creature all rights reserved</p>
+
+
+
+
 </div>
