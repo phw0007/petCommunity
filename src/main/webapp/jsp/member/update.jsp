@@ -10,6 +10,7 @@
 	<h1>회원 수정</h1>
 	<table ><tr><td>
 	<form action="updateProc" method="post" id="f">
+	<h5>프로필 사진</h5><input type="file" id="fileImg" name="petFile" onchange="fileURL()" value="${sessionScope.petFile}" style="background-color: none; font-family: 'Poor Story', cursive; margin-bottom:30px;" accept="image/*"/><br>
 		<input type="text" value="${sessionScope.id }" id="id" placeholder="아이디" style="width: 308px; height: 30px; font-family: 'Poor Story', cursive; background-color: #FFEDA1; border:none; margin-bottom: 20px;"> <br>
 		<input type="password" name="pw" id="pw" placeholder="비밀번호" style="width: 308px; height: 30px; font-family: 'Poor Story', cursive; background-color: #FFEDA1; border:none; margin-bottom: 20px;"><br>
 		<input type="password" name="confirm"  id="confirm"
@@ -29,6 +30,7 @@
          <option value="소동물">소동물</option>
          <option value="기타동물">기타동물</option>
 		</select><br>
+		
 		
 		
 		<input type="button" value="수정" onclick="allCheck()" style="margin-left: 50px; margin-top: 30px; background-color: #FFEDA1; width:100px; height:30px; border: 1px solid #000000; cursor: pointer;">

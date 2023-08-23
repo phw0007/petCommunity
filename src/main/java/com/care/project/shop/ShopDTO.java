@@ -1,6 +1,6 @@
-package com.care.project.ashop;
+package com.care.project.shop;
 
-public class AShopDTO {
+public class ShopDTO {
 /*
 CREATE TABLE project_shop(
 no number,

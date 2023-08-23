@@ -61,7 +61,7 @@
 							<td>${shop.category }</td>
 							<td>${shop.company }</td>
 							<td>${shop.product }</td>
-							<td>${shop.pay }</td>
+							<td>${shop.shopPay}</td>
 							<td>${shop.inventory }</td>
 						</tr>
 					</c:forEach>

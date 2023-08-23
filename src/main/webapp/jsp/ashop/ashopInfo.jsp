@@ -17,7 +17,7 @@
 function ashopUpdateButton() {
 	let selectedValues = ['${shop.no}','${shop.category}','${shop.product}','${shop.company}',
 		'${shop.inventory}','${shop.imageFile}','${shop.info}'];
-	url="ashopUpdate?pay=${shop.pay}";
+	url="ashopUpdate?shopPay=${shop.shopPay}";
     const form = document.createElement('form'); // form 태그 생성
     form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
     form.setAttribute('action', url); // 전송할 url 지정
@@ -92,7 +92,7 @@ function getDeleteShop(url, selectedValues) {
 					<li><span>상품 이름</span>${shop.product}</li>
 					<li><span>상품 분류</span>${shop.category }</li>
 					<li><span>판매 업체</span>${shop.company }</li>
-					<li><span>상품 가격</span>${shop.pay }</li>
+					<li><span>상품 가격</span>${shop.shopPay }</li>
 					<li><span>재고</span>${shop.inventory }</li>
 				</ul>
 			</div>

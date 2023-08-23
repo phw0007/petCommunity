@@ -3,7 +3,7 @@
 .petInfo {width: 500px; height:200px; float: left; overflow: hidden;  border-right: 1px solid #9a9a9a;}
 .ownerInfo {width:680px; height:200px; float: right;}
 
-.petInfo a{float: left; width: 120px; height: 150px; background-color: #FFEDA1; margin-top: 25px; margin-right: 70px;}
+.petInfo a{float: left;  margin-top: 25px; margin-right: 70px;}
 .petInfo p span {margin-left: 10px;}
 .petInfo2 h5{font-size: 18px; margin-left: 10px;}
 
@@ -21,9 +21,21 @@
 
 
 .infoButton button {margin-top: 80px; margin-bottom: 80px; background-color: #FFEDA1; width: 80px; height: 30px; border: 1px solid #000000; margin-right: 30px;}
+.infoButton button:first-child {margin-left: 40px;}
 
 .album h6{font-size: 20px;}
 .album {margin-bottom: 100px;}
+
+.out ul li{margin-bottom: 200px; list-style: none; margin-top: 40px; background-color: #FFEDA1; width: 120px; height: 25px; margin-left: -25px;  border: 1px solid #000000;}
+.out ul li a {color:black; font-size: 20px; text-decoration: none; text-align: center;}
+
+
+.basket{margin-top:50px; margin-bottom:50px;}
+.basket > ul{font-size:0; }
+.basket > ul li{width:200px; height:300px; background: #FFEDA1;
+                      display:inline-block; font-size:20px; margin-right:50px;margin-bottom:50px; margin-top: 50px; text-decoration: none;}
+
+
 
 
 

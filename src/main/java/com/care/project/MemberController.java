@@ -27,10 +27,6 @@ public class MemberController {
 		return "member/index";
 	}
 
-	@RequestMapping("index2")
-	public String index2() {
-		return "member/index2";
-	}
 
 	@RequestMapping("header")
 	public String header() {
@@ -46,11 +42,29 @@ public class MemberController {
 	public String footer() {
 		return "default/footer";
 	}
+	
+	@RequestMapping("index2")
+	public String index2() {
+	    // 세션에서 아이디 정보를 가져와서 로그인 상태 확인
+	    String id = (String) session.getAttribute("id");
+	    if (id == null) {
+	        return "redirect:login"; // 로그인되지 않은 상태라면 로그인 페이지로 리다이렉트
+	    }
+	    return "member/index2";
+	}
+	
+	
+	
+	
 
-	/* http://localhost:8086/dbQuiz/login */
 	@GetMapping("login")
 	public String login() {
-		return "member/login";
+	    // 로그인 상태를 확인하여 리다이렉트할 페이지를 결정합니다.
+	    if (session.getAttribute("id") != null) {
+	        return "redirect:index2"; // 이미 로그인한 경우 index2.jsp로 리다이렉트
+	    } else {
+	        return "member/login"; // 로그인하지 않은 경우 login.jsp로 이동
+	    }
 	}
 
 	@PostMapping("mloginProc")
@@ -83,7 +97,7 @@ public class MemberController {
 	@RequestMapping("logout")
 	public String logout() {
 		session.invalidate();
-		return "forward:index";
+		return "forward:login";
 	}
 
 	@RequestMapping("userInfo")
@@ -98,6 +112,20 @@ public class MemberController {
 		}
 		model.addAttribute("member", member);
 		return "member/userInfo";
+	}
+	
+	@RequestMapping("basket")
+	public String basket(String id, @RequestParam(value = "currentPage", required = false) String cp, Model model) {
+
+		if (session.getAttribute("id") == null) {
+			return "redirect:login";
+		}
+		MemberDTO member = service.userInfo(id);
+		if (member == null) {
+			return "redirect:memberInfo?currentPage=" + cp;
+		}
+		model.addAttribute("member", member);
+		return "mall/basket";
 	}
 
 	@GetMapping("update")
@@ -116,10 +144,7 @@ public class MemberController {
 	public String info() {
 		return "mall/info";
 	}
-	@GetMapping("shopping")
-	public String shopping() {
-		return "mall/shopping";
-	}
+
 
 	@PostMapping("updateProc")
 	public String updateProc(MemberDTO member, String confirm) {
@@ -135,6 +160,7 @@ public class MemberController {
 		return "member/update";
 
 	}
+	
 
 	@GetMapping("delete")
 	public String delete() {
