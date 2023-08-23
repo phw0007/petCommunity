@@ -62,4 +62,15 @@ public class ShopController {
 	    return "mall/shopIn"; // 상세 페이지 JSP 파일의 이름을 반환합니다.
 	}
 	
+	@RequestMapping("shopBuy")
+	public String shopBuy(String productPrice, String productId, String quantity) {
+		int pay = Integer.parseInt(productPrice);
+		int num = Integer.parseInt(quantity);
+		System.out.println(productPrice);
+		System.out.println(productId);
+		System.out.println(quantity);
+		System.out.println(pay*num);
+		return "mall/shopBuy";
+	}
+	
 }

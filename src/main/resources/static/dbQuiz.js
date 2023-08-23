@@ -19,7 +19,6 @@ function allCheck(){
    }
 }
 
-
 function pwCheck(){
 	let pw = document.getElementById('pw');
 	confirm = document.getElementById('confirm');
