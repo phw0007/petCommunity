@@ -16,6 +16,7 @@ a{text-decoration:none; color:black;}
 .infoButton{font-size:18px;margin-left:750px;}
 .infoButton > a{border:1px solid black; padding:5px 5px;}
 .serch{margin-left:150px;}
+.result{text-align:center;font-size:18px;text-decoration:none; color:black;}
 
 /*쇼핑몰 shopping*/
 .shopping{margin:0 auto; width:1200px;padding-top:100px; padding-bottom:50px; font-size:26px; font-family:'Poor Story';}
@@ -24,7 +25,7 @@ a{text-decoration:none; color:black;}
 .shopping > ul li {display:inline-block; font-size:25px;}
 .shopping > ul li a{padding:10px 40px;}
 .shopping > ul li a:hover{border-bottom:3px solid #FFEDA1;}
-.result{text-align:center;font-size:18px;text-decoration:none; color:black;}
+
 
 
 .serch{margin-top: 10px;}

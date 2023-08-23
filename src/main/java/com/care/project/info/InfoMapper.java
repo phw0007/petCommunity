@@ -10,12 +10,13 @@ import com.care.project.ainfo.AInfoDTO;
 @Mapper
 public interface InfoMapper {
 
-	ArrayList<AInfoDTO> InfoData(@Param("begin")int begin, @Param("end")int end, 
-			@Param("select")String select, @Param("search")String search);
+	ArrayList<InfoDTO> InfoData(@Param("begin")int begin, @Param("end")int end, 
+			@Param("select")String select, @Param("search")String search,@Param("category")String category);
 
 	int hoscount(@Param("select")String select, @Param("search")String search);
 
-	ArrayList<AInfoDTO> minfoCheck();
+	ArrayList<InfoDTO> minfoCheck();
+	int hosinfoCheck(@Param("category")String category);
 
 	void insertInfo(@Param("subjectCategory")String subjectCategory, 
 			@Param("title")String title, @Param("venue")String venue, 

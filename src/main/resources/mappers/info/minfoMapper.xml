@@ -40,11 +40,11 @@
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<otherwise>
-				SELECT AAA.* FROM 
-				(SELECT rownum as rn, category, name, address, home_page, mobile
-				FROM project_info WHERE category like ('%' ||  #{search} || '%') or name like ('%' ||  #{search} || '%') or
-				address like ('%' ||  #{search} || '%') or mobile like ('%' ||  #{search} || '%'))AAA 
-				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			SELECT AAA.*FROM 
+			(SELECT rownum as rn, category, name, address, home_page, mobile
+             FROM project_info WHERE (category like ('%' ||  #{search} || '%') or name like ('%' ||  #{search} || '%') or
+                 address like ('%' ||  #{search} || '%') or mobile like ('%' ||  #{search} || '%'))
+                  AND category =#{category}) AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</otherwise>
 		</choose>
 	</select>
@@ -64,7 +64,7 @@
 	  			SELECT count(name) FROM project_info WHERE mobile like ('%' ||  #{search} || '%')
 	  		</when>
 	  		<otherwise>
-	  			SELECT count(name) FROM project_info WHERE category like ('%' ||  #{search} || '%') or
+	  		SELECT count(category) FROM project_info WHERE category like ('%' ||  #{search} || '%') or
 	  			name like ('%' ||  #{search} || '%') or address like ('%' ||  #{search} || '%') or 
 	  			mobile like ('%' ||  #{search} || '%')
 	  		</otherwise>
@@ -73,6 +73,10 @@
 	
 	<select id="minfoCheck">
 		SELECT * from project_info
+	</select>
+	
+	<select id="hosinfoCheck">
+		SELECT count(no) FROM project_info  WHERE category='동물병원'
 	</select>
 	
 	<!-- <insert id="insertInfo">

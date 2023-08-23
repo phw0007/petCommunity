@@ -30,7 +30,7 @@ public class InfoService {
     @Autowired InfoMapper infoMapper;
     @Autowired HttpSession session;
     
-	public void info(String cp, String select, String search, Model model) {
+	public void info(String cp, String select, String search, Model model,String category) {
 		if(select == null){
 			select = "";
 		}
@@ -51,9 +51,46 @@ public class InfoService {
 		
 		int begin = end - pageBlock + 1; 
 		int no = 0;
-		ArrayList<AInfoDTO> info = infoMapper.InfoData(begin, end, select, search);
-		int totalCount = infoMapper.hoscount(select, search);
-		String url = "InfoSearch?select="+select+"&search="+search+"&currentPage=";
+		ArrayList<InfoDTO> info = infoMapper.InfoData(begin, end, select, search,category);
+	    int totalCount=infoMapper.hosinfoCheck(category);
+		System.out.println("여기서도 나오나?"+category);
+		//int totalCount = infoMapper.hoscount(select, search);
+		String url ="info?select="+select+"&search="+search+"&category="+category+"&currentPage=";
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		no = (currentPage-1)*10;
+		model.addAttribute("info", info);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("no", no);
+		model.addAttribute("select", select);
+		model.addAttribute("search", search);
+	}
+	public void mediinfo(String cp, String select, String search, Model model,String category) {
+		if(select == null){
+			select = "";
+		}
+		
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+			
+		if(search == null) {
+			search = "";
+		}
+	
+		int pageBlock = 10; 
+		int end = pageBlock * currentPage; 
+		
+		int begin = end - pageBlock + 1; 
+		int no = 0;
+		ArrayList<InfoDTO> info = infoMapper.InfoData(begin, end, select, search,category);
+	    int totalCount=infoMapper.hosinfoCheck(category);
+		System.out.println("여기서도 나오나?"+category);
+		//int totalCount = infoMapper.hoscount(select, search);
+		String url ="medicine?select="+select+"&search="+search+"&category="+category+"&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		no = (currentPage-1)*10;
 		model.addAttribute("info", info);
@@ -65,9 +102,11 @@ public class InfoService {
 		
 		
 	}
+	
+	
 	public void xmlInsert() {
 		String[] keywordList = {"동물병원", "동물약국", "학교체육시설", "수영장", "축구장"}; 
-		ArrayList<AInfoDTO> infoList = infoMapper.minfoCheck();
+		ArrayList<InfoDTO> infoList = infoMapper.minfoCheck();
 		if(infoList.isEmpty() == false) {
 			return;
 		}else {
