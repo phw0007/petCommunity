@@ -11,7 +11,7 @@ a{text-decoration:none; color:black;}
 .info ul li> a{padding:5px 40px 5px 40px;}
 .info ul li > a:hover{border-bottom:3px solid #c5b100;}
 
-.infoList ul{border-bottom:1px solid #e6e6e6;}
+
 .infoT th{ background-color:#ffeda1; }
 .infoButton{font-size:18px;margin-left:750px;}
 .infoButton > a{border:1px solid black; padding:5px 5px;}

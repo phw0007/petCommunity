@@ -84,6 +84,9 @@ function commentDeleteProc(url, selectedValues, commentId) {
      if (errorMessage) {
          alert(errorMessage);
      }
+     function goBack() {
+         window.history.back(); // 현재 창의 브라우저 히스토리에서 이전 페이지로 이동
+       }
 </script>
 
 </head>
@@ -103,7 +106,9 @@ function commentDeleteProc(url, selectedValues, commentId) {
         <!-- 파일이 없을 때는 아무것도 출력하지 않음 -->
     </c:when>
     <c:otherwise>
-        <img id="img" src="/image/${board.fileName}" alt="petImage" />
+		<c:forEach items="${board.fileName}" var="fileName">
+    <img id="img" src="/image/${fileName}" alt="petImage" /><br>
+</c:forEach>
 
     </c:otherwise>
 </c:choose>
@@ -112,7 +117,7 @@ function commentDeleteProc(url, selectedValues, commentId) {
 		<div class="likeB"><button class="likes" type="button" onclick="clickLike()"><img src="/image/made.png" alt="하트" style="width:70px; height:70px; ">추천수:<span>${board.likes}</span></button></div>
 	 
 	  <div class="contentB">
-			<button class="Clist" type="button" onclick="location.href='freeboardForm'">목록</button>
+			<button class="Clist" type="button" onclick="goBack()">목록</button>
 			<button class="Cmodify"type="button"
 				onclick="location.href='boardModify?no=${board.no}'">수정</button>
 			<button class="Cdelete" type="button" onclick="deleteCheck()">삭제</button>

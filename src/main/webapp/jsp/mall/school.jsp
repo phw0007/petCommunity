@@ -22,31 +22,29 @@
       <table class="infoT">
       <c:forEach var="useInfo" items="${info }">  
         <tr>
-          <th width="100" height="30" style="background-color:#ffeda1">업체이름</th>
-          <td width="370">${useInfo.name }</td>
-          <th width="100" style="background-color:#ffeda1">홈페이지</th>
-          <td width="370"><a href="${useInfo.homePage }" target="_blanck">홈페이지</a></td>
+          <th width="150" height="30" style="background-color:#ffeda1">업체이름</th>
+          <td width="300">${useInfo.name }</td>
+          <th width="150" style="background-color:#ffeda1">홈페이지</th>
+          <td width="300"><a href="${useInfo.homePage }" target="_blanck">홈페이지</a></td>
         </tr>
          <tr></tr>
          <tr></tr>
-        <tr  style="border-bottom:1px solid #e6e6e6; padding-bottom:15px;">
-         <th width="100"height="30" style="background-color:#ffeda1">업체주소</th>
-          <td width="370">${useInfo.address }</td>
+        <tr>
+         <th width="150"height="30" style="background-color:#ffeda1">업체주소</th>
+          <td>${useInfo.address }</td>
           <th style="background-color:#ffeda1">연락처</th>
-          <td width="370">${useInfo.mobile }</td>
+          <td>${useInfo.mobile }</td>
+      
         </tr>
-          <tr>
-           <td colspan="4" style="border-top:1px solid #e6e6e6; padding-top:5px; padding-bottom:10px;"></td>
-       </tr>
        </c:forEach>
       </table>
-      <!--  <div class="infoButton">
+      <div class="infoButton">
         <a href="${useInfo.homePage }" target="_blanck">홈페이지</a>
            <a href="https://www.instagram.com/myoyeon_catclinic/" target="_blanck">위치보기</a>
-           
-      </div>-->
+      </div>
       </li>
     </ul>
+    
   </div>
 <div class="result">${result }</div>
   <div class="serch">
