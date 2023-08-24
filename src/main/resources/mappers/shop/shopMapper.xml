@@ -43,6 +43,7 @@
 		<result column="shippin_address" property="shippinAddress"/>
 		<result column="shippin_mobile" property="shippinMobile"/>
 		<result column="shippin_memo" property="shippinMemo"/>
+		<result column="order_number" property="orderNumber"/>
 	</resultMap>
 	
 		<select id="shopData" resultMap="shopDto">
@@ -106,7 +107,7 @@
 		<selectKey order="BEFORE" keyProperty="no" resultType="int">
 			SELECT nvl(max(no),0) + 1 FROM project_order
 		</selectKey>
-		INSERT INTO project_order VALUES(#{no}, #{id}, #{userName}, #{address}, #{mobile}, #{writeDate}, #{payType}, #{payCheck}, #{shippinName},#{shippinAddress},#{shippinMobile},#{shippinMemo})
+		INSERT INTO project_order VALUES(#{no}, #{id}, #{userName}, #{address}, #{mobile}, #{writeDate}, #{payType}, #{payCheck}, #{shippinName},#{shippinAddress},#{shippinMobile},#{shippinMemo},#{orderNumber})
 	</insert>
 	
 	<select id="shopOrderDate" resultMap="ashopDto">
@@ -114,6 +115,6 @@
     </select>
     
     <insert id="shippinData">
-		INSERT INTO project_order_list VALUES(#{no}, #{id}, #{writeDate}, #{category}, #{company}, #{product}, #{pay}, #{orderCount})
+		INSERT INTO project_order_list VALUES(#{no}, #{id}, #{category}, #{company}, #{product}, #{pay}, #{orderCount})
 	</insert>
 </mapper>

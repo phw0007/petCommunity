@@ -100,6 +100,7 @@ public class ShopService {
 		String mobile = orderUserData[2];
 		String address = orderUserData[3];
 		String payType = orderUserData[4];
+		String orderNumber = (id+"-"+orderUserData[5]);
 		String payCheck = "확인";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    String writeDate = sdf.format(new Date());
@@ -154,6 +155,7 @@ public class ShopService {
 		System.out.println("주문자 결재날짜 :"+writeDate);
 		
 		System.out.println("=================수령자===================");
+		System.out.println("주문번호 :"+orderNumber);
 		System.out.println("수령자 이름 :"+shippinName);
 		System.out.println("수령자 전화번호 :"+shippinMobile);
 		System.out.println("수령자 주소 :"+shippinAddress);
@@ -184,12 +186,13 @@ public class ShopService {
 		shopDto.setProduct(product);
 		shopDto.setPay(pay);
 		shopDto.setOrderCount(orderCount);
+		shopDto.setOrderNumber(orderNumber);
 		
-//		shopMapper.shopOrder(shopDto);
-//		AShopDTO shopOrderDto = shopMapper.shopOrderDate(writeDate);
-//		int no = shopOrderDto.getNo();
-//		shopDto.setNo(no);
-//		shopMapper.shippinData(shopDto);
+		shopMapper.shopOrder(shopDto);
+		AShopDTO shopOrderDto = shopMapper.shopOrderDate(writeDate);
+		int no = shopOrderDto.getNo();
+		shopDto.setNo(no);
+		shopMapper.shippinData(shopDto);
 
 	}
 

@@ -13,6 +13,10 @@
 <title>index</title>
 </head>
 <body>
+<script
+src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
 <script>
 function orderDeleteButton(no) {
 	let selectedValues = no;
@@ -35,6 +39,21 @@ function getDeleteShop(url, selectedValues) {
 		document.body.appendChild(form);
 		form.submit();     
 	}
+}
+
+function cancelPay() {
+  jQuery.ajax({
+    // 예: http://www.myservice.com/payments/cancel
+    "url": "ashopOrder", 
+    "type": "POST",
+    "contentType": "application/json",
+    "data": JSON.stringify({
+      "merchant_uid": "2023-08-24 17:45:16aaaa", // 예: ORD20180131-0000011
+      "cancel_request_amount": 32970, // 환불금액
+      "reason": "테스트 결제 환불" // 환불사유
+    }),
+    "dataType": "json"
+  });
 }
 </script>
 <c:import url="/aheader" />
@@ -74,7 +93,7 @@ function getDeleteShop(url, selectedValues) {
 				    		<th style="width: 200px;">전화번호</th>
 				    		<th>결재방식</th>
 				    		<th>결재상태</th>
-				    		<th>주문날짜</th>
+				    		<th style="width: 250px;">주문날짜</th>
 				    	</tr>
 				    </thead>
 				    <tbody>
@@ -96,14 +115,16 @@ function getDeleteShop(url, selectedValues) {
 				<table>
 					<thead>
 				    	<tr>
+				    		<th style="width: 200px;">주문번호</th>
 				    		<th style="width: 150px;">수령인</th>
-				    		<th style="width: 800px;">주소</th>
-				    		<th style="width: 200px;">전화번호</th>
+				    		<th style="width: 700px;">주소</th>
+				    		<th style="width: 150px;">전화번호</th>
 				    		<th style="width: 700px;">요청사항</th>
 				    	</tr>
 				    </thead>
 				    <tbody>
 				    	<tr>
+				    		<td>${order.shippinName}</td>
 				    		<td>${order.shippinName}</td>
 				    		<td>${order.shippinAddress}</td>
 				    		<td>${order.shippinMobile}</td>
@@ -140,6 +161,7 @@ function getDeleteShop(url, selectedValues) {
 				</table>
 			</div>
 			<input type="button" value="삭제" class="ashopUpdate" onclick="orderDeleteButton(${order.no})"/>
+			<input type="button" value="주문취소" class="ashopUpdate" onclick="cancelPay()"/>
 			<input type="button" value="확인" class="ashopSelect" onclick="history.back()"/>
 		</div>
 	</div>
