@@ -18,25 +18,25 @@
 			<when test="select == 'category'">
 				SELECT AAA.* FROM 
 				(SELECT rownum as rn, category, name, address, home_page,mobile 
-				FROM project_info WHERE category like ('%' ||  #{search} || '%'))AAA 
+				FROM project_info WHERE category like ('%' ||  #{search} || '%')AND category =#{category})AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'name'">
 				SELECT AAA.* FROM 
 				(SELECT rownum as rn, category, name, address, home_page, mobile 
-				FROM project_info WHERE name like ('%' ||  #{search} || '%'))AAA 
+				FROM project_info WHERE name like ('%' ||  #{search} || '%')AND category =#{category})AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'address'">
 				SELECT AAA.* FROM 
 				(SELECT rownum as rn, category, name, address, home_page, mobile 
-				FROM project_info WHERE address like ('%' ||  #{search} || '%'))AAA 
+				FROM project_info WHERE address like ('%' ||  #{search} || '%')AND category =#{category})AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'mobile'">
 				SELECT AAA.* FROM 
 				(SELECT rownum as rn, category, name, address, home_page, mobile 
-				FROM project_info WHERE mobile like ('%' ||  #{search} || '%'))AAA 
+				FROM project_info WHERE mobile like ('%' ||  #{search} || '%')AND category =#{category})AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<otherwise>

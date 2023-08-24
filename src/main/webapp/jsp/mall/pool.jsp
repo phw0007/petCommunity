@@ -4,6 +4,10 @@
 <link href="/css/mall.css" rel="stylesheet" type="text/css">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+    .infoT {
+    
+      border: 1px solid black; /* 테두리 두께 및 색상 설정 */
+   }
 </style>
 <c:import url = "/header"/>
 
@@ -17,39 +21,30 @@
   </ul>
   
   <div class="infoList">
-    <ul>
-      <li>
-      <table class="infoT">
+      <table class="infoT" > 
       <c:forEach var="useInfo" items="${info }">  
         <tr>
-          <th width="150" height="30" style="background-color:#ffeda1">업체이름</th>
-          <td width="300">${useInfo.name }</td>
-          <th width="150" style="background-color:#ffeda1">홈페이지</th>
-          <td width="300"><a href="${useInfo.homePage }" target="_blanck">홈페이지</a></td>
+          <th width="100" height="10" style="background-color:#ffeda1">업체이름</th>
+          <td width="370">${useInfo.name }</td>
+          <th width="100" style="background-color:#ffeda1">홈페이지</th>
+          <td width="370"><a href="${useInfo.homePage }" target="_blanck">홈페이지</a></td>
         </tr>
-         <tr></tr>
-         <tr></tr>
-        <tr>
-         <th width="150"height="30" style="background-color:#ffeda1">업체주소</th>
-          <td>${useInfo.address }</td>
+        <tr  style="border-bottom:1px solid #e6e6e6; padding-bottom:15px;">
+         <th width="100"height="30" style="background-color:#ffeda1">업체주소</th>
+          <td width="370">${useInfo.address }</td>
           <th style="background-color:#ffeda1">연락처</th>
-          <td>${useInfo.mobile }</td>
-      
+          <td width="370">${useInfo.mobile }</td>
         </tr>
+             <tr>
+           <td colspan="4" style="border-top:1px solid #e6e6e6; padding-top:5px; padding-bottom:10px;"></td>
+       </tr>
        </c:forEach>
       </table>
-      <div class="infoButton">
-        <a href="${useInfo.homePage }" target="_blanck">홈페이지</a>
-           <a href="https://www.instagram.com/myoyeon_catclinic/" target="_blanck">위치보기</a>
-      </div>
-      </li>
-    </ul>
-    
   </div>
 <div class="result">${result }</div>
   <div class="serch">
-	<form action="InfoSearch">
-			<select name="select" class="selectOption" style="width:100px; height:30px;font-family:'Poor Story';">
+	<form action="info">
+			<select name="select" class="selectOption" >
 						<c:choose>
 							<c:when test="${select == 'name'}">
 								<option value="">전체</option>
@@ -81,8 +76,9 @@
 							</c:otherwise>
 						</c:choose>
 					</select>
-					<input type="text" name="search" class="searchOption" value="${search}" style="width:500px; height:30px;"/>
-					<input type="submit" value="검색" class="submitOption" style="width:100px; height:30px; font-family:'Poor Story';background:#fcd11e;"/>
+					<input type="hidden" name="category" value="수영장">
+					<input type="text" name="search" class="searchOption" value="${search}" />
+					<input type="submit" value="검색" class="submitOption" />
 	</form>
 	</div>
 </div>

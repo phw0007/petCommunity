@@ -3,6 +3,7 @@ package com.care.project.info;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.HandlerMapping;
@@ -35,9 +36,34 @@ public class InfoController {
 		service.mediinfo(cp,select,search,model,category);
 		return "mall/medicine";
 	}
+	@RequestMapping("school")
+	public String school(@RequestParam(value="currentPage", required = false)String cp,
+			@RequestParam(value="category", required = false)String category,
+			String select, String search, Model model) {
+		System.out.println(category);
+		service.xmlInsert();
+		service.mediinfo(cp,select,search,model,category);
+		return "mall/school";
+	}
+	@RequestMapping("pool")
+	public String pool(@RequestParam(value="currentPage", required = false)String cp,
+			@RequestParam(value="category", required = false)String category,
+			String select, String search, Model model) {
+		System.out.println(category);
+		service.xmlInsert();
+		service.mediinfo(cp,select,search,model,category);
+		return "mall/pool";
+	}
+	@RequestMapping("soccer")
+	public String soccer(@RequestParam(value="currentPage", required = false)String cp,
+			@RequestParam(value="category", required = false)String category,
+			String select, String search, Model model) {
+		System.out.println(category);
+		service.xmlInsert();
+		service.mediinfo(cp,select,search,model,category);
+		return "mall/soccer";
+	}
 
-	
-	
 	
 //	@RequestMapping({"/info", "/medi"})
 //	public String medi(@RequestParam(value="currentPage", required = false)String cp,

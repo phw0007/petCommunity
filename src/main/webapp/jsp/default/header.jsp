@@ -23,7 +23,7 @@
 		<li><a href="${context }freeboardForm">커뮤니티</a></li>
 		<li><a href="${context }shopping">쇼핑몰</a></li>
 		<li><a href="${context }photo">반려앨범</a></li>
-		<li><a href="${context }info">업체정보</a></li>
+		<li><a href="${context }info?category=동물병원">업체정보</a></li>
 		<li><a href="${context }login">로그인</a></li>
 	</ul>
 </div>
