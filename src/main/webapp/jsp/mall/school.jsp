@@ -15,7 +15,7 @@
  <ul>
     <li><a href="info?category=동물병원">동물병원</a></li>
     <li><a href="medicine?category=동물약국">동물약국</a></li>
-    <li><a href="school?category=학교체육시설">학교체육시설</a></li>
+    <li><a href="school?category=학교체육시설" class="on">학교체육시설</a></li>
     <li><a href="pool?category=수영장">수영장</a></li>
     <li><a href="soccer?category=축구장">축구장</a></li>
   </ul>

@@ -23,8 +23,9 @@ public class InfoController {
 			@RequestParam(value="category", required = false)String category,
 			String select, String search, Model model) {
 		System.out.println(category);
+		String jsp="info";
 		service.xmlInsert();
-		service.info(cp,select,search,model,category);
+		service.info(cp,select,search,model,category,jsp);
 		return "mall/info";
 	}
 	@RequestMapping("medicine")
@@ -33,7 +34,8 @@ public class InfoController {
 			String select, String search, Model model) {
 		System.out.println(category);
 		service.xmlInsert();
-		service.mediinfo(cp,select,search,model,category);
+		String jsp="medicine";
+		service.info(cp,select,search,model,category,jsp);
 		return "mall/medicine";
 	}
 	@RequestMapping("school")
@@ -41,8 +43,10 @@ public class InfoController {
 			@RequestParam(value="category", required = false)String category,
 			String select, String search, Model model) {
 		System.out.println(category);
+		String url="school";
 		service.xmlInsert();
-		service.mediinfo(cp,select,search,model,category);
+		String jsp="school";
+		service.info(cp,select,search,model,category,jsp);
 		return "mall/school";
 	}
 	@RequestMapping("pool")
@@ -51,7 +55,8 @@ public class InfoController {
 			String select, String search, Model model) {
 		System.out.println(category);
 		service.xmlInsert();
-		service.mediinfo(cp,select,search,model,category);
+		String jsp="pool";
+		service.info(cp,select,search,model,category,jsp);
 		return "mall/pool";
 	}
 	@RequestMapping("soccer")
@@ -60,7 +65,8 @@ public class InfoController {
 			String select, String search, Model model) {
 		System.out.println(category);
 		service.xmlInsert();
-		service.mediinfo(cp,select,search,model,category);
+		String jsp="soccer";
+		service.info(cp,select,search,model,category,jsp);
 		return "mall/soccer";
 	}
 
