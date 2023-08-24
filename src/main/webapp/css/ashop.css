@@ -63,9 +63,14 @@
 	height: 34px; width: 100px; font-family: 'Poor Story'; font-size: 18px;}
 
 	.infoTop tr th:nth-child(1n) {width: 140px;}
+	.infoTop p {text-align: left; font-size: 22px; font-weight: bold; border-bottom: 1px solid #000;
+	padding-top: 15px; padding-bottom: 15px;}
 	
-	.infoBottom p{font-size: 26px; font-weight: bold; text-align: left; width: 100%; border-bottom: 2px solid #000;
-	padding:30px 0 30px 0;}
+	.infoCenter p{text-align: left; font-size: 22px; font-weight: bold; border-bottom: 1px solid #000;
+	padding-top: 15px; padding-bottom: 15px;}
+	
+	.infoBottom p{font-size: 22px; font-weight: bold; text-align: left; width: 100%; border-bottom: 2px solid #000;
+	padding:15px 0 15px 0; border-top: 2px solid #000; margin-top:15px;}
 	.infoBottom {margin-bottom: 20px;}
 	.infoTop tr td input{height: 22px; width: 600px; border: 2px solid #000; font-family: 'Poor Story';
 	font-size: 20px;}

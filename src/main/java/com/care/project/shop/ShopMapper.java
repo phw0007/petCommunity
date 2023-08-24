@@ -16,4 +16,13 @@ public interface ShopMapper {
 	int count(@Param("select")String select, @Param("search")String search, @Param("category")String category);
 	
 	ShopDTO getProductDetails(int productId);
+
+	void shopOrder(AShopDTO shopDto);
+
+	AShopDTO shopOrderDate(String writeDate);
+
+	void shippinData(AShopDTO shopDto);
+
+
+	
 }

@@ -51,17 +51,20 @@ function getDeleteShop(url, selectedValues) {
 	</div>
 	<div class="memberMain">
 		<div class="memberTitle">
-			<p>주문 목록</p>
+			<p>주문 상세정보</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
 				<li>></li>
 				<li><a href="ashop">쇼핑몰 관리</a></li>
 				<li>></li>
 				<li><a href="ashopOrder">주문 목록</a></li>
+				<li>></li>
+				<li>주문 상세정보</li>
 			</ul>
 		</div>
 		<div class="memberInfo">
 			<div class="infoTop">
+				<p>주문자 정보</p>
 				<table>
 					<thead>
 				    	<tr>
@@ -87,6 +90,29 @@ function getDeleteShop(url, selectedValues) {
 				    </tbody>
 				</table>
 			</div>
+			
+			<div class="infoCenter">
+				<p>배송지 정보</p>
+				<table>
+					<thead>
+				    	<tr>
+				    		<th style="width: 150px;">수령인</th>
+				    		<th style="width: 800px;">주소</th>
+				    		<th style="width: 200px;">전화번호</th>
+				    		<th style="width: 700px;">요청사항</th>
+				    	</tr>
+				    </thead>
+				    <tbody>
+				    	<tr>
+				    		<td>${order.shippinName}</td>
+				    		<td>${order.shippinAddress}</td>
+				    		<td>${order.shippinModile}</td>
+				    		<td>${order.shippinMemo}</td>
+				    	</tr>
+				    </tbody>
+				</table>
+			</div>		
+				
 			<div class="infoBottom">
 				<p>구매 항목</p>
 				<table>

@@ -84,10 +84,29 @@ public class ShopController {
 //	public void callback(@RequestParam(required = false) String imp_uid) {
 //	
 //	}
-	@RequestMapping("callback")
-	public void callback(@RequestBody Map<String, Object> model) {
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "application/json; charset=UTF-8");
-		JSONObject responseObj = new JSONObject();
+//	@RequestMapping("callback")
+//	public void callback(@RequestBody Map<String, Object> model) {
+//		HttpHeaders responseHeaders = new HttpHeaders();
+//		responseHeaders.add("Content-Type", "application/json; charset=UTF-8");
+//		JSONObject responseObj = new JSONObject();
+//	}
+	@RequestMapping("addToCart")
+	public String addCart(String selectedValues, Model model) {
+		String[] checkData = selectedValues.split(",");
+		System.out.println(checkData[0]);//개당상품가격
+		System.out.println(checkData[1]);//상품번호
+		System.out.println(checkData[2]);//상품구매갯수
+		int pay = Integer.parseInt(checkData[0]);
+		int num = Integer.parseInt(checkData[2]);
+		int total = pay*num;
+		System.out.println(total);//상품총가격
+		return "mall/addToCart";
 	}
+	
+	@RequestMapping("callback")
+	public String callback(String orderUser, String shippingUser,String orderProduct) {
+		service.orderData(orderUser, shippingUser, orderProduct);
+		return "redirect:shopping";
+	}
+	
 }
