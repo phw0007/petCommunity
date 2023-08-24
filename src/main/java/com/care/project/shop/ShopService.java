@@ -185,11 +185,11 @@ public class ShopService {
 		shopDto.setPay(pay);
 		shopDto.setOrderCount(orderCount);
 		
-		shopMapper.shopOrder(shopDto);
-		AShopDTO shopOrderDto = shopMapper.shopOrderDate(writeDate);
-		int no = shopOrderDto.getNo();
-		shopDto.setNo(no);
-		shopMapper.shippinData(shopDto);
+//		shopMapper.shopOrder(shopDto);
+//		AShopDTO shopOrderDto = shopMapper.shopOrderDate(writeDate);
+//		int no = shopOrderDto.getNo();
+//		shopDto.setNo(no);
+//		shopMapper.shippinData(shopDto);
 
 	}
 
