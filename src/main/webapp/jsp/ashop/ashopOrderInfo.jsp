@@ -106,7 +106,7 @@ function getDeleteShop(url, selectedValues) {
 				    	<tr>
 				    		<td>${order.shippinName}</td>
 				    		<td>${order.shippinAddress}</td>
-				    		<td>${order.shippinModile}</td>
+				    		<td>${order.shippinMobile}</td>
 				    		<td>${order.shippinMemo}</td>
 				    	</tr>
 				    </tbody>
