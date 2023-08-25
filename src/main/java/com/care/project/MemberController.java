@@ -27,11 +27,8 @@ public class MemberController {
       return "member/index";
    }
 
-   @RequestMapping("index2")
-   public String index2() {
-      return "member/index2";
-   }
 
+  
    @RequestMapping("header")
    public String header() {
       return "default/header";
@@ -42,18 +39,38 @@ public class MemberController {
       return "default/main";
    }
 
-   @RequestMapping("footer")
-   public String footer() {
-      return "default/footer";
-   }
 
-   /* http://localhost:8086/dbQuiz/login */
-   @GetMapping("login")
-   public String login() {
-      
-      return "member/login";
-   }
+	@RequestMapping("footer")
+	public String footer() {
+		return "default/footer";
+	}
+	
+	@RequestMapping("index2")
+	public String index2() {
+	    // 세션에서 아이디 정보를 가져와서 로그인 상태 확인
+	    String id = (String) session.getAttribute("id");
+	    if (id == null) {
+	        return "redirect:login"; // 로그인되지 않은 상태라면 로그인 페이지로 리다이렉트
+	    }
+	    return "member/index2";
+	}
+	
+	
+	
+	
 
+
+	@GetMapping("login")
+	public String login() {
+	    // 로그인 상태를 확인하여 리다이렉트할 페이지를 결정합니다.
+	    if (session.getAttribute("id") != null) {
+	        return "redirect:index2"; // 이미 로그인한 경우 index2.jsp로 리다이렉트
+	    } else {
+	        return "member/login"; // 로그인하지 않은 경우 login.jsp로 이동
+	    }
+	}
+
+  
    @PostMapping("mloginProc")
    public String mloginProc(MemberDTO member) {
 	   System.out.println("로그인되나여");
@@ -82,61 +99,113 @@ public class MemberController {
       return "member/register";
    }
 
-   @RequestMapping("logout")
-   public String logout() {
-      session.invalidate();
-      return "forward:index";
-   }
 
-   @RequestMapping("userInfo")
-   public String userInfo(String id, @RequestParam(value = "currentPage", required = false) String cp, Model model) {
+	@RequestMapping("logout")
+	public String logout() {
+		session.invalidate();
+		return "forward:login";
+	}
 
-      if (session.getAttribute("id") == null) {
-         return "redirect:login";
-      }
-      MemberDTO member = service.userInfo(id);
-      if (member == null) {
-         return "redirect:memberInfo?currentPage=" + cp;
-      }
-      model.addAttribute("member", member);
-      return "member/userInfo";
-   }
+ 
 
-   @GetMapping("update")
-   public String update() {
-      String id = (String) session.getAttribute("id");
-      if (id == null || id.isEmpty()) {
-         return "redirect:login";
-      }
-      return "member/update";
-   }
+	@RequestMapping("userInfo")
+	public String userInfo(String id, @RequestParam(value = "currentPage", required = false) String cp, Model model) {
+
+		if (session.getAttribute("id") == null) {
+			return "redirect:login";
+		}
+		MemberDTO member = service.userInfo(id);
+		if (member == null) {
+			return "redirect:memberInfo?currentPage=" + cp;
+		}
+		model.addAttribute("member", member);
+		return "member/userInfo";
+	}
+	
+   
+   @RequestMapping("cart")
+	public String cart(String id, @RequestParam(value = "currentPage", required = false) String cp, Model model) {
+
+		if (session.getAttribute("id") == null) {
+			return "redirect:login";
+		}
+		MemberDTO member = service.userInfo(id);
+		if (member == null) {
+			return "redirect:memberInfo?currentPage=" + cp;
+		}
+		model.addAttribute("member", member);
+		return "mall/cart";
+	}
+
+
+
+	@GetMapping("update")
+	public String update() {
+		String id = (String) session.getAttribute("id");
+		if (id == null || id.isEmpty()) {
+			return "redirect:login";
+		}
+		return "member/update";
+	}
 
 
 
 
-   @GetMapping("info")
-   public String info() {
-      return "mall/info";
-   }
-   @GetMapping("shopping")
-   public String shopping() {
-      return "mall/shopping";
-   }
+	@GetMapping("info")
+	public String info() {
+		return "mall/info";
+	}
 
-   @PostMapping("updateProc")
-   public String updateProc(MemberDTO member, String confirm) {
-      String id = (String) session.getAttribute("id");
-      if (id == null || id.isEmpty()) {
-         return "redirect:login";
-      }
-      member.setId(id);
-      String result = service.updateProc(member, confirm);
-      if (result.equals("회원 정보 수정 완료")) {
-         return "forward:logout";
-      }
-      return "member/update";
 
-   }
+	@PostMapping("updateProc")
+	public String updateProc(MemberDTO member, String confirm) {
+		String id = (String) session.getAttribute("id");
+		if (id == null || id.isEmpty()) {
+			return "redirect:login";
+		}
+		member.setId(id);
+		String result = service.updateProc(member, confirm);
+		if (result.equals("회원 정보 수정 완료")) {
+			return "forward:logout";
+		}
+		return "member/update";
+
+	}
+	
+
+
+	@PostMapping("deleteProc")
+	public String deleteProc(String pw, String confirmPw, Model model) {
+		String id = (String) session.getAttribute("id");
+		if (id == null || id.isEmpty()) {
+			return "redirect:login";
+		}
+
+		String result = service.deleteProc(id, pw, confirmPw);
+		model.addAttribute("msg", result);
+		if (result.equals("회원 정보 삭제 완료")) {
+			return "forward:logout";
+		}
+		return "member/delete";
+	}
+
+	@ResponseBody
+	@PostMapping(value = "uploadImage3", produces = "text/plain; charset=utf-8") // 추가
+	public String uploadImage3(@RequestParam(value = "imageFile", required = false) MultipartFile emailFile,
+			@RequestParam("fileName") String fileName) {
+		System.out.println(fileName);
+		service.uploadImage3(emailFile, fileName);
+		return "index";
+	}
+
+	@GetMapping("photoAlbum")
+	public String photoAlbum() {
+		return "member/photoAlbum";
+	}
+
+
+
+
    
 
    @GetMapping("delete")
@@ -148,34 +217,9 @@ public class MemberController {
       return "member/delete";
    }
 
-   @PostMapping("deleteProc")
-   public String deleteProc(String pw, String confirmPw, Model model) {
-      String id = (String) session.getAttribute("id");
-      if (id == null || id.isEmpty()) {
-         return "redirect:login";
-      }
+  
 
-      String result = service.deleteProc(id, pw, confirmPw);
-      model.addAttribute("msg", result);
-      if (result.equals("회원 정보 삭제 완료")) {
-         return "forward:logout";
-      }
-      return "member/delete";
-   }
 
-   @ResponseBody
-   @PostMapping(value = "uploadImage3", produces = "text/plain; charset=utf-8") // 추가
-   public String uploadImage3(@RequestParam(value = "imageFile", required = false) MultipartFile emailFile,
-         @RequestParam("fileName") String fileName) {
-      System.out.println(fileName);
-      service.uploadImage3(emailFile, fileName);
-      return "index";
-   }
-
-   @GetMapping("photoAlbum")
-   public String photoAlbum() {
-      return "member/photoAlbum";
-   }
 
 
    @ResponseBody

@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 
 @charset "UTF-8";
 .footer{width:1200px; margin:0 auto;text-decoration:none;}
+=======
+
+@charset "UTF-8";
+.footer{width:1200px; margin:0 auto;text-decoration:none;}
+>>>>>>> branch 'main' of https://github.com/phw0007/petCommunity.git
 .footer ul li{display:inline; list-style:none; color: black;}

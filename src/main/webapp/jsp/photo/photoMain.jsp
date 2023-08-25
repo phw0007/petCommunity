@@ -39,10 +39,12 @@
 		<ul class="contentWeb">
 		<c:forEach var="photo" items="${photos}" >
 			<li>
+
 				<div class="liweb" onclick="location.href='photoContent?no=${photo.no}'">
 					<div class="lititle">${photo.id} &nbsp;&nbsp; ${photo.writeDate}</div>
 					<div class="liimg"><img alt="/image/${photo.fileName}" src=/image/${photo.fileName} width="210" height="220" ></div>
 					<div class="licont">${photo.title}</div>
+
 					<div class="liicon">
 						<p class="see"><span class="material-symbols-outlined">visibility</span>&nbsp;</p>
 						<p class="favorite"><span class="material-symbols-outlined">favorite</span>&nbsp;</p>
@@ -73,7 +75,9 @@
 	</div>
 	
 
+
 	
 </body>
 </html>
 <c:import url="/footer" />
+

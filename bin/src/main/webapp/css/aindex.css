@@ -28,16 +28,16 @@
 	
 	.board p{font-size: 22px; border-bottom: 2px solid #000; padding-bottom: 10px; font-weight:bold;}
 	.board ul li{padding-top: 10px;}
-	.board span{float: right;}
+	.board span{display: inline-block; width:110px;}
 	
 	.info p{font-size: 22px; border-bottom: 2px solid #000; padding-bottom: 10px; font-weight:bold;}
 	.info ul li{padding-top: 10px;}
-	.info span{float: right; padding-left: 20px;}
+	.info span{display: inline-block; width:120px;}
 	
 	.shop p{font-size: 22px; border-bottom: 2px solid #000; padding-bottom: 10px; font-weight:bold;}
 	.shop ul li{padding-top: 10px;}
-	.shop span{float: right;}
+	.shop span{display: inline-block; width:110px;}
 	
 	.photo p{font-size: 22px; border-bottom: 2px solid #000; padding-bottom: 10px; font-weight:bold;}
 	.photo ul li{padding-top: 10px;}
-	.photo span{float: right;}
+	.photo span{display: inline-block; width:110px;}

@@ -17,6 +17,64 @@
 		<result column="pet_file" property="petFile"/>
 	</resultMap>
 	
+	<resultMap type="com.care.project.aboard.ABoardDTO" id="boardDto">
+		<id column="no" property="no"/>
+		<result column="id" property="id"/>
+		<result column="category" property="category"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="file_name" property="fileName"/>
+		<result column="write_date" property="writeDate"/>
+		<result column="hits" property="hits"/>
+		<result column="likes" property="likes"/>
+		<result column="comment_id" property="commentId"/>
+		<result column="comment_content" property="commentContent"/>
+		<result column="likes_id" property="likesId"/>
+	</resultMap>
+	
+	<resultMap type="com.care.project.ainfo.AInfoDTO" id="infoDTO">
+		<id column="no" property="no"/>
+		<result column="category" property="category"/>
+		<result column="name" property="name"/>
+		<result column="address" property="address"/>
+		<result column="home_page" property="homePage"/>
+		<result column="mobile" property="mobile"/>
+	</resultMap>
+	
+	<resultMap type="com.care.project.ashop.AShopDTO" id="ashopDto">
+		<id column="no" property="no"/>
+		<result column="category" property="category"/>
+		<result column="product" property="product"/>
+		<result column="company" property="company"/>
+		<result column="pay" property="pay"/>
+		<result column="inventory" property="inventory"/>
+		<result column="image_file" property="imageFile"/>
+		<result column="info" property="info"/>
+		<result column="id" property="id"/>
+		<result column="user_name" property="userName"/>
+		<result column="address" property="address"/>
+		<result column="mobile" property="mobile"/>
+		<result column="pay_type" property="payType"/>
+		<result column="pay_check" property="payCheck"/>
+		<result column="order_count" property="orderCount"/>
+		<result column="write_date" property="writeDate"/>
+	</resultMap>
+	
+	<resultMap type="com.care.project.aphoto.APhotoDTO" id="photoDto">
+		<id column="no" property="no"/>
+		<result column="id" property="id"/>
+		<result column="category" property="category"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="file_name" property="fileName"/>
+		<result column="write_date" property="writeDate"/>
+		<result column="hits" property="hits"/>
+		<result column="likes" property="likes"/>
+		<result column="comment_id" property="commentId"/>
+		<result column="comment_content" property="commentContent"/>
+		<result column="likes_id" property="likesId"/>
+	</resultMap>
+	
 	<select id="memberData" resultMap="memberDto">
 		<choose>
 			<when test="select == 'id'">
@@ -98,6 +156,38 @@
 	<select id="loginProc" resultMap="memberDto">
 		SELECT * FROM project_register WHERE id=#{id}
 	</select>
+	
+	<select id="amaminMember" resultMap="memberDto">
+		SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, pw, user_name, register_day, address
+				, email, mobile, pet_name, pet_category, pet_file
+				FROM project_register)AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="amaminBoard" resultMap="boardDto">
+		SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board)AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="amaminInfo" resultMap="infoDTO">
+		SELECT AAA.* FROM 
+				(SELECT rownum as rn, category, name, address, home_page, mobile 
+				FROM project_info)AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="amaminShop" resultMap="ashopDto">
+			SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, category, product, company, pay, inventory
+				, image_file, info FROM project_shop)AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="amaminPhoto" resultMap="photoDto">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_photo)AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
 </mapper>
 
 

@@ -20,8 +20,7 @@
 	    사용자 아이디 : ${sessionScope.id }<br>
 	    <form action="loginAfter">
 	    <input type="button" value="마이페이지" onclick="location.href='userInfo?id=${sessionScope.id }'"><br>
-	    <input type="button" value="사진첩" onclick="location.href='index2'"><br>
-	    <input type="button" value="장바구니" onclick="location.href='index2'"><br>
+	    <input type="button" value="장바구니" onclick="location.href='cart?id=${sessionScope.id }'"><br>
 	    
 	    </form>
 		<ul>
