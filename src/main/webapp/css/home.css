@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /*home*/
-.mainlogo{text-align: center; }
+.mainlogo{text-align: center;  margin-top: 100px;}
  .web{width:1200px; margin:auto; overflow: hidden; height: 1100px;}
  a{text-decoration: none; color:black; position: relative;}
   .top{float: left; height: 700px; width:1200px;}	
@@ -23,6 +23,7 @@
    
   .boardHit > li{border:1px solid black; border-top:0px solid black;
   	height: 25px; line-height:25px  }
+  	
    
    .tlp > p{ position: relative;
    	background-color:#FFEDA1; border:2px solid black;
@@ -31,9 +32,20 @@
    .tlp > p > a{position: absolute;right:10px;}
    
    .potHit{border:1px solid black; border-top:0px solid black;
-   height: 300px;}
+   height: 300px; display: flex; flex-wrap: wrap; overflow: hidden;}
+  .potHit  > li{display: inline-block; margin-right: 5px; margin-bottom: 30px; padding-top: 15px; padding-left: 10px;}
    
-   
+    .mliweb{width: 180px; height: 270px;  background-color: #FFEDA1; text-align: center; padding: 5px; padding-left: 
+   10px; box-sizing: border-box;} 
+   .mlititle{width: 10px; height: 30px; line-height: 30px;
+  }
+   .mliimg{background-color: #FFFFFF; width: 160px; height: 200px;}
+   .mlicont{margin: 5px 0;}
+   .mliicon{vertical-align: middle; height: 30px; text-align: center; margin-left: 30px;}
+  .mpotoid{float: left; font-size: 14px; width: 14px;  
+  position: relative;bottom: -10px;}
+  .msee{float: right; margin-right: 20px;}
+  .mfavorite{float:right;margin-right: 5px;}
    
    
 	.tr{float: left; width:450px;}
@@ -78,7 +90,7 @@
    ****************************************************************************/
    
    /*potoMain*/  
-   .potoMain{width:1200px;margin:100px auto; height:1000px; 
+   .potoMain{width:1200px;margin:200px auto; height:1000px; 
    }
    .potoMain > h3{border:2px solid black; text-align: center; height: 30px; line-height: 30px; 
    font-size: 26px; font-weight: 600; width:600px; margin:0 auto 50px;}
@@ -117,15 +129,16 @@
    
    /*potoContent*/  
      
-    .boardContent{width:1200px;margin:0 auto; height:750px;padding-top:100px;padding-left:200px;
+    .photoContent{width:1200px;margin:0 auto; height:2000px;padding-top:100px;padding-left:200px;
             font-family: 'Poor Story'}
-	.boardContent > h1{padding-right:100px;width:150px;padding-bottom:10px; border-bottom:2px solid black;
+	.photoContent > h1{padding-right:100px;width:150px;padding-bottom:10px; border-bottom:2px solid rgb(0, 0, 0);
                   vertical-align: left; font-size: 26px; margin-bottom: 10px; font-weight: 800;}
     
-    .boardContent > p{border-bottom: 1px solid rgb(192, 192, 192); margin: 15px 0;}
-    .boardContent > p > span{display: inline-block; margin-right : 100px; width: 50px;} 
-    .seeboard{ width: 1048px; height: auto;  border:1px solid black; margin-left: 150px;}
-                  
-	.button{padding-left:50px;}        
+    .photoContent > p{border-bottom: 1px solid rgb(192, 192, 192); margin: 15px 0;}
+    .photoContent > p > span{display: inline-block; margin-right : 100px; width: 50px;} 
+    .seephoto{ width: 1048px; height: auto;  border:1px solid rgb(192, 192, 192); margin-left: 150px;  padding-top: 20px;}            
+	.button{padding-left:50px;}  
+	
+	.poContent{margin-bottom: 20px; margin-left: 10px;}    
      
      

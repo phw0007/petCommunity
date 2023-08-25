@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="/css/board.css" rel="stylesheet" type="text/css">
@@ -111,7 +111,7 @@ function commentDeleteProc(url, selectedValues, commentId) {
 		<c:forEach items="${board.fileName}" var="fileName">
     <img id="img" src="/image/${fileName}" alt="petImage" /><br>
 </c:forEach>
-
+ 
     </c:otherwise>
 </c:choose>
 	   </div>
