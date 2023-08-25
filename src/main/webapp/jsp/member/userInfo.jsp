@@ -41,7 +41,7 @@
 	
 	
 	<div class="basket" align="center">
-	<input type="button" value="더보기 >" onclick="location.href='basket?id=${sessionScope.id }'" style="background: none; vertical-align: right; border: none; cursor: pointer; font-size: 15px; float:right;"><br>
+	<input type="button" value="더보기 >" onclick="location.href='cart?id=${sessionScope.id }'" style="background: none; vertical-align: right; border: none; cursor: pointer; font-size: 15px; float:right;"><br>
 	 <ul>
       <li>
         <a href="#">

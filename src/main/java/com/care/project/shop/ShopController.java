@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -74,57 +75,73 @@ public class ShopController {
 	}
 	
 	
-	@Autowired
-	private HttpServletRequest request; // 필드로 HttpServletRequest를 주입받습니다.
-
-	@RequestMapping("/addToCart")
-	@ResponseBody
-	public String addToCart(@RequestParam("productId") int productId, @RequestParam("quantity") int quantity) {
-	    // 세션에서 장바구니 정보를 가져옵니다. 세션이 없다면 생성합니다.
-	    HttpSession session = request.getSession(true);
-	    List<CartItemDTO> cart = (List<CartItemDTO>) session.getAttribute("cart");
-
-
-	    // 카트가 비어있는 경우 새로 생성합니다.
-	    if (cart == null) {
-	        cart = new ArrayList<>();
-	    }
-
-	    // 선택한 상품 정보를 데이터베이스 등에서 가져옵니다.
-	    ShopDTO product = shopService.getProductDetails(productId);
-
-	    // 카트에 상품 정보와 수량을 추가합니다.
-	    cart.add(new CartItemDTO(product, quantity));
-
-	    // 장바구니 정보를 세션에 저장합니다.
-	    session.setAttribute("cart", cart);
-
-	    return "success"; // 또는 "error"
-	}
 	
-	@RequestMapping("/cart")
-	public String viewCart(Model model) {
-	    // 세션에서 장바구니 정보를 가져옵니다.
-	    HttpSession session = request.getSession(false);
-	    List<CartItemDTO> cart = (List<CartItemDTO>) session.getAttribute("cart");
-	    if (cart == null) {
-	        cart = new ArrayList<>();
-	    }
-
-	    // 장바구니 내용을 뷰에 전달합니다.
-	    model.addAttribute("cartItems", cart);
-
-	    return "mall/cart"; // 장바구니 뷰를 반환합니다.
-	}
-
-	 @GetMapping("cart")
-	    public String cart() {
-	        if (session.getAttribute("id") == null) {
-	            return "redirect:login";
+	
+	  @GetMapping("cart")
+	    public String cart(Model model) {
+	        String id = (String) session.getAttribute("id");
+	        if (id == null) {
+	            return "redirect:login"; // 로그인되지 않은 경우 로그인 페이지로 이동
 	        }
+
+	        List<CartDTO> cartItems = shopService.getCartItems(id);
+	        model.addAttribute("cartItems", cartItems);
+
 	        return "mall/cart";
 	    }
-	
-	
+	 
+	 
+	 @RequestMapping("addCart")
+	 public String addCart(String selectedValues, Model model) {
+	     String id = (String) session.getAttribute("id");
+	     if (id == null) {
+	            return "redirect:login"; // 로그인되지 않은 경우 로그인 페이지로 이동
+	        }
+	     String[] checkData = selectedValues.split(",");
+	     int inventory = Integer.parseInt(checkData[0]);     // 상품 구매 갯수
+	     int productPrice = Integer.parseInt(checkData[1]); // 개당 상품 가격
+	     int productId = Integer.parseInt(checkData[2]);   // 상품 번호
+	     int quantity = Integer.parseInt(checkData[3]);     // 상품 구매 갯수
+	     int total = productPrice * quantity; // 상품 총 가격 계산
+	     
+	     // productId를 사용하여 상품 정보를 가져와서 모델에 추가
+	     ShopDTO product = service.getProductDetails(productId);
+	     model.addAttribute("product", product);
+	     product.getProduct();
+	     
+	     
+	     // 나머지 필요한 정보도 모델에 추가
+	     model.addAttribute("productPrice", productPrice);
+	     model.addAttribute("productId", productId);
+	     model.addAttribute("quantity", quantity);
+	     model.addAttribute("inventory", inventory);
+	     model.addAttribute("total", total);
+	     
+	     shopService.addToCart(productId, quantity, total);
+	     
+	     
+	     
+	  // 기존 코드에 추가: 장바구니 정보 가져와서 모델에 추가
+	        
+	        List<CartDTO> cartItems = shopService.getCartItems(id);
+	        model.addAttribute("cartItems", cartItems);
+	     
+	     return "mall/cart"; // 결과 페이지로 이동
+	 }
+	 
+	 
+	 @PostMapping("removeSelectedItems")
+	    public String removeSelectedItems(@RequestParam("selectedItems") int[] selectedItems) {
+	        String id = (String) session.getAttribute("id");
+	        shopService.removeSelectedItems(id, selectedItems);
+
+	        return "redirect:cart"; // 카트 페이지로 리다이렉트
+	    }
+	 
+
+	 
+	 
+	 
+	 
 	
 }

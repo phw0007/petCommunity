@@ -114,8 +114,8 @@ public class MemberController {
 		return "member/userInfo";
 	}
 	
-	@RequestMapping("basket")
-	public String basket(String id, @RequestParam(value = "currentPage", required = false) String cp, Model model) {
+	@RequestMapping("cart")
+	public String cart(String id, @RequestParam(value = "currentPage", required = false) String cp, Model model) {
 
 		if (session.getAttribute("id") == null) {
 			return "redirect:login";
@@ -125,7 +125,7 @@ public class MemberController {
 			return "redirect:memberInfo?currentPage=" + cp;
 		}
 		model.addAttribute("member", member);
-		return "mall/basket";
+		return "mall/cart";
 	}
 
 	@GetMapping("update")

@@ -68,37 +68,32 @@ public class ShopService {
 	}
 	
 	
-	 public String addToCart(int productId, int quantity) {
-	        List<CartItemDTO> cart = getCartItems(); // 기존 장바구니 정보를 가져옴
-
-	        // 선택한 상품 정보를 데이터베이스 등에서 가져옵니다. (가정)
-	        ShopDTO product = getProductDetails(productId);
-
-	        // 카트에 상품 정보와 수량을 추가합니다.
-	        cart.add(new CartItemDTO(product, quantity));
-
-	        // 장바구니 정보를 세션에 저장합니다.
-	        session.setAttribute("cart", cart);
-
-	        return "success"; // 또는 "error"
+	public void addToCart(int productId, int quantity, int total) {
+	    // productId를 사용하여 상품 정보 가져오기
+	    ShopDTO product = shopMapper.getProductDetails(productId);
+	    String id = (String) session.getAttribute("id");
+	    // CartDTO 객체를 생성하여 관련 데이터 설정
+	    CartDTO cartItem = new CartDTO();
+	    cartItem.setId(id);
+	    cartItem.setProduct(product.getProduct());
+	    cartItem.setCompany(product.getCompany());
+	    cartItem.setPay(product.getPay());
+	    cartItem.setImageFile(product.getImageFile());
+	    cartItem.setProductId(productId);
+	    cartItem.setQuantity(quantity);
+	    cartItem.setTotal(total);
+	    
+	    // 매퍼를 사용하여 장바구니 항목을 데이터베이스에 저장
+	    shopMapper.addToCart(cartItem);
+	}
+	 public List<CartDTO> getCartItems(String id) {
+		 
+	        return shopMapper.getCartItems(id);
 	    }
 
-	    public List<CartItemDTO> getCartItems() {
-	        // 세션에서 장바구니 정보를 가져옵니다.
-	        List<CartItemDTO> cart = (List<CartItemDTO>) session.getAttribute("cart");
-
-	        // 카트가 비어있는 경우 새로 생성합니다.
-	        if (cart == null) {
-	            cart = new ArrayList<>();
-	        }
-
-	        return cart;
+	 public void removeSelectedItems(String id, int[] selectedItems) {
+	        shopMapper.removeSelectedItems(id, selectedItems);
 	    }
-	
-	
-
-
-	
 	
 	
 
