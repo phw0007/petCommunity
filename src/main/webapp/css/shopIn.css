@@ -1,0 +1,8 @@
+@charset "UTF-8";
+.product-details {width: 1200px; margin: 0 auto; overflow: hidden; margin-top: 100px; font-family: 'Poor Story', cursive; margin-bottom: 100px;}
+
+.shopInLeft{width: 700px; float: left;}
+.shopInLeft > img {margin-left: 150px; }
+
+
+.shopInRight {margin-top: 70px;}

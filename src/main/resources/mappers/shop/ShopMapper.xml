@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
+  
 <mapper namespace="com.care.project.shop.ShopMapper">
 	<resultMap type="com.care.project.shop.ShopDTO" id="shopDto">
 		<id column="no" property="no"/>
@@ -21,6 +22,17 @@
 		<result column="pay_check" property="payCheck"/>
 		<result column="order_count" property="orderCount"/>
 		<result column="write_date" property="writeDate"/>
+	</resultMap>
+	
+	<resultMap type="com.care.project.shop.CartDTO" id="cartDto">
+		<id column="no" property="no"/>
+		<result column="id" property="id"/>
+		<result column="product" property="product"/>
+		<result column="company" property="company"/>
+		<result column="pay" property="pay"/>
+		<result column="image_file" property="imageFile"/>
+		<result column="quantity" property="quantity"/>
+		<result column="total" property="total"/>
 	</resultMap>
 	
 		<select id="shopData" resultMap="shopDto">
@@ -75,6 +87,23 @@
 	  		</otherwise>
 		</choose>
 	</select>
+	
+	<select id="getProductDetails" resultMap="shopDto">
+    SELECT * FROM project_shop WHERE no = #{productId}
+    </select>
+    
+     
+    <!-- addToCart 메서드에 대한 SQL 매핑 -->
+ <insert id="addToCart" parameterType="com.care.project.shop.CartDTO">
+ 	<selectKey order="BEFORE" keyProperty="no" resultType="int">
+			SELECT nvl(max(no),0) + 1 FROM project_cart
+	</selectKey>
+    INSERT INTO project_cart VALUES (#{no}, #{id}, #{product}, #{company}, #{pay}, #{imageFile}, #{productId}, #{quantity}, #{total})
+</insert>
+    
+     <select id="getCartItems" resultMap="cartDto">
+        SELECT * FROM project_cart WHERE id = #{id}
+    </select>
 	
 </mapper>
 
