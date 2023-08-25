@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import com.care.project.board.BoardDTO;
+
 
 @Mapper
 public interface photoMapper {
@@ -16,14 +20,19 @@ public interface photoMapper {
 	void incHit(int no);
 
 	List<photoDTO> getAllPhotos();
-
+	
 	List<Image> getAllImages();
+	ArrayList<photoDTO> photoData(@Param("begin")int begin, @Param("end")int end, 
+			@Param("select")String select, @Param("search")String search);
 
-	ArrayList<photoDTO> photoData(int begin, int end, String select, String search);
+	int count(@Param("select")String select, @Param("search")String search);
 
-	int count(String select, String search);
+	String printPage(@Param("url")String url, @Param("currentPage")int currentPage, 
+			@Param("totalCount")int totalCount, @Param("pageBlock")int pageBlock);
 
-	String printPage(String url, int currentPage, int totalCount, int pageBlock);
+	 List<photoDTO> homePhoto() ;
+	
+	 List<BoardDTO> mainhomeboard(@Param("begin")int begin, @Param("end")int end) ;
 
 	
 }

@@ -1,6 +1,8 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <c:import url="/header" />
   
   
@@ -21,27 +23,36 @@
 		 <div class="web">
  					<div class="top">
 			 			<div class="tl">
-						 	<p>공지사항</p>
+						 	<p>공지사항<a href="${context }home">더보기 > </a></p>
 						 	<br>
 						 	<div class="tlc">
-							 	<p>커뮤니티 인기글 	 <a href="${context }home">더보기 > </a></p>
+							 	<p>커뮤니티 인기글 	 <a href="${context }freeboardForm">더보기 > </a></p>
 							 		<ul class="boardHit">
-							 			<li>1번</li>
-							 			<li>2번</li>
-							 			<li>3번</li>
-							 			<li>4번</li>
-							 			<li>5번</li>
-							 			<li>6번</li>
-							 			<li>7번</li>
-							 			
+									<c:forEach var="mboard" items ="${mboards}" >
+									       <li onclick="location.href='boardContent?no=${mboard.no}&category=${mboard.category}'">
+									       ${mboard.no} &nbsp; ${mboard.title}&nbsp; ${mboard.id} &nbsp; ${mboard.writeDate} </li>
+									    </c:forEach>
 							 		</ul>
 					 		</div>
 			 			 <br> <br>
 						 	<div class="tlp">
-						 	 	<p>반려앨범<a href="${context }photo">더보기 > </a></p>
+						 	 	<p>반려앨범<a href="${context }photoMain">더보기 > </a></p>
 						 		<ul class="potHit">
-						 			<li></li>
-						 		</ul>
+    <c:forEach var="mphoto" items="${mphotos}" varStatus="loop">
+        <li>
+            <div class="mliweb" onclick="location.href='photoContent?no=${mphoto.no}'">
+                <div class="mliimg"><img alt="/image/${mphoto.fileName}" src="/image/${mphoto.fileName}" width="160" height="200"></div>
+                <div class="mlicont">${mphoto.title}</div>
+                <div class="mliicon">
+                    <p class="mpotoid">${mphoto.id}</p>
+                    <p class="msee"><span class="material-symbols-outlined">visibility</span>&nbsp;0</p>
+                    <p class="mfavorite"><span class="material-symbols-outlined">favorite</span>&nbsp;0</p>
+                </div>
+            </div>
+        </li>
+    </c:forEach>
+</ul>
+
 						 	</div>
 			 	
 						 </div>
@@ -49,15 +60,15 @@
 			 
 							 <div class="tr">
 							 	<p>업체정보
-							 	<a href="${context }home">더보기 > </a></p>
+							 	<a href="${context }info">더보기 > </a></p>
 							 	<ul class="infoList">
-							 			<li></li>
+							 			<li> 자유게시판같은 형식으로 카테고리, 이름만   </li>
 							 		</ul>
 							 </div>
  					</div>
  				<br>
 				 		 <div class="shop">
-							 	<p>업체정보<a href="${context }home">더보기 > </a></p>
+							 	<p>쇼핑몰<a href="${context }shopping">더보기 > </a></p>
 							 	<ul class="shopList">
 							 			<li class="sh">
 											<a href="${context }home">
@@ -78,4 +89,5 @@
  
 </body>
 </html>
+
 <c:import url="/footer" />

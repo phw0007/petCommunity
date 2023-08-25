@@ -6,8 +6,6 @@
   	<link rel="stylesheet" href="/css/home.css">
     <link href="css/reset.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     
 <!DOCTYPE html>
 <html>
@@ -21,19 +19,19 @@
 		<h3>공지사항</h3>
 		
 		<ul class="animalCategory">
-			<li><a href="${context }home">강아지</a></li>
+			<li><a href="home">강아지</a></li>
 			<li> ㅣ </li>
-			<li><a href="${context }home">고양이</a></li>
+			<li><a href="home">고양이</a></li>
 			<li> ㅣ </li>
-			<li><a href="${context }home">파충류</a></li>
+			<li><a href="home">파충류</a></li>
 			<li> ㅣ </li>
-			<li><a href="${context }home">조류</a></li>
+			<li><a href="home">조류</a></li>
 			<li> ㅣ </li>
-			<li><a href="${context }home">수중생물</a></li>
+			<li><a href="home">수중생물</a></li>
 			<li> ㅣ </li>
-			<li><a href="${context }home">소동물</a></li>
+			<li><a href="home">소동물</a></li>
 			<li> ㅣ </li>
-			<li><a href="${context }home">기타동물</a></li>
+			<li><a href="home">기타동물</a></li>
 			
 		</ul>
 		<br>
@@ -41,26 +39,23 @@
 		<ul class="contentWeb">
 		<c:forEach var="photo" items="${photos}" >
 			<li>
-				<div class="liweb">
-					<div class="lititle">${photo.id} &nbsp;&nbsp;  ${photo.write_date}</div>
-					<div class="liimg"><a href='photoContent?no=${photo.no}'><img alt="photoImg/${photo.file_name}" width="210" height="220" src=photoImg/${photo.file_name}></a></div>
-					
-					<div class="licont"><a href="#">${photo.title} </a></div>
+
+				<div class="liweb" onclick="location.href='photoContent?no=${photo.no}'">
+					<div class="lititle">${photo.id} &nbsp;&nbsp; ${photo.writeDate}</div>
+					<div class="liimg"><img alt="/image/${photo.fileName}" src=/image/${photo.fileName} width="210" height="220" ></div>
+					<div class="licont">${photo.title}</div>
+
 					<div class="liicon">
-						<p class="see"><span class="material-symbols-outlined">visibility</span>&nbsp; ${hits} </p>
-						<p class="favorite"><span class="material-symbols-outlined">favorite</span>&nbsp; ${likes}</p>
-						<p class="comment"><span class="material-symbols-outlined">comment</span>&nbsp; ${0}</p>
+						<p class="see"><span class="material-symbols-outlined">visibility</span>&nbsp;</p>
+						<p class="favorite"><span class="material-symbols-outlined">favorite</span>&nbsp;</p>
+						<p class="comment"><span class="material-symbols-outlined">comment</span>&nbsp;</p>
 					</div>
 				</div>
 				</c:forEach>
 			</li>
 			
-			<br>
-		
-			
-			
 		</ul>
-		
+		<div style="text-align: center;">${result}</div>
 		<br><br><br><br>
 		<div class=	"photoFt">
 			<div class="boardshBg">
@@ -79,7 +74,10 @@
 		
 	</div>
 	
-<!-- <div> ${result}	</div> -->	
 
+
+	
 </body>
 </html>
+<c:import url="/footer" />
+

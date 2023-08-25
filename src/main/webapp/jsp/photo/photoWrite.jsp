@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -33,7 +34,7 @@
        
          <div class="button">
 			<input type = "submit" value = "글 등록하기"  style="font-size:15px; width:100px; height:30px;background:#fcd11e;  font-family: 'Poor Story' onload(location.href='photoMain');" >
-			<input type = "button" value = "목록"style="font-size:15px; width:100px; height:30px;background:#fcd11e;  font-family: 'Poor Story'" onclick="location.href = 'photo'">
+			<input type = "button" value = "목록"style="font-size:15px; width:100px; height:30px;background:#fcd11e;  font-family: 'Poor Story'" onclick="location.href = 'photoMain'">
 			</div>
 		</form>
 	</div>
@@ -41,4 +42,5 @@
 
 </body>
 </html>
+
 <c:import url="/footer" />
