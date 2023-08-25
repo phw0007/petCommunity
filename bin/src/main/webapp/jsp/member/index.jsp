@@ -8,11 +8,21 @@
 <title>index</title>
 </head>
 <body>
-	<c:import url="/header"/> <!-- forward로 나감 -->
+
+	
+	<c:import url="/header"/>
 	<c:import url="/main"/>
-	<div align = "center">
+	<div align="center">
 		${msg }
 	</div>
 	<c:import url="/footer"/>
 </body>
 </html>
+
+
+
+
+
+
+
+

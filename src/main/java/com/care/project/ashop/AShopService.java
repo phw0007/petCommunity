@@ -23,8 +23,7 @@ public class AShopService {
 		String product = checkData[0];
 		String category = checkData[1];
 		String company = checkData[2];
-		int payData = Integer.parseInt(checkData[3]);
-		String pay = forematter.format(payData);
+		int pay = Integer.parseInt(checkData[3]);
 		int inventory = Integer.parseInt(checkData[4]);
 		String info = checkData[5];
 		if(imageFile != null) {
@@ -75,6 +74,7 @@ public class AShopService {
 		if(search == null) {
 			search = "";
 		}
+		DecimalFormat forematter = new DecimalFormat("###,###");
 		requestUrl = requestUrl.substring(1);
 		int pageBlock = 14; 
 		int end = pageBlock * currentPage; 
@@ -86,6 +86,11 @@ public class AShopService {
 		String url = requestUrl+"?select="+select+"&search="+search+"&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		no = (currentPage-1)*14;
+		for(int i = 0; i < shops.size(); i++) {
+			String pay = forematter.format(shops.get(i).getPay());
+			shops.get(i).setShopPay(pay);
+		}
+		
 		model.addAttribute("shops", shops);
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
@@ -101,34 +106,36 @@ public class AShopService {
 		}catch(Exception e){
 			currentPage = 1;
 		}
+		DecimalFormat forematter = new DecimalFormat("###,###");
 		AShopDTO shop = shopMapper.ashopInfo(name, category, company);
-
+		String pay = forematter.format(shop.getPay());
+		shop.setShopPay(pay);
 		model.addAttribute("shop", shop);
 		model.addAttribute("cp", cp);
 	}
 	
-	public void ashopUpdate(String pay, String selectedValues, Model model) {
+	public void ashopUpdate(String shopPay, String selectedValues, Model model) {
 		String[] checkData = selectedValues.split(",");
 		AShopDTO shop = new AShopDTO();
 		shop.setNo(Integer.parseInt(checkData[0]));
 		shop.setCategory(checkData[1]);
 		shop.setProduct(checkData[2]);
 		shop.setCompany(checkData[3]);
-		pay = pay.replaceAll("[^\\w+]","");
-		shop.setPay(pay);
+		shopPay = shopPay.replaceAll("[^\\w+]","");
+		shop.setPay(Integer.parseInt(shopPay));
 		shop.setInventory(Integer.parseInt(checkData[4]));
 		shop.setImageFile(checkData[5]);
 		shop.setInfo(checkData[6]);
 		model.addAttribute("shop",shop);
 	}
+	
 	public String updateShop(String selectedValues, MultipartFile imageFile, String fileName) {
 		DecimalFormat forematter = new DecimalFormat("###,###");
 		String[] checkData = selectedValues.split(",");
 		String product = checkData[0];
 		String category = checkData[1];
 		String company = checkData[2];
-		int payData = Integer.parseInt(checkData[3]);
-		String pay = forematter.format(payData);
+		int pay = Integer.parseInt(checkData[3]);
 		int inventory = Integer.parseInt(checkData[4]);
 		String info = checkData[5];
 		if(imageFile != null) {
@@ -213,12 +220,20 @@ public class AShopService {
 	}
 	
 	public void ashopOrderInfo(String selectedValues, Model model) {
+		DecimalFormat forematter = new DecimalFormat("###,###");
 		int no = Integer.parseInt(selectedValues);
 		int listNo = 0;
 		AShopDTO order = shopMapper.ashopOrderInfo(no);
 		ArrayList<AShopDTO> lists = shopMapper.ashopOrderList(no);
 		model.addAttribute("no",no);
 		model.addAttribute("order",order);
+		
+		for(int i = 0; i < lists.size(); i++) {
+			String pay = forematter.format(lists.get(i).getPay());
+			System.out.println(pay);
+			lists.get(i).setShopPay(pay);
+		}
+		
 		model.addAttribute("lists",lists);
 		model.addAttribute("listNo",listNo);
 	}

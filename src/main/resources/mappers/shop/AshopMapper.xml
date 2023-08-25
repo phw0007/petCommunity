@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.care.project.ashop.AShopMapper">
+	<resultMap type="com.care.project.ashop.AShopDTO" id="ashopDto">
+		<id column="no" property="no"/>
+		<result column="category" property="category"/>
+		<result column="product" property="product"/>
+		<result column="company" property="company"/>
+		<result column="pay" property="pay"/>
+		<result column="inventory" property="inventory"/>
+		<result column="image_file" property="imageFile"/>
+		<result column="info" property="info"/>
+		<result column="id" property="id"/>
+		<result column="user_name" property="userName"/>
+		<result column="address" property="address"/>
+		<result column="mobile" property="mobile"/>
+		<result column="pay_type" property="payType"/>
+		<result column="pay_check" property="payCheck"/>
+		<result column="order_count" property="orderCount"/>
+		<result column="write_date" property="writeDate"/>
+		<result column="shippin_name" property="shippinName"/>
+		<result column="shippin_address" property="shippinAddress"/>
+		<result column="shippin_mobile" property="shippinMobile"/>
+		<result column="shippin_memo" property="shippinMemo"/>
+		<result column="order_number" property="orderNumber"/>
+		<result column="impUid" property="impUid"/>
+	</resultMap>
+	
+	<select id="shopData" resultMap="ashopDto">
+		<choose>
+			<when test="select == 'category'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, category, product, company, pay, inventory
+				, image_file, info FROM project_shop WHERE category like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<when test="select == 'company'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, category, product, company, pay, inventory
+				, image_file, info FROM project_shop WHERE company like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<when test="select == 'product'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, category, product, company, pay, inventory
+				, image_file, info FROM project_shop WHERE product like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<otherwise>
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, category, product, company, pay, inventory
+				, image_file, info FROM project_shop WHERE category like ('%' ||  #{search} || '%') or
+				company like ('%' ||  #{search} || '%') or product like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="count">
+		<choose>
+	  		<when test="select == 'category'">
+	  			SELECT count(product) FROM project_shop WHERE category like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<when test="select == 'company'">
+	  			SELECT count(product) FROM project_shop WHERE company like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<when test="select == 'product'">
+	  			SELECT count(product) FROM project_shop WHERE product like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<otherwise>
+	  			SELECT count(product) FROM project_shop WHERE category like ('%' ||  #{search} || '%') or
+	  			company like ('%' ||  #{search} || '%') or product like ('%' ||  #{search} || '%')
+	  		</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insertShop">
+		<selectKey order="BEFORE" keyProperty="no" resultType="int">
+			SELECT nvl(max(no),0) + 1 FROM project_shop
+		</selectKey>
+		INSERT INTO project_shop VALUES(#{no}, #{category}, #{product}, #{company}, #{pay}, #{inventory}, #{imageFile}, #{info})
+	</insert>
+	
+	<select id="checkShop" resultMap="ashopDto">
+		SELECT * FROM project_shop WHERE product=#{product}
+	</select>
+	
+	<select id="ashopInfo" resultMap="ashopDto">
+		SELECT * FROM project_shop WHERE product=#{product} AND category=#{category} AND company=#{company}
+	</select>
+	
+	<update id="updateShopImage">
+		UPDATE project_shop SET category=#{category}, company=#{company}, pay=#{pay}, inventory=#{inventory}, image_file=#{imageFile}, info=#{info} WHERE product=#{product}
+	</update>
+	
+	<update id="updateShop">
+		UPDATE project_shop SET category=#{category}, company=#{company}, pay=#{pay}, inventory=#{inventory}, info=#{info} WHERE product=#{product}
+	</update>
+	
+	<delete id="ashopDelete">
+		DELETE FROM project_shop WHERE product=#{product} AND category=#{category} AND no=#{no}
+	</delete>	
+		
+	<update id="ashopNoUpdate">
+		UPDATE project_shop SET no = no - 1 WHERE no >= #{no}
+	</update>
+	
+	<select id="shopOrderData" resultMap="ashopDto">
+		<choose>
+			<when test="select == 'id'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, user_name, address, mobile, write_date
+				, pay_type, pay_check FROM project_order WHERE id like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<when test="select == 'userName'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, user_name, address, mobile, write_date
+				, pay_type, pay_check FROM project_order WHERE user_name like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<when test="select == 'writeDate'">
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, user_name, address, mobile, write_date
+				, pay_type, pay_check FROM project_order WHERE write_date like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<otherwise>
+				SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, id, user_name, address, mobile, write_date
+				, pay_type, pay_check FROM project_order WHERE id like ('%' ||  #{search} || '%') or
+				user_name like ('%' ||  #{search} || '%') or write_date like ('%' ||  #{search} || '%'))AAA 
+				WHERE AAA.rn BETWEEN #{begin} AND #{end}
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="orderCount">
+		<choose>
+	  		<when test="select == 'id'">
+	  			SELECT count(id) FROM project_order WHERE id like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<when test="select == 'userName'">
+	  			SELECT count(id) FROM project_order WHERE user_name like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<when test="select == 'writeDate'">
+	  			SELECT count(id) FROM project_order WHERE write_date like ('%' ||  #{search} || '%')
+	  		</when>
+	  		<otherwise>
+	  			SELECT count(id) FROM project_order WHERE id like ('%' ||  #{search} || '%') or
+	  			user_name like ('%' ||  #{search} || '%') or write_date like ('%' ||  #{search} || '%')
+	  		</otherwise>
+		</choose>
+	</select>
+	
+	<select id="ashopOrderInfo" resultMap="ashopDto">
+		SELECT * FROM project_order WHERE no=#{no}
+	</select>
+	
+	<select id="ashopOrderList" resultMap="ashopDto">
+		SELECT * FROM project_order_list WHERE no=#{no}
+	</select>
+	
+	<delete id="orderDelete">
+		DELETE FROM project_order WHERE no=#{no}
+	</delete>	
+		
+	<update id="orderNoUpdate">
+		UPDATE project_order SET no = no - 1 WHERE no >= #{no}
+	</update>
+	
+	<delete id="orderListDelete">
+		DELETE FROM project_order_list WHERE no=#{no}
+	</delete>	
+		
+	<update id="orderListNoUpdate">
+		UPDATE project_order_list SET no = no - 1 WHERE no >= #{no}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+  

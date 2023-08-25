@@ -32,34 +32,39 @@
 .comment ul li{list-style:none;width:750px;padding:5px 0 5px 0;border-bottom:1px solid #e6e6e6; }
 .comment ul li:first-child{border-bottom:0;}
 .comment ul li > span{font-size:18px;}
+.comment ul li:last-child > span{margin-left:20px;}
 .comment ul li> b{font-weight:100; padding-left:30px; font-size:15px;}
+.commentD{margin-left:20px;}
 
 
 
 /*boardForm*/
-.boardForm{width:1200px;margin:0 auto; height:800px;padding-top:100px;
+.boardForm{width:1200px;margin:0 auto; height:900px;padding-top:100px;
           font-family: 'Poor Story', cursive;}
 .boardForm > h1{border-bottom:2px solid black; width:500px; padding-bottom:20px;}
 .boardForm ul{list-style: none;}
 .boardCategory,
 .boardFormT{float:left;margin-top:50px;}
 
+
 /*카테고리 선택하는 곳*/
 .boardCategory{background:#ffeda1;width:170px;font-size:20px;}
-.boardCategory > ul li a{text-decoration: none;color:black;padding-right:30px;}
+.boardCategory > ul li a{text-decoration: none;color:black;padding-right:15px;padding-left:15px;}
 .boardCategory > ul{text-align:center;}
-.boardCategory > ul li{padding-bottom:10px;}
+.boardCategory > ul li{padding-bottom:10px;padding-right:15px;}
+
 
 /*게시판 div*/
 .boardFormT{width:850px; margin-left:50px; margin-bottom:15px; }
 .boardFormT > span{ margin-left:400px; font-size:20px;}
 /*게시판에 있는 table */
-.formTable{border:1px solid black;padding:20px;font-size:20px;}
+.formTable{border:1px solid black;padding:20px;font-size:20px;margin-bottom:30px;}
 .formTable th{border-bottom:1px solid #e6e6e6; padding-bottom:10px;}
 .formTable td{border-bottom:1px solid #e6e6e6; padding:5px 0 5px 0; text-align: center;}
+.formTable > span{padding-right:100px;}
 .writeB{background:#fcd11e; margin-top:50px;width:70px; height:40px;
          margin-left:750px; font-family: 'Poor Story', cursive;font-size:20px;border:none;}
-         
+.result{text-align:center;font-size:18px;text-decoration:none; color:black;}
 /*boardModify글 수정 */
 .boardModify{width:1200px; margin:0 auto; height:1200px;padding-top:100px;font-family: 'Poor Story'}
 .boardModify{margin-top:50px;}
@@ -72,4 +77,5 @@
 .Mlist,.modi,.back{background:#fcd11e; width:70px; height:40px;
                         font-family: 'Poor Story', cursive;font-size:20px;}
                         
-
+.searchBoard{height:20px; margin-top:20px;margin-left:40px;}
+.search{width:100px; height:30px;font-family:'Poor Story';}

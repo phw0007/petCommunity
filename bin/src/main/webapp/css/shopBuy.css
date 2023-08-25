@@ -1,0 +1,54 @@
+@charset "UTF-8";
+ul,li{list-style:none;}
+a{text-decoration:none; color:black;}
+.shopping{width:1200px; margin:0 auto; padding-top:100px; font-family: 'Poor Story'; }
+.shopping h1{font-size: 30px; border-bottom: 2px solid #000; padding-bottom: 15px; font-weight: bold;}
+
+.shopProduct tr{text-align: center;}
+.shopProduct tr th{font-weight: bold; font-size: 22px; width: 120px; 
+border-bottom: 2px solid #000; padding: 10px 0 10px 0;}
+.shopProduct tr th:nth-child(3){width: 500px;}
+.shopProduct tr th:nth-child(4){width: 150px;}
+.shopProduct tr td{font-size: 20px; width: 100px; vertical-align: middle; padding: 10px 0 10px 0;
+border-bottom: 1px solid #000;}
+
+.shopAddressLeft{float: left; width: 80%; border-right: 2px solid #000;}
+.shopAddressRight{float: right; width: 19.8%;}
+
+.shopAddress{font-size: 22px; height: 414px; margin-top:10px; border-bottom: 2px solid #000;}
+.shopAddress p {font-size: 24px; border-bottom: 2px solid #000; border-top: 2px solid #000;
+padding-bottom: 15px; padding-top: 15px;font-weight: bold;}
+
+.shopAddressLeft input {font-size: 20px; font-family: 'Poor Story';}
+.shopAddressLeft ul li{padding-top: 10px; }
+.shopAddressLeft ul{padding-bottom: 10px;}
+.shopAddressLeft ul li:nth-child(2) input {width: 250px;}
+.shopAddressLeft ul li:nth-child(3) input{margin-top: 10px;}
+.shopAddressLeft ul li:nth-child(4) input{margin-top: 10px;}
+#memoSelect{vertical-align: middle; border: 2px solid #000; 
+	height: 34px; width: 500px; font-family: 'Poor Story'; font-size: 18px;font-weight:bold;}
+#memoTextBox{width: 500px;}	
+.shopAddressLeft #address{width: 600px;}
+.shopAddressLeft #detailAddress{width: 400px;}
+.shopAddressLeft span{display: inline-block; width: 150px;}
+
+.shopAddressRight ul li{padding-top: 10px;}
+.shopAddressRight p {padding-left: 10px;}
+.shopAddressRight ul li {padding-left: 10px;}
+
+.paymentLift{float: left; width: 80%;}
+.paymentRight{float: Right; width: 19.8%;  height: 250px;border-left: 2px solid #000;}
+
+.payment{font-size: 22px; height: 250px; border-bottom: 2px solid #000;}
+.payment p {font-size: 24px; border-bottom: 2px solid #000; padding-bottom: 15px; 
+padding-top: 15px;font-weight: bold;}
+.paymentLift ul li{padding-top: 10px; }
+.paymentLift ul li div{display: inline-block; vertical-align: middle;}
+
+.paymentRight p {padding-left: 10px;}
+.paymentRight ul li{padding-top: 10px;}
+.paymentRight ul li {padding-left: 40px;}
+.paymentRight ul li span{display: inline-block; width: 100px;}
+.paymentRight ul li:nth-child(4){padding-left:0; padding-top:30px; text-align: center;}
+.paymentRight ul li:nth-child(4) input{border:2px solid #000; height: 40px; width: 120px;
+background-color: #fcd11e; font-weight:bold; font-size: 18px; text-align: center;}

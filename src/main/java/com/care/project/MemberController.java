@@ -111,16 +111,9 @@ public class MemberController {
       return "member/update";
    }
 
-
-
-
    @GetMapping("info")
    public String info() {
       return "mall/info";
-   }
-   @GetMapping("shopping")
-   public String shopping() {
-      return "mall/shopping";
    }
 
    @PostMapping("updateProc")
