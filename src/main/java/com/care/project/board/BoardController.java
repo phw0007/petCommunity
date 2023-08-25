@@ -118,19 +118,6 @@ public class BoardController {
 	   }
 	
 	
-	@RequestMapping("boardDownload")
-	public void boardDownload(
-			@RequestParam(value="no", required = false)String n, 
-			HttpServletResponse res) throws IOException{
-		
-		service.boardDownload(n, res);
-		
-//		boolean result = service.boardDownload(n, res);
-//		if(result == false)
-//			return "redirect:boardForm";
-//	
-//		return "forward:boardContent"; 
-	}
 	
 	@GetMapping("boardModify")
 	public String boardModify(
