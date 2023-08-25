@@ -150,13 +150,6 @@ public class MemberController {
 
 
 
-
-	@GetMapping("info")
-	public String info() {
-		return "mall/info";
-	}
-
-
 	@PostMapping("updateProc")
 	public String updateProc(MemberDTO member, String confirm) {
 		String id = (String) session.getAttribute("id");
