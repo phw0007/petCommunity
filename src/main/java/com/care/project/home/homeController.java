@@ -1,6 +1,7 @@
 package com.care.project.home;
 
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.care.project.board.BoardDTO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -23,11 +25,27 @@ public class homeController {
 	
 	
 	@RequestMapping("home")
-	public String home(
-			@RequestParam(value="currentPage", required = false)String cp,
-			Model model) {
-		System.out.println("호출되는거야?");
-		
+	public String home(Model model) {
+			
+		 List<photoDTO> mphotos = service.getHomePhotos(); 
+	        model.addAttribute("mphotos", mphotos);
+	  
+	        List<BoardDTO> mboards = service.mainhomeboard();
+//	        if (mboards == null) {
+//	            System.out.println("mboards is null");
+//	        } else {
+//	            System.out.println("mboards in model: " + mboards);
+//
+//	            for (BoardDTO board : mboards) {
+//	                System.out.println("Board ID: " + board.getId());
+//	                System.out.println("Board Title: " + board.getTitle());
+//	               System.out.println(board.getNo());
+//	               System.out.println(board.getWriteDate());
+//	            }
+//	        }
+	        model.addAttribute("mboards", mboards);
+	 //     System.out.println(mboards);
+	      //  System.out.println("mboards in model: " + model.getAttribute("mboards"));
 		return "default/home";
 	}
 	
@@ -35,31 +53,24 @@ public class homeController {
 	 @Autowired
 	    private photoMapper imageMapper; // 실제 매퍼 인터페이스를 구현한 클래스의 빈을 주입
 
-//	    @RequestMapping("photo")
-//	    public String photo(Model model2) {
-//	        List<Image> images = imageMapper.getAllImages(); // 이미지 리스트를 매퍼를 통해 가져옴
-//	        model2.addAttribute("images", images); // JSP로 이미지 리스트를 전달
-//	        System.out.println();
-//	        return "photo/photoMain"; // 이미지 리스트를 보여줄 JSP 파일의 이름
-//	    }
+
 	
 	
-	
-	@RequestMapping("photo")
-	public String photo(
-			Model model, Model model2) {
-		List<photoDTO> photos = service.getAllPhotos();
-	    model.addAttribute("photos", photos);
+	@RequestMapping("photoMain")
+	public String photo(@RequestParam(value="currentPage", required = false)String cp,
+			String select, String search, Model model) {
 		
-	    List<Image> images = imageMapper.getAllImages(); // 이미지 리스트를 매퍼를 통해 가져옴
-        model2.addAttribute("images", images); // JSP로 이미지 리스트를 전달
-	   
-        
-        
-        
+		service.photo(cp,select, search, model);
+		
+		
+   
 		return "photo/photoMain";
 	}
-	
+	 
+
+//	List<photoDTO> photos = service.getAllPhotos();
+//    model.addAttribute("photos", photos);
+
 	@RequestMapping("photoWrite")
 	public String photoWrite(
 			@RequestParam(value="currentPage", required = false)String cp,
@@ -71,6 +82,9 @@ public class homeController {
 		
 	}
 	
+	
+	
+	
 	@PostMapping("photoWriteProc")
 	public String photoWriteProc(Model model, MultipartHttpServletRequest multi) {
 		String msg = service.photoWriteProc(multi);
@@ -81,23 +95,32 @@ public class homeController {
 			return "redirect:photoMain";
 		
 		model.addAttribute("msg", msg);
-		return "redirect:photo";
+		return "redirect:photoMain";
 	}
 	
 	
-	@RequestMapping("potoContent")
-	public String photoContent(
-			@RequestParam(value="no", required = false)String n, Model model) {
-		photoDTO photo = service.photoContent(n);
-		if(photo == null) {
-			System.out.println("boardContent 게시글 번호 : " + n);
-			return "redirect:photo";
-		}
-		model.addAttribute("photo", photo);
+	@RequestMapping("photoContent")
+	public String photoContent( @RequestParam(value="no", required = false)String n,
+	        
+	         @RequestParam(value="cp", required=false)String cp,
+	         Model model, Model model2) {
+	      photoDTO photo = service.photoContent(n,cp);
+	      photoDTO photos = new photoDTO();
+//	      System.out.println(n);
+//	      System.out.println("페이지"+cp);
+	      if(photo == null) {
+	         System.out.println("boardContent 게시글 번호 : " + n);
+	         return "redirect:photoMain";
+	      }
+	      List<photoDTO> aphotos = service.getAllPhotos();
+		    model2.addAttribute("photos", aphotos);
+		    
+	      model.addAttribute("photo", photo);
+	      model.addAttribute("cp",cp); {
+		
 		return "photo/photoContent";
-		
-		
 	}
-	
+	}		
+			
 
 }
