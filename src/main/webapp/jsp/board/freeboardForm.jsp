@@ -7,20 +7,20 @@
 </style>
 <c:import url = "/header"/>
 <div class="boardForm">
-
+<input type="hidden" name="category" value="자유게시판">
 	<h1>자유게시판</h1>
 	<div class="boardCategory">
 		<ul>
-			<li><a href="location.href=''">공지사항</a></li>
-			<li><a href="location.href='freeboardForm'">자유게시판</a></li>
-			<li><a href="location.href='qnaoardForm'">Q&A</a></li>
-			<li><a href="location.href=''">강아지</a></li>
-			<li><a href="location.href=''">고양이</a></li>
-			<li><a href="location.href=''">파충류</a></li>
-			<li><a href="location.href=''">조류</a></li>
-			<li><a href="location.href=''">수중생물</a></li>
-			<li><a href="location.href=''">소동물</a></li>
-			<li><a href="location.href=''">기타동물</a></li>
+			<li><a href="">공지사항</a></li>
+			<li><a href="freeboardForm">자유게시판</a></li>
+			<li><a href="qNaboardForm">Q&A</a></li>
+			<li><a href="dogboardForm">강아지</a></li>
+			<li><a href="catboardForm">고양이</a></li>
+			<li><a href="reptileboardForm">파충류</a></li>
+			<li><a href="birdboardForm">조류</a></li>
+			<li><a href="fishboardForm">수중생물</a></li>
+			<li><a href="smallboardForm">소동물</a></li>
+			<li><a href="etcboardForm">기타동물</a></li>
 		</ul>
 	</div>
 
@@ -35,7 +35,7 @@
 				<th width="50">추천수</th>
 				<th width="50">조회수</th>	
 			</tr>
-			<c:forEach var="freeboard" items="${freeboards}" varStatus="status">
+			<c:forEach var="freeboard" items="${boards}" varStatus="status">
 		
 				<tr>
 					<td>${totalCount - ((currentPage-1) * 10 + status.index)}</td>
@@ -44,12 +44,14 @@
 					<td>${freeboard.writeDate }</td>
 					<td>${freeboard.likes }</td>
 					<td>${freeboard.hits }</td>
+					
 				</tr>
 			</c:forEach>
 		</table>
 		<div class="result">${result }</div>
 		 <div class="searchBoard">
 	   <form action="boardSearch">
+	  
 		<!--  <select name="select" style="width:100px; height:30px;font-family:'Poor Story';">
 			<option value="" >전체</option>
 			<option value="id">아이디</option>
@@ -57,6 +59,7 @@
 		</select> <input type="text" name=search style="width:500px; height:30px;"> 
 		<input type="submit" value="검색" style="width:100px; height:30px; font-family:'Poor Story';background:#fcd11e;">-->
 					<select name="select" class="search">
+					
 						<c:choose>
 							<c:when test="${select == 'title'}">
 								<option value="">전체</option>
@@ -75,7 +78,8 @@
 							</c:otherwise>
 						</c:choose>
 					</select>
-					<input type="text" name="search" style="width:500px; height:30px;" value="${search}"> 
+					 <input type="hidden" name="category" value="자유게시판">
+					<input type="text" name="search" style="width:600px; height:30px;" value="${search}"> 
 		<input type="submit" value="검색" style="width:100px; height:30px; font-family:'Poor Story';background:#fcd11e;">
 	</form>
 	</div>

@@ -40,4 +40,3 @@
 <c:import url="/footer" />
 
 
-
