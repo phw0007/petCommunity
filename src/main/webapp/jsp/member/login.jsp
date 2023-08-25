@@ -29,8 +29,8 @@
 	 -->
 	<tr><td>
 		<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&
-		client_id=5fb646c4e122b6bf77a3b660ed215c0d&
-		redirect_uri=http://localhost:8086/dbQuiz/kakaoLogin">
+		client_id=79e0a43154447405870c6f3c1f1b5267&
+		redirect_uri=http://localhost/kakaoLogin">
 			<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" />
 		</a>
 	</td></tr>

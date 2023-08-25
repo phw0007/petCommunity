@@ -191,7 +191,7 @@ public class MemberController {
       return "member/email";
    }
    
-   @PostMapping("register")
+   @RequestMapping("register")
    public String register(String email, Model model) {
       model.addAttribute("email",email);
        return "member/register";
@@ -206,6 +206,8 @@ public class MemberController {
         
         return authenticationResult; // "인증 성공" 또는 "인증 실패"를 반환
     }
+   
+   
    
 
 }
