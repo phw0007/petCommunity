@@ -84,11 +84,12 @@ function commentDeleteProc(url, selectedValues, commentId) {
      if (errorMessage) {
          alert(errorMessage);
      }
-     
+
      function goBack() {
-       window.history.back(); // 현재 창의 브라우저 히스토리에서 이전 페이지로 이동
-     }
-  
+         window.history.back(); // 현재 창의 브라우저 히스토리에서 이전 페이지로 이동
+       }
+
+ 
 </script>
 
 </head>
@@ -115,18 +116,6 @@ function commentDeleteProc(url, selectedValues, commentId) {
     </c:otherwise>
 </c:choose>
 	   </div>
-		<!--<c:choose>
-			<c:when test="${id ne null}">
-				<a href='javascript: like_func();'><img
-					src='/image/made.png' id='like_img'></a>
-			</c:when>
-			<c:otherwise>
-				<a href='javascript: login_need();'><img
-					src='/image/made.png'></a>
-			</c:otherwise>
-		</c:choose>-->
-
-
 
 		<div class="likeB"><button class="likes" type="button" onclick="clickLike()"><img src="/image/made.png" alt="하트" style="width:70px; height:70px; ">추천수:<span>${board.likes}</span></button></div>
 	 

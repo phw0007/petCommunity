@@ -12,6 +12,16 @@
 <head>
 <meta charset="UTF-8">
 <title>boardWrite</title>
+<script>
+
+function checkContentLength(textarea) {
+	const maxLength = 600;
+	if (textarea.value.length > maxLength) {
+		alert('내용은 600자 이내로 입력해주세요.');
+		textarea.value = textarea.value.substring(0, maxLength);
+	}
+}
+</script>
 </head>
 <body>
 	<div class="boardWrite">
@@ -30,13 +40,13 @@
 			<option value="기타동물">기타동물</option>
 		</select><br><br>
 		<input type="text" name="title" placeholder="제목을 입력해주세요." id="title" style="width: 800px; height: 30px;"><br><br>
-	    <textarea class="contentWrite" rows="20" cols="130" name="content" placeholder="내용을 입력해주세요."></textarea><br><br>
-	      파일 첨부 :<label class="input-file" for="upfile">
-          파일선택
-        </label>
+	    <textarea class="contentWrite" rows="20" cols="130" oninput="checkContentLength(this)"  name="content" placeholder="내용을 입력해주세요(600자이내)."></textarea><br><br>
+	      파일 첨부 :
+          
+     
         <input type="file" id="fileImg" class="ashopFile" name="upfile" onchange="fileURL()" accept="image/*"/>
        <br><br>
-       <input type="button" value="등록" class="ashop_select" onclick="uploadImage2()"/>
+       <!--  <input type="button" value="등록" class="ashop_select" onclick="uploadImage2()"/>-->
          <div class="button">
 			<input class="write" type = "submit" value = "글 등록하기">
 			<input class="list" type = "button" value = "목록" onclick="location.href = 'freeboardForm'">
@@ -46,5 +56,8 @@
 
 <c:import url = "/footer"/>
 </body>
+
 </html>
+
+
 

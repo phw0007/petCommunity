@@ -64,4 +64,3 @@ var xhr;
 
 <c:import url="/footer" />
 
-

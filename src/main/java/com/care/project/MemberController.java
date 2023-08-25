@@ -111,10 +111,6 @@ public class MemberController {
       return "member/update";
    }
 
-   @GetMapping("info")
-   public String info() {
-      return "mall/info";
-   }
 
    @PostMapping("updateProc")
    public String updateProc(MemberDTO member, String confirm) {
