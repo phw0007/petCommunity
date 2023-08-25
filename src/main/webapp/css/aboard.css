@@ -54,8 +54,8 @@
 	.annoRegister  ul > li:nth-child(2) {float: left; width: 100%;}
 	.memberViews > ul > li:nth-child(4) {float: left; margin-right: 50px;}
 	.memberViews > ul > li:nth-child(6) > span{float: left;}
-	.content{display: inline-block; width: 90%; height: 340px; resize: none; border:2px solid #000;
-	font-size: 22px; font-family: 'Poor Story'; padding:10px;}
+	.content{display: inline-block; width: 90%; resize: none; border:2px solid #000;
+	font-size: 22px; font-family: 'Poor Story'; padding:10px; }
 	.AnnoContent > textarea{display: inline-block; width: 90%; height: 340px; resize: none; border:2px solid #000;
 	font-size: 22px; font-family: 'Poor Story'; padding:10px;}
 	
