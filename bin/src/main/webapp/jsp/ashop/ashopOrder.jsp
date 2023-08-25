@@ -124,4 +124,4 @@ function getDeleteShop(url, selectedValues) {
 	</div>
 </div>
 </body>
-</html>s
+</html>

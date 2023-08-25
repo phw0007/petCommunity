@@ -17,26 +17,28 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class MemberController {
-	@Autowired
-	private MemberService service;
-	@Autowired
-	private HttpSession session;
+   @Autowired
+   private MemberService service;
+   @Autowired
+   private HttpSession session;
 
-	@RequestMapping("index")
-	public String index() {
-		return "member/index";
-	}
+   @RequestMapping("index")
+   public String index() {
+      return "member/index";
+   }
 
 
-	@RequestMapping("header")
-	public String header() {
-		return "default/header";
-	}
+  
+   @RequestMapping("header")
+   public String header() {
+      return "default/header";
+   }
 
-	@RequestMapping("main")
-	public String main() {
-		return "default/main";
-	}
+   @RequestMapping("main")
+   public String main() {
+      return "default/main";
+   }
+
 
 	@RequestMapping("footer")
 	public String footer() {
@@ -57,6 +59,7 @@ public class MemberController {
 	
 	
 
+
 	@GetMapping("login")
 	public String login() {
 	    // 로그인 상태를 확인하여 리다이렉트할 페이지를 결정합니다.
@@ -67,38 +70,43 @@ public class MemberController {
 	    }
 	}
 
-	@PostMapping("mloginProc")
-	public String mloginProc(MemberDTO member) {
-		String result = service.loginProc(member);
+  
+   @PostMapping("mloginProc")
+   public String mloginProc(MemberDTO member) {
+	   System.out.println("로그인되나여");
+      String result = service.loginProc(member);
 
-		String id = (String)session.getAttribute("id");
-//		if(id.endsWith("admin")) {
-//			return "redirect:aindex";
-//		}
-		if(result.equals("로그인 성공")) {
+      String id = (String)session.getAttribute("id");
+//      if(id.endsWith("admin")) {
+//         return "redirect:aindex";
+//      }
+      if(result.equals("로그인 성공")) {
 
-			return "redirect:index2";
-		}
-		
-		return "member/login";
-	}
+         return "redirect:index2";
+      }
+      
+      return "member/login";
+   }
 
 
 
-	@PostMapping("registerProc")
-	public String registerProc(MemberDTO member, String confirm) {
-		String result = service.registerProc(member, confirm);
-		if (result.equals("회원 등록 완료")) {
-			return "redirect:index";
-		}
-		return "member/register";
-	}
+   @PostMapping("registerProc")
+   public String registerProc(MemberDTO member, String confirm) {
+      String result = service.registerProc(member, confirm);
+      if (result.equals("회원 등록 완료")) {
+         return "redirect:index";
+      }
+      return "member/register";
+   }
+
 
 	@RequestMapping("logout")
 	public String logout() {
 		session.invalidate();
 		return "forward:login";
 	}
+
+ 
 
 	@RequestMapping("userInfo")
 	public String userInfo(String id, @RequestParam(value = "currentPage", required = false) String cp, Model model) {
@@ -114,7 +122,8 @@ public class MemberController {
 		return "member/userInfo";
 	}
 	
-	@RequestMapping("cart")
+   
+   @RequestMapping("cart")
 	public String cart(String id, @RequestParam(value = "currentPage", required = false) String cp, Model model) {
 
 		if (session.getAttribute("id") == null) {
@@ -127,6 +136,8 @@ public class MemberController {
 		model.addAttribute("member", member);
 		return "mall/cart";
 	}
+
+
 
 	@GetMapping("update")
 	public String update() {
@@ -162,14 +173,6 @@ public class MemberController {
 	}
 	
 
-	@GetMapping("delete")
-	public String delete() {
-		String id = (String) session.getAttribute("id");
-		if (id == null || id.isEmpty()) {
-			return "redirect:login";
-		}
-		return "member/delete";
-	}
 
 	@PostMapping("deleteProc")
 	public String deleteProc(String pw, String confirmPw, Model model) {
@@ -201,33 +204,51 @@ public class MemberController {
 	}
 
 
-	@ResponseBody
-	@PostMapping(value = "mySendEmail", produces = "text/plain; charset=utf-8")
-	public String sendEmail(@RequestBody(required = false) String email) {
-		return service.sendEmail(email);
-	}
 
-	@ResponseBody
-	@PostMapping(value = "mySendAuth", produces = "text/plain; charset=utf-8")
-	public String sendAuth(@RequestBody(required = false) String auth) {
-	    String authResult = service.sendAuth(auth); // 인증 결과를 받아옴
 
-	    return authResult; // "인증 성공" 또는 "인증 실패" 반환
-	}
-	
-	
-	@GetMapping("email")
-	public String email() {
-		return "member/email";
-	}
-	
-	@PostMapping("register")
-	public String register(String email, Model model) {
-		model.addAttribute("email",email);
-	    return "member/register";
-	}
-	
-	@PostMapping(value = "emailProc", produces = "text/plain; charset=utf-8")
+   
+
+   @GetMapping("delete")
+   public String delete() {
+      String id = (String) session.getAttribute("id");
+      if (id == null || id.isEmpty()) {
+         return "redirect:login";
+      }
+      return "member/delete";
+   }
+
+  
+
+
+
+
+   @ResponseBody
+   @PostMapping(value = "mySendEmail", produces = "text/plain; charset=utf-8")
+   public String sendEmail(@RequestBody(required = false) String email) {
+      return service.sendEmail(email);
+   }
+
+   @ResponseBody
+   @PostMapping(value = "mySendAuth", produces = "text/plain; charset=utf-8")
+   public String sendAuth(@RequestBody(required = false) String auth) {
+       String authResult = service.sendAuth(auth); // 인증 결과를 받아옴
+
+       return authResult; // "인증 성공" 또는 "인증 실패" 반환
+   }
+   
+   
+   @GetMapping("email")
+   public String email() {
+      return "member/email";
+   }
+   
+   @PostMapping("register")
+   public String register(String email, Model model) {
+      model.addAttribute("email",email);
+       return "member/register";
+   }
+   
+   @PostMapping(value = "emailProc", produces = "text/plain; charset=utf-8")
     @ResponseBody
     public String emailProc(@RequestBody(required = false) String email) {
         // 여기서 인증 코드를 확인하고 처리하는 로직을 구현하세요.
@@ -236,6 +257,6 @@ public class MemberController {
         
         return authenticationResult; // "인증 성공" 또는 "인증 실패"를 반환
     }
-	
+   
 
 }

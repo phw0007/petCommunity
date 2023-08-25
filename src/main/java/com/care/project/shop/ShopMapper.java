@@ -1,13 +1,14 @@
 package com.care.project.shop;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.care.project.ashop.AShopDTO;
-import com.care.project.member.MemberDTO;
+
 
 @Mapper
 public interface ShopMapper {
@@ -23,6 +24,17 @@ public interface ShopMapper {
 
 	List<CartDTO> getCartItems(@Param("id") String id);
 	
-	void removeSelectedItems(@Param("id") String id, @Param("selectedItems") int[] selectedItems);
+	void removeSelectedItems(@Param("id") String id, @Param("productId") int productId);
 
+	void shopOrder(AShopDTO shopDto);
+
+	AShopDTO shopOrderDate(String writeDate);
+
+	void shippinData(AShopDTO shopDto);
+
+	AShopDTO getOrderData(@Param("id")String id, @Param("writeDate")String writeDate);
+
+
+	
 }
+

@@ -1,34 +1,47 @@
+
 package com.care.project.shop;
 
-import java.util.ArrayList;
+import java.text.DecimalFormat;
+import java.util.Map;
 
-import java.util.List;
-
-
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.HandlerMapping;
-
-import com.care.project.member.MemberDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+
+
+import java.util.List;
+
+
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+
+
+
 @Controller
 public class ShopController {
 	@Autowired private ShopService service;
+	@Autowired private HttpSession session;
+	
+	
 	 @Autowired
 	    private ShopService shopService;
-	 @Autowired
-		private HttpSession session;
+	 
 	
-
+	
+	
+	
 	@RequestMapping({"/shopping", "/food", "/snack", "/cloths", "/medi", "/pad", "/living"})
 	public String shopping(@RequestParam(value="currentPage", required = false)String cp,
 			String select, String search, Model model, HttpServletRequest request) {
@@ -61,7 +74,7 @@ public class ShopController {
 		service.shop(cp, select, search, model, category, page);
 		return "mall/shopping";
 	}
-	
+
 	
 	@RequestMapping("/shopIn")
 	public String shopIn(@RequestParam("productId") int productId, Model model) {
@@ -131,7 +144,7 @@ public class ShopController {
 	 
 	 
 	 @PostMapping("removeSelectedItems")
-	    public String removeSelectedItems(@RequestParam("selectedItems") int[] selectedItems) {
+	    public String removeSelectedItems(String selectedItems) {
 	        String id = (String) session.getAttribute("id");
 	        shopService.removeSelectedItems(id, selectedItems);
 
@@ -141,7 +154,35 @@ public class ShopController {
 
 	 
 	 
-	 
-	 
+	@RequestMapping("shopLink")
+	public String shopLink() {
+		return "mall/shopLink";
+	}
 	
+
+	
+	@RequestMapping("shopBuy")
+	public String shopBuy(String productPrice, String productId, String quantity, Model model) {
+		String id = (String)session.getAttribute("id");
+		if (id == null || id.isEmpty()) {
+			return "redirect:login";
+		}
+		service.getProduct(productPrice, productId, quantity, id, model);
+		return "mall/shopBuy";
+	}
+	
+
+	
+	@RequestMapping("callback")
+	public String callback(String orderUser, String shippingUser,String orderProduct) {
+		service.orderData(orderUser, shippingUser, orderProduct);
+		return "redirect:shopping";
+	}
+	
+	@RequestMapping("orderCancel")
+	public void orderCancel(String id, String writeDate) {
+		String accessToken = service.getAccessToken();
+		service.getPayment(id, writeDate, accessToken); 
+	}
 }
+

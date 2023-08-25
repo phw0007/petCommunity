@@ -21,6 +21,10 @@
 		<result column="pay_check" property="payCheck"/>
 		<result column="order_count" property="orderCount"/>
 		<result column="write_date" property="writeDate"/>
+		<result column="shippin_name" property="shippinName"/>
+		<result column="shippin_address" property="shippinAddress"/>
+		<result column="shippin_mobile" property="shippinMobile"/>
+		<result column="shippin_memo" property="shippinMemo"/>
 	</resultMap>
 	
 	<select id="shopData" resultMap="ashopDto">

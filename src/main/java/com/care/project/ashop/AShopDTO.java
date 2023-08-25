@@ -29,8 +29,15 @@ primary key(no)
 	private String mobile;
 	private String payType;
 	private String payCheck;
-	private String orderCount;
+	private int orderCount;
 	private String writeDate;
+	private String shippinName;
+	private String shippinAddress;
+	private String shippinMobile;
+	private String shippinMemo;
+	private String orderNumber;
+	private String impUid;
+
 	public int getNo() {
 		return no;
 	}
@@ -121,10 +128,10 @@ primary key(no)
 	public void setPayCheck(String payCheck) {
 		this.payCheck = payCheck;
 	}
-	public String getOrderCount() {
+	public int getOrderCount() {
 		return orderCount;
 	}
-	public void setOrderCount(String orderCount) {
+	public void setOrderCount(int orderCount) {
 		this.orderCount = orderCount;
 	}
 	public String getWriteDate() {
@@ -133,5 +140,43 @@ primary key(no)
 	public void setWriteDate(String writeDate) {
 		this.writeDate = writeDate;
 	}
+
+	public String getShippinName() {
+		return shippinName;
+	}
+	public void setShippinName(String shippinName) {
+		this.shippinName = shippinName;
+	}
+	public String getShippinAddress() {
+		return shippinAddress;
+	}
+	public void setShippinAddress(String shippinAddress) {
+		this.shippinAddress = shippinAddress;
+	}
+	public String getShippinMobile() {
+		return shippinMobile;
+	}
+	public void setShippinMobile(String shippinMobile) {
+		this.shippinMobile = shippinMobile;
+	}
+	public String getShippinMemo() {
+		return shippinMemo;
+	}
+	public void setShippinMemo(String shippinMemo) {
+		this.shippinMemo = shippinMemo;
+	}
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+	public String getImpUid() {
+		return impUid;
+	}
+	public void setImpUid(String impUid) {
+		this.impUid = impUid;
+	}
+
 
 }

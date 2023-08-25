@@ -13,6 +13,7 @@
     <title>장바구니</title>
 </head>
 <body>
+
 <script type="text/javascript">
   function updatePrice(productId) {
     var productPriceSpan = document.getElementById("productPrice_" + productId);
@@ -73,5 +74,6 @@
     </form>
 </div>
 <c:import url="/footer"/>
+
 </body>
 </html>

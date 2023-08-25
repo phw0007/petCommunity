@@ -35,7 +35,7 @@
 			</ul>
 		</div>
 		<div class="memberInfo">
-			<p><textarea class="siteInfo01" readonly="readonly">안녕하세요</textarea></p>
+			<p><textarea class="siteInfo01" readonly="readonly">${siteInfo}</textarea></p>
 			<p><input type="button" value="수정" class="siteUpdateBtn" onclick="location.href='siteUpdate02'"/></p>
 		</div>
 	</div>

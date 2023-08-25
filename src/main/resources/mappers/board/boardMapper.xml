@@ -19,13 +19,7 @@
 		<result column="like_check" property="likeCheck"/>
 		<result column="likes_id" property="likesId"/>
 	</resultMap>
-    
-    <insert id="boardWriteProc">
-		<selectKey order="BEFORE" keyProperty="no" resultType="int">
-			SELECT nvl(max(no),0) + 1 FROM project_board
-		</selectKey>
-		INSERT INTO project_board VALUES(#{no},#{id}, #{category}, #{title}, #{content},#{fileName}, #{writeDate}, 0,0  )
-	</insert>
+   
 
 	<select id="count">
 	  	SELECT count(no) FROM project_board
@@ -34,15 +28,121 @@
 	<select id="freecount">
 	  	SELECT count(no) FROM project_board where category='자유게시판'
 	</select>
- 
- 
+	
 	<select id="freeboardForm" resultMap="boardDto">
-	SELECT freeboard. * FROM 
-	(SELECT rownum as rn, free. * FROM (select no,title,id,category,write_date,hits,likes from project_board where category='자유게시판' order by no desc)free)
-	freeboard WHERE freeboard.rn BETWEEN #{begin} AND #{end}
+		SELECT freeboard. * FROM
+		(SELECT rownum as rn, free. * FROM (select
+		no,title,id,category,write_date,hits,likes from project_board where
+		category='자유게시판' order by no desc)free)
+		freeboard WHERE freeboard.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+	
+   <select id="qNacount">
+	  	SELECT count(no) FROM project_board where category='QnA'
+	</select>
+	
+	<select id="qNaboardForm" resultMap="boardDto">
+		SELECT qnaboard. * FROM
+		(SELECT rownum as rn, qna. * FROM (select
+		no,title,id,category,write_date,hits,likes from project_board where
+		category='QnA' order by no desc)qna)
+		qnaboard WHERE qnaboard.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+<select id="dogcount">
+	  	SELECT count(no) FROM project_board where category='강아지'
+	</select>
+	
+	<select id="dogboardForm" resultMap="boardDto">
+		SELECT board. * FROM
+		(SELECT rownum as rn, form. * FROM (select
+		no,title,id,category,write_date,hits,likes from project_board where
+		category='강아지' order by no desc)form)
+		board WHERE board.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="catcount">
+	  	SELECT count(no) FROM project_board where category='고양이'
+	</select>
+	
+	<select id="catboardForm" resultMap="boardDto">
+		SELECT board. * FROM
+		(SELECT rownum as rn, form. * FROM (select
+		no,title,id,category,write_date,hits,likes from project_board where
+		category='고양이' order by no desc)form)
+		board WHERE board.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+		<select id="reptilecount">
+	  	SELECT count(no) FROM project_board where category='파충류'
+	</select>
+	
+	<select id="reptileboardForm" resultMap="boardDto">
+		SELECT board. * FROM
+		(SELECT rownum as rn, form. * FROM (select
+		no,title,id,category,write_date,hits,likes from project_board where
+		category='파충류' order by no desc)form)
+		board WHERE board.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+		<select id="birdcount">
+	  	SELECT count(no) FROM project_board where category='조류'
+	</select>
+	
+	<select id="birdboardForm" resultMap="boardDto">
+		SELECT board. * FROM
+		(SELECT rownum as rn, form. * FROM (select
+		no,title,id,category,write_date,hits,likes from project_board where
+		category='조류' order by no desc)form)
+		board WHERE board.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+<select id="fishcount">
+	  	SELECT count(no) FROM project_board where category='수중생물'
+	</select>
+	
+	<select id="fishboardForm" resultMap="boardDto">
+		SELECT board. * FROM
+		(SELECT rownum as rn, form. * FROM (select
+		no,title,id,category,write_date,hits,likes from project_board where
+		category='수중생물' order by no desc)form)
+		board WHERE board.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="smallcount">
+	  	SELECT count(no) FROM project_board where category='소동물'
+	</select>
+	
+	<select id="smallboardForm" resultMap="boardDto">
+		SELECT board. * FROM
+		(SELECT rownum as rn, form. * FROM (select
+		no,title,id,category,write_date,hits,likes from project_board where
+		category='소동물' order by no desc)form)
+		board WHERE board.rn BETWEEN #{begin} AND #{end}
 	</select>
 
-
+		<select id="etccount">
+	  	SELECT count(no) FROM project_board where category='기타동물'
+	</select>
+	
+	<select id="etcboardForm" resultMap="boardDto">
+		SELECT board. * FROM
+		(SELECT rownum as rn, form. * FROM (select
+		no,title,id,category,write_date,hits,likes from project_board where
+		category='기타동물' order by no desc)form)
+		board WHERE board.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+	
+	 
+    <insert id="boardWriteProc">
+		<selectKey order="BEFORE" keyProperty="no" resultType="int">
+			SELECT nvl(max(no),0) + 1 FROM project_board
+		</selectKey>
+		INSERT INTO project_board VALUES(#{no},#{id}, #{category}, #{title}, #{content},#{fileName}, #{writeDate}, 0,0  )
+	</insert>
+	
 	<select id="boardContent" resultMap="boardDto">
 		SELECT * FROM project_board WHERE no=#{no}
 	</select>
@@ -96,15 +196,16 @@
 	<select id="boardSearch" resultMap="boardDto">
 		<choose>
 			<when test="select == 'title'">
-	SELECT BBB.* FROM ( SELECT rownum as rn, AAA.* FROM
-       (SELECT no, id, category, title, content, file_name, write_date, hits, likes FROM project_board WHERE title like ('%' || #{search} || '%')
-        ORDER BY no DESC) AAA) BBB
-WHERE BBB.rn BETWEEN #{begin} AND #{end}
+	        SELECT BBB.* FROM ( SELECT rownum as rn, AAA.* FROM
+            (SELECT no, id, category, title, content, file_name, write_date, hits, likes FROM project_board WHERE title
+            like ('%' || #{search} || '%')AND category=#{category}
+            ORDER BY no DESC) AAA) BBB
+          WHERE BBB.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'id'">
 				SELECT AAA.* FROM 
 				(SELECT rownum as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_board WHERE id like ('%' ||  #{search} || '%'))AAA 
+				, write_date, hits, likes FROM project_board WHERE id like ('%' ||  #{search} || '%')AND category=#{category})AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 				<otherwise>
@@ -127,7 +228,4 @@ WHERE BBB.rn BETWEEN #{begin} AND #{end}
 	  		</when>
 		</choose>
 	</select>
-	
-</mapper>
-
-
+	</mapper>

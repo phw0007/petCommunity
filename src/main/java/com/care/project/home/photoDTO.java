@@ -2,7 +2,7 @@ package com.care.project.home;
 
 public class photoDTO {
 	private String id;
-	private String nickname;
+	private String user_name;
 	private int no;
 	private String category;
 	private String title;
@@ -19,11 +19,11 @@ public class photoDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getuser_name() {
+		return user_name;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setuser_name(String user_name) {
+		this.user_name = user_name;
 	}
 	public int getNo() {
 		return no;
