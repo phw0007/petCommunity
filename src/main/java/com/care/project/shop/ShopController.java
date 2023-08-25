@@ -109,4 +109,8 @@ public class ShopController {
 		return "redirect:shopping";
 	}
 	
+	@RequestMapping("orderCancel")
+	public void orderCancel() {
+		service.orderCancel();
+	}
 }

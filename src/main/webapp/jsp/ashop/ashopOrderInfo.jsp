@@ -13,10 +13,11 @@
 <title>index</title>
 </head>
 <body>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script
-src="https://code.jquery.com/jquery-3.3.1.min.js"
-integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-crossorigin="anonymous"></script>
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 <script>
 function orderDeleteButton(no) {
 	let selectedValues = no;
@@ -42,18 +43,7 @@ function getDeleteShop(url, selectedValues) {
 }
 
 function cancelPay() {
-  jQuery.ajax({
-    // 예: http://www.myservice.com/payments/cancel
-    "url": "ashopOrder", 
-    "type": "POST",
-    "contentType": "application/json",
-    "data": JSON.stringify({
-      "merchant_uid": "2023-08-24 17:45:16aaaa", // 예: ORD20180131-0000011
-      "cancel_request_amount": 32970, // 환불금액
-      "reason": "테스트 결제 환불" // 환불사유
-    }),
-    "dataType": "json"
-  });
+	
 }
 </script>
 <c:import url="/aheader" />
@@ -124,7 +114,7 @@ function cancelPay() {
 				    </thead>
 				    <tbody>
 				    	<tr>
-				    		<td>${order.shippinName}</td>
+				    		<td>${order.orderNumber}</td>
 				    		<td>${order.shippinName}</td>
 				    		<td>${order.shippinAddress}</td>
 				    		<td>${order.shippinMobile}</td>
@@ -161,7 +151,7 @@ function cancelPay() {
 				</table>
 			</div>
 			<input type="button" value="삭제" class="ashopUpdate" onclick="orderDeleteButton(${order.no})"/>
-			<input type="button" value="주문취소" class="ashopUpdate" onclick="cancelPay()"/>
+			<input type="button" value="주문취소" class="ashopUpdate" onclick="location.href='orderCancel'"/>
 			<input type="button" value="확인" class="ashopSelect" onclick="history.back()"/>
 		</div>
 	</div>

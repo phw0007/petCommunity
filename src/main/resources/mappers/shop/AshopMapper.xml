@@ -25,6 +25,7 @@
 		<result column="shippin_address" property="shippinAddress"/>
 		<result column="shippin_mobile" property="shippinMobile"/>
 		<result column="shippin_memo" property="shippinMemo"/>
+		<result column="order_number" property="orderNumber"/>
 	</resultMap>
 	
 	<select id="shopData" resultMap="ashopDto">
