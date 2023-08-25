@@ -15,15 +15,15 @@
 	.main_left ul li{padding-top: 10px;}
 	.main_left span{float: right;}
 	
-	.main_rigth{width:1340px; height: 750px; float: right; }
+	.main_rigth{width:1340px; height: 750px; float: right;}
 	
-	.board{border:2px solid #000; width:600px; height: 300px; display: inline-block;
+	.board{border:2px solid #000; width:600px; height: 300px; float: left;
+	border-radius: 30px; padding:20px; margin-bottom: 40px; margin-left: 20px; }
+	.info{border:2px solid #000; width:600px; height: 300px; float: right;
+	border-radius: 30px; padding:20px; margin-left: 25px; margin-bottom: 40px;}
+	.shop{border:2px solid #000; width:600px; height: 300px; float: right;
 	border-radius: 30px; padding:20px; margin-bottom: 40px; margin-left: 20px;}
-	.info{border:2px solid #000; width:600px; height: 300px; display: inline-block;
-	border-radius: 30px; padding:20px; margin-left: 25px;}
-	.shop{border:2px solid #000; width:600px; height: 300px; display: inline-block;
-	border-radius: 30px; padding:20px; margin-bottom: 40px; margin-left: 20px;}
-	.photo{border:2px solid #000; width:600px; height: 300px; display: inline-block;
+	.photo{border:2px solid #000; width:600px; height: 300px; float: left;
 	border-radius: 30px; padding:20px; margin-left: 25px;}
 	
 	.board p{font-size: 22px; border-bottom: 2px solid #000; padding-bottom: 10px; font-weight:bold;}
