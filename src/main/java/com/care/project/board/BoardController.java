@@ -111,6 +111,9 @@ public class BoardController {
 	         System.out.println("boardContent 게시글 번호 : " + n);
 	         return "redirect:freeboardForm";
 	      }
+	      String id=(String)session.getAttribute("id");
+	      
+	      model.addAttribute("deleteId", id);
 	      model.addAttribute("board", board);
 	      model.addAttribute("comments", comments);
 	      model.addAttribute("cp",cp);
@@ -182,6 +185,7 @@ public class BoardController {
 	@PostMapping("freecommentProc")
 	public String freecommentProc(@RequestParam(value="no", required = false)String n,
 		    @RequestParam(value = "category", required = false) String category,
+		    HttpServletRequest request,
 			BoardDTO board, Model model) {
 		String id = (String)session.getAttribute("id");
 		if(id == null || id.isEmpty()) {
@@ -191,7 +195,8 @@ public class BoardController {
 		String result = service.freecommtentProc(board);
 
 		if(result.equals("댓글 작성 완료")) {
-			return "forward:boardContent?no="+n; //forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
+			  String referer = request.getHeader("Referer");
+	    	    return "redirect:"+ referer;//forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
 		}
 	   
 		return "board/boardContent";

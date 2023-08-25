@@ -24,8 +24,9 @@ function commentDelete(writeDate,commentId){
 	commentDeleteProc(url,selectedValues,commentId);
 }
 function commentDeleteProc(url, selectedValues, commentId) {
+	var deleteId = "${deleteId}"
     alert('${sessionScope.id}');
-    if (commentId === null || commentId !== '${sessionScope.id}') {
+    if ('${sessionScope.id}' === null || commentId !== '${sessionScope.id}'||deleteId === "") {
         alert('작성자만 삭제할 수 있습니다.');
     } 
     if(commentId ==='${sessionScope.id}') {
