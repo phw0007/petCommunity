@@ -151,7 +151,7 @@ function cancelPay() {
 				</table>
 			</div>
 			<input type="button" value="삭제" class="ashopUpdate" onclick="orderDeleteButton(${order.no})"/>
-			<input type="button" value="주문취소" class="ashopUpdate" onclick="location.href='orderCancel'"/>
+			<input type="button" value="주문취소" class="ashopUpdate" onclick="location.href='orderCancel?id=${order.id}&writeDate=${order.writeDate}'"/>
 			<input type="button" value="확인" class="ashopSelect" onclick="history.back()"/>
 		</div>
 	</div>

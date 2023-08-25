@@ -23,6 +23,8 @@ public interface ShopMapper {
 
 	void shippinData(AShopDTO shopDto);
 
+	AShopDTO getOrderData(@Param("id")String id, @Param("writeDate")String writeDate);
+
 
 	
 }

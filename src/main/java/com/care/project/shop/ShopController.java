@@ -110,7 +110,8 @@ public class ShopController {
 	}
 	
 	@RequestMapping("orderCancel")
-	public void orderCancel() {
-		service.orderCancel();
+	public void orderCancel(String id, String writeDate) {
+		String accessToken = service.getAccessToken();
+		service.getPayment(id, writeDate, accessToken); 
 	}
 }

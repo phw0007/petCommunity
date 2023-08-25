@@ -15,11 +15,6 @@
 <body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-<script>
 <script>
 function execDaumPostcode() {
 	new daum.Postcode({
@@ -159,6 +154,7 @@ function requestPay() {
     },
     function (rsp) {
 		if (rsp.success) {// 결제성공시 로직
+			var impUid = rsp.imp_uid;
 		 	var name = document.getElementById("name").value;
 		 	var mobile = document.getElementById("mobile").value;
 		 	var postcode = document.getElementById("postcode").value;
@@ -197,7 +193,7 @@ function requestPay() {
 		 		alert('결제방법은 필수 선택 항목입니다.');
 		 	}
 		 	else{
-				let orderUser = ['${user.id}','${user.userName}','${user.mobile}','${user.address}',payType,randomNum];
+				let orderUser = ['${user.id}','${user.userName}','${user.mobile}','${user.address}',payType,randomNum,impUid];
 				let shippingUser = [name,mobile,postcode,address,detailAddress,shippingMemo];
 				let orderProduct = ['${product.category}','${product.company}','${product.product}','${productAllPay}','${num}'];
 				
@@ -330,7 +326,7 @@ function requestPay() {
 				<li><span>상품금액</span>${productPay }</li>
 				<li><span>배송비용</span>${shippingFee }</li>
 				<li><span>주문금액</span>${shippingPay }</li>
-				<li><input type="button" value="결제하기" onclick="addBuy()"></li>
+				<li><input type="button" value="결제하기" onclick="requestPay()"></li>
 			</ul>
 		</div>
 	</div>

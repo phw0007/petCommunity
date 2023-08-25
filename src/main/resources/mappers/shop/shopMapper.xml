@@ -22,6 +22,7 @@
 		<result column="order_count" property="orderCount"/>
 		<result column="write_date" property="writeDate"/>
 	</resultMap>
+	
 	<resultMap type="com.care.project.ashop.AShopDTO" id="ashopDto">
 		<id column="no" property="no"/>
 		<result column="category" property="category"/>
@@ -44,6 +45,7 @@
 		<result column="shippin_mobile" property="shippinMobile"/>
 		<result column="shippin_memo" property="shippinMemo"/>
 		<result column="order_number" property="orderNumber"/>
+		<result column="impUid" property="impUid"/>
 	</resultMap>
 	
 		<select id="shopData" resultMap="shopDto">
@@ -107,7 +109,7 @@
 		<selectKey order="BEFORE" keyProperty="no" resultType="int">
 			SELECT nvl(max(no),0) + 1 FROM project_order
 		</selectKey>
-		INSERT INTO project_order VALUES(#{no}, #{id}, #{userName}, #{address}, #{mobile}, #{writeDate}, #{payType}, #{payCheck}, #{shippinName},#{shippinAddress},#{shippinMobile},#{shippinMemo},#{orderNumber})
+		INSERT INTO project_order VALUES(#{no}, #{id}, #{userName}, #{address}, #{mobile}, #{writeDate}, #{payType}, #{payCheck}, #{shippinName},#{shippinAddress},#{shippinMobile},#{shippinMemo},#{orderNumber},#{impUid})
 	</insert>
 	
 	<select id="shopOrderDate" resultMap="ashopDto">
@@ -117,4 +119,9 @@
     <insert id="shippinData">
 		INSERT INTO project_order_list VALUES(#{no}, #{id}, #{category}, #{company}, #{product}, #{pay}, #{orderCount})
 	</insert>
+	
+	<select id="getOrderData" resultMap="ashopDto">
+    	SELECT * FROM project_order WHERE id=#{id} AND write_date=#{writeDate}
+    </select>
+    
 </mapper>

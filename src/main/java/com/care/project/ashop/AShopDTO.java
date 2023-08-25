@@ -36,6 +36,7 @@ primary key(no)
 	private String shippinMobile;
 	private String shippinMemo;
 	private String orderNumber;
+	private String impUid;
 	public int getNo() {
 		return no;
 	}
@@ -168,5 +169,11 @@ primary key(no)
 	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
 	}
-	
+	public String getImpUid() {
+		return impUid;
+	}
+	public void setImpUid(String impUid) {
+		this.impUid = impUid;
+	}
+
 }

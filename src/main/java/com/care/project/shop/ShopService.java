@@ -14,6 +14,20 @@ import com.care.project.ashop.AShopDTO;
 import com.care.project.common.PageService;
 import com.care.project.member.MemberDTO;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.client.methods.HttpGet;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+
 import jakarta.servlet.http.HttpSession;
 
 @Service
@@ -101,6 +115,7 @@ public class ShopService {
 		String address = orderUserData[3];
 		String payType = orderUserData[4];
 		String orderNumber = (id+"-"+orderUserData[5]);
+		String impUid = (orderUserData[6]);
 		String payCheck = "확인";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    String writeDate = sdf.format(new Date());
@@ -160,6 +175,7 @@ public class ShopService {
 		System.out.println("수령자 전화번호 :"+shippinMobile);
 		System.out.println("수령자 주소 :"+shippinAddress);
 		System.out.println("수령자 메모 :"+shippinMemo);
+		System.out.println("impUid :"+impUid);
 		
 		System.out.println("==================상품정보==================");
 		System.out.println("상품분류 :"+category);
@@ -187,6 +203,7 @@ public class ShopService {
 		shopDto.setPay(pay);
 		shopDto.setOrderCount(orderCount);
 		shopDto.setOrderNumber(orderNumber);
+		shopDto.setImpUid(impUid);
 		
 		shopMapper.shopOrder(shopDto);
 		AShopDTO shopOrderDto = shopMapper.shopOrderDate(writeDate);
@@ -195,31 +212,79 @@ public class ShopService {
 		shopMapper.shippinData(shopDto);
 
 	}
-	
-	public static final String IMPORT_TOKEN_URL = "https://api.iamport.kr/users/getToken";
-    public static final String IMPORT_CANCEL_URL = "https://api.iamport.kr/payments/cancel";
-    public static final String KEY = "";
-    public static final String SECRET = "";
     
-	public void orderCancel() {
-//	        String result = "";
-//	        HttpClient client = HttpClientBuilder.create().build();
-//	        HttpPost post = new HttpPost(IMPORT_TOKEN_URL);
-//	        Map<String,String> m =new HashMap<String,String>();
-//	        m.put("imp_key", KEY);
-//	        m.put("imp_secret", SECRET);
-//	        try {
-//	            post.setEntity(new UrlEncodedFormEntity(convertParameter(m)));
-//	            HttpResponse res = client.execute(post);
-//	            ObjectMapper mapper = new ObjectMapper();
-//	            String body = EntityUtils.toString(res.getEntity());
-//	            JsonNode rootNode = mapper.readTree(body);
-//	            JsonNode resNode = rootNode.get("response");
-//	            result = resNode.get("access_token").asText();
-//	        } catch (Exception e){
-//	            throw new IamportException("아임포트 토큰을 받아올 수 없습니다.");
-//	        } return result;
+	public String getAccessToken() {
+		String apiKey = "5740256785645581";
+        String apiSecret = "CXm9Qe4HfB1x1C4HPUQWDtjjzyK7eVw1OcJEPE7RcoHEnUjiIMNFqXiKwXN8izN0y8j3KlVgLoJtNV3d";
+        String apiUrl = "https://api.iamport.kr/users/getToken";
+        String accessToken = "";
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost(apiUrl);
+
+        JSONObject requestParams = new JSONObject();
+        requestParams.put("imp_key", apiKey);
+        requestParams.put("imp_secret", apiSecret);
+        
+        try {
+	        StringEntity entity = new StringEntity(requestParams.toString());
+	        httpPost.setEntity(entity);
+	        httpPost.setHeader("Content-Type", "application/json");
+	
+	        HttpResponse response = httpClient.execute(httpPost);
+	
+	        if (response.getStatusLine().getStatusCode() == 200) {
+	            BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+	            StringBuilder responseContent = new StringBuilder();
+	            String line;
+	            while ((line = reader.readLine()) != null) {
+	                responseContent.append(line);
+	            }
+	            JSONObject responseData = new JSONObject(responseContent.toString());
+	            accessToken = responseData.getJSONObject("response").getString("access_token");
+	            System.out.println("Access Token: " + accessToken);
+	        } else {
+	            System.out.println("Failed to get access token. Status code: " + response.getStatusLine().getStatusCode());
+	        }
+		} catch (Exception e) {
+			
+		}
+        return accessToken;
+    }
+
+	public void getPayment(String id, String writeDate, String accessToken) {
+		AShopDTO shopDto = shopMapper.getOrderData(id, writeDate);
+        String impUid = shopDto.getImpUid().replace(" ", "_"); // 가져올 결제 거래의 아임포트 거래번호
+        String orderNumber = shopDto.getOrderNumber(); // 가져올 결제 거래의 아임포트 거래번호
+        int pay = shopDto.getPay(); // 가져올 결제 거래의 아임포트 거래번호
+        String refundUrl = "https://api.iamport.kr/payments/cancel"; // 취소 요청 URL
+        String cancelUrl = "https://api.iamport.kr/payments/cancel"; // 환불 요청 URL
+
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        try {
+	        // 환불 요청
+	        JSONObject refundParams = new JSONObject();
+	        refundParams.put("merchant_uid", orderNumber); // 환불할 결제 거래의 고유 ID
+	        refundParams.put("amount", pay); // 환불할 금액
+	        HttpPost refundPost = new HttpPost(refundUrl);
+	        refundPost.setHeader("Authorization", accessToken);
+	        refundPost.setEntity(new StringEntity(refundParams.toString(), "UTF-8"));
+	        refundPost.setHeader("Content-Type", "application/json");
+	        HttpResponse refundResponse = httpClient.execute(refundPost);
+	        
+	        // 취소 요청
+	        JSONObject cancelParams = new JSONObject();
+	        cancelParams.put("imp_uid", impUid); // 취소할 결제 거래의 고유 ID
+	        HttpPost cancelPost = new HttpPost(cancelUrl);
+	        cancelPost.setHeader("Authorization", accessToken);
+	        cancelPost.setEntity(new StringEntity(cancelParams.toString(), "UTF-8"));
+	        cancelPost.setHeader("Content-Type", "application/json");
+	        HttpResponse cancelResponse = httpClient.execute(cancelPost);
+	
+	        // 처리 결과 확인
+	        System.out.println("Refund Response Status: " + refundResponse.getStatusLine().getStatusCode());
+	        System.out.println("Cancel Response Status: " + cancelResponse.getStatusLine().getStatusCode());
+        } catch (Exception e) {
+			
+		}
 	}
-
-
 }
