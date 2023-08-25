@@ -202,23 +202,23 @@ public class ShopService {
     public static final String SECRET = "";
     
 	public void orderCancel() {
-	        String result = "";
-	        HttpClient client = HttpClientBuilder.create().build();
-	        HttpPost post = new HttpPost(IMPORT_TOKEN_URL);
-	        Map<String,String> m =new HashMap<String,String>();
-	        m.put("imp_key", KEY);
-	        m.put("imp_secret", SECRET);
-	        try {
-	            post.setEntity(new UrlEncodedFormEntity(convertParameter(m)));
-	            HttpResponse res = client.execute(post);
-	            ObjectMapper mapper = new ObjectMapper();
-	            String body = EntityUtils.toString(res.getEntity());
-	            JsonNode rootNode = mapper.readTree(body);
-	            JsonNode resNode = rootNode.get("response");
-	            result = resNode.get("access_token").asText();
-	        } catch (Exception e){
-	            throw new IamportException("아임포트 토큰을 받아올 수 없습니다.");
-	        } return result;
+//	        String result = "";
+//	        HttpClient client = HttpClientBuilder.create().build();
+//	        HttpPost post = new HttpPost(IMPORT_TOKEN_URL);
+//	        Map<String,String> m =new HashMap<String,String>();
+//	        m.put("imp_key", KEY);
+//	        m.put("imp_secret", SECRET);
+//	        try {
+//	            post.setEntity(new UrlEncodedFormEntity(convertParameter(m)));
+//	            HttpResponse res = client.execute(post);
+//	            ObjectMapper mapper = new ObjectMapper();
+//	            String body = EntityUtils.toString(res.getEntity());
+//	            JsonNode rootNode = mapper.readTree(body);
+//	            JsonNode resNode = rootNode.get("response");
+//	            result = resNode.get("access_token").asText();
+//	        } catch (Exception e){
+//	            throw new IamportException("아임포트 토큰을 받아올 수 없습니다.");
+//	        } return result;
 	}
 
 
