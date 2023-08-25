@@ -241,9 +241,9 @@ public class ShopService {
 	            }
 	            JSONObject responseData = new JSONObject(responseContent.toString());
 	            accessToken = responseData.getJSONObject("response").getString("access_token");
-	            System.out.println("Access Token: " + accessToken);
+	            System.out.println("토큰 값: " + accessToken);
 	        } else {
-	            System.out.println("Failed to get access token. Status code: " + response.getStatusLine().getStatusCode());
+	            System.out.println("요청 실패: " + response.getStatusLine().getStatusCode());
 	        }
 		} catch (Exception e) {
 			
@@ -255,7 +255,7 @@ public class ShopService {
 		AShopDTO shopDto = shopMapper.getOrderData(id, writeDate);
         String impUid = shopDto.getImpUid().replace(" ", "_"); // 가져올 결제 거래의 아임포트 거래번호
         String orderNumber = shopDto.getOrderNumber(); // 가져올 결제 거래의 아임포트 거래번호
-        int pay = shopDto.getPay(); // 가져올 결제 거래의 아임포트 거래번호
+        int pay = shopDto.getPay(); // 가져올 결제 거래 가격
         String refundUrl = "https://api.iamport.kr/payments/cancel"; // 취소 요청 URL
         String cancelUrl = "https://api.iamport.kr/payments/cancel"; // 환불 요청 URL
 
@@ -281,8 +281,8 @@ public class ShopService {
 	        HttpResponse cancelResponse = httpClient.execute(cancelPost);
 	
 	        // 처리 결과 확인
-	        System.out.println("Refund Response Status: " + refundResponse.getStatusLine().getStatusCode());
-	        System.out.println("Cancel Response Status: " + cancelResponse.getStatusLine().getStatusCode());
+	        System.out.println("환불 성공: " + refundResponse.getStatusLine().getStatusCode());
+	        System.out.println("취소 성공: " + cancelResponse.getStatusLine().getStatusCode());
         } catch (Exception e) {
 			
 		}
