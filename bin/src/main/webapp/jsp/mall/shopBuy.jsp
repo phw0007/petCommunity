@@ -59,6 +59,7 @@ function addBuy() {
  	var memoSelect = document.getElementById('memoSelect').value;
  	var cardRadio = document.getElementById('card');
  	var cacaoRadio = document.getElementById('cacaoPay');
+ 	var randomNum = Math.floor(Math.random() * (100000000 - 1000000000)) + 1000000000;
  	
  	var shippingMemo;
     if (memoTextRadio.checked) {
@@ -87,7 +88,7 @@ function addBuy() {
  		alert('결제방법은 필수 선택 항목입니다.');
  	}
  	else{
-		let orderUser = ['${user.id}','${user.userName}','${user.mobile}','${user.address}',payType];
+		let orderUser = ['${user.id}','${user.userName}','${user.mobile}','${user.address}',payType,randomNum];
 		let shippingUser = [name,mobile,postcode,address,detailAddress,shippingMemo];
 		let orderProduct = ['${product.category}','${product.company}','${product.product}','${productAllPay}','${num}'];
 		
@@ -131,14 +132,8 @@ function requestPay() {
  	var cardRadio = document.getElementById('card');
  	var cacaoRadio = document.getElementById('cacaoPay');
 	var currentDate = new Date();
-
-	var year = currentDate.getFullYear();
-	var month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month is zero-based
-	var day = String(currentDate.getDate()).padStart(2, '0');
-	var hours = String(currentDate.getHours()).padStart(2, '0');
-	var minutes = String(currentDate.getMinutes()).padStart(2, '0');
-	var seconds = String(currentDate.getSeconds()).padStart(2, '0');
-	var formattedDateTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds+'${user.id}';
+	var randomNum = Math.floor(Math.random() * (100000000 - 1000000000)) + 1000000000;
+	
 	var payType = "";
 	if (cardRadio.checked) {
 		payType = "kcp.A52CY";
@@ -148,7 +143,7 @@ function requestPay() {
 	IMP.request_pay({
 		pg: payType,
 		pay_method: "card", // 생략가
-		merchant_uid: formattedDateTime, // 상점에서 생성한 고유 주문번호
+		merchant_uid: randomNum, // 상점에서 생성한 고유 주문번호
 		name: "결제테스트",
 		amount: '${totalPay}',                         // 숫자 타입
 		buyer_email: '${user.email }',
@@ -197,7 +192,7 @@ function requestPay() {
 		 		alert('결제방법은 필수 선택 항목입니다.');
 		 	}
 		 	else{
-				let orderUser = ['${user.id}','${user.userName}','${user.mobile}','${user.address}',payType];
+				let orderUser = ['${user.id}','${user.userName}','${user.mobile}','${user.address}',payType,randomNum];
 				let shippingUser = [name,mobile,postcode,address,detailAddress,shippingMemo];
 				let orderProduct = ['${product.category}','${product.company}','${product.product}','${productAllPay}','${num}'];
 				
