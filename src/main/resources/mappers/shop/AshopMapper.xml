@@ -21,6 +21,12 @@
 		<result column="pay_check" property="payCheck"/>
 		<result column="order_count" property="orderCount"/>
 		<result column="write_date" property="writeDate"/>
+		<result column="shippin_name" property="shippinName"/>
+		<result column="shippin_address" property="shippinAddress"/>
+		<result column="shippin_mobile" property="shippinMobile"/>
+		<result column="shippin_memo" property="shippinMemo"/>
+		<result column="order_number" property="orderNumber"/>
+		<result column="impUid" property="impUid"/>
 	</resultMap>
 	
 	<select id="shopData" resultMap="ashopDto">
@@ -175,11 +181,3 @@
 	</update>
 	
 </mapper>
-
-
-
-
-
-
-
-  

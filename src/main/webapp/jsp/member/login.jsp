@@ -40,4 +40,7 @@
 <c:import url="/footer" />
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'main' of https://github.com/phw0007/petCommunity.git

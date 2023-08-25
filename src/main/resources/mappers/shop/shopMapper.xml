@@ -3,7 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  
 <mapper namespace="com.care.project.shop.ShopMapper">
 	<resultMap type="com.care.project.shop.ShopDTO" id="shopDto">
 		<id column="no" property="no"/>
@@ -24,15 +23,29 @@
 		<result column="write_date" property="writeDate"/>
 	</resultMap>
 	
-	<resultMap type="com.care.project.shop.CartDTO" id="cartDto">
+	<resultMap type="com.care.project.ashop.AShopDTO" id="ashopDto">
 		<id column="no" property="no"/>
-		<result column="id" property="id"/>
+		<result column="category" property="category"/>
 		<result column="product" property="product"/>
 		<result column="company" property="company"/>
 		<result column="pay" property="pay"/>
+		<result column="inventory" property="inventory"/>
 		<result column="image_file" property="imageFile"/>
-		<result column="quantity" property="quantity"/>
-		<result column="total" property="total"/>
+		<result column="info" property="info"/>
+		<result column="id" property="id"/>
+		<result column="user_name" property="userName"/>
+		<result column="address" property="address"/>
+		<result column="mobile" property="mobile"/>
+		<result column="pay_type" property="payType"/>
+		<result column="pay_check" property="payCheck"/>
+		<result column="order_count" property="orderCount"/>
+		<result column="write_date" property="writeDate"/>
+		<result column="shippin_name" property="shippinName"/>
+		<result column="shippin_address" property="shippinAddress"/>
+		<result column="shippin_mobile" property="shippinMobile"/>
+		<result column="shippin_memo" property="shippinMemo"/>
+		<result column="order_number" property="orderNumber"/>
+		<result column="impUid" property="impUid"/>
 	</resultMap>
 	
 		<select id="shopData" resultMap="shopDto">
@@ -89,28 +102,26 @@
 	</select>
 	
 	<select id="getProductDetails" resultMap="shopDto">
-    SELECT * FROM project_shop WHERE no = #{productId}
+    	SELECT * FROM project_shop WHERE no = #{productId}
     </select>
     
-     
-    <!-- addToCart 메서드에 대한 SQL 매핑 -->
- <insert id="addToCart" parameterType="com.care.project.shop.CartDTO">
- 	<selectKey order="BEFORE" keyProperty="no" resultType="int">
-			SELECT nvl(max(no),0) + 1 FROM project_cart
-	</selectKey>
-    INSERT INTO project_cart VALUES (#{no}, #{id}, #{product}, #{company}, #{pay}, #{imageFile}, #{productId}, #{quantity}, #{total})
-</insert>
-    
-     <select id="getCartItems" resultMap="cartDto">
-        SELECT * FROM project_cart WHERE id = #{id}
-    </select>
+	<insert id="shopOrder">
+		<selectKey order="BEFORE" keyProperty="no" resultType="int">
+			SELECT nvl(max(no),0) + 1 FROM project_order
+		</selectKey>
+		INSERT INTO project_order VALUES(#{no}, #{id}, #{userName}, #{address}, #{mobile}, #{writeDate}, #{payType}, #{payCheck}, #{shippinName},#{shippinAddress},#{shippinMobile},#{shippinMemo},#{orderNumber},#{impUid})
+	</insert>
 	
+	<select id="shopOrderDate" resultMap="ashopDto">
+    	SELECT * FROM project_order WHERE write_date = #{writeDate}
+    </select>
+    
+    <insert id="shippinData">
+		INSERT INTO project_order_list VALUES(#{no}, #{id}, #{category}, #{company}, #{product}, #{pay}, #{orderCount})
+	</insert>
+	
+	<select id="getOrderData" resultMap="ashopDto">
+    	SELECT * FROM project_order WHERE id=#{id} AND write_date=#{writeDate}
+    </select>
+    
 </mapper>
-
-
-
-
-
-
-
-  

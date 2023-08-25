@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -26,5 +27,4 @@
 		<li><a href="${context }info?category=동물병원">업체정보</a></li>
 		<li><a href="${context }login">로그인</a></li>
 	</ul>
-</div>
 </div>

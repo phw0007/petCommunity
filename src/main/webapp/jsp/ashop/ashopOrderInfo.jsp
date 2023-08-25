@@ -13,6 +13,11 @@
 <title>index</title>
 </head>
 <body>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 <script>
 function orderDeleteButton(no) {
 	let selectedValues = no;
@@ -36,6 +41,10 @@ function getDeleteShop(url, selectedValues) {
 		form.submit();     
 	}
 }
+
+function cancelPay() {
+	
+}
 </script>
 <c:import url="/aheader" />
 <div class="member">
@@ -51,17 +60,20 @@ function getDeleteShop(url, selectedValues) {
 	</div>
 	<div class="memberMain">
 		<div class="memberTitle">
-			<p>주문 목록</p>
+			<p>주문 상세정보</p>
 			<ul>
 				<li><a href="aindex">홈</a></li>
 				<li>></li>
 				<li><a href="ashop">쇼핑몰 관리</a></li>
 				<li>></li>
 				<li><a href="ashopOrder">주문 목록</a></li>
+				<li>></li>
+				<li>주문 상세정보</li>
 			</ul>
 		</div>
 		<div class="memberInfo">
 			<div class="infoTop">
+				<p>주문자 정보</p>
 				<table>
 					<thead>
 				    	<tr>
@@ -71,7 +83,7 @@ function getDeleteShop(url, selectedValues) {
 				    		<th style="width: 200px;">전화번호</th>
 				    		<th>결재방식</th>
 				    		<th>결재상태</th>
-				    		<th>주문날짜</th>
+				    		<th style="width: 250px;">주문날짜</th>
 				    	</tr>
 				    </thead>
 				    <tbody>
@@ -87,6 +99,31 @@ function getDeleteShop(url, selectedValues) {
 				    </tbody>
 				</table>
 			</div>
+			
+			<div class="infoCenter">
+				<p>배송지 정보</p>
+				<table>
+					<thead>
+				    	<tr>
+				    		<th style="width: 200px;">주문번호</th>
+				    		<th style="width: 150px;">수령인</th>
+				    		<th style="width: 700px;">주소</th>
+				    		<th style="width: 150px;">전화번호</th>
+				    		<th style="width: 700px;">요청사항</th>
+				    	</tr>
+				    </thead>
+				    <tbody>
+				    	<tr>
+				    		<td>${order.orderNumber}</td>
+				    		<td>${order.shippinName}</td>
+				    		<td>${order.shippinAddress}</td>
+				    		<td>${order.shippinMobile}</td>
+				    		<td>${order.shippinMemo}</td>
+				    	</tr>
+				    </tbody>
+				</table>
+			</div>		
+				
 			<div class="infoBottom">
 				<p>구매 항목</p>
 				<table>
@@ -114,6 +151,7 @@ function getDeleteShop(url, selectedValues) {
 				</table>
 			</div>
 			<input type="button" value="삭제" class="ashopUpdate" onclick="orderDeleteButton(${order.no})"/>
+			<input type="button" value="주문취소" class="ashopUpdate" onclick="location.href='orderCancel?id=${order.id}&writeDate=${order.writeDate}'"/>
 			<input type="button" value="확인" class="ashopSelect" onclick="history.back()"/>
 		</div>
 	</div>

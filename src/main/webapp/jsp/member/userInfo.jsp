@@ -12,11 +12,11 @@
 <div class="userInfo">
 	<h1>마이 페이지 </h1>
 	    <div class="petInfo">
-	        <a><img src="${member.petFile}" width="140px" height="180px"></a>
+	        <a><img src="${member.petFile}" width="120px" height="150px"></a>
 	        <div class="petInfo2">
 	        <h5>반려동물 정보</h5>
-	        <p>이름  <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1; margin-top: 20px;">${member.petName}</span></p>
-	        <p>종류  <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1; margin-top: 20px;">${member.petCategory}</span></p>
+	        <p>이름  <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1;">${member.petName}</span></p>
+	        <p>종류  <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1;">${member.petCategory}</span></p>
 	        </div>
 	    </div>
 	    <div class="ownerInfo">
@@ -24,12 +24,11 @@
 	        <ul class="ownerLeft">
 	            <li>이름 &nbsp; &nbsp; &nbsp; <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1;">${member.userName }</span></li>
 	            <li>전화번호 <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1;">${member.mobile }</span></li>
-	            <li>가입일자 <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${member.registerDay }</span></li>
 	        </ul>
 	        <ul class="ownerRight">
 	            <li>주소 &nbsp; &nbsp; <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${member.address }</span></li>
 	            <li>아이디 <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1;">${member.id }</span></li>
-	            <li>이메일 <span style="display:inline-block; width:150px; height:20px; background-color: #FFEDA1;">${member.email }</span></li>
+	            <li>이메일 ${member.email }</li>
 	        </ul>
 	    </div>
 	    <div class="infoButton" align="center">
@@ -40,48 +39,24 @@
 
 	
 	
-	<div class="basket" align="center">
-	<input type="button" value="더보기 >" onclick="location.href='cart?id=${sessionScope.id }'" style="background: none; vertical-align: right; border: none; cursor: pointer; font-size: 15px; float:right;"><br>
-	 <ul>
-      <li>
-        <a href="#">
-          <b>이미지 들어갈 곳</b><br>
-           <span>상품이름 : </span><br>
-           <span>가격 : </span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <b>이미지 들어갈 곳</b><br>
-           <span>상품이름 : </span><br>
-           <span>가격 : </span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <b>이미지 들어갈 곳</b><br>
-           <span>상품이름 : </span><br>
-           <span>가격 : </span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <b>이미지 들어갈 곳</b><br>
-           <span>상품이름 : </span><br>
-           <span>가격 : </span>
-        </a>
-      </li>
-      </ul>
+	
+	
+	
+	<div class="album" align="right">
+	    <input type="button" value="더보기>" onclick="location.href='photoAlbum'" style="background: none; border: none; font-family: 'Poor Story', cursive; 
+          cursor: pointer; font-size:20px; margin: 20px 0 20px 0;"><br>
+        <div class="albumIn" align="center">
+            <h6>반려앨범</h6>
+            <img src="${member.petFile}" width="220px" height="280px" style="margin-right: 20px;">
+            <img src="${member.petFile}" width="220px" height="280px" style="margin-right: 20px;">
+            <img src="${member.petFile}" width="220px" height="280px" style="margin-right: 20px;">
+            <img src="${member.petFile}" width="220px" height="280px">
+        </div>
+	
 	</div>
 	<hr>
 	
-	
-	
-	<div class="out" align="center">
-	<ul>
-	    <li><a href="${context }logout">로그아웃</a></li>
-	</ul>
-	
+	<div class="basket">
 	</div>
 	    
 	   

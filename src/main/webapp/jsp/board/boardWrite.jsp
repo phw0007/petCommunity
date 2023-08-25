@@ -30,7 +30,7 @@ function checkContentLength(textarea) {
 		<select id="category" name="category" size="1" style="width:250px; height:30px;">
 			<option value="">카테고리</option>
 			<option value="자유게시판">자유게시판</option>
-			<option value="Q&A">Q&A</option>
+			<option value="QnA">Q&A</option>
 			<option value="강아지">강아지</option>
 			<option value="고양이">고양이</option>
 			<option value="파충류">파충류</option>
@@ -56,4 +56,8 @@ function checkContentLength(textarea) {
 
 <c:import url = "/footer"/>
 </body>
+
 </html>
+
+
+

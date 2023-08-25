@@ -1,5 +1,8 @@
 package com.care.project.home;
 
+import java.awt.Image;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,13 +32,31 @@ public class homeController {
 	}
 	
 	
+	 @Autowired
+	    private photoMapper imageMapper; // 실제 매퍼 인터페이스를 구현한 클래스의 빈을 주입
+
+//	    @RequestMapping("photo")
+//	    public String photo(Model model2) {
+//	        List<Image> images = imageMapper.getAllImages(); // 이미지 리스트를 매퍼를 통해 가져옴
+//	        model2.addAttribute("images", images); // JSP로 이미지 리스트를 전달
+//	        System.out.println();
+//	        return "photo/photoMain"; // 이미지 리스트를 보여줄 JSP 파일의 이름
+//	    }
+	
+	
 	
 	@RequestMapping("photo")
 	public String photo(
-			@RequestParam(value="currentPage", required = false)String cp,
-			Model model) {
-		System.out.println("호출되는거야?");
+			Model model, Model model2) {
+		List<photoDTO> photos = service.getAllPhotos();
+	    model.addAttribute("photos", photos);
 		
+	    List<Image> images = imageMapper.getAllImages(); // 이미지 리스트를 매퍼를 통해 가져옴
+        model2.addAttribute("images", images); // JSP로 이미지 리스트를 전달
+	   
+        
+        
+        
 		return "photo/photoMain";
 	}
 	
@@ -80,10 +101,3 @@ public class homeController {
 	
 
 }
-
-
-
-
-
-
-
