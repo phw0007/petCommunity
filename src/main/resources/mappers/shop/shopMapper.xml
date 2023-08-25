@@ -48,6 +48,17 @@
 		<result column="impUid" property="impUid"/>
 	</resultMap>
 	
+	<resultMap type="com.care.project.shop.CartDTO" id="cartDto">
+		<id column="no" property="no"/>
+		<result column="id" property="id"/>
+		<result column="product" property="product"/>
+		<result column="company" property="company"/>
+		<result column="pay" property="pay"/>
+		<result column="image_file" property="imageFile"/>
+		<result column="quantity" property="quantity"/>
+		<result column="total" property="total"/>
+	</resultMap>
+	
 		<select id="shopData" resultMap="shopDto">
 		<choose>
 			<when test="select == 'company'">
@@ -123,5 +134,22 @@
 	<select id="getOrderData" resultMap="ashopDto">
     	SELECT * FROM project_order WHERE id=#{id} AND write_date=#{writeDate}
     </select>
+    
+     <!-- addToCart 메서드에 대한 SQL 매핑 -->
+ <insert id="addToCart" parameterType="com.care.project.shop.CartDTO">
+ 	<selectKey order="BEFORE" keyProperty="no" resultType="int">
+			SELECT nvl(max(no),0) + 1 FROM project_cart
+	</selectKey>
+    INSERT INTO project_cart VALUES (#{no}, #{id}, #{product}, #{company}, #{pay}, #{imageFile}, #{productId}, #{quantity}, #{total})
+</insert>
+    
+     <select id="getCartItems" resultMap="cartDto">
+        SELECT * FROM project_cart WHERE id = #{id}
+    </select>
+    
+    
+    <delete id="removeSelectedItems">
+    DELETE FROM project_cart WHERE id = #{id} AND productId = #{productId}
+</delete>
     
 </mapper>

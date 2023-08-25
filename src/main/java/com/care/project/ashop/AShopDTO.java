@@ -37,6 +37,7 @@ primary key(no)
 	private String shippinMemo;
 	private String orderNumber;
 	private String impUid;
+
 	public int getNo() {
 		return no;
 	}
@@ -139,6 +140,7 @@ primary key(no)
 	public void setWriteDate(String writeDate) {
 		this.writeDate = writeDate;
 	}
+
 	public String getShippinName() {
 		return shippinName;
 	}
@@ -175,5 +177,6 @@ primary key(no)
 	public void setImpUid(String impUid) {
 		this.impUid = impUid;
 	}
+
 
 }
