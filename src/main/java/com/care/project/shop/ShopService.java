@@ -33,12 +33,6 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 
-
-
-
-
-
-
 @Service
 public class ShopService {
 	@Autowired private ShopMapper shopMapper;
@@ -124,12 +118,6 @@ public class ShopService {
 		 	}
 	    }
 	
-	
-
-
-
-	
-
 	public void getProduct(String productPrice, String productId, String quantity, String id, Model model) {
 		DecimalFormat forematter = new DecimalFormat("###,###");
 		int pay = Integer.parseInt(productPrice);
