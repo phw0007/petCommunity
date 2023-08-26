@@ -125,13 +125,16 @@ var IMP = window.IMP;
 IMP.init("imp07740386");
 
 function requestPay() {
-	let mobile = document.getElementById('mobile');
-	let postcode = document.getElementById('postcode');
-	let address = document.getElementById('address');
-	let detailAddress = document.getElementById('detailAddress');
+	var mobile = document.getElementById("mobile").value;
+	var postcode = document.getElementById("postcode").value;
+	var address = document.getElementById("address").value;
+	var detailAddress = document.getElementById("detailAddress").value;
  	var cardRadio = document.getElementById('card');
  	var cacaoRadio = document.getElementById('cacaoPay');
-	var currentDate = new Date();
+ 	var name = document.getElementById("name").value;
+	var memoTextRadio = document.getElementById('memoTextRadio');
+	var memoTextBox = document.getElementById('memoTextBox').value;
+	var memoSelect = document.getElementById('memoSelect').value;
 	var randomNum = Math.floor(Math.random() * (100000000 - 1000000000)) + 1000000000;
 	
 	var payType = "";
@@ -140,6 +143,21 @@ function requestPay() {
 	} else if(cacaoRadio.checked){
 		payType = "kakaopay.TC0ONETIME";
 	}
+	
+	if(name == ""){
+		alert('수령인명은 필수 입력 항목입니다.');
+	}else if(mobile == ""){
+		alert('전화번호는 필수 입력 항목입니다.');
+	}else if(postcode == ""){
+		alert('우편번호는 필수 입력 항목입니다.');
+	}else if(address == ""){
+		alert('주소는 필수 입력 항목입니다.');
+	}else if(detailAddress == ""){
+		alert('상세주소는 필수 입력 항목입니다.');
+	}else if(payType == "") {
+		alert('결제방법은 필수 선택 항목입니다.');
+	}
+	else{
 	IMP.request_pay({
 		pg: payType,
 		pay_method: "card", // 생략가
@@ -155,17 +173,7 @@ function requestPay() {
     function (rsp) {
 		if (rsp.success) {// 결제성공시 로직
 			var impUid = rsp.imp_uid;
-		 	var name = document.getElementById("name").value;
-		 	var mobile = document.getElementById("mobile").value;
-		 	var postcode = document.getElementById("postcode").value;
-			var address = document.getElementById("address").value;
-		 	var detailAddress = document.getElementById("detailAddress").value;
-		 	var memoTextRadio = document.getElementById('memoTextRadio');
-		 	var memoTextBox = document.getElementById('memoTextBox').value;
-		 	var memoSelect = document.getElementById('memoSelect').value;
-		 	var cardRadio = document.getElementById('card');
-		 	var cacaoRadio = document.getElementById('cacaoPay');
-		 	
+
 		 	var shippingMemo;
 		    if (memoTextRadio.checked) {
 		    	shippingMemo = memoTextBox;
@@ -179,20 +187,7 @@ function requestPay() {
 		    } else if(cacaoRadio.checked){
 		    	payType = "카카오페이";
 		    }
-		    if(name == ""){
-		    	alert('수령인명은 필수 입력 항목입니다.');
-		    }else if(mobile == ""){
-		    	alert('전화번호는 필수 입력 항목입니다.');
-		    }else if(postcode == ""){
-				alert('우편번호는 필수 입력 항목입니다.');
-		 	}else if(address == ""){
-		 		alert('주소는 필수 입력 항목입니다.');
-		 	}else if(detailAddress == ""){
-		 		alert('상세주소는 필수 입력 항목입니다.');
-		 	}else if(payType == "") {
-		 		alert('결제방법은 필수 선택 항목입니다.');
-		 	}
-		 	else{
+
 				let orderUser = ['${user.id}','${user.userName}','${user.mobile}','${user.address}',payType,randomNum,impUid];
 				let shippingUser = [name,mobile,postcode,address,detailAddress,shippingMemo];
 				let orderProduct = ['${product.category}','${product.company}','${product.product}','${productAllPay}','${num}'];
@@ -222,12 +217,12 @@ function requestPay() {
 			    form.appendChild(productData);
 			    document.body.appendChild(form);
 			    form.submit();    
-			}
-			
-        } else {// 결제 실패시
-			alert("결재 실패");         
-        }
-	});
+			    
+	        } else {// 결제 실패시
+				alert("결재 실패");         
+	        }
+		});
+	}
 }
 </script>
 <div class="shopping">

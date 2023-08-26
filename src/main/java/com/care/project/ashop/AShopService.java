@@ -241,7 +241,7 @@ public class AShopService {
 	public void orderDeleteCheckboxes(String selectedValues) {
 		String[] checkData = selectedValues.split(",");
 		int sub = 0;
-		for(int i = 1; i <= checkData.length; i++) {
+		for(int i = 3; i <= checkData.length; i+=3) {
 			int no = Integer.parseInt(checkData[i-1]);
 			no -= sub;
 			System.out.println(no);

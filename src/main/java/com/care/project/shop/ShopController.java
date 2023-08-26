@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.HandlerMapping;
 
+import com.care.project.ashop.AShopService;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ShopController {
 	@Autowired private ShopService service;
+	@Autowired private AShopService shopService;
 	@Autowired private HttpSession session;
 	@RequestMapping({"/shopping", "/food", "/snack", "/cloths", "/medi", "/pad", "/living"})
 	public String shopping(@RequestParam(value="currentPage", required = false)String cp,
@@ -109,9 +112,33 @@ public class ShopController {
 		return "redirect:shopping";
 	}
 	
-	@RequestMapping("orderCancel")
-	public void orderCancel(String id, String writeDate) {
+	@RequestMapping({"/orderCancel","/orderCancelCheckboxes"})
+	public String orderCancel(String selectedValues, HttpServletRequest request) {
+		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		String accessToken = service.getAccessToken();
-		service.getPayment(id, writeDate, accessToken); 
+		String[] checkData = selectedValues.split(",");
+		if("/orderCancel".equals(requestUrl)) {
+			String id = checkData[0];
+			String writeDate = checkData[1];
+			int no = Integer.parseInt(checkData[2]);
+			System.out.println(id);
+			System.out.println(writeDate);
+			System.out.println(no);
+			service.getPayment(id, writeDate, accessToken); 
+			shopService.orderDeleteCheckboxes(selectedValues);
+			return "redirect:ashopOrderInfo?selectedValues="+no;
+		}else  {
+			for(int i = 3; i <= checkData.length; i+=3) {
+				String id = checkData[i-3];
+				String writeDate = checkData[i-2];
+				int no = Integer.parseInt(checkData[i-1]);
+				System.out.println(id);
+				System.out.println(writeDate);
+				System.out.println(no);
+				service.getPayment(id, writeDate, accessToken); 
+			}
+			shopService.orderDeleteCheckboxes(selectedValues);
+			return "redirect:ashopOrderDel";
+		}
 	}
 }
