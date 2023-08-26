@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.care.project.aboard.ABoardDTO;
-import com.care.project.aboard.ABoardMapper;
+
 import com.care.project.common.PageService;
 
 @Service

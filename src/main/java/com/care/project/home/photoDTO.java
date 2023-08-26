@@ -1,16 +1,19 @@
 package com.care.project.home;
 
 public class photoDTO {
-	private String id;
-	private String user_name;
 	private int no;
+	private String id;
+	private String userName;
 	private String category;
 	private String title;
 	private String content;
-	private String file_name;
-	private String write_date;
+	private String fileName;
+	private String writeDate;
 	private int hits;
+	
 	private int likes;
+	
+	
 	
 	
 	public String getId() {
@@ -19,11 +22,11 @@ public class photoDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getuser_name() {
-		return user_name;
+	public String getUserName() {
+		return userName;
 	}
-	public void setuser_name(String user_name) {
-		this.user_name = user_name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public int getNo() {
 		return no;
@@ -46,21 +49,22 @@ public class photoDTO {
 	public String getContent() {
 		return content;
 	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public String getWriteDate() {
+		return writeDate;
+	}
+	public void setWriteDate(String writeDate) {
+		this.writeDate = writeDate;
+	}
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getFile_name() {
-		return file_name;
-	}
-	public void setFile_name(String file_name) {
-		this.file_name = file_name;
-	}
-	public String getWrite_date() {
-		return write_date;
-	}
-	public void setWrite_date(String write_date) {
-		this.write_date = write_date;
-	}
+
 	public int getHits() {
 		return hits;
 	}
@@ -73,8 +77,5 @@ public class photoDTO {
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
-	
 
-	
-	
 }

@@ -19,16 +19,25 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.client.methods.HttpGet;
-import org.json.JSONArray;
+
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
+
 import java.io.InputStreamReader;
 
 
 import jakarta.servlet.http.HttpSession;
+
+
+import java.util.List;
+
+
+
+
+
+
+
 
 @Service
 public class ShopService {
@@ -73,10 +82,53 @@ public class ShopService {
 		model.addAttribute("select", select);
 		model.addAttribute("search", search);
 	}
-
+	
 	public ShopDTO getProductDetails(int productId) {
 	    return shopMapper.getProductDetails(productId);
 	}
+
+	public ShopDTO getProductById(int productId) {
+		
+		return shopMapper.getProductDetails(productId);
+	}
+	
+	
+	public void addToCart(int productId, int quantity, int total) {
+	    // productId를 사용하여 상품 정보 가져오기
+	    ShopDTO product = shopMapper.getProductDetails(productId);
+	    String id = (String) session.getAttribute("id");
+	    // CartDTO 객체를 생성하여 관련 데이터 설정
+	    CartDTO cartItem = new CartDTO();
+	    cartItem.setId(id);
+	    cartItem.setProduct(product.getProduct());
+	    cartItem.setCompany(product.getCompany());
+	    cartItem.setPay(product.getPay());
+	    cartItem.setImageFile(product.getImageFile());
+	    cartItem.setProductId(productId);
+	    cartItem.setQuantity(quantity);
+	    cartItem.setTotal(total);
+	    
+	    // 매퍼를 사용하여 장바구니 항목을 데이터베이스에 저장
+	    shopMapper.addToCart(cartItem);
+	}
+	 public List<CartDTO> getCartItems(String id) {
+		 
+	        return shopMapper.getCartItems(id);
+	    }
+
+	 public void removeSelectedItems(String id,String selectedItems) {
+		 String[] orderUserData = selectedItems.split(",");
+		 	for(int i = 0; i < orderUserData.length; i++) {
+		 		int  productId = Integer.parseInt(orderUserData[i]);
+		 		shopMapper.removeSelectedItems(id, productId);
+		 	}
+	    }
+	
+	
+
+
+
+	
 
 	public void getProduct(String productPrice, String productId, String quantity, String id, Model model) {
 		DecimalFormat forematter = new DecimalFormat("###,###");

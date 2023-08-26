@@ -1,8 +1,10 @@
+
 function allCheck(){
    let id = document.getElementById('id');
    let pw = document.getElementById('pw');
    confirm = document.getElementById('confirm');
    userName = document.getElementById('userName');
+   
    if(id.value == ""){
       alert('아이디는 필수 항목입니다.');
    }else if(pw.value == ""){
@@ -17,7 +19,6 @@ function allCheck(){
       f.submit();
    }
 }
-
 
 function pwCheck(){
 	let pw = document.getElementById('pw');
@@ -75,8 +76,6 @@ function uploadImage(){
    };
    xhr.send(formData);
 }
-
-
 
 function getSelectedDeleteCheckboxes() {
    let checkboxes = document.getElementsByClassName('member-checkbox');

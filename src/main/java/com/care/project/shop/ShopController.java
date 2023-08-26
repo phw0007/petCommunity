@@ -1,6 +1,7 @@
 package com.care.project.shop;
 
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,6 +76,21 @@ public class ShopController {
 	    return "mall/shopIn"; // 상세 페이지 JSP 파일의 이름을 반환합니다.
 	}
 	
+	  @GetMapping("cart")
+	    public String cart(Model model) {
+	        String id = (String) session.getAttribute("id");
+	        if (id == null) {
+	            return "redirect:login"; // 로그인되지 않은 경우 로그인 페이지로 이동
+	        }
+
+	        List<CartDTO> cartItems = service.getCartItems(id);
+	        model.addAttribute("cartItems", cartItems);
+
+	        return "mall/cart";
+	    }
+
+	  
+	  
 	@RequestMapping("shopBuy")
 	public String shopBuy(String productPrice, String productId, String quantity, Model model) {
 		String id = (String)session.getAttribute("id");
@@ -93,18 +111,50 @@ public class ShopController {
 //		responseHeaders.add("Content-Type", "application/json; charset=UTF-8");
 //		JSONObject responseObj = new JSONObject();
 //	}
-	@RequestMapping("addToCart")
-	public String addCart(String selectedValues, Model model) {
-		String[] checkData = selectedValues.split(",");
-		System.out.println(checkData[0]);//개당상품가격
-		System.out.println(checkData[1]);//상품번호
-		System.out.println(checkData[2]);//상품구매갯수
-		int pay = Integer.parseInt(checkData[0]);
-		int num = Integer.parseInt(checkData[2]);
-		int total = pay*num;
-		System.out.println(total);//상품총가격
-		return "mall/addToCart";
-	}
+	 @RequestMapping("addCart")
+	 public String addCart(String selectedValues, Model model) {
+	     String id = (String) session.getAttribute("id");
+	     if (id == null) {
+	            return "redirect:login"; // 로그인되지 않은 경우 로그인 페이지로 이동
+	        }
+	     String[] checkData = selectedValues.split(",");
+	     int inventory = Integer.parseInt(checkData[0]);     // 상품 구매 갯수
+	     int productPrice = Integer.parseInt(checkData[1]); // 개당 상품 가격
+	     int productId = Integer.parseInt(checkData[2]);   // 상품 번호
+	     int quantity = Integer.parseInt(checkData[3]);     // 상품 구매 갯수
+	     int total = productPrice * quantity; // 상품 총 가격 계산
+	     
+	     // productId를 사용하여 상품 정보를 가져와서 모델에 추가
+	     ShopDTO product = service.getProductDetails(productId);
+	     model.addAttribute("product", product);
+	     product.getProduct();
+	     
+	     
+	     // 나머지 필요한 정보도 모델에 추가
+	     model.addAttribute("productPrice", productPrice);
+	     model.addAttribute("productId", productId);
+	     model.addAttribute("quantity", quantity);
+	     model.addAttribute("inventory", inventory);
+	     model.addAttribute("total", total);
+	     
+	     service.addToCart(productId, quantity, total);
+   
+	  // 기존 코드에 추가: 장바구니 정보 가져와서 모델에 추가
+	        
+	        List<CartDTO> cartItems = service.getCartItems(id);
+	        model.addAttribute("cartItems", cartItems);
+	     
+	     return "mall/cart"; // 결과 페이지로 이동
+	 }
+	 
+	 @PostMapping("removeSelectedItems")
+	    public String removeSelectedItems(String selectedItems) {
+	        String id = (String) session.getAttribute("id");
+	        service.removeSelectedItems(id, selectedItems);
+
+	        return "redirect:cart"; // 카트 페이지로 리다이렉트
+	    }
+	 
 	
 	@RequestMapping("callback")
 	public String callback(String orderUser, String shippingUser,String orderProduct) {

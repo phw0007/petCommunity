@@ -118,19 +118,6 @@ public class BoardController {
 	   }
 	
 	
-	@RequestMapping("boardDownload")
-	public void boardDownload(
-			@RequestParam(value="no", required = false)String n, 
-			HttpServletResponse res) throws IOException{
-		
-		service.boardDownload(n, res);
-		
-//		boolean result = service.boardDownload(n, res);
-//		if(result == false)
-//			return "redirect:boardForm";
-//	
-//		return "forward:boardContent"; 
-	}
 	
 	@GetMapping("boardModify")
 	public String boardModify(
@@ -173,12 +160,12 @@ public class BoardController {
 		String msg = service.boardDeleteProc(n);
 		if(msg.equals("로그인"))
 			return "redirect:login";
-		
+
 		if(msg.equals("작성자만 삭제 할 수 있습니다.")) {
 			String alert="작성자만 삭제할 수 있습니다.";
 			return "redirect:login";
 		}
-		
+
 		return "redirect:freeboardForm";
 	}
 	

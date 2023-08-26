@@ -13,6 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.care.project.board.BoardDTO;
+import com.care.project.common.PageService;
+
 import jakarta.servlet.http.HttpSession;
 
 @Service
@@ -35,8 +38,10 @@ public class photoService {
 		photo.setTitle(multi.getParameter("title"));
 		photo.setContent(multi.getParameter("content"));
 		SimpleDateFormat sdfDate  = new SimpleDateFormat("yyyy-MM-dd");
-		photo.setWrite_date(sdfDate .format(new Date()));
-		photo.setFile_name("");
+		photo.setWriteDate(sdfDate .format(new Date()));
+		
+		photo.setFileName("");
+		
 		  List<MultipartFile> files = multi.getFiles("upfile"); // 여러 개의 파일 가져오기
 		    List<String> savedFileNames = new ArrayList<>(); // 저장된 파일명들을 담을 리스트
 
@@ -48,7 +53,7 @@ public class photoService {
 		            Calendar cal = Calendar.getInstance();
 		            fileName = sdfFile .format(cal.getTime()) + fileName;
 
-		            String fileLocation = "C:/JAVAS/boot_workspace/petCommunity/src/main/webapp/photoImg/";
+		            String fileLocation = "C:/JAVAS/boot_workspace/petCommunity/src/main/webapp/image/";
 		            File save = new File(fileLocation + fileName);
 
 		            try {
@@ -62,8 +67,8 @@ public class photoService {
 		    }
 
 		    // 저장된 파일명들을 photo 객체에 설정 (여러 개의 파일명을 쉼표로 구분하여 하나의 문자열로 저장)
-		    photo.setFile_name(String.join(",", savedFileNames));
-
+		    photo.setFileName(String.join(",", savedFileNames));
+		    System.out.println(photo.getFileName());
 		
 		photoMapper.photoWriteProc(photo);
 		return "photo";
@@ -71,7 +76,7 @@ public class photoService {
 	}
 	
 	
-	public photoDTO photoContent(String n) {
+	public photoDTO photoContent(String n, String cp) {
 		int no = 0;
 		try {
 			no = Integer.parseInt(n);
@@ -82,16 +87,7 @@ public class photoService {
 		photoDTO photo = photoMapper.photoContent(no);
 		if(photo == null)
 			return null;
-		photo.setHits(photo.getHits()+1);
-		incHit(photo.getNo());
 		
-		System.out.println(" photo.getFile_name() : " + photo.getFile_name());
-		System.out.println(" photo.getFile_name() : " + photo.getFile_name().isEmpty());
-		if(photo.getFile_name() != null && photo.getFile_name().isEmpty() == false) {
-			String fn = photo.getFile_name();
-			String[] fileName = fn.split("-", 2);
-			photo.setFile_name(fileName[1]);
-		}
 		return photo;
 	}
 
@@ -101,13 +97,21 @@ public class photoService {
 		
 	} 
 	  
-	 
 	public List<photoDTO> getAllPhotos() {
 	    return photoMapper.getAllPhotos(); // 예시: 모든 사진 데이터를 가져오는 메서드 호출
 	}
-	   
 	
-	public void photo(String cp, String select, String search, Model model, String requestUrl) {
+	public List<photoDTO> getHomePhotos(){
+		return photoMapper.homePhoto();
+	}
+	
+	public List<BoardDTO> mainhomeboard(){
+		int begin = 1;
+		int end = 22;
+		return photoMapper.mainhomeboard(begin,end);
+	}
+	
+	public void photo(String cp, String select, String search, Model model) {
 		if(select == null){
 			select = "";
 		}
@@ -122,25 +126,28 @@ public class photoService {
 		if(search == null) {
 			search = "";
 		}
-		requestUrl = requestUrl.substring(1);
-		int pageBlock = 6; 
+		int pageBlock = 8; 
 		int end = pageBlock * currentPage; 
 		
 		int begin = end - pageBlock + 1; 
 		int no = 0;
 		ArrayList<photoDTO> photos = photoMapper.photoData(begin, end, select, search);
 		int totalCount = photoMapper.count(select, search);
-		String url = requestUrl+"?select="+select+"&search="+search+"&currentPage=";
-		String result = photoMapper.printPage(url, currentPage, totalCount, pageBlock);
+		String url = "photoMain?select="+select+"&search="+search+"&currentPage=";
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		no = (currentPage-1)*6;
-		model.addAttribute("boards", photos);
+		model.addAttribute("photos", photos);
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("no", no);
 		model.addAttribute("select", select);
 		model.addAttribute("search", search);
+		
+		
 	}
+
+
 	
-	
+//	
 	
 }
