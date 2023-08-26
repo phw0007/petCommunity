@@ -53,15 +53,15 @@
       <choose> 
          <when test="select == 'id'">
             SELECT AAA.* FROM 
-            (SELECT rownum as rn, no, id, category, title, content, fileName
-            , writeDate, hits, likes FROM project_photo WHERE id like ('%' ||  #{search} || '%'))AAA 
+            (SELECT rownum as rn, no, id, category, title, content, file_name
+            , write_date, hits, likes FROM project_photo WHERE id like ('%' ||  #{search} || '%'))AAA 
             WHERE AAA.rn BETWEEN #{begin} AND #{end}
             ORDER BY no   DESC
          </when>
          <otherwise>
             SELECT AAA.* FROM 
-            (SELECT rownum as rn, no, id, category, title, content, fileName
-            , writeDate, hits, likes FROM project_photo WHERE id like ('%' ||  #{search} || '%'))AAA 
+            (SELECT rownum as rn, no, id, category, title, content, file_name
+            , write_date, hits, likes FROM project_photo WHERE id like ('%' ||  #{search} || '%'))AAA 
             WHERE AAA.rn BETWEEN #{begin} AND #{end}
             ORDER BY no   DESC
          </otherwise>
@@ -84,7 +84,7 @@
 	</select>
   
   <select id="homePhoto" resultMap="photoDto">
-    SELECT no, id, title, fileName FROM project_photo
+    SELECT no, id, title, file_name FROM project_photo
    ORDER BY no   DESC
 </select>
 

@@ -59,7 +59,7 @@
                 <td>${item.product}</td>
                 <td>${item.pay}원</td>
                 <td><label for="quantity_${item.productId}">수량:</label>
-                    <input type="number" id="quantity_${item.productId}" name="quantity" value="1" min="1" max="" oninput="updatePrice(${item.productId})"><br></td>
+                    <input type="number" id="quantity_${item.productId}" name="quantity" value="${item.quantity }" min="1" max="${inventory }" oninput="updatePrice(${item.productId})"><br></td>
                 <td><span id="productPrice_${item.productId}" data-price="${item.pay}" data-total="${item.total}">${item.total}</span>원</td>
             </tr>
         </c:forEach>
@@ -68,10 +68,7 @@
     <button type="submit" style="background-color: #FFEDA1; border:none; width:150px; height:30px; font-family: 'Poor Story', cursive; cursor: pointer; margin-top: 20px; margin-left: 1450px;">삭제</button>
      <div class="totalCoin">총 주문 금액: <span id="totalPrice">0</span>원</div>
 </form>
-    
-    <form action="checkout" method="post" align="center">
-        <button type="submit" style="background-color: #FFEDA1; border:none; width:400px; height:40px; font-family: 'Poor Story', cursive; cursor: pointer; margin-top: 50px;">구매하기</button>
-    </form>
+    <button type="button" onclick="" style="background-color: #FFEDA1; border:none; width:400px; height:40px; font-family: 'Poor Story', cursive; cursor: pointer; margin-top: 50px;">구매하기</button>
 </div>
 <c:import url="/footer"/>
 

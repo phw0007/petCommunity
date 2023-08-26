@@ -91,13 +91,19 @@ public class ShopController {
 
 	  
 	  
-	@RequestMapping("shopBuy")
-	public String shopBuy(String productPrice, String productId, String quantity, Model model) {
+	@RequestMapping({"/shopBuy"})
+	public String shopBuy(String productPrice, String productId, String quantity, Model model,
+			HttpServletRequest request) {
+		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		String id = (String)session.getAttribute("id");
 		if (id == null || id.isEmpty()) {
 			return "redirect:login";
 		}
-		service.getProduct(productPrice, productId, quantity, id, model);
+		if("/shopBuy".equals(requestUrl)) {
+			service.getProduct(productPrice, productId, quantity, id, model);
+		}else {
+			
+		}
 		return "mall/shopBuy";
 	}
 	
@@ -127,9 +133,7 @@ public class ShopController {
 	     // productId를 사용하여 상품 정보를 가져와서 모델에 추가
 	     ShopDTO product = service.getProductDetails(productId);
 	     model.addAttribute("product", product);
-	     product.getProduct();
-	     
-	     
+
 	     // 나머지 필요한 정보도 모델에 추가
 	     model.addAttribute("productPrice", productPrice);
 	     model.addAttribute("productId", productId);

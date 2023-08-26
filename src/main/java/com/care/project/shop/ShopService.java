@@ -103,7 +103,10 @@ public class ShopService {
 	    cartItem.setTotal(total);
 	    
 	    // 매퍼를 사용하여 장바구니 항목을 데이터베이스에 저장
-	    shopMapper.addToCart(cartItem);
+	    CartDTO userCart = shopMapper.peoductCheck(cartItem);
+	    if (userCart == null) {
+	    	shopMapper.addToCart(cartItem);
+	    }
 	}
 	 public List<CartDTO> getCartItems(String id) {
 		 
@@ -133,6 +136,7 @@ public class ShopService {
 		String shippingPay= forematter.format(totalPay);
 		ShopDTO product = shopMapper.getProductDetails(no);
 		MemberDTO user = memberMapper.mloginProc(id);
+		
 		model.addAttribute("product", product);
 		model.addAttribute("user", user);
 		model.addAttribute("num", num);

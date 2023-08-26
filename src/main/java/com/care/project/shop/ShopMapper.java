@@ -34,6 +34,8 @@ public interface ShopMapper {
 
 	AShopDTO getOrderData(@Param("id")String id, @Param("writeDate")String writeDate);
 
+	CartDTO peoductCheck(CartDTO cartItem);
+
 
 	
 }

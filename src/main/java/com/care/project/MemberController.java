@@ -56,10 +56,6 @@ public class MemberController {
 	}
 	
 	
-	
-	
-
-
 	@GetMapping("login")
 	public String login() {
 	    // 로그인 상태를 확인하여 리다이렉트할 페이지를 결정합니다.
@@ -106,7 +102,7 @@ public class MemberController {
 		return "forward:login";
 	}
 
- 
+
 
 	@RequestMapping("userInfo")
 	public String userInfo(String id, @RequestParam(value = "currentPage", required = false) String cp, Model model) {
@@ -138,7 +134,6 @@ public class MemberController {
 	}
 
 
-
 	@GetMapping("update")
 	public String update() {
 		String id = (String) session.getAttribute("id");
@@ -146,14 +141,6 @@ public class MemberController {
 			return "redirect:login";
 		}
 		return "member/update";
-	}
-
-
-
-
-	@GetMapping("info")
-	public String info() {
-		return "mall/info";
 	}
 
 
@@ -203,11 +190,6 @@ public class MemberController {
 		return "member/photoAlbum";
 	}
 
-
-
-
-   
-
    @GetMapping("delete")
    public String delete() {
       String id = (String) session.getAttribute("id");
@@ -216,11 +198,6 @@ public class MemberController {
       }
       return "member/delete";
    }
-
-  
-
-
-
 
    @ResponseBody
    @PostMapping(value = "mySendEmail", produces = "text/plain; charset=utf-8")

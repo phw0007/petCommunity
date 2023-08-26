@@ -147,6 +147,9 @@
         SELECT * FROM project_cart WHERE id = #{id}
     </select>
     
+    <select id="peoductCheck" resultMap="cartDto">
+		SELECT * FROM project_cart WHERE product=#{product} AND id=#{id}
+	</select>
     
     <delete id="removeSelectedItems">
     DELETE FROM project_cart WHERE id = #{id} AND productId = #{productId}
