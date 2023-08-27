@@ -1,6 +1,7 @@
 package com.care.project.shop;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -82,8 +83,13 @@ public class ShopController {
 	        if (id == null) {
 	            return "redirect:login"; // 로그인되지 않은 경우 로그인 페이지로 이동
 	        }
-
+	        
 	        List<CartDTO> cartItems = service.getCartItems(id);
+	        for(int i = 0; i < cartItems.size(); i++) {
+	        	int no = cartItems.get(i).getProductId();
+	        	ShopDTO shopDto = service.getProductDetails(no);
+	        	cartItems.get(i).setInventory(shopDto.getInventory());
+	        }
 	        model.addAttribute("cartItems", cartItems);
 
 	        return "mall/cart";
@@ -91,9 +97,10 @@ public class ShopController {
 
 	  
 	  
-	@RequestMapping({"/shopBuy"})
+	@RequestMapping({"/shopBuy","/getBuyProduct"})
 	public String shopBuy(String productPrice, String productId, String quantity, Model model,
-			HttpServletRequest request) {
+			HttpServletRequest request, String selectedValues, String quantityValues) {
+		
 		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		String id = (String)session.getAttribute("id");
 		if (id == null || id.isEmpty()) {
@@ -102,7 +109,7 @@ public class ShopController {
 		if("/shopBuy".equals(requestUrl)) {
 			service.getProduct(productPrice, productId, quantity, id, model);
 		}else {
-			
+			service.getCartData(selectedValues, quantityValues, id, model);
 		}
 		return "mall/shopBuy";
 	}
@@ -145,8 +152,13 @@ public class ShopController {
    
 	  // 기존 코드에 추가: 장바구니 정보 가져와서 모델에 추가
 	        
-	        List<CartDTO> cartItems = service.getCartItems(id);
-	        model.addAttribute("cartItems", cartItems);
+       List<CartDTO> cartItems = service.getCartItems(id);
+       for(int i = 0; i < cartItems.size(); i++) {
+    	   int no = cartItems.get(i).getProductId();
+    	   ShopDTO shopDto = service.getProductDetails(no);
+    	   cartItems.get(i).setInventory(shopDto.getInventory());
+       }
+	   model.addAttribute("cartItems", cartItems);
 	     
 	     return "mall/cart"; // 결과 페이지로 이동
 	 }
@@ -158,11 +170,17 @@ public class ShopController {
 
 	        return "redirect:cart"; // 카트 페이지로 리다이렉트
 	    }
-	 
 	
 	@RequestMapping("callback")
-	public String callback(String orderUser, String shippingUser,String orderProduct) {
-		service.orderData(orderUser, shippingUser, orderProduct);
+	public String callback(String orderUser, String shippingUser, String orderProduct, String orderSelectProductId) {
+		String[] checkData = orderProduct.split(",");
+		if(!checkData[0].equals("")) {
+			service.orderData(orderUser, shippingUser, orderProduct);
+			System.out.println("구매완료");
+		}else {
+			service.orderCartData(orderUser, shippingUser, orderSelectProductId);
+			System.out.println("장바구니 구매완료");
+		}
 		return "redirect:shopping";
 	}
 	
@@ -180,7 +198,7 @@ public class ShopController {
 			System.out.println(no);
 			service.getPayment(id, writeDate, accessToken); 
 			shopService.orderDeleteCheckboxes(selectedValues);
-			return "redirect:ashopOrderInfo?selectedValues="+no;
+			return "redirect:ashopOrder";
 		}else  {
 			for(int i = 3; i <= checkData.length; i+=3) {
 				String id = checkData[i-3];

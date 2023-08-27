@@ -89,9 +89,16 @@ function addBuy() {
  		alert('결제방법은 필수 선택 항목입니다.');
  	}
  	else{
-		let orderUser = ['${user.id}','${user.userName}','${user.mobile}','${user.address}',payType,randomNum];
+ 		let orderUser = ['${user.id}','${user.userName}','${user.mobile}','${user.address}',payType,randomNum];
 		let shippingUser = [name,mobile,postcode,address,detailAddress,shippingMemo];
-		let orderProduct = ['${product.category}','${product.company}','${product.product}','${productAllPay}','${num}'];
+		let orderProduct = [];
+		var orderSelectProductId;
+		var orderCheck = '${product.product}';
+		if(orderCheck != ""){
+			orderProduct.push(['${product.category}','${product.company}','${product.product}','${productAllPay}','${num}']);
+		}else{
+			orderSelectProductId = '${selectedValues}';
+		}
 		
 		url="callback";
 	    const form = document.createElement('form'); // form 태그 생성
@@ -112,15 +119,20 @@ function addBuy() {
 	   	productData.setAttribute('type', 'hidden'); // type = hidden
 	   	productData.setAttribute('name', 'orderProduct'); // 데이터의 key
 	   	productData.setAttribute('value', orderProduct); // 데이터의 value
+	   	 
+	   	const productData2 = document.createElement('input'); // input 태그 생성
+	   	productData2.setAttribute('type', 'hidden'); // type = hidden
+	   	productData2.setAttribute('name', 'orderSelectProductId'); // 데이터의 key
+	   	productData2.setAttribute('value', orderSelectProductId); // 데이터의 value
 	   	
 	    form.appendChild(userData);
 	    form.appendChild(shippingData);
 	    form.appendChild(productData);
+	    form.appendChild(productData2);
 	    document.body.appendChild(form);
 	    form.submit();    
 	}
 }
-
 
 var IMP = window.IMP;
 IMP.init("imp07740386");
@@ -164,7 +176,7 @@ function requestPay() {
 		pay_method: "card", // 생략가
 		merchant_uid: randomNum, // 상점에서 생성한 고유 주문번호
 		name: "결제테스트",
-		amount: '${totalPay}',                         // 숫자 타입
+		amount: '${productAllPay}',                         // 숫자 타입
 		buyer_email: '${user.email }',
 		buyer_name: '${user.userName }',
 		buyer_tel: mobile.value,
@@ -191,7 +203,14 @@ function requestPay() {
 
 				let orderUser = ['${user.id}','${user.userName}','${user.mobile}','${user.address}',payType,randomNum,impUid];
 				let shippingUser = [name,mobile,postcode,address,detailAddress,shippingMemo];
-				let orderProduct = ['${product.category}','${product.company}','${product.product}','${productAllPay}','${num}'];
+				let orderProduct = [];
+				var orderSelectProductId;
+				var orderCheck = '${product.product}';
+				if(orderCheck != ""){
+					orderProduct.push(['${product.no}','${product.category}','${product.company}','${product.product}','${productAllPay}','${num}']);
+				}else{
+					orderSelectProductId = '${selectedValues}';
+				}
 				
 				url="callback";
 			    const form = document.createElement('form'); // form 태그 생성
@@ -213,9 +232,15 @@ function requestPay() {
 			   	productData.setAttribute('name', 'orderProduct'); // 데이터의 key
 			   	productData.setAttribute('value', orderProduct); // 데이터의 value
 			   	
+				const productData2 = document.createElement('input'); // input 태그 생성
+			   	productData2.setAttribute('type', 'hidden'); // type = hidden
+			   	productData2.setAttribute('name', 'orderSelectProductId'); // 데이터의 key
+			   	productData2.setAttribute('value', orderSelectProductId); // 데이터의 value
+			   	
 			    form.appendChild(userData);
 			    form.appendChild(shippingData);
 			    form.appendChild(productData);
+			    form.appendChild(productData2);
 			    document.body.appendChild(form);
 			    form.submit();    
 			    
@@ -242,15 +267,32 @@ function requestPay() {
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>${number=number+1}</td>
-					<td><img src="${product.imageFile}" alt="pet" width=100px height=100px/></i></td>
-					<td>${product.product}</td>
-					<td>${product.company}</td>
-					<td>${num}</td>
-					<td>${shippingFee}</td>
-					<td>${productAllPay}</td>
-				</tr>
+			<c:choose>
+				<c:when test="${product != null}">
+					<tr>
+						<td>${number=number+1}</td>
+						<td><img src="${product.imageFile}" alt="pet" width=100px height=100px/></i></td>
+						<td>${product.product}</td>
+						<td>${product.company}</td>
+						<td>${num}</td>
+						<td>${shippingFee}</td>
+						<td>${productAllPay}</td>
+					</tr>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="cart" items="${cart}">
+						<tr>
+							<td>${number=number+1}</td>
+							<td><img src="${cart.imageFile}" alt="pet" width=100px height=100px/></i></td>
+							<td>${cart.product}</td>
+							<td>${cart.company}</td>
+							<td>${cart.quantity}</td>
+							<td>${delivery}</td>
+							<td>${cart.total}</td>
+						</tr>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 			</tbody>
 		</table>
 	</div>

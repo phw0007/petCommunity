@@ -52,9 +52,11 @@
 		<id column="no" property="no"/>
 		<result column="id" property="id"/>
 		<result column="product" property="product"/>
+		<result column="category" property="category"/>
 		<result column="company" property="company"/>
 		<result column="pay" property="pay"/>
 		<result column="image_file" property="imageFile"/>
+		<result column="productId" property="productId"/>
 		<result column="quantity" property="quantity"/>
 		<result column="total" property="total"/>
 	</resultMap>
@@ -128,7 +130,7 @@
     </select>
     
     <insert id="shippinData">
-		INSERT INTO project_order_list VALUES(#{no}, #{id}, #{category}, #{company}, #{product}, #{pay}, #{orderCount})
+		INSERT INTO project_order_list VALUES(#{no}, #{productId}, #{id}, #{category}, #{company}, #{product}, #{pay}, #{orderCount})
 	</insert>
 	
 	<select id="getOrderData" resultMap="ashopDto">
@@ -136,12 +138,12 @@
     </select>
     
      <!-- addToCart 메서드에 대한 SQL 매핑 -->
- <insert id="addToCart" parameterType="com.care.project.shop.CartDTO">
- 	<selectKey order="BEFORE" keyProperty="no" resultType="int">
-			SELECT nvl(max(no),0) + 1 FROM project_cart
-	</selectKey>
-    INSERT INTO project_cart VALUES (#{no}, #{id}, #{product}, #{company}, #{pay}, #{imageFile}, #{productId}, #{quantity}, #{total})
-</insert>
+	<insert id="addToCart" parameterType="com.care.project.shop.CartDTO">
+	 	<selectKey order="BEFORE" keyProperty="no" resultType="int">
+				SELECT nvl(max(no),0) + 1 FROM project_cart
+		</selectKey>
+	    INSERT INTO project_cart VALUES (#{no}, #{id}, #{category}, #{product}, #{company}, #{pay}, #{imageFile}, #{productId}, #{quantity}, #{total})
+	</insert>
     
      <select id="getCartItems" resultMap="cartDto">
         SELECT * FROM project_cart WHERE id = #{id}
@@ -152,7 +154,23 @@
 	</select>
     
     <delete id="removeSelectedItems">
-    DELETE FROM project_cart WHERE id = #{id} AND productId = #{productId}
-</delete>
+		DELETE FROM project_cart WHERE id = #{id} AND productId = #{productId}
+	</delete>
+	
+	<select id="getSelectCart" resultMap="cartDto">
+		SELECT * FROM project_cart WHERE productId=#{productId} AND id=#{id}
+	</select>
     
+    <insert id="shippinCartData">
+		INSERT INTO project_order_list VALUES(#{no}, #{productId}, #{id}, #{category}, #{company}, #{product}, #{total}, #{quantity})
+	</insert>
+	
+	<update id="updateToCart">
+		UPDATE project_cart SET quantity=#{quantity}, total=#{total} WHERE no=#{no}
+	</update>
+	
+	<update id="updateInventory">
+		UPDATE project_shop SET inventory=#{inventory} WHERE no=#{no}
+	</update>
+	
 </mapper>

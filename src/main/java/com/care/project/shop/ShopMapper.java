@@ -36,6 +36,13 @@ public interface ShopMapper {
 
 	CartDTO peoductCheck(CartDTO cartItem);
 
+	CartDTO getSelectCart(@Param("id")String id, @Param("productId")String productId);
+
+	void shippinCartData(CartDTO cartDto);
+
+	void updateToCart(CartDTO cartDto);
+
+	void updateInventory(@Param("no")int no, @Param("inventory")int inventory);
 
 	
 }
