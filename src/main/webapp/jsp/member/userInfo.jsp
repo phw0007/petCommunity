@@ -36,44 +36,13 @@
 	        <button type="button" onclick="location.href='update'" style="cursor: pointer;">회원 수정</button>
 	        <button type="button" onclick="location.href='delete'" style="cursor: pointer;">회원 탈퇴</button>
 	    </div>
-	    <hr>
+	    
 
 	
 	
-	<div class="basket" align="center">
-	<input type="button" value="더보기 >" onclick="location.href='cart?id=${sessionScope.id }'" style="background: none; vertical-align: right; border: none; cursor: pointer; font-size: 15px; float:right;"><br>
-	 <ul>
-      <li>
-        <a href="#">
-          <b>이미지 들어갈 곳</b><br>
-           <span>상품이름 : </span><br>
-           <span>가격 : </span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <b>이미지 들어갈 곳</b><br>
-           <span>상품이름 : </span><br>
-           <span>가격 : </span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <b>이미지 들어갈 곳</b><br>
-           <span>상품이름 : </span><br>
-           <span>가격 : </span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <b>이미지 들어갈 곳</b><br>
-           <span>상품이름 : </span><br>
-           <span>가격 : </span>
-        </a>
-      </li>
-      </ul>
-	</div>
-	<hr>
+	
+	
+	
 	
 	
 	
