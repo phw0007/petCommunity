@@ -19,9 +19,9 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
 <script>
-function orderDeleteButton(no) {
-	let selectedValues = no;
-	url="orderDeleteButton";
+function orderDeleteButton() {
+	let selectedValues = ['${order.id}','${order.writeDate}','${order.no}'];
+	url="orderCancel";
 	getDeleteShop(url, selectedValues);
 }
 
@@ -42,9 +42,6 @@ function getDeleteShop(url, selectedValues) {
 	}
 }
 
-function cancelPay() {
-	
-}
 </script>
 <c:import url="/aheader" />
 <div class="member">
@@ -150,8 +147,7 @@ function cancelPay() {
 				    </c:forEach>
 				</table>
 			</div>
-			<input type="button" value="삭제" class="ashopUpdate" onclick="orderDeleteButton(${order.no})"/>
-			<input type="button" value="주문취소" class="ashopUpdate" onclick="location.href='orderCancel?id=${order.id}&writeDate=${order.writeDate}'"/>
+			<input type="button" value="주문취소" class="ashopUpdate" onclick="orderDeleteButton()"/>
 			<input type="button" value="확인" class="ashopSelect" onclick="history.back()"/>
 		</div>
 	</div>

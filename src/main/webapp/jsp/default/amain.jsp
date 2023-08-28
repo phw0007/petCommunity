@@ -26,8 +26,8 @@
 		<div class="board">
 			<p>커뮤니티 관리<a href="aboard"><span style="width:70px; float: right;">더보기 ></span></a></p>
 			<ul>
-				<c:forEach var="board" items="${boards}">
-					<li><span>${board.category}</span><span style="overflow: hidden; text-overflow: ellipsis;white-space: nowrap; width: 360px;">${board.title}</span>
+				<c:forEach var="board" items="${boards}" >
+					<li><span>${board.category}</span><span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 360px;">${board.title}</span>
 					<span style="float: right; text-align: right;">${board.writeDate}</span></li>
 				</c:forEach>
 			</ul>

@@ -27,6 +27,7 @@
 		<result column="shippin_memo" property="shippinMemo"/>
 		<result column="order_number" property="orderNumber"/>
 		<result column="impUid" property="impUid"/>
+		<result column="productId" property="productId"/>
 	</resultMap>
 	
 	<select id="shopData" resultMap="ashopDto">

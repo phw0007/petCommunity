@@ -65,8 +65,15 @@ public class ABoardService {
 		ABoardDTO board = boardMapper.aboardInfo(id, category, no);
 		ArrayList<ABoardDTO> comments = boardMapper.aboardComment(id, category, no);
 		
+		String[] fileImages = board.getFileName().split(",");
+		
+		for(int i = 0; i < fileImages.length; i++ ) {
+			fileImages[i] = "/image/"+fileImages[i];
+		}
+		
 		model.addAttribute("comments", comments);
 		model.addAttribute("board", board);
+		model.addAttribute("fileImages", fileImages);
 		model.addAttribute("cp", cp);
 	}
 	

@@ -22,7 +22,90 @@ function allCheck(){
 
 
 
-
+function addBuy() {
+ 	var name = document.getElementById("name").value;
+ 	var mobile = document.getElementById("mobile").value;
+ 	var postcode = document.getElementById("postcode").value;
+	var address = document.getElementById("address").value;
+ 	var detailAddress = document.getElementById("detailAddress").value;
+ 	var memoTextRadio = document.getElementById('memoTextRadio');
+ 	var memoTextBox = document.getElementById('memoTextBox').value;
+ 	var memoSelect = document.getElementById('memoSelect').value;
+ 	var cardRadio = document.getElementById('card');
+ 	var cacaoRadio = document.getElementById('cacaoPay');
+ 	var randomNum = Math.floor(Math.random() * (100000000 - 1000000000)) + 1000000000;
+ 	
+ 	var shippingMemo;
+    if (memoTextRadio.checked) {
+    	shippingMemo = memoTextBox;
+    } else {
+    	shippingMemo = memoSelect;
+    }
+    
+ 	var payType = "";
+    if (cardRadio.checked) {
+    	payType = "신용카드";
+    } else if(cacaoRadio.checked){
+    	payType = "카카오페이";
+    }
+    if(name == ""){
+    	alert('수령인명은 필수 입력 항목입니다.');
+    }else if(mobile == ""){
+    	alert('전화번호는 필수 입력 항목입니다.');
+    }else if(postcode == ""){
+		alert('우편번호는 필수 입력 항목입니다.');
+ 	}else if(address == ""){
+ 		alert('주소는 필수 입력 항목입니다.');
+ 	}else if(detailAddress == ""){
+ 		alert('상세주소는 필수 입력 항목입니다.');
+ 	}else if(payType == "") {
+ 		alert('결제방법은 필수 선택 항목입니다.');
+ 	}
+ 	else{
+ 		let orderUser = ['${user.id}','${user.userName}','${user.mobile}','${user.address}',payType,randomNum];
+		let shippingUser = [name,mobile,postcode,address,detailAddress,shippingMemo];
+		let orderProduct = [];
+		let orderSelectProductId = [];
+		var orderCheck = '${product.product}';
+		if(orderCheck.value != ""){
+			orderProduct.push(['${product.category}','${product.company}','${product.product}','${productAllPay}','${num}']);
+		}else{
+			orderSelectProductId.push(['${orderProductId}'.split(",")]);
+		}
+		
+		url="callback";
+	    const form = document.createElement('form'); // form 태그 생성
+	    form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
+	    form.setAttribute('action', url); // 전송할 url 지정
+	    
+	    const userData = document.createElement('input'); // input 태그 생성
+	    userData.setAttribute('type', 'hidden'); // type = hidden
+	    userData.setAttribute('name', 'orderUser'); // 데이터의 key
+	    userData.setAttribute('value', orderUser); // 데이터의 value
+	
+	   	const shippingData = document.createElement('input'); // input 태그 생성
+	   	shippingData.setAttribute('type', 'hidden'); // type = hidden
+	   	shippingData.setAttribute('name', 'shippingUser'); // 데이터의 key
+	   	shippingData.setAttribute('value', shippingUser); // 데이터의 value
+	   	
+	   	const productData = document.createElement('input'); // input 태그 생성
+	   	productData.setAttribute('type', 'hidden'); // type = hidden
+	   	productData.setAttribute('name', 'orderProduct'); // 데이터의 key
+	   	productData.setAttribute('value', orderProduct); // 데이터의 value
+	   	
+	   	const productData2 = document.createElement('input'); // input 태그 생성
+	   	productData2.setAttribute('type', 'hidden'); // type = hidden
+	   	productData2.setAttribute('name', 'orderSelectProductId'); // 데이터의 key
+	   	productData2.setAttribute('value', orderSelectProductId); // 데이터의 value
+	   	
+	    form.appendChild(userData);
+	    form.appendChild(shippingData);
+	    form.appendChild(productData);
+	    form.appendChild(productData2);
+	    document.body.appendChild(form);
+	    form.submit();    
+	}
+}
 
 function pwCheck(){
 	let pw = document.getElementById('pw');
@@ -80,8 +163,6 @@ function uploadImage(){
    };
    xhr.send(formData);
 }
-
-
 
 function getSelectedDeleteCheckboxes() {
    let checkboxes = document.getElementsByClassName('member-checkbox');
@@ -193,25 +274,6 @@ function getShopDeleteCheckBoxes() {
          window.confirm("삭제할 회원을 선택해주세요.")
       } else {
          const url = "shopDeleteCheckBoxes";
-         getCheckBoxesData(url, selectedValues);
-      }
-   }
-}
-
-function getOrderDeleteCheckboxes() {
-   let checkboxes = document.getElementsByClassName('member-checkbox');
-   let selectedValues = [];
-
-   if (window.confirm("정말로 삭제하시겠습니까?")) {
-      for (let i = 0; i < checkboxes.length; i++) {
-         if (checkboxes[i].checked) {
-            selectedValues.push(checkboxes[i].value);
-         }
-      }
-      if (selectedValues[0] == null || selectedValues[0] == "") {
-         window.confirm("삭제할 회원을 선택해주세요.")
-      } else {
-         const url = "orderDeleteCheckboxes";
          getCheckBoxesData(url, selectedValues);
       }
    }

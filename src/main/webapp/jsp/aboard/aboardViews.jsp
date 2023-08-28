@@ -74,7 +74,9 @@ function getDeleteBoard(url, selectedValues) {
 				<li><span>내용</span>
 					<div class="content">
 						<c:if test="${board.fileName != null}">
-							<img src=${board.fileName } alt="pet" width=140px height=200px/><br>
+							<c:forEach var="fileImage" items="${fileImages}">
+							<img src=${fileImage } alt="pet" width=140px height=200px/><br>
+							</c:forEach>
 						</c:if>
 						${board.content }
 					</div>

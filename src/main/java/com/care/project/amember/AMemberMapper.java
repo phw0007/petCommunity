@@ -34,4 +34,10 @@ public interface AMemberMapper {
 	ArrayList<AShopDTO> amaminShop(@Param("begin")int begin, @Param("end")int end);
 
 	ArrayList<APhotoDTO> amaminPhoto(@Param("begin")int begin, @Param("end")int end);
+
+	int boardCount(String id);
+
+	int commentCount(String id);
+
+	int photoCount(String id);
 }

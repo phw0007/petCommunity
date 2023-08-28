@@ -1,47 +1,33 @@
-
 package com.care.project.shop;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.HandlerMapping;
 
+import com.care.project.ashop.AShopService;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
-
-
-import java.util.List;
-
-
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-
-
-
 
 @Controller
 public class ShopController {
 	@Autowired private ShopService service;
+	@Autowired private AShopService shopService;
 	@Autowired private HttpSession session;
-	
-	
-	 @Autowired
-	    private ShopService shopService;
-	 
-	
-	
-	
-	
 	@RequestMapping({"/shopping", "/food", "/snack", "/cloths", "/medi", "/pad", "/living"})
 	public String shopping(@RequestParam(value="currentPage", required = false)String cp,
 			String select, String search, Model model, HttpServletRequest request) {
@@ -74,7 +60,11 @@ public class ShopController {
 		service.shop(cp, select, search, model, category, page);
 		return "mall/shopping";
 	}
-
+	
+	@RequestMapping("shopLink")
+	public String shopLink() {
+		return "mall/shopLink";
+	}
 	
 	@RequestMapping("/shopIn")
 	public String shopIn(@RequestParam("productId") int productId, Model model) {
@@ -87,23 +77,53 @@ public class ShopController {
 	    return "mall/shopIn"; // 상세 페이지 JSP 파일의 이름을 반환합니다.
 	}
 	
-	
-	
-	
 	  @GetMapping("cart")
 	    public String cart(Model model) {
 	        String id = (String) session.getAttribute("id");
 	        if (id == null) {
 	            return "redirect:login"; // 로그인되지 않은 경우 로그인 페이지로 이동
 	        }
-
-	        List<CartDTO> cartItems = shopService.getCartItems(id);
+	        
+	        List<CartDTO> cartItems = service.getCartItems(id);
+	        for(int i = 0; i < cartItems.size(); i++) {
+	        	int no = cartItems.get(i).getProductId();
+	        	ShopDTO shopDto = service.getProductDetails(no);
+	        	cartItems.get(i).setInventory(shopDto.getInventory());
+	        }
 	        model.addAttribute("cartItems", cartItems);
 
 	        return "mall/cart";
 	    }
-	 
-	 
+
+	  
+	  
+	@RequestMapping({"/shopBuy","/getBuyProduct"})
+	public String shopBuy(String productPrice, String productId, String quantity, Model model,
+			HttpServletRequest request, String selectedValues, String quantityValues) {
+		
+		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		String id = (String)session.getAttribute("id");
+		if (id == null || id.isEmpty()) {
+			return "redirect:login";
+		}
+		if("/shopBuy".equals(requestUrl)) {
+			service.getProduct(productPrice, productId, quantity, id, model);
+		}else {
+			service.getCartData(selectedValues, quantityValues, id, model);
+		}
+		return "mall/shopBuy";
+	}
+	
+//	@RequestMapping(value="callback", produces = "application/text; charset=utf8")
+//	public void callback(@RequestParam(required = false) String imp_uid) {
+//	
+//	}
+//	@RequestMapping("callback")
+//	public void callback(@RequestBody Map<String, Object> model) {
+//		HttpHeaders responseHeaders = new HttpHeaders();
+//		responseHeaders.add("Content-Type", "application/json; charset=UTF-8");
+//		JSONObject responseObj = new JSONObject();
+//	}
 	 @RequestMapping("addCart")
 	 public String addCart(String selectedValues, Model model) {
 	     String id = (String) session.getAttribute("id");
@@ -120,9 +140,7 @@ public class ShopController {
 	     // productId를 사용하여 상품 정보를 가져와서 모델에 추가
 	     ShopDTO product = service.getProductDetails(productId);
 	     model.addAttribute("product", product);
-	     product.getProduct();
-	     
-	     
+
 	     // 나머지 필요한 정보도 모델에 추가
 	     model.addAttribute("productPrice", productPrice);
 	     model.addAttribute("productId", productId);
@@ -130,59 +148,69 @@ public class ShopController {
 	     model.addAttribute("inventory", inventory);
 	     model.addAttribute("total", total);
 	     
-	     shopService.addToCart(productId, quantity, total);
-	     
-	     
-	     
+	     service.addToCart(productId, quantity, total);
+   
 	  // 기존 코드에 추가: 장바구니 정보 가져와서 모델에 추가
 	        
-	        List<CartDTO> cartItems = shopService.getCartItems(id);
-	        model.addAttribute("cartItems", cartItems);
+       List<CartDTO> cartItems = service.getCartItems(id);
+       for(int i = 0; i < cartItems.size(); i++) {
+    	   int no = cartItems.get(i).getProductId();
+    	   ShopDTO shopDto = service.getProductDetails(no);
+    	   cartItems.get(i).setInventory(shopDto.getInventory());
+       }
+	   model.addAttribute("cartItems", cartItems);
 	     
 	     return "mall/cart"; // 결과 페이지로 이동
 	 }
 	 
-	 
 	 @PostMapping("removeSelectedItems")
 	    public String removeSelectedItems(String selectedItems) {
 	        String id = (String) session.getAttribute("id");
-	        shopService.removeSelectedItems(id, selectedItems);
+	        service.removeSelectedItems(id, selectedItems);
 
 	        return "redirect:cart"; // 카트 페이지로 리다이렉트
 	    }
-	 
-
-	 
-	 
-	@RequestMapping("shopLink")
-	public String shopLink() {
-		return "mall/shopLink";
-	}
-	
-
-	
-	@RequestMapping("shopBuy")
-	public String shopBuy(String productPrice, String productId, String quantity, Model model) {
-		String id = (String)session.getAttribute("id");
-		if (id == null || id.isEmpty()) {
-			return "redirect:login";
-		}
-		service.getProduct(productPrice, productId, quantity, id, model);
-		return "mall/shopBuy";
-	}
-	
-
 	
 	@RequestMapping("callback")
-	public String callback(String orderUser, String shippingUser,String orderProduct) {
-		service.orderData(orderUser, shippingUser, orderProduct);
+	public String callback(String orderUser, String shippingUser, String orderProduct, String orderSelectProductId) {
+		String[] checkData = orderProduct.split(",");
+		if(!checkData[0].equals("")) {
+			service.orderData(orderUser, shippingUser, orderProduct);
+			System.out.println("구매완료");
+		}else {
+			service.orderCartData(orderUser, shippingUser, orderSelectProductId);
+			System.out.println("장바구니 구매완료");
+		}
 		return "redirect:shopping";
 	}
 	
-	@RequestMapping("orderCancel")
-	public void orderCancel(String id, String writeDate) {
+	@RequestMapping({"/orderCancel","/orderCancelCheckboxes"})
+	public String orderCancel(String selectedValues, HttpServletRequest request) {
+		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		String accessToken = service.getAccessToken();
-		service.getPayment(id, writeDate, accessToken); 
+		String[] checkData = selectedValues.split(",");
+		if("/orderCancel".equals(requestUrl)) {
+			String id = checkData[0];
+			String writeDate = checkData[1];
+			int no = Integer.parseInt(checkData[2]);
+			System.out.println(id);
+			System.out.println(writeDate);
+			System.out.println(no);
+			service.getPayment(id, writeDate, accessToken); 
+			shopService.orderDeleteCheckboxes(selectedValues);
+			return "redirect:ashopOrder";
+		}else  {
+			for(int i = 3; i <= checkData.length; i+=3) {
+				String id = checkData[i-3];
+				String writeDate = checkData[i-2];
+				int no = Integer.parseInt(checkData[i-1]);
+				System.out.println(id);
+				System.out.println(writeDate);
+				System.out.println(no);
+				service.getPayment(id, writeDate, accessToken); 
+			}
+			shopService.orderDeleteCheckboxes(selectedValues);
+			return "redirect:ashopOrderDel";
+		}
 	}
 }
-
