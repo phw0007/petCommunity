@@ -73,7 +73,7 @@ public class BoardController {
 	///////////////////////////////////////////////////////////////////////
 	
 	@GetMapping("boardWrite")
-	public String boardWrite() {
+	public String boardWrite(@RequestParam(value="category", required = false)String category) {
 	String id = (String)session.getAttribute("id");
 	if(id == null || id.isEmpty()) {
 	return "redirect:login";
@@ -88,8 +88,23 @@ public class BoardController {
 			return "redirect:login";
 		}
 		if(msg.equals("게시글 작성 완료")) {
-			 //String referer = request.getHeader("Referer");
-			//String referer = (String)request.getHeader("REFERER");
+			if(multi.getParameter("category").equals("QnA")) {
+				return "redirect:qNaboardForm";
+			}else if(multi.getParameter("category").equals("강아지")) {
+				return "redirect:dogboardForm";
+			}else if(multi.getParameter("category").equals("고양이")) {
+				return "redirect:catboardForm";
+			}else if(multi.getParameter("category").equals("조류")) {
+				return "redirect:birdboardForm";
+			}else if(multi.getParameter("category").equals("수중생물")) {
+				return "redirect:fistboardForm";
+			}else if(multi.getParameter("category").equals("소동물")) {
+				return "redirect:smallboardForm";
+			}else if(multi.getParameter("category").equals("파충류")) {
+				return "redirect:reptileboardForm";
+			}else if(multi.getParameter("category").equals("기타동물")) {
+				return "redirect:stcboardForm";
+			}else
 			return "redirect:freeboardForm"; //forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
 		}
 		model.addAttribute("msg", msg);
@@ -111,6 +126,9 @@ public class BoardController {
 	         System.out.println("boardContent 게시글 번호 : " + n);
 	         return "redirect:freeboardForm";
 	      }
+	      String id=(String)session.getAttribute("id");
+	      
+	      model.addAttribute("deleteId", id);
 	      model.addAttribute("board", board);
 	      model.addAttribute("comments", comments);
 	      model.addAttribute("cp",cp);
@@ -141,34 +159,83 @@ public class BoardController {
 	}
 	
 	@PostMapping("boardModifyProc")
-	public String boardModifyProc(BoardDTO board) {
+	public String boardModifyProc(BoardDTO board
+			) {
 		String id = (String)session.getAttribute("id");
 		if(id == null || id.isEmpty()) {
 			return "redirect:login";
 		}
-		System.out.println(board.getCategory());
+		System.out.println("QBQB"+board.getCategory());
 		String result = service.boardModifyProc(board);
-		String category=board.getCategory();
+		//String category=board.getCategory();
+		
 		int no=board.getNo();
 		if(result.equals("게시글 수정 완료")) {
-			return "forward:boardContent?no="+no;
+			if(board.getCategory().equals("QnA")) {
+				return "redirect:qNaboardForm";
+			}else if(board.getCategory().equals("자유게시판")) {
+				return "redirect:freeboardForm";			
+			}else if(board.getCategory().equals("강아지")) {
+				return "redirect:dogboardForm";			
+			}else if(board.getCategory().equals("고양이")) {
+				return "redirect:catboardForm";			
+			}else if(board.getCategory().equals("조류")) {
+				return "redirect:birdboardForm";			
+			}else if(board.getCategory().equals("수중생물")) {
+				return "redirect:fishboardForm";			
+			}else if(board.getCategory().equals("파충류")) {
+				return "redirect:reptileboardForm";			
+			}else if(board.getCategory().equals("소동물")) {
+				return "redirect:smallboardForm";			
+			}else if(board.getCategory().equals("기타동물")) {
+				return "redirect:etcboardForm";			
+			}
+			
 		}
 		return "board/freeboardForm"; // 실패했을 때 게시글 수정하는 자리로 간다고 하면, board/boardModify가 될 수 없음(보드에 들어갈 내용이 없으니까. redirect로 가야 함)
 	}
+
 	@RequestMapping("boardDeleteProc")
-	public String boardDeleteProc(@RequestParam(value="no", required = false)String n) {
-		String msg = service.boardDeleteProc(n);
+	public String boardDeleteProc(String selected,
+			Model model) {
+		String msg = service.boardDeleteProc(selected);
+	
+		String[] check = selected.split(",");
+		String category=check[1];
+		
+		System.out.println("카테고리"+category);
 		if(msg.equals("로그인"))
 			return "redirect:login";
 
 		if(msg.equals("작성자만 삭제 할 수 있습니다.")) {
 			String alert="작성자만 삭제할 수 있습니다.";
+			model.addAttribute("alert",alert);
 			return "redirect:login";
 		}
-
-		return "redirect:freeboardForm";
+        if(msg.equals("게시글 삭제 완료")) {
+        	if(category.equals("자유게시판")) {
+		     return "redirect:freeboardForm";
+            }else if(category.equals("QnA")) {
+            	return "redirect:qNaboardForm";
+            }else if(category.equals("강아지")) {
+            	return "redirect:dogboardForm";
+            }else if(category.equals("고양이")) {
+            	return "redirect:catboardForm";
+            }else if(category.equals("조류")) {
+            	return "redirect:birdboardForm";
+            }else if(category.equals("수중생물")) {
+            	return "redirect:fishboardForm";
+            }else if(category.equals("파충류")) {
+            	return "redirect:reptileboardForm";
+            }else if(category.equals("기타동물")) {
+            	return "redirect:etcboardForm";
+            }else if(category.equals("소동물")) {
+            	return "redirect:smallboardForm";
+            }
 	}
-	
+        return "board/freeboardForm";
+	}
+
 	
 	@ResponseBody
 	@PostMapping(value = "uploadImage2", produces = "text/plain; charset=utf-8")
@@ -182,6 +249,7 @@ public class BoardController {
 	@PostMapping("freecommentProc")
 	public String freecommentProc(@RequestParam(value="no", required = false)String n,
 		    @RequestParam(value = "category", required = false) String category,
+		    HttpServletRequest request,
 			BoardDTO board, Model model) {
 		String id = (String)session.getAttribute("id");
 		if(id == null || id.isEmpty()) {
@@ -191,7 +259,8 @@ public class BoardController {
 		String result = service.freecommtentProc(board);
 
 		if(result.equals("댓글 작성 완료")) {
-			return "forward:boardContent?no="+n; //forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
+			  String referer = request.getHeader("Referer");
+	    	    return "redirect:"+ referer;//forward 해도 됨. 목적은 둘 다 boardForm으로 매핑 찾아가서 메서드 실행하려는 것이기 때문
 		}
 	   
 		return "board/boardContent";
