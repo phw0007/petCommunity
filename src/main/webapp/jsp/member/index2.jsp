@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="dbQuiz.js"></script>
-<link rel="stylesheet" href="/css/index2.css" type="text/css">
+<link rel="stylesheet" href="${contextRoot}css/index2.css" type="text/css">
 <style>
  @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 </style>  

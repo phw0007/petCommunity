@@ -4,8 +4,8 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 </style>
-<link rel="stylesheet" href="/css/kakaoRegister.css" type="text/css">
-<script src="/dbQuiz.js"></script>
+<link rel="stylesheet" href="${contextRoot}css/kakaoRegister.css" type="text/css">
+<script src="${contextRoot}dbQuiz.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 function execDaumPostcode() {

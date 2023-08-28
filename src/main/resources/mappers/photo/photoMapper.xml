@@ -10,8 +10,8 @@
       <result column="nickname" property="nickname"/>
       <result column="title" property="title"/>
       <result column="content" property="content"/>
-      <result column="fileName" property="fileName"/>
-      <result column="writeDate" property="writeDate"/>
+      <result column="file_name" property="fileName"/>
+      <result column="write_date" property="writeDate"/>
       <result column="hits" property="hits"/>
       <result column="likes" property="likes"/>
    </resultMap>

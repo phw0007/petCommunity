@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="/css/reset.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="/css/aindex.css" type="text/css">
+	<link href="${contextRoot}css/reset.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="${contextRoot}css/aindex.css" type="text/css">
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 	</style>

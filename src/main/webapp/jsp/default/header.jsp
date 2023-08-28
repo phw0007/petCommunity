@@ -5,7 +5,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 </style>
-<link rel="stylesheet" href="/css/header.css" type="text/css">
+<link rel="stylesheet" href="${contextRoot}css/header.css" type="text/css">
 <style type = "text/css">
 #header{height:100px;}
 .inner{font-family: 'Poor Story', cursive;height:80px;}

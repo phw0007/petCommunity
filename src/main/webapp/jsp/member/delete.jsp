@@ -3,7 +3,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 </style>
-<link rel="stylesheet" href="/css/delete.css" type="text/css">
+<link rel="stylesheet" href="${contextRoot}css/delete.css" type="text/css">
 <c:import url="/header" />
 
 

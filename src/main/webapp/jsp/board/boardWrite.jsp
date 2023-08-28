@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url = "/header"/>
-<link href="/css/board.css" rel="stylesheet" type="text/css">
+<link href="${contextRoot}css/board.css" rel="stylesheet" type="text/css">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 </style>
-<script src="/dbQuiz.js"></script>
+<script src="${contextRoot}dbQuiz.js"></script>
 <!DOCTYPE html>
 <html>
 <head>

@@ -3,7 +3,7 @@
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   <c:import url="/header" />
   
-  	<link rel="stylesheet" href="/css/home.css">
+  	<link rel="stylesheet" href="${contextRoot}css/home.css">
     <link href="css/reset.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />

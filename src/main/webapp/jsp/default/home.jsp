@@ -3,7 +3,7 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <c:import url="/header" />
-  	<link rel="stylesheet" href="/css/home.css">
+  	<link rel="stylesheet" href="${contextRoot}css/home.css">
     <link href="css/reset.css" rel="stylesheet" type="text/css">
   <style type="text/css">
 </style>    
@@ -49,7 +49,7 @@
 			<c:forEach var="mphoto" items="${mphotos}" varStatus="loop">
 		        <li>
 		            <div class="mliweb" onclick="location.href='photoContent?no=${mphoto.no}'">
-		                <div class="mliimg"><img alt="/image/${mphoto.fileName}" src="/image/${mphoto.fileName}" width="160" height="200"></div>
+		                <div class="mliimg"><img alt="${mphoto.fileName}" src="${mphoto.fileName}" width="160" height="200"></div>
 		                <div class="mlicont">${mphoto.title}</div>
 		                <div class="mliicon">
 		                    <p class="mpotoid">${mphoto.id}</p>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <link href="css/reset.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="/css/aboard.css">
+<link rel="stylesheet" href="${contextRoot}css/aboard.css">
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 </style>
@@ -13,7 +13,7 @@
 <title>index</title>
 </head>
 <body>
-<script src="/dbQuiz.js"></script>
+<script src="${contextRoot}dbQuiz.js"></script>
 <c:import url="/aheader" />
 <div class="member">
 	<div class="memberItem">

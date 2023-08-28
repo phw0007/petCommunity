@@ -4,7 +4,7 @@
   <c:import url="/header" />
   
   
-  	<link rel="stylesheet" href="/css/home.css">
+  	<link rel="stylesheet" href="${contextRoot}css/home.css">
     <link href="css/reset.css" rel="stylesheet" type="text/css">
   <style type="text/css">
 </style>    

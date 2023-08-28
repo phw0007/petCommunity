@@ -4,8 +4,8 @@
  <style>
   @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 </style>
-<link rel="stylesheet" href="/css/update.css" type="text/css">
-<script src="/dbQuiz.js"></script>
+<link rel="stylesheet" href="${contextRoot}css/update.css" type="text/css">
+<script src="${contextRoot}dbQuiz.js"></script>
 <div class="update" align="center">
 	<h1>회원 수정</h1>
 	<table ><tr><td>
