@@ -52,9 +52,9 @@
     <h2>${product.company}</h2>
     <h3>${product.product}</h3>
     <form action="shopBuy" method="post" id="addToCartForm">
-       <p>가격: <span id="productPrice" data-price="${product.pay}">${product.pay}</span>원</p>
-       <input type="hidden" id="productId" name="productId" value="${product.no}">
-       <input type="hidden" name="productPrice"value="${product.pay}">
+      <p>가격: <span id="productPrice" data-price="${product.pay}">${product.pay}</span>원</p>
+      <input type="hidden" id="productId" name="productId" value="${product.no}">
+      <input type="hidden" name="productPrice"value="${product.pay}">
       <label for="quantity">수량:</label>
       <input type="number" id="quantity" name="quantity" value="1" min="1" max="${product.inventory}" oninput="updatePrice()"><br>
       <button type="button" onclick="addCart(${product.pay},${product.inventory })" style="margin-top: 30px; background-color: #FFEDA1; border:none; width:400px; height:40px; font-family: 'Poor Story', cursive; cursor: pointer;">장바구니에 추가</button>

@@ -173,4 +173,10 @@
 		UPDATE project_shop SET inventory=#{inventory} WHERE no=#{no}
 	</update>
 	
+	<select id="getShop" resultMap="ashopDto">
+		SELECT AAA.* FROM 
+				(SELECT rownum as rn, no, category, product, company, pay, inventory
+				, image_file, info FROM project_shop)AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
 </mapper>

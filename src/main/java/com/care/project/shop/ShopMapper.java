@@ -44,6 +44,8 @@ public interface ShopMapper {
 
 	void updateInventory(@Param("no")int no, @Param("inventory")int inventory);
 
+	ArrayList<AShopDTO> getShop(@Param("begin")int begin, @Param("end")int end);
+
 	
 }
 

@@ -1,6 +1,7 @@
 package com.care.project.home;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,8 +14,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.care.project.ainfo.AInfoDTO;
+import com.care.project.ainfo.AInfoMapper;
+import com.care.project.ashop.AShopDTO;
 import com.care.project.board.BoardDTO;
 import com.care.project.common.PageService;
+import com.care.project.shop.ShopDTO;
+import com.care.project.shop.ShopMapper;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -22,6 +28,8 @@ import jakarta.servlet.http.HttpSession;
 public class photoService {
 
 	@Autowired private photoMapper photoMapper;
+	@Autowired private AInfoMapper infoMapper;
+	@Autowired private ShopMapper shopMapper;
 	@Autowired private HttpSession session;
 	
 	public String photoWriteProc(MultipartHttpServletRequest multi){
@@ -147,7 +155,23 @@ public class photoService {
 	}
 
 
-	
-//	
-	
+	public ArrayList<AInfoDTO> getInfo() {
+		int begin = 1;
+		int end = 19;
+		return infoMapper.getInfo(begin, end);
+	}
+
+
+	public ArrayList<AShopDTO> getShop() {
+		DecimalFormat forematter = new DecimalFormat("###,###");
+		int begin = 1;
+		int end = 5;
+		ArrayList<AShopDTO> shops = shopMapper.getShop(begin, end);
+		for(int i = 0; i < shops.size(); i++) {
+			String pay = forematter.format(shops.get(i).getPay());
+			shops.get(i).setShopPay(pay);
+		}
+		return shops;
+	}
+
 }

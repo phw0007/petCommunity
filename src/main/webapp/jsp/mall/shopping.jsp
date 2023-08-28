@@ -34,11 +34,9 @@
   
   
   
-  <div class="shoppingList">
-    <ul> 
+<div class="shoppingList">
+	<ul> 
 		<c:forEach var="shop" items="${shops}">
-		    
-    
 			<li onclick="location.href='#'">
 			    <a href="shopIn?productId=${shop.no}">
 				<p><img src="${shop.imageFile}" alt="pet" width=200px height=260px/></p>
@@ -48,8 +46,8 @@
 				</a>
 			</li>
 		</c:forEach>
-    </ul>
-  </div>
+	</ul>
+</div>
  <div> ${result} </div>
   <div class="serch">
 	<form action="shopping">

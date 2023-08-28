@@ -30,4 +30,6 @@ public interface AInfoMapper {
 
 	void ainfoNoUpdate(int no);
 
+	ArrayList<AInfoDTO> getInfo(@Param("begin")int begin, @Param("end")int end);
+
 }
