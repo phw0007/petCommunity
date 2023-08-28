@@ -38,7 +38,7 @@
  
 	<select id="freeboardForm" resultMap="boardDto">
 	SELECT freeboard. * FROM 
-	(SELECT rownum as rn, free. * FROM (select no,title,id,category,write_date,hits,likes from project_board where category='자유게시판' order by no desc)free)
+	(SELECT ROWNUM() as rn, free. * FROM (select no,title,id,category,write_date,hits,likes from project_board where category='자유게시판' order by no desc)free)
 	freeboard WHERE freeboard.rn BETWEEN #{begin} AND #{end}
 	</select>
 
@@ -96,22 +96,22 @@
 	<select id="boardSearch" resultMap="boardDto">
 		<choose>
 			<when test="select == 'title'">
-	SELECT BBB.* FROM ( SELECT rownum as rn, AAA.* FROM
-       (SELECT no, id, category, title, content, file_name, write_date, hits, likes FROM project_board WHERE title like ('%' || #{search} || '%')
+	SELECT BBB.* FROM ( SELECT ROWNUM() as rn, AAA.* FROM
+       (SELECT no, id, category, title, content, file_name, write_date, hits, likes FROM project_board WHERE title like ('%' , #{search} , '%')
         ORDER BY no DESC) AAA) BBB
 WHERE BBB.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'id'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_board WHERE id like ('%' ||  #{search} || '%'))AAA 
+				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE id like ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 				<otherwise>
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_board WHERE category like ('%' ||  #{search} || '%') or
-				title like ('%' ||  #{search} || '%') or id like ('%' ||  #{search} || '%'))AAA 
+				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE category like ('%' ,  #{search} , '%') or
+				title like ('%' ,  #{search} , '%') or id like ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</otherwise>
 		</choose>
@@ -120,10 +120,10 @@ WHERE BBB.rn BETWEEN #{begin} AND #{end}
 	<select id="searchCount">
 		<choose>
 	  		<when test="select == 'title'">
-	  			SELECT count(no) FROM project_board WHERE title like ('%' ||  #{search} || '%')
+	  			SELECT count(no) FROM project_board WHERE title like ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'id'">
-	  			SELECT count(no) FROM project_board WHERE category='자유게시판' AND id like ('%' ||  #{search} || '%')
+	  			SELECT count(no) FROM project_board WHERE category='자유게시판' AND id like ('%' ,  #{search} , '%')
 	  		</when>
 		</choose>
 	</select>
