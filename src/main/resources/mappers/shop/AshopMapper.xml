@@ -35,26 +35,26 @@
 			<when test="select == 'category'">
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, category, product, company, pay, inventory
-				, image_file, info FROM project_shop WHERE category like ('%' ,  #{search} , '%'))AAA 
+				, image_file, info FROM project_shop WHERE category like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'company'">
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, category, product, company, pay, inventory
-				, image_file, info FROM project_shop WHERE company like ('%' ,  #{search} , '%'))AAA 
+				, image_file, info FROM project_shop WHERE company like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'product'">
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, category, product, company, pay, inventory
-				, image_file, info FROM project_shop WHERE product like ('%' ,  #{search} , '%'))AAA 
+				, image_file, info FROM project_shop WHERE product like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<otherwise>
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, category, product, company, pay, inventory
-				, image_file, info FROM project_shop WHERE category like ('%' ,  #{search} , '%') or
-				company like ('%' ,  #{search} , '%') or product like ('%' ,  #{search} , '%'))AAA 
+				, image_file, info FROM project_shop WHERE category like CONCAT ('%' ,  #{search} , '%') or
+				company like CONCAT ('%' ,  #{search} , '%') or product like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</otherwise>
 		</choose>
@@ -63,17 +63,17 @@
 	<select id="count">
 		<choose>
 	  		<when test="select == 'category'">
-	  			SELECT count(product) FROM project_shop WHERE category like ('%' ,  #{search} , '%')
+	  			SELECT count(product) FROM project_shop WHERE category like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'company'">
-	  			SELECT count(product) FROM project_shop WHERE company like ('%' ,  #{search} , '%')
+	  			SELECT count(product) FROM project_shop WHERE company like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'product'">
-	  			SELECT count(product) FROM project_shop WHERE product like ('%' ,  #{search} , '%')
+	  			SELECT count(product) FROM project_shop WHERE product like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<otherwise>
-	  			SELECT count(product) FROM project_shop WHERE category like ('%' ,  #{search} , '%') or
-	  			company like ('%' ,  #{search} , '%') or product like ('%' ,  #{search} , '%')
+	  			SELECT count(product) FROM project_shop WHERE category like CONCAT ('%' ,  #{search} , '%') or
+	  			company like CONCAT ('%' ,  #{search} , '%') or product like CONCAT ('%' ,  #{search} , '%')
 	  		</otherwise>
 		</choose>
 	</select>
@@ -114,26 +114,26 @@
 			<when test="select == 'id'">
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, id, user_name, address, mobile, write_date
-				, pay_type, pay_check FROM project_order WHERE id like ('%' ,  #{search} , '%'))AAA 
+				, pay_type, pay_check FROM project_order WHERE id like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'userName'">
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, id, user_name, address, mobile, write_date
-				, pay_type, pay_check FROM project_order WHERE user_name like ('%' ,  #{search} , '%'))AAA 
+				, pay_type, pay_check FROM project_order WHERE user_name like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'writeDate'">
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, id, user_name, address, mobile, write_date
-				, pay_type, pay_check FROM project_order WHERE write_date like ('%' ,  #{search} , '%'))AAA 
+				, pay_type, pay_check FROM project_order WHERE write_date like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<otherwise>
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, id, user_name, address, mobile, write_date
-				, pay_type, pay_check FROM project_order WHERE id like ('%' ,  #{search} , '%') or
-				user_name like ('%' ,  #{search} , '%') or write_date like ('%' ,  #{search} , '%'))AAA 
+				, pay_type, pay_check FROM project_order WHERE id like CONCAT ('%' ,  #{search} , '%') or
+				user_name like CONCAT ('%' ,  #{search} , '%') or write_date like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</otherwise>
 		</choose>
@@ -142,17 +142,17 @@
 	<select id="orderCount">
 		<choose>
 	  		<when test="select == 'id'">
-	  			SELECT count(id) FROM project_order WHERE id like ('%' ,  #{search} , '%')
+	  			SELECT count(id) FROM project_order WHERE id like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'userName'">
-	  			SELECT count(id) FROM project_order WHERE user_name like ('%' ,  #{search} , '%')
+	  			SELECT count(id) FROM project_order WHERE user_name like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'writeDate'">
-	  			SELECT count(id) FROM project_order WHERE write_date like ('%' ,  #{search} , '%')
+	  			SELECT count(id) FROM project_order WHERE write_date like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<otherwise>
-	  			SELECT count(id) FROM project_order WHERE id like ('%' ,  #{search} , '%') or
-	  			user_name like ('%' ,  #{search} , '%') or write_date like ('%' ,  #{search} , '%')
+	  			SELECT count(id) FROM project_order WHERE id like CONCAT ('%' ,  #{search} , '%') or
+	  			user_name like CONCAT ('%' ,  #{search} , '%') or write_date like CONCAT ('%' ,  #{search} , '%')
 	  		</otherwise>
 		</choose>
 	</select>

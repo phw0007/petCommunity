@@ -13,10 +13,10 @@
 		<result column="file_name" property="fileName"/>
 		<result column="write_date" property="writeDate"/>
 		<result column="hits" property="hits"/>
-		<result column="likes" property="likes"/>
+		<result column="like CONCATs" property="like CONCATs"/>
 		<result column="comment_id" property="commentId"/>
 		<result column="comment_content" property="commentContent"/>
-		<result column="likes_id" property="likesId"/>
+		<result column="like CONCATs_id" property="like CONCATsId"/>
 	</resultMap>
 	
 	<select id="boardData" resultMap="boardDto">
@@ -24,26 +24,26 @@
 			<when test="select == 'category'">
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_board WHERE category like ('%' ,  #{search} , '%'))AAA 
+				, write_date, hits, like CONCATs FROM project_board WHERE category like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'title'">
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_board WHERE title like ('%' ,  #{search} , '%'))AAA 
+				, write_date, hits, like CONCATs FROM project_board WHERE title like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'id'">
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_board WHERE id like ('%' ,  #{search} , '%'))AAA 
+				, write_date, hits, like CONCATs FROM project_board WHERE id like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<otherwise>
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_board WHERE category like ('%' ,  #{search} , '%') or
-				title like ('%' ,  #{search} , '%') or id like ('%' ,  #{search} , '%'))AAA 
+				, write_date, hits, like CONCATs FROM project_board WHERE category like CONCAT ('%' ,  #{search} , '%') or
+				title like CONCAT ('%' ,  #{search} , '%') or id like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</otherwise>
 		</choose>
@@ -52,17 +52,17 @@
 	<select id="count">
 		<choose>
 	  		<when test="select == 'category'">
-	  			SELECT count(id) FROM project_board WHERE category like ('%' ,  #{search} , '%')
+	  			SELECT count(id) FROM project_board WHERE category like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'title'">
-	  			SELECT count(id) FROM project_board WHERE title like ('%' ,  #{search} , '%')
+	  			SELECT count(id) FROM project_board WHERE title like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'id'">
-	  			SELECT count(id) FROM project_board WHERE id like ('%' ,  #{search} , '%')
+	  			SELECT count(id) FROM project_board WHERE id like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<otherwise>
-	  			SELECT count(id) FROM project_board WHERE category like ('%' ,  #{search} , '%') or
-	  			title like ('%' ,  #{search} , '%') or id like ('%' ,  #{search} , '%')
+	  			SELECT count(id) FROM project_board WHERE category like CONCAT ('%' ,  #{search} , '%') or
+	  			title like CONCAT ('%' ,  #{search} , '%') or id like CONCAT ('%' ,  #{search} , '%')
 	  		</otherwise>
 		</choose>
 	</select>
@@ -77,7 +77,7 @@
 		
 	<select id="boardCount">
 		SELECT count(id) FROM project_board WHERE 
-		id like ('%' ,  #{id} , '%') AND category like ('%' ,  #{category} , '%')
+		id like CONCAT ('%' ,  #{id} , '%') AND category like CONCAT ('%' ,  #{category} , '%')
 	</select>
 		
 	<delete id="aboardDelete">
@@ -106,19 +106,19 @@
 			<when test="select == 'title'">
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_board WHERE title like ('%' ,  #{search} , '%'))AAA 
+				, write_date, hits, like CONCATs FROM project_board WHERE title like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'id'">
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_board WHERE id like ('%' ,  #{search} , '%'))AAA 
+				, write_date, hits, like CONCATs FROM project_board WHERE id like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<otherwise>
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_board WHERE category like ('%공지사항%'))AAA 
+				, write_date, hits, like CONCATs FROM project_board WHERE category like CONCAT ('%공지사항%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</otherwise>
 		</choose>
@@ -127,13 +127,13 @@
 	<select id="annoCount">
 		<choose>
 	  		<when test="select == 'title'">
-	  			SELECT count(id) FROM project_board WHERE title like ('%' ,  #{search} , '%')
+	  			SELECT count(id) FROM project_board WHERE title like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'id'">
-	  			SELECT count(id) FROM project_board WHERE id like ('%' ,  #{search} , '%')
+	  			SELECT count(id) FROM project_board WHERE id like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<otherwise>
-	  			SELECT count(id) FROM project_board WHERE category like ('%공지사항%')
+	  			SELECT count(id) FROM project_board WHERE category like CONCAT ('%공지사항%')
 	  		</otherwise>
 		</choose>
 	</select>

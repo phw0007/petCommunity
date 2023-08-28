@@ -13,7 +13,7 @@
 		<result column="file_name" property="fileName"/>
 		<result column="write_date" property="writeDate"/>
 		<result column="hits" property="hits"/>
-		<result column="likes" property="likes"/>
+		<result column="like CONCATs" property="like CONCATs"/>
 	</resultMap>
 
 	

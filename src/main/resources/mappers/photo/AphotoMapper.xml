@@ -24,26 +24,26 @@
 			<when test="select == 'category'">
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_photo WHERE category like ('%' ,  #{search} , '%'))AAA 
+				, write_date, hits, likes FROM project_photo WHERE category like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'title'">
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_photo WHERE title like ('%' ,  #{search} , '%'))AAA 
+				, write_date, hits, likes FROM project_photo WHERE title like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'id'">
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_photo WHERE id like ('%' ,  #{search} , '%'))AAA 
+				, write_date, hits, likes FROM project_photo WHERE id like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<otherwise>
 				SELECT AAA.* FROM 
 				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_photo WHERE category like ('%' ,  #{search} , '%') or
-				title like ('%' ,  #{search} , '%') or id like ('%' ,  #{search} , '%'))AAA 
+				, write_date, hits, likes FROM project_photo WHERE category like CONCAT ('%' ,  #{search} , '%') or
+				title like CONCAT ('%' ,  #{search} , '%') or id like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</otherwise>
 		</choose>
@@ -52,17 +52,17 @@
 	<select id="count">
 		<choose>
 	  		<when test="select == 'category'">
-	  			SELECT count(id) FROM project_photo WHERE category like ('%' ,  #{search} , '%')
+	  			SELECT count(id) FROM project_photo WHERE category like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'title'">
-	  			SELECT count(id) FROM project_photo WHERE title like ('%' ,  #{search} , '%')
+	  			SELECT count(id) FROM project_photo WHERE title like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'id'">
-	  			SELECT count(id) FROM project_photo WHERE id like ('%' ,  #{search} , '%')
+	  			SELECT count(id) FROM project_photo WHERE id like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<otherwise>
-	  			SELECT count(id) FROM project_photo WHERE category like ('%' ,  #{search} , '%') or
-	  			title like ('%' ,  #{search} , '%') or id like ('%' ,  #{search} , '%')
+	  			SELECT count(id) FROM project_photo WHERE category like CONCAT ('%' ,  #{search} , '%') or
+	  			title like CONCAT ('%' ,  #{search} , '%') or id like CONCAT ('%' ,  #{search} , '%')
 	  		</otherwise>
 		</choose>
 	</select>
