@@ -9,8 +9,7 @@
 	.memberItem ul li{font-size: 22px; padding-top: 30px;}
 	
 	.header ul li:nth-child(6){font-size: 36px;}
-	
-	
+
 	.memberMain{display: inline-block; width: 1500px; height: 600px; padding: 30px; text-align: center;}
 	.memberTitle{height: 56px; border-bottom: 2px solid #000; }
 	.memberTitle p{font-size: 24px; font-weight: bold; float: left; }
