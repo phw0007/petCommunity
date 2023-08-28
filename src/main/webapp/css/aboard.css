@@ -2,7 +2,7 @@
 
 	.member {font-family: 'Poor Story'; display: flex;}
 	.member a{text-decoration: none; color:black; position: relative;}
-	.memberItem{width: 300px; border-right: 2px solid #000; float: left;  flex: 1;
+	.memberItem{width: 300px; border-right: 2px solid #000; float: left;  flex: 0.8;
 	text-align: center; padding-top:30px;}
 	.memberItem h3{font-size: 26px; padding-bottom:30px; border-bottom: 2px solid #000;
 	font-weight:bold;}

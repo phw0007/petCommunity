@@ -73,14 +73,12 @@ public class MemberController {
       String result = service.loginProc(member);
 
       String id = (String)session.getAttribute("id");
-//      if(id.endsWith("admin")) {
-//         return "redirect:aindex";
-//      }
+      if(id.equals("admin")) {
+    	  	return "redirect:aindex";
+      }
       if(result.equals("로그인 성공")) {
-
          return "redirect:index2";
       }
-      
       return "member/login";
    }
 
@@ -90,7 +88,7 @@ public class MemberController {
    public String registerProc(MemberDTO member, String confirm) {
       String result = service.registerProc(member, confirm);
       if (result.equals("회원 등록 완료")) {
-         return "redirect:index";
+         return "redirect:home";
       }
       return "member/register";
    }

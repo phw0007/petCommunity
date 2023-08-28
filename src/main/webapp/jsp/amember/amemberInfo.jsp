@@ -57,9 +57,9 @@
 			<div class="userBoard">
 				<p>게시물 정보</p>
 				<ul>
-					<li><span>커뮤니티</span>1</li>
-					<li><span>반려앨범</span>1</li>
-					<li><span>댓글</span>1</li>
+					<li><span>커뮤니티</span>${boardCount}</li>
+					<li><span>반려앨범</span>${photoCount}</li>
+					<li><span>댓글</span>${commentCount}</li>
 				</ul>
 			</div>
 			<div class="userPet">

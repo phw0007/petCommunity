@@ -57,7 +57,14 @@ public class AMemberController {
 	@RequestMapping("amemberInfo")
 	public String amember_info(String id, Model model,
 			@RequestParam(value="currentPage", required = false)String cp) {
-		AMemberDTO member = service.amemberInfo(id);		
+		AMemberDTO member = service.amemberInfo(id);
+		int boardCount = service.userBoardCount(id);
+		int commentCount = service.userCommentCount(id);
+		int photoCount = service.userPhotoCount(id);
+		
+		model.addAttribute("boardCount", boardCount);
+		model.addAttribute("commentCount", commentCount);
+		model.addAttribute("photoCount", photoCount);
 		model.addAttribute("member", member);
 		model.addAttribute("cp", cp);
 		return "amember/amemberInfo";

@@ -129,6 +129,18 @@ public class AMemberService {
 		
 	}
 
+	public int userBoardCount(String id) {
+		return memberMapper.boardCount(id);
+	}
+
+	public int userCommentCount(String id) {
+		return memberMapper.commentCount(id);
+	}
+
+	public int userPhotoCount(String id) {
+		return memberMapper.photoCount(id);
+	}
+
 }
 
 
