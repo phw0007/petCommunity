@@ -12,10 +12,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import com.care.project.common.PageService;
+import com.care.project.shop.ShopDTO;
+import com.care.project.shop.ShopMapper;
 
 @Service
 public class AShopService {
-	@Autowired private AShopMapper shopMapper;
+	@Autowired private AShopMapper ashopMapper;
+	@Autowired private ShopMapper shopMapper;
+	
 	public String uploadImage(String selectedValues, MultipartFile imageFile, String fileName) {
 		DecimalFormat forematter = new DecimalFormat("###,###");
 		String[] checkData = selectedValues.split(",");
@@ -50,9 +54,9 @@ public class AShopService {
 		shopDto.setInventory(inventory);
 		shopDto.setImageFile(fileName);
 		shopDto.setInfo(info);
-		AShopDTO check = shopMapper.checkShop(shopDto);
+		AShopDTO check = ashopMapper.checkShop(shopDto);
 		if(check == null) {
-			shopMapper.insertShop(shopDto);		
+			ashopMapper.insertShop(shopDto);		
 		}else {
 			return "이미 존재하는 상품입니다.";
 		}
@@ -80,8 +84,8 @@ public class AShopService {
 		
 		int begin = end - pageBlock + 1; 
 		int no = 0;
-		ArrayList<AShopDTO> shops = shopMapper.shopData(begin, end, select, search);
-		int totalCount = shopMapper.count(select, search);
+		ArrayList<AShopDTO> shops = ashopMapper.shopData(begin, end, select, search);
+		int totalCount = ashopMapper.count(select, search);
 		String url = requestUrl+"?select="+select+"&search="+search+"&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		no = (currentPage-1)*14;
@@ -106,7 +110,7 @@ public class AShopService {
 			currentPage = 1;
 		}
 		DecimalFormat forematter = new DecimalFormat("###,###");
-		AShopDTO shop = shopMapper.ashopInfo(name, category, company);
+		AShopDTO shop = ashopMapper.ashopInfo(name, category, company);
 		String pay = forematter.format(shop.getPay());
 		shop.setShopPay(pay);
 		model.addAttribute("shop", shop);
@@ -163,9 +167,9 @@ public class AShopService {
 		shopDto.setInfo(info);
 		if(fileName != "") {
 			shopDto.setImageFile(fileName);
-			shopMapper.updateShopImage(shopDto);
+			ashopMapper.updateShopImage(shopDto);
 		}else {
-			shopMapper.updateShop(shopDto);
+			ashopMapper.updateShop(shopDto);
 		}
 		return "상품수정 완료되었습니다.";
 	}
@@ -178,8 +182,8 @@ public class AShopService {
 			String category = checkData[i-2];
 			int no = Integer.parseInt(checkData[i-1]);
 			no -= sub;
-			shopMapper.ashopDelete(product, category, no);
-			shopMapper.ashopNoUpdate(no);
+			ashopMapper.ashopDelete(product, category, no);
+			ashopMapper.ashopNoUpdate(no);
 			sub++;
 		}
 	}
@@ -205,8 +209,8 @@ public class AShopService {
 		
 		int begin = end - pageBlock + 1; 
 		int no = 0;
-		ArrayList<AShopDTO> orders = shopMapper.shopOrderData(begin, end, select, search);
-		int totalCount = shopMapper.orderCount(select, search);
+		ArrayList<AShopDTO> orders = ashopMapper.shopOrderData(begin, end, select, search);
+		int totalCount = ashopMapper.orderCount(select, search);
 		String url = requestUrl+"?select="+select+"&search="+search+"&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		no = (currentPage-1)*14;
@@ -222,14 +226,13 @@ public class AShopService {
 		DecimalFormat forematter = new DecimalFormat("###,###");
 		int no = Integer.parseInt(selectedValues);
 		int listNo = 0;
-		AShopDTO order = shopMapper.ashopOrderInfo(no);
-		ArrayList<AShopDTO> lists = shopMapper.ashopOrderList(no);
+		AShopDTO order = ashopMapper.ashopOrderInfo(no);
+		ArrayList<AShopDTO> lists = ashopMapper.ashopOrderList(no);
 		model.addAttribute("no",no);
 		model.addAttribute("order",order);
 		
 		for(int i = 0; i < lists.size(); i++) {
 			String pay = forematter.format(lists.get(i).getPay());
-			System.out.println(pay);
 			lists.get(i).setShopPay(pay);
 		}
 		
@@ -240,14 +243,26 @@ public class AShopService {
 	public void orderDeleteCheckboxes(String selectedValues) {
 		String[] checkData = selectedValues.split(",");
 		int sub = 0;
-		for(int i = 1; i <= checkData.length; i++) {
+		for(int i = 3; i <= checkData.length; i+=3) {
 			int no = Integer.parseInt(checkData[i-1]);
 			no -= sub;
+			System.out.println("=======================================");
+			System.out.println(selectedValues);
 			System.out.println(no);
-			shopMapper.orderDelete(no);
-			shopMapper.orderNoUpdate(no);
-			shopMapper.orderListDelete(no);
-			shopMapper.orderListNoUpdate(no);
+			ArrayList<AShopDTO> shopList = ashopMapper.ashopOrderList(no);
+			for(int j = 0; j < shopList.size(); j++) {
+				int shopNo = shopList.get(j).getProductId();
+				int orderCount = shopList.get(j).getOrderCount();
+				System.out.println("상품번호 : " + shopNo);
+				System.out.println("구매갯수 : " + orderCount);
+				ShopDTO shopData = shopMapper.getProductDetails(shopNo);
+				int inventory = shopData.getInventory() + orderCount;
+				shopMapper.updateInventory(shopNo, inventory);
+			}
+			ashopMapper.orderDelete(no);
+			ashopMapper.orderNoUpdate(no);
+			ashopMapper.orderListDelete(no);
+			ashopMapper.orderListNoUpdate(no);
 			sub++;
 		}
 	}

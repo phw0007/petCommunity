@@ -13,8 +13,7 @@
 		<result column="pay" property="pay"/>
 		<result column="image_file" property="imageFile"/>
 		<result column="quantity" property="quantity"/>
-		<result column="total" property="total"/>
-		
+		<result column="total" property="total"/>	
 	</resultMap>
 	
 	
@@ -23,7 +22,9 @@
     VALUES (#{no}, #{id}, #{product}, #{company}, #{pay}, #{imageFile}, #{productId}, #{quantity}, #{total})
 </insert>
 
-	
+	<select id="peoductCheck" resultMap="cartDto">
+		SELECT * FROM project_cart WHERE product=#{product} AND #{id}
+	</select>
 	
 		
 	

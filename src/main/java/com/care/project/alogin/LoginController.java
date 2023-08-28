@@ -18,7 +18,7 @@ public class LoginController {
 	@RequestMapping("aloginOut")
 	public String aloginOut() {
 		session.invalidate();
-		return "redirect:index";
+		return "redirect:home";
 	}
 	
 	

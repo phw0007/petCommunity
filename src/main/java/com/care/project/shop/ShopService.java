@@ -33,12 +33,6 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 
-
-
-
-
-
-
 @Service
 public class ShopService {
 	@Autowired private ShopMapper shopMapper;
@@ -100,6 +94,7 @@ public class ShopService {
 	    // CartDTO 객체를 생성하여 관련 데이터 설정
 	    CartDTO cartItem = new CartDTO();
 	    cartItem.setId(id);
+	    cartItem.setCategory(product.getCategory());
 	    cartItem.setProduct(product.getProduct());
 	    cartItem.setCompany(product.getCompany());
 	    cartItem.setPay(product.getPay());
@@ -109,12 +104,15 @@ public class ShopService {
 	    cartItem.setTotal(total);
 	    
 	    // 매퍼를 사용하여 장바구니 항목을 데이터베이스에 저장
-	    shopMapper.addToCart(cartItem);
-	}
-	 public List<CartDTO> getCartItems(String id) {
-		 
-	        return shopMapper.getCartItems(id);
+	    CartDTO userCart = shopMapper.peoductCheck(cartItem);
+	    if (userCart == null) {
+	    	shopMapper.addToCart(cartItem);
 	    }
+	}
+	
+	 public List<CartDTO> getCartItems(String id) {
+		 return shopMapper.getCartItems(id);
+	 }
 
 	 public void removeSelectedItems(String id,String selectedItems) {
 		 String[] orderUserData = selectedItems.split(",");
@@ -124,12 +122,6 @@ public class ShopService {
 		 	}
 	    }
 	
-	
-
-
-
-	
-
 	public void getProduct(String productPrice, String productId, String quantity, String id, Model model) {
 		DecimalFormat forematter = new DecimalFormat("###,###");
 		int pay = Integer.parseInt(productPrice);
@@ -145,6 +137,7 @@ public class ShopService {
 		String shippingPay= forematter.format(totalPay);
 		ShopDTO product = shopMapper.getProductDetails(no);
 		MemberDTO user = memberMapper.mloginProc(id);
+		
 		model.addAttribute("product", product);
 		model.addAttribute("user", user);
 		model.addAttribute("num", num);
@@ -161,6 +154,7 @@ public class ShopService {
 		String[] orderProductData = orderProduct.split(",");
 		String[] ordershippinData = shippingUser.split(",");
 		
+		int productNo = 0;
 		String id = orderUserData[0];
 		String userName = orderUserData[1];
 		String mobile = orderUserData[2];
@@ -196,20 +190,22 @@ public class ShopService {
 			shippinMemo = ordershippinData[5];
 		}
 		
-		if(orderProductData.length == 6){
-			category = orderProductData[0];
-			company = orderProductData[1];
-			product = orderProductData[2];
-			pay = Integer.parseInt(orderProductData[3]+orderProductData[4]);
-			orderCount = Integer.parseInt(orderProductData[5]);
+		if(orderProductData.length == 7){
+			productNo = Integer.parseInt(orderProductData[0]);
+			category = orderProductData[1];
+			company = orderProductData[2];
+			product = orderProductData[3];
+			pay = Integer.parseInt(orderProductData[4]+orderProductData[5]);
+			orderCount = Integer.parseInt(orderProductData[6]);
 		}
 		
-		if(orderProductData.length == 7){
-			category = orderProductData[0];
-			company = orderProductData[1];
-			product = orderProductData[2];
-			pay = Integer.parseInt(orderProductData[3]+orderProductData[4]+orderProductData[5]);
-			orderCount = Integer.parseInt(orderProductData[6]);
+		if(orderProductData.length == 8){
+			productNo = Integer.parseInt(orderProductData[0]);
+			category = orderProductData[1];
+			company = orderProductData[2];
+			product = orderProductData[3];
+			pay = Integer.parseInt(orderProductData[4]+orderProductData[5]+orderProductData[6]);
+			orderCount = Integer.parseInt(orderProductData[7]);
 		}
 		
 		System.out.println("================주문자================");
@@ -230,6 +226,7 @@ public class ShopService {
 		System.out.println("impUid :"+impUid);
 		
 		System.out.println("==================상품정보==================");
+		System.out.println("상품번호 : "+productNo);
 		System.out.println("상품분류 :"+category);
 		System.out.println("판매자 :"+company);
 		System.out.println("상품명 :"+product);
@@ -238,8 +235,8 @@ public class ShopService {
 		
 		AShopDTO shopDto = new AShopDTO();
 		shopDto.setId(id);
+		shopDto.setProductId(productNo);
 		shopDto.setUserName(userName);
-		shopDto.setMobile(mobile);
 		shopDto.setMobile(mobile);
 		shopDto.setAddress(address);
 		shopDto.setPayType(payType);
@@ -262,7 +259,10 @@ public class ShopService {
 		int no = shopOrderDto.getNo();
 		shopDto.setNo(no);
 		shopMapper.shippinData(shopDto);
-
+		
+		ShopDTO shopData = shopMapper.getProductDetails(productNo);
+		int inventory = shopData.getInventory() - orderCount;
+		shopMapper.updateInventory(productNo, inventory);
 	}
     
 	public String getAccessToken() {
@@ -339,4 +339,151 @@ public class ShopService {
 			
 		}
 	}
+
+	public CartDTO getSelectCart(String id, String productId) {
+		return shopMapper.getSelectCart(id, productId);
+	}
+
+	public void getCartData(String selectedValues, String quantityValues, String id, Model model) {
+		DecimalFormat forematter = new DecimalFormat("###,###");
+		String[] orderProductId = selectedValues.split(",");
+		String[] quantityCount = quantityValues.split(",");
+		ArrayList<CartDTO> cart = new ArrayList<>();
+		MemberDTO user = memberMapper.mloginProc(id);
+		int number = 0;
+		int pay = 0;
+		int deliveryPay = 0;
+		int totalPay = 0;
+		String delivery = "3,000";
+		for(int i = 0; i < orderProductId.length; i++) {
+			CartDTO cartDto = shopMapper.getSelectCart(id, orderProductId[i]);
+			int count = Integer.parseInt(quantityCount[i]);
+			int cartPay = cartDto.getPay();
+			int total = count * cartPay;
+			cartDto.setQuantity(count);
+			cartDto.setTotal(total);
+			shopMapper.updateToCart(cartDto);
+		}
+		for(int i = 0; i < orderProductId.length; i++) {
+			CartDTO cartDto = shopMapper.getSelectCart(id, orderProductId[i]);
+			pay += cartDto.getTotal();
+			deliveryPay += 3000;
+			cart.add(cartDto);
+		}
+		totalPay = pay + deliveryPay;
+		int productAllPay = totalPay;
+		String productPay = forematter.format(pay);
+		String shippingFee = forematter.format(deliveryPay);
+		String shippingPay = forematter.format(totalPay);
+		
+		model.addAttribute("selectedValues", selectedValues);
+		model.addAttribute("user", user);
+		model.addAttribute("cart", cart);
+		model.addAttribute("number", number);
+		model.addAttribute("delivery", delivery);
+		model.addAttribute("productPay", productPay);
+		model.addAttribute("shippingFee", shippingFee);
+		model.addAttribute("shippingPay", shippingPay);
+		model.addAttribute("productAllPay", productAllPay);
+		
+	}
+
+	public void orderCartData(String orderUser, String shippingUser, String orderProductId) {
+		String[] productId = orderProductId.split(",");
+		String[] orderUserData = orderUser.split(",");
+		String[] ordershippinData = shippingUser.split(",");
+		
+		String id = orderUserData[0];
+		String userName = orderUserData[1];
+		String mobile = orderUserData[2];
+		String address = orderUserData[3];
+		String payType = orderUserData[4];
+		String orderNumber = (id+"-"+orderUserData[5]);
+		String impUid = (orderUserData[6]);
+		String payCheck = "확인";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    String writeDate = sdf.format(new Date());
+	    
+		String shippinName = "";
+		String shippinAddress = "";
+		String shippinMobile = "";
+		String shippinMemo = "";
+		
+		String category = "";
+		String company = "";
+		String product = "";
+		int pay = 0;
+		int orderCount = 0;
+		
+		if(ordershippinData.length == 5) {
+			shippinName = ordershippinData[0];//유저아이디
+			shippinMobile = ordershippinData[1];//유저이름
+			shippinAddress = ("("+ordershippinData[2]+")"+ordershippinData[3]+ordershippinData[4]);
+		}
+		
+		if(ordershippinData.length == 6) {
+			shippinName = ordershippinData[0];//유저이름
+			shippinMobile = ordershippinData[1];//유저이름
+			shippinAddress = ("("+ordershippinData[2]+")"+ordershippinData[3]+ordershippinData[4]);
+			shippinMemo = ordershippinData[5];
+		}
+		
+		System.out.println("================주문자================");
+		System.out.println("주문자 ID :"+id);
+		System.out.println("주문자 이름 :"+userName);
+		System.out.println("주문자 전화번호 :"+mobile);
+		System.out.println("주문자 주소 :"+address);
+		System.out.println("주문자 결재방법 :"+payType);
+		System.out.println("주문자 결제상태 :"+payCheck);
+		System.out.println("주문자 결재날짜 :"+writeDate);
+		
+		System.out.println("=================수령자===================");
+		System.out.println("주문번호 :"+orderNumber);
+		System.out.println("수령자 이름 :"+shippinName);
+		System.out.println("수령자 전화번호 :"+shippinMobile);
+		System.out.println("수령자 주소 :"+shippinAddress);
+		System.out.println("수령자 메모 :"+shippinMemo);
+		System.out.println("impUid :"+impUid);
+		
+		AShopDTO shopDto = new AShopDTO();
+		shopDto.setId(id);
+		shopDto.setUserName(userName);
+		shopDto.setMobile(mobile);
+		shopDto.setAddress(address);
+		shopDto.setPayType(payType);
+		shopDto.setPayCheck(payCheck);
+		shopDto.setWriteDate(writeDate);
+		shopDto.setShippinName(shippinName);
+		shopDto.setShippinMobile(shippinMobile);
+		shopDto.setShippinAddress(shippinAddress);
+		shopDto.setShippinMemo(shippinMemo);
+		shopDto.setCategory(category);
+		shopDto.setCompany(company);
+		shopDto.setProduct(product);
+		shopDto.setPay(pay);
+		shopDto.setOrderCount(orderCount);
+		shopDto.setOrderNumber(orderNumber);
+		shopDto.setImpUid(impUid);
+		shopMapper.shopOrder(shopDto);
+		AShopDTO shopOrderDto = shopMapper.shopOrderDate(writeDate);
+		int no = shopOrderDto.getNo();
+		for(int i = 0; i < productId.length; i++) {
+			CartDTO cartDto = shopMapper.getSelectCart(id, productId[i]);
+			cartDto.setNo(no);
+			System.out.println("==================상품정보==================");
+			System.out.println("상품분류 :"+cartDto.getCategory());
+			System.out.println("판매자 :"+cartDto.getCompany());
+			System.out.println("상품명 :"+cartDto.getProduct());
+			System.out.println("상품가격 :"+cartDto.getTotal());
+			System.out.println("구매갯수 :"+cartDto.getQuantity());
+			cartDto.setProductId(Integer.parseInt(productId[i]));
+			shopMapper.shippinCartData(cartDto);
+			ShopDTO shopData = shopMapper.getProductDetails(Integer.parseInt(productId[i]));
+			int inventory = shopData.getInventory() - cartDto.getQuantity();
+			shopMapper.updateInventory(Integer.parseInt(productId[i]), inventory);
+			shopMapper.removeSelectedItems(id, Integer.parseInt(productId[i]));
+		}
+		
+	}
+
 }

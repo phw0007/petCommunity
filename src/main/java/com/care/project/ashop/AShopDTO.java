@@ -15,6 +15,7 @@ primary key(no)
 );
 */		
 	private int no;
+	private int productId;
 	private String category;
 	private String product;
 	private String company;
@@ -37,12 +38,17 @@ primary key(no)
 	private String shippinMemo;
 	private String orderNumber;
 	private String impUid;
-
 	public int getNo() {
 		return no;
 	}
 	public void setNo(int no) {
 		this.no = no;
+	}
+	public int getProductId() {
+		return productId;
+	}
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 	public String getCategory() {
 		return category;
@@ -140,7 +146,6 @@ primary key(no)
 	public void setWriteDate(String writeDate) {
 		this.writeDate = writeDate;
 	}
-
 	public String getShippinName() {
 		return shippinName;
 	}
@@ -177,6 +182,5 @@ primary key(no)
 	public void setImpUid(String impUid) {
 		this.impUid = impUid;
 	}
-
-
+	
 }

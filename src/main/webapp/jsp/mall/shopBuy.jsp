@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -88,9 +89,16 @@ function addBuy() {
  		alert('결제방법은 필수 선택 항목입니다.');
  	}
  	else{
-		let orderUser = ['${user.id}','${user.userName}','${user.mobile}','${user.address}',payType,randomNum];
+ 		let orderUser = ['${user.id}','${user.userName}','${user.mobile}','${user.address}',payType,randomNum];
 		let shippingUser = [name,mobile,postcode,address,detailAddress,shippingMemo];
-		let orderProduct = ['${product.category}','${product.company}','${product.product}','${productAllPay}','${num}'];
+		let orderProduct = [];
+		var orderSelectProductId;
+		var orderCheck = '${product.product}';
+		if(orderCheck != ""){
+			orderProduct.push(['${product.category}','${product.company}','${product.product}','${productAllPay}','${num}']);
+		}else{
+			orderSelectProductId = '${selectedValues}';
+		}
 		
 		url="callback";
 	    const form = document.createElement('form'); // form 태그 생성
@@ -111,27 +119,35 @@ function addBuy() {
 	   	productData.setAttribute('type', 'hidden'); // type = hidden
 	   	productData.setAttribute('name', 'orderProduct'); // 데이터의 key
 	   	productData.setAttribute('value', orderProduct); // 데이터의 value
+	   	 
+	   	const productData2 = document.createElement('input'); // input 태그 생성
+	   	productData2.setAttribute('type', 'hidden'); // type = hidden
+	   	productData2.setAttribute('name', 'orderSelectProductId'); // 데이터의 key
+	   	productData2.setAttribute('value', orderSelectProductId); // 데이터의 value
 	   	
 	    form.appendChild(userData);
 	    form.appendChild(shippingData);
 	    form.appendChild(productData);
+	    form.appendChild(productData2);
 	    document.body.appendChild(form);
 	    form.submit();    
 	}
 }
 
-
 var IMP = window.IMP;
 IMP.init("imp07740386");
 
 function requestPay() {
-	let mobile = document.getElementById('mobile');
-	let postcode = document.getElementById('postcode');
-	let address = document.getElementById('address');
-	let detailAddress = document.getElementById('detailAddress');
+	var mobile = document.getElementById("mobile").value;
+	var postcode = document.getElementById("postcode").value;
+	var address = document.getElementById("address").value;
+	var detailAddress = document.getElementById("detailAddress").value;
  	var cardRadio = document.getElementById('card');
  	var cacaoRadio = document.getElementById('cacaoPay');
-	var currentDate = new Date();
+ 	var name = document.getElementById("name").value;
+	var memoTextRadio = document.getElementById('memoTextRadio');
+	var memoTextBox = document.getElementById('memoTextBox').value;
+	var memoSelect = document.getElementById('memoSelect').value;
 	var randomNum = Math.floor(Math.random() * (100000000 - 1000000000)) + 1000000000;
 	
 	var payType = "";
@@ -140,12 +156,27 @@ function requestPay() {
 	} else if(cacaoRadio.checked){
 		payType = "kakaopay.TC0ONETIME";
 	}
+	
+	if(name == ""){
+		alert('수령인명은 필수 입력 항목입니다.');
+	}else if(mobile == ""){
+		alert('전화번호는 필수 입력 항목입니다.');
+	}else if(postcode == ""){
+		alert('우편번호는 필수 입력 항목입니다.');
+	}else if(address == ""){
+		alert('주소는 필수 입력 항목입니다.');
+	}else if(detailAddress == ""){
+		alert('상세주소는 필수 입력 항목입니다.');
+	}else if(payType == "") {
+		alert('결제방법은 필수 선택 항목입니다.');
+	}
+	else{
 	IMP.request_pay({
 		pg: payType,
 		pay_method: "card", // 생략가
 		merchant_uid: randomNum, // 상점에서 생성한 고유 주문번호
 		name: "결제테스트",
-		amount: '${totalPay}',                         // 숫자 타입
+		amount: '${productAllPay}',                         // 숫자 타입
 		buyer_email: '${user.email }',
 		buyer_name: '${user.userName }',
 		buyer_tel: mobile.value,
@@ -155,17 +186,7 @@ function requestPay() {
     function (rsp) {
 		if (rsp.success) {// 결제성공시 로직
 			var impUid = rsp.imp_uid;
-		 	var name = document.getElementById("name").value;
-		 	var mobile = document.getElementById("mobile").value;
-		 	var postcode = document.getElementById("postcode").value;
-			var address = document.getElementById("address").value;
-		 	var detailAddress = document.getElementById("detailAddress").value;
-		 	var memoTextRadio = document.getElementById('memoTextRadio');
-		 	var memoTextBox = document.getElementById('memoTextBox').value;
-		 	var memoSelect = document.getElementById('memoSelect').value;
-		 	var cardRadio = document.getElementById('card');
-		 	var cacaoRadio = document.getElementById('cacaoPay');
-		 	
+
 		 	var shippingMemo;
 		    if (memoTextRadio.checked) {
 		    	shippingMemo = memoTextBox;
@@ -179,23 +200,17 @@ function requestPay() {
 		    } else if(cacaoRadio.checked){
 		    	payType = "카카오페이";
 		    }
-		    if(name == ""){
-		    	alert('수령인명은 필수 입력 항목입니다.');
-		    }else if(mobile == ""){
-		    	alert('전화번호는 필수 입력 항목입니다.');
-		    }else if(postcode == ""){
-				alert('우편번호는 필수 입력 항목입니다.');
-		 	}else if(address == ""){
-		 		alert('주소는 필수 입력 항목입니다.');
-		 	}else if(detailAddress == ""){
-		 		alert('상세주소는 필수 입력 항목입니다.');
-		 	}else if(payType == "") {
-		 		alert('결제방법은 필수 선택 항목입니다.');
-		 	}
-		 	else{
+
 				let orderUser = ['${user.id}','${user.userName}','${user.mobile}','${user.address}',payType,randomNum,impUid];
 				let shippingUser = [name,mobile,postcode,address,detailAddress,shippingMemo];
-				let orderProduct = ['${product.category}','${product.company}','${product.product}','${productAllPay}','${num}'];
+				let orderProduct = [];
+				var orderSelectProductId;
+				var orderCheck = '${product.product}';
+				if(orderCheck != ""){
+					orderProduct.push(['${product.no}','${product.category}','${product.company}','${product.product}','${productAllPay}','${num}']);
+				}else{
+					orderSelectProductId = '${selectedValues}';
+				}
 				
 				url="callback";
 			    const form = document.createElement('form'); // form 태그 생성
@@ -217,17 +232,23 @@ function requestPay() {
 			   	productData.setAttribute('name', 'orderProduct'); // 데이터의 key
 			   	productData.setAttribute('value', orderProduct); // 데이터의 value
 			   	
+				const productData2 = document.createElement('input'); // input 태그 생성
+			   	productData2.setAttribute('type', 'hidden'); // type = hidden
+			   	productData2.setAttribute('name', 'orderSelectProductId'); // 데이터의 key
+			   	productData2.setAttribute('value', orderSelectProductId); // 데이터의 value
+			   	
 			    form.appendChild(userData);
 			    form.appendChild(shippingData);
 			    form.appendChild(productData);
+			    form.appendChild(productData2);
 			    document.body.appendChild(form);
 			    form.submit();    
-			}
-			
-        } else {// 결제 실패시
-			alert("결재 실패");         
-        }
-	});
+			    
+	        } else {// 결제 실패시
+				alert("결재 실패");         
+	        }
+		});
+	}
 }
 </script>
 <div class="shopping">
@@ -246,15 +267,32 @@ function requestPay() {
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>${number=number+1}</td>
-					<td><img src="${product.imageFile}" alt="pet" width=100px height=100px/></i></td>
-					<td>${product.product}</td>
-					<td>${product.company}</td>
-					<td>${num}</td>
-					<td>${shippingFee}</td>
-					<td>${productAllPay}</td>
-				</tr>
+			<c:choose>
+				<c:when test="${product != null}">
+					<tr>
+						<td>${number=number+1}</td>
+						<td><img src="${product.imageFile}" alt="pet" width=100px height=100px/></i></td>
+						<td>${product.product}</td>
+						<td>${product.company}</td>
+						<td>${num}</td>
+						<td>${shippingFee}</td>
+						<td>${productAllPay}</td>
+					</tr>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="cart" items="${cart}">
+						<tr>
+							<td>${number=number+1}</td>
+							<td><img src="${cart.imageFile}" alt="pet" width=100px height=100px/></i></td>
+							<td>${cart.product}</td>
+							<td>${cart.company}</td>
+							<td>${cart.quantity}</td>
+							<td>${delivery}</td>
+							<td>${cart.total}</td>
+						</tr>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 			</tbody>
 		</table>
 	</div>
@@ -331,7 +369,6 @@ function requestPay() {
 		</div>
 	</div>
 </div>
-
 <c:import url = "/footer"/>
-</body>
+	</body>
 </html>

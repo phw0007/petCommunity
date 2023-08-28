@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
-	.member {font-family: 'Poor Story';}
+	.member {font-family: 'Poor Story'; display: flex;}
 	.member a{text-decoration: none; color:black; position: relative;}
 	.memberItem{width: 300px; height: 840px; border-right: 2px solid #000; float: left;
-	text-align: center; padding-top:30px;}
+	text-align: center; padding-top:30px; flex: 0.8;}
 	.memberItem h3{font-size: 26px; padding-bottom:30px; border-bottom: 2px solid #000;
 	font-weight:bold;}
 	.memberItem ul li{font-size: 22px; padding-top: 30px;}

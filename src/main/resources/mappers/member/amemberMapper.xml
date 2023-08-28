@@ -188,6 +188,18 @@
 				, write_date, hits, likes FROM project_photo)AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
 	</select>
 	
+	<select id="boardCount">
+		SELECT count(id) FROM project_board WHERE id=#{id}
+	</select>
+	
+	<select id="commentCount">
+		SELECT count(id) FROM project_board_comment WHERE id=#{id}
+	</select>
+	
+	<select id="photoCount">
+		SELECT count(id) FROM project_photo WHERE id=#{id}
+	</select>
+	
 </mapper>
 
 
