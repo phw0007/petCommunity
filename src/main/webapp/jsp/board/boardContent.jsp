@@ -13,11 +13,35 @@
 <title>boardContent</title>
 <script>
 function deleteCheck(){
-	result = confirm('삭제하시겠습니까?');
+	if('${board.id}'!=='${sessionScope.id}'){
+		alert("작성자만 삭제할 수 있습니다.")
+	}
+	else{result = confirm('삭제하시겠습니까?');
 	if (result == true){
-		location.href='boardDeleteProc?no=${board.no}';
+		let selected = ['${board.no}','${board.category}','${cp}'];
+		url="boardDeleteProc"
+		boardDelete(url,selected);
+	}
 	}
 }
+function boardDelete(url,selected){
+	const form = document.createElement('form'); // form 태그 생성
+    form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
+    form.setAttribute('action', url); // 전송할 url 지정
+    
+    const data = document.createElement('input'); // input 태그 생성
+    data.setAttribute('type', 'hidden'); // type = hidden
+    data.setAttribute('name', 'selected'); // 데이터의 key
+   	data.setAttribute('value', selected); // 데이터의 value (여기서는 data1)
+
+    form.appendChild(data);
+	
+    document.body.appendChild(form);
+
+    form.submit();      
+}
+
+
 function commentDelete(writeDate,commentId){
 	let selectedValues = ['${board.no}',commentId,'${board.category}','${cp}',writeDate];
 	url="commentDelete"
@@ -25,7 +49,6 @@ function commentDelete(writeDate,commentId){
 }
 function commentDeleteProc(url, selectedValues, commentId) {
 	var deleteId = "${deleteId}"
-    alert('${sessionScope.id}');
     if ('${sessionScope.id}' === null || commentId !== '${sessionScope.id}'||deleteId === "") {
         alert('작성자만 삭제할 수 있습니다.');
     } 

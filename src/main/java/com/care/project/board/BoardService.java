@@ -511,18 +511,16 @@ public class BoardService {
       return comments;
    }
 
-	  public String boardDeleteProc(String n) {
+	  public String boardDeleteProc(String selectd) {
+		  String[] check = selectd.split(",");
+			int no = Integer.parseInt(check[0]);
+			String category=check[1];
+			String cp=check[2];
 			String id = (String)session.getAttribute("id");
 			if(id == null || id.isEmpty()) {
 				return "로그인";
 			}
 			
-			int no = 0;
-			try{
-				no = Integer.parseInt(n);
-			}catch(Exception e){
-				return "게시글 번호에 문제가 생겼습니다.";
-			}
 			
 			BoardDTO board = boardMapper.boardContent(no);
 			if(board == null)
