@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:url var="contextRoot" value="/"/>
 <link href="${contextRoot}css/mall.css" rel="stylesheet" type="text/css">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
@@ -39,7 +40,7 @@
 		<c:forEach var="shop" items="${shops}">
 			<li onclick="location.href='#'">
 			    <a href="shopIn?productId=${shop.no}">
-				<p><img src="${shop.imageFile}" alt="pet" width=200px height=260px/></p>
+				<p><img src="/opt/tomcat/tomcat-10/webapps/upload/pat.jpg" alt="${shop.imageFile}" width=200px height=260px/></p>
 				<span style="font-weight: bold;">${shop.company}</span>
 				<span>${shop.product}</span>
 				<span>${shop.shopPay}</span>

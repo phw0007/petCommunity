@@ -309,7 +309,7 @@ public class BoardService {
 		            Calendar cal = Calendar.getInstance();
 		            fileName = sdfFile .format(cal.getTime()) + fileName;
 
-		            String fileLocation = "C:\\javas\\boot_workspace\\petCommunity\\src\\main\\webapp\\image\\";
+		            String fileLocation = "/opt/tomcat/tomcat-10/webapps/upload/";
 		            File save = new File(fileLocation + fileName);
 
 		            try {
@@ -467,7 +467,7 @@ public class BoardService {
 	         return;
 	      }
 	      if(imageFile.getSize() != 0) {
-	         String fileLocation = "C:\\javas\\boot_workspace\\petCommunity\\src\\main\\webapp\\image\\"+fileName;
+	         String fileLocation = "/opt/tomcat/tomcat-10/webapps/upload/"+fileName;
 	         File save = new File(fileLocation);
              System.out.println(fileLocation);
 	         try {

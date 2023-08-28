@@ -110,7 +110,7 @@ function commentDeleteProc(url, selectedValues, commentId) {
     </c:when>
     <c:otherwise>
 		<c:forEach items="${board.fileName}" var="fileName">
-    <img id="img" src="/image/${fileName}" alt="petImage" /><br>
+    <img id="img" src="${fileName}" alt="${fileName}" /><br>
 </c:forEach>
  
     </c:otherwise>
