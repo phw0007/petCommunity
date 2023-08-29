@@ -309,7 +309,7 @@ public class BoardService {
 		            Calendar cal = Calendar.getInstance();
 		            fileName = sdfFile .format(cal.getTime()) + fileName;
 
-		            String fileLocation = "C:\\javas\\boot_workspace\\petCommunity\\src\\main\\webapp\\image\\";
+		            String fileLocation = "C:\\Users\\hi\\git\\petCommunity\\src\\main\\webapp\\image\\";
 		            File save = new File(fileLocation + fileName);
 
 		            try {
@@ -452,7 +452,10 @@ public class BoardService {
 		
 		if(board.getTitle() == null || board.getTitle().isEmpty())
 			return "제목을 입력하세요.";
-		
+		 SimpleDateFormat sdfFile  = new SimpleDateFormat("yyyyMMddHHmmss-");
+		 Calendar cal = Calendar.getInstance();
+		 String fileName = sdfFile.format(cal.getTime()) + board.getFileName();
+		 board.setFileName(fileName);
 		boardMapper.boardModifyProc(board);
 		return "게시글 수정 완료";
 	}
@@ -488,6 +491,7 @@ public class BoardService {
 		BoardDTO free= new BoardDTO();
 		free.setId(id);
 		free.setCategory(board.getCategory());
+		free.setCommentId(board.getCommentId());
 		free.setNo(board.getNo());
 		free.setCommentContent(board.getCommentContent());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -511,18 +515,16 @@ public class BoardService {
       return comments;
    }
 
-	  public String boardDeleteProc(String n) {
+	  public String boardDeleteProc(String selectd) {
+		  String[] check = selectd.split(",");
+			int no = Integer.parseInt(check[0]);
+			String category=check[1];
+			String cp=check[2];
 			String id = (String)session.getAttribute("id");
 			if(id == null || id.isEmpty()) {
 				return "로그인";
 			}
 			
-			int no = 0;
-			try{
-				no = Integer.parseInt(n);
-			}catch(Exception e){
-				return "게시글 번호에 문제가 생겼습니다.";
-			}
 			
 			BoardDTO board = boardMapper.boardContent(no);
 			if(board == null)

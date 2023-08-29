@@ -161,11 +161,11 @@
 	</delete>
 			
 	<update id = "boardModifyProc">
-		UPDATE project_board SET title = #{title}, content = #{content} WHERE no = #{no}
+		UPDATE project_board SET title = #{title}, content = #{content}, file_name = #{fileName} WHERE no = #{no}
 	</update>
 
     <insert id="freecommentProc">
-      INSERT INTO project_board_comment VALUES(#{id}, #{no}, #{category}, #{writeDate}, #{commentContent})
+      INSERT INTO project_board_comment VALUES(#{id}, #{no}, #{category}, #{commentId}, #{writeDate}, #{commentContent})
     </insert>
     
       <select id="freeComment" resultMap="boardDto">

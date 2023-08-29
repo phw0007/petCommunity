@@ -129,6 +129,7 @@ function commentDeleteProc(url, selectedValues, commentId) {
 	  <h3>댓글</h3>
 		<form action="freecommentProc" method="post"  >	
 		<input type = "hidden" name = "no" value = "${board.no }">
+		<input type = "hidden" name = "commentId" value = "${board.id }">
 		<input type = "hidden" name = "category" value = "${board.category }">
 		<textarea rows="5" cols = "100" name = "commentContent" oninput="checkCommentLength(this)"  placeholder="댓글을 입력해주세요.(100자 이내)"></textarea>
 		<button type="submit" style="background:#fcd11e;font-family: 'Poor Story', cursive;border:none; 

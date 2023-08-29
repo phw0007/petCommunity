@@ -11,7 +11,7 @@
 	<h1>Q&A게시판</h1>
 	<div class="boardCategory">
 		<ul>
-			<li><a href="">공지사항</a></li>
+			
 			<li><a href="freeboardForm">자유게시판</a></li>
 			<li><a href="qNaboardForm">Q&A</a></li>
 			<li><a href="dogboardForm">강아지</a></li>

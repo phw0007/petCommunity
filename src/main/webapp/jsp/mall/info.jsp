@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link href="${contextRoot}css/mall.css" rel="stylesheet" type="text/css">
+<link href="/css/mall.css" rel="stylesheet" type="text/css">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
     .infoT {
@@ -27,8 +27,18 @@
           <th width="100" height="10" style="background-color:#ffeda1">업체이름</th>
           <td width="370">${useInfo.name }</td>
           <th width="100" style="background-color:#ffeda1">홈페이지</th>
-          <td width="370"><a href="${useInfo.homePage }" target="_blanck">홈페이지</a></td>
-        </tr>
+					<c:choose>
+						<c:when
+							test="${empty useInfo.homePage or useInfo.homePage eq '-'}">
+							<td width="370">-</td>
+						</c:when>
+						<c:otherwise>
+							<td width="370"><a href="${useInfo.homePage}"
+								target="_blank">홈페이지</a></td>
+						</c:otherwise>
+					</c:choose>
+
+				</tr>
         <tr  style="border-bottom:1px solid #e6e6e6; padding-bottom:15px;">
          <th width="100"height="30" style="background-color:#ffeda1">업체주소</th>
           <td width="370">${useInfo.address }</td>
