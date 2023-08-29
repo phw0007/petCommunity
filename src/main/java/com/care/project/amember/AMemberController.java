@@ -70,10 +70,10 @@ public class AMemberController {
 		return "amember/amemberInfo";
 	}	
 	
-	@PostMapping("memberDelete")
+	@RequestMapping("memberDelete")
 	public String memberDelete(String selectedValues) {
 		service.amemberDelete(selectedValues);
-		return "redirect:amemberDelete";
+		return "redirect:amember";
 	}
 	
 	@RequestMapping("passwordUpdata")

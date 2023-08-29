@@ -71,14 +71,16 @@ public class MemberController {
    public String mloginProc(MemberDTO member) {
 	   System.out.println("로그인되나여");
       String result = service.loginProc(member);
-
       String id = (String)session.getAttribute("id");
-      if(id.equals("admin")) {
-    	  	return "redirect:aindex";
-      }
-      if(result.equals("로그인 성공")) {
-         return "redirect:index2";
-      }
+      System.out.println(id);
+    if(id != null) {
+	    if(id.equals("admin")) {
+	      	  return "redirect:aindex";
+	    }
+	    	if(result.equals("로그인 성공")) {
+	    	return "redirect:index2";
+	    }
+    }
       return "member/login";
    }
 

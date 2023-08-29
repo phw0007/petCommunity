@@ -3,6 +3,7 @@ package com.care.project.amember;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -66,7 +67,9 @@ public class AMemberService {
 	}
 
 	public void passwordUpdata(String id, String newPassword) {
-		memberMapper.passwordUpdata(id, newPassword);
+		BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+        String cryptPassword = bpe.encode(newPassword);
+		memberMapper.passwordUpdata(id, cryptPassword);
 	}
 	
 	public void amemberEmail(Model model, String selectedValues) {
