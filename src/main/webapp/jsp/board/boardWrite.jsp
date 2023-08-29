@@ -42,8 +42,7 @@ function checkContentLength(textarea) {
 		<input type="text" name="title" placeholder="제목을 입력해주세요." id="title" style="width: 800px; height: 30px;"><br><br>
 	    <textarea class="contentWrite" rows="20" cols="130" oninput="checkContentLength(this)"  name="content" placeholder="내용을 입력해주세요(600자이내)."></textarea><br><br>
 	      파일 첨부 :
-          
-     
+         
         <input type="file" id="fileImg" class="ashopFile" name="upfile" onchange="fileURL()" accept="image/*"/>
        <br><br>
        <!--  <input type="button" value="등록" class="ashop_select" onclick="uploadImage2()"/>-->

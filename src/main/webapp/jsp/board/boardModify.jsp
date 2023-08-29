@@ -27,6 +27,7 @@
 	   <li><textarea rows="10" cols="30" style="width:800px; font-size:15px;" name="content">${board.content }</textarea> </li>
 	 </ul>
 	  <div class="modifyB">
+	  
 			<button class="Mlist" type="button" onclick="location.href='boardForm'">목록</button>
 			<input class="modi" type="submit" value="수정">
 			<button class="back" type="button" onclick="history.back()">이전</button> 
