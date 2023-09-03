@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="css/reset.css" rel="stylesheet" type="text/css">
+<c:url var="contextRoot" value="/"/>
 <link href="${contextRoot}css/board.css" rel="stylesheet" type="text/css">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
@@ -111,7 +112,7 @@ function commentDeleteProc(url, selectedValues, commentId) {
     </c:when>
     <c:otherwise>
 		<c:forEach items="${board.fileName}" var="fileName">
-    <img id="img" src="${fileName}" alt="${fileName}" /><br>
+    <img id="img" src="${contextRoot}${fileName}" alt="${fileName}" /><br>
 </c:forEach>
  
     </c:otherwise>

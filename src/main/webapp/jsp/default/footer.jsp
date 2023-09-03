@@ -10,7 +10,7 @@
 <c:url var = "context" value= "/"/>
  <hr>
 <div class="footer" align="center">
-   <img src="/image/logo2.png" alt="logo" width="100"; height="100";>
+   <img src="${contextRoot}image/logo2.png" alt="logo" width="100"; height="100";>
    <ul>
       <li><a href="${context }Company">회사소개</a></li>
       <li>|</li>

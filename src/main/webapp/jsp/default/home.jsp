@@ -12,7 +12,7 @@
 <title>home</title>
 </head>
 <body>
-<div class="mainlogo"><a href="${context }home" id="logo"><img src="/image/logo.png" alt="logo" width="300px" height="300px" ></a></div>
+<div class="mainlogo"><a href="${context }home" id="logo"><img src="${contextRoot}image/logo.png" alt="logo" width="300px" height="300px" ></a></div>
 <div class="web">
  	<div class="top">
 		<div class="tl">
@@ -47,7 +47,7 @@
 			<c:forEach var="mphoto" items="${mphotos}" varStatus="loop">
 		        <li>
 		            <div class="mliweb" onclick="location.href='photoContent?no=${mphoto.no}'">
-		                <div class="mliimg"><img alt="${mphoto.fileName}" src="${mphoto.fileName}" width="160" height="200"></div>
+		                <div class="mliimg"><img alt="${mphoto.fileName}" src="${contextRoot}image/${mphoto.fileName}" width="160" height="200"></div>
 		                <div class="mlicont">${mphoto.title}</div>
 		                <div class="mliicon">
 		                    <p class="mpotoid">${mphoto.id}</p>
@@ -91,7 +91,7 @@
 				<c:forEach var="shop" items="${shops}">
 					<li onclick="location.href='#'">
 					    <a href="shopIn?productId=${shop.no}">
-						<p><img src="${shop.imageFile}" alt="pet" width=160px height=180px/></p>
+						<p><img src="${contextRoot}image/${shop.imageFile}" alt="pet" width=160px height=180px/></p>
 						<span style="font-weight: bold;">${shop.company}</span>
 						<span>${shop.product}</span>
 						<span>${shop.shopPay}</span>

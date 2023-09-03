@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:url var="contextRoot" value="/"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,7 +76,7 @@ function getDeleteBoard(url, selectedValues) {
 					<div class="content">
 						<c:if test="${board.fileName != null}">
 							<c:forEach var="fileImage" items="${fileImages}">
-							<img src=${fileImage } alt="pet" width=140px height=200px/><br>
+							<img src="${contextRoot}image/${fileImage}" alt="pet" width=140px height=200px/><br>
 							</c:forEach>
 						</c:if>
 						${board.content }

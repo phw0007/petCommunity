@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<c:url var="contextRoot" value="/"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +65,7 @@
 			<div class="userPet">
 				<p>반려동물 정보</p>
 				<ul>
-					<li><img src=${member.petFile } alt="pet" width=140px height=200px/></li>
+					<li><img src="${contextRoot}image/${member.petFile}" alt="pet" width=140px height=200px/></li>
 					<li><span>이름</span>${member.petName }</li>
 					<li><span>종류</span>${member.petCategory }</li>
 				</ul>

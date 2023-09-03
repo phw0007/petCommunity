@@ -9,7 +9,7 @@
 <script src="${contextRoot}dbQuiz.js"></script>
 <div class=login align="center">
 
-    <p><img src="/image/logo2.png" alt="logo"></p>
+    <p><img src="${contextRoot}image/logo2.png" alt="logo"></p>
 
 	<h1>로그인</h1>
 	<table ><tr><td> 

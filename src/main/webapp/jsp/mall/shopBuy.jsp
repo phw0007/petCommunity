@@ -1,6 +1,6 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<c:url var="contextRoot" value="/"/>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
@@ -271,7 +271,7 @@ function requestPay() {
 				<c:when test="${product != null}">
 					<tr>
 						<td>${number=number+1}</td>
-						<td><img src="${product.imageFile}" alt="pet" width=100px height=100px/></i></td>
+						<td><img src="${contextRoot}image/${product.imageFile}" alt="pet" width=100px height=100px/></i></td>
 						<td>${product.product}</td>
 						<td>${product.company}</td>
 						<td>${num}</td>

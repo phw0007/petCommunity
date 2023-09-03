@@ -40,7 +40,7 @@
 		<c:forEach var="shop" items="${shops}">
 			<li onclick="location.href='#'">
 			    <a href="shopIn?productId=${shop.no}">
-				<p><img src="/opt/tomcat/tomcat-10/webapps/upload/pat.jpg" alt="${shop.imageFile}" width=200px height=260px/></p>
+				<p><img src="${contextRoot}image/${shop.imageFile}" alt="${shop.imageFile}" width=200px height=260px/></p>
 				<span style="font-weight: bold;">${shop.company}</span>
 				<span>${shop.product}</span>
 				<span>${shop.shopPay}</span>

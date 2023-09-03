@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:url var="contextRoot" value="/"/>
 <link href="${contextRoot}css/shopIn.css" rel="stylesheet" type="text/css">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
@@ -46,7 +47,7 @@
 
 <div class="product-details">
   <div class="shopInLeft">
-    <img src="${product.imageFile}" alt="pet" style="border: 1px solid #000000; width:300px; height:400px;"/>
+    <img src="${contextRoot}image/${product.imageFile}" alt="pet" style="border: 1px solid #000000; width:300px; height:400px;"/>
   </div>
   <div class="shopInRight">
     <h2>${product.company}</h2>

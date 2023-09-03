@@ -1,7 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<c:url var="contextRoot" value="/"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,10 +83,10 @@ function getDeleteShop(url, selectedValues) {
 			<div class="ashopLeft">
 				<c:choose>
 					<c:when test="${shop.imageFile == '' || shop.imageFile == null}">
-						<p><img src="/image/pet.jpg" alt="pet" width=180px height=240px/></p>	
+						<p><img src="${contextRoot}image/pet.jpg" alt="pet" width=180px height=240px/></p>	
 					</c:when>
 					<c:otherwise>
-						<p><img src="${shop.imageFile}" alt="pet" width=180px height=240px/></p>
+						<p><img src="${contextRoot}image/${shop.imageFile}" alt="pet" width=180px height=240px/></p>
 					</c:otherwise>
 				</c:choose>
 				<ul>

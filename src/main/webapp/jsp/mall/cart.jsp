@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:url var="contextRoot" value="/"/>
 <link href="${contextRoot}css/cart.css" rel="stylesheet" type="text/css">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
@@ -95,7 +96,7 @@ function getBuyProduct() {
             <c:forEach var="item" items="${cartItems}">
             <tr>
                 <td><input type="checkbox" name="selectedItems" value="${item.productId}" onchange="updateTotalPrice()"></td>
-                <td><img src="${item.imageFile}" alt="pet" style="width:100px; height:100px;"/></td>
+                <td><img src="${contextRoot}image/${item.imageFile}" alt="pet" style="width:100px; height:100px;"/></td>
                 <td>${item.company}</td>
                 <td>${item.product}</td>
                 <td>${item.pay}원</td>

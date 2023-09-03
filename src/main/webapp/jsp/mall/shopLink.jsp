@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<c:url var="contextRoot" value="/"/>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
@@ -17,7 +18,7 @@
 <h1>[아투] 아투 프리런 치킨 성견용 강아지 사료</h1>
 	<div class="shopTop">
 		<div class="shopTopLift">
-			<img src="/image/pet.jpg" alt="pet" width=320px height=460px/>
+			<img src="${contextRoot}image/pet.jpg" alt="pet" width=320px height=460px/>
 		</div>
 		<div class="shopTopRight">
 			<p>판매사이트</p>
