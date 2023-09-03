@@ -17,6 +17,7 @@ public interface BoardMapper {
 	ArrayList<BoardDTO> fishboardForm(@Param("begin")int begin, @Param("end")int end);
 	ArrayList<BoardDTO> smallboardForm(@Param("begin")int begin, @Param("end")int end);
 	ArrayList<BoardDTO> etcboardForm(@Param("begin")int begin, @Param("end")int end);
+	ArrayList<BoardDTO> infoboardForm(@Param("begin")int begin, @Param("end")int end);
 	//count();
 	int freecount();
 	int qNacount();
@@ -27,6 +28,7 @@ public interface BoardMapper {
 	int fishcount();
 	int smallcount();
 	int etccount();
+	int infocount();
 	
 	void boardWriteProc(BoardDTO board);
 	BoardDTO boardContent(int no);

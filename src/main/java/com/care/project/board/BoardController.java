@@ -30,6 +30,11 @@ public class BoardController {
 		service.freeboardForm(cp, model);
 		return "board/freeboardForm";
 	}
+	@RequestMapping("infoboardForm")
+	public String infoboardForm(@RequestParam(value="currentPage", required=false)String cp,Model model) {
+		service.infoboardForm(cp, model);
+		return "board/infoboardForm";
+	}
 	@RequestMapping("qNaboardForm")
 	public String qNaboardForm(@RequestParam(value="currentPage", required=false)String cp,Model model) {
 		service.qNaboardForm(cp, model);

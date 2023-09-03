@@ -621,6 +621,30 @@ public class BoardService {
 		model.addAttribute("category", category);
 		
 	}
+	public void infoboardForm(String cp, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 10; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+	    
+		
+		
+		ArrayList<BoardDTO> birdboards = boardMapper.infoboardForm(begin, end);
+		int totalCount = boardMapper.infocount();
+		String url = "infoboardForm?currentPage=";
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("boards", birdboards);
+		model.addAttribute("result", result);
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("currentPage", currentPage);
+	}
 	
 	
 

@@ -28,12 +28,14 @@ public class homeController {
 	@RequestMapping("home")
 	public String home(Model model) {
 		int no = 0;
+		int infoNo = 0;
 		 List<photoDTO> mphotos = service.getHomePhotos(); 
 	        model.addAttribute("mphotos", mphotos);
 	        List<BoardDTO> mboards = service.mainhomeboard();
 	        ArrayList<AInfoDTO> infos = service.getInfo();
 	        model.addAttribute("mboards", mboards);
 	        model.addAttribute("no", no);
+	        model.addAttribute("infoNo", infoNo);
 	        model.addAttribute("infos", infos);
 	        model.addAttribute("shops", service.getShop());
 		return "default/home";

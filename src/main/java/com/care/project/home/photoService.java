@@ -115,7 +115,7 @@ public class photoService {
 	
 	public List<BoardDTO> mainhomeboard(){
 		int begin = 1;
-		int end = 22;
+		int end = 5;
 		return photoMapper.mainhomeboard(begin,end);
 	}
 	

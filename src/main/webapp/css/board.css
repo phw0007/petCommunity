@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+.inner ul li:nth-child(2) {font-weight: bold; font-size: 36px;}
+.inner ul li:nth-child(2) {padding-bottom: 7px;}
+
 /*boardWrite*/
 .boardWrite{width:1200px;margin:0 auto; height:750px;padding-top:100px;padding-left:200px;
             font-family: 'Poor Story';}
@@ -14,6 +17,7 @@
 
 /*boardContent 게시글 보이는 곳*/
 .boardContent{width:1200px; margin:0 auto; padding-top:100px;font-family: 'Poor Story'}
+.boardContent h1{font-weight: bold; font-size: 26px;} 
 .boardContent ul{padding-top:50px;} 
 .boardContent > ul li{list-style:none;border-bottom:1px solid #e6e6e6; width:1000px; height:30px;font-size:18px;line-height:30px;padding:3px;} 
 .boardContent > ul li span{padding-left:50px;}
@@ -34,6 +38,7 @@
 .comment ul li > span{font-size:18px;}
 .comment ul li:last-child > span{margin-left:20px;}
 .comment ul li> b{font-weight:100; padding-left:30px; font-size:15px;}
+.comment textarea{resize: none;}
 .commentD{margin-left:20px;}
 
 
@@ -41,7 +46,7 @@
 /*boardForm*/
 .boardForm{width:1200px;margin:0 auto; height:900px;padding-top:100px;
           font-family: 'Poor Story', cursive;}
-.boardForm > h1{border-bottom:2px solid black; width:500px; padding-bottom:20px;}
+.boardForm > h1{border-bottom:2px solid black; width:500px; padding-bottom:20px; font-size: 26px; font-weight: bold;}
 .boardForm ul{list-style: none;}
 .boardCategory,
 .boardFormT{float:left;margin-top:50px;}
@@ -49,9 +54,9 @@
 
 /*카테고리 선택하는 곳*/
 .boardCategory{background:#ffeda1;width:170px;font-size:20px;}
-.boardCategory > ul li a{text-decoration: none;color:black;padding-right:15px;padding-left:15px;}
+.boardCategory > ul li a{display: block; text-decoration: none; color:black; padding: 10px 0 10px 0;}
 .boardCategory > ul{text-align:center;}
-.boardCategory > ul li{padding-bottom:10px;padding-right:15px;}
+.boardCategory > ul li{padding-bottom:10px;}
 
 
 /*게시판 div*/
@@ -59,12 +64,12 @@
 .boardFormT > span{ margin-left:400px; font-size:20px;}
 /*게시판에 있는 table */
 .formTable{border:1px solid black;padding:20px;font-size:20px;margin-bottom:30px;}
-.formTable th{border-bottom:1px solid #e6e6e6; padding-bottom:10px;}
-.formTable td{border-bottom:1px solid #e6e6e6; padding:5px 0 5px 0; text-align: center;}
+.formTable th{ padding-bottom:10px; padding-top:10px; font-weight: bold;}
+.formTable td{border-top:1px solid #e6e6e6; padding:5px 0 5px 0; text-align: center;}
 .formTable > span{padding-right:100px;}
 .writeB{background:#fcd11e; margin-top:50px;width:70px; height:40px;
          margin-left:750px; font-family: 'Poor Story', cursive;font-size:20px;border:none;}
-.result{text-align:center;font-size:18px;text-decoration:none; color:black;}
+.result{text-align:center;font-size:20px;text-decoration:none; color:black;}
 /*boardModify글 수정 */
 .boardModify{width:1200px; margin:0 auto; height:1200px;padding-top:100px;font-family: 'Poor Story'}
 .boardModify{margin-top:50px;}
@@ -78,4 +83,4 @@
                         font-family: 'Poor Story', cursive;font-size:20px;}
                         
 .searchBoard{height:20px; margin-top:20px;margin-left:40px;}
-.search{width:100px; height:30px;font-family:'Poor Story';}
+.search{width:100px; height:30px; font-family:'Poor Story';  float: left; border: 2px solid #000;}

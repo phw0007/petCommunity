@@ -50,7 +50,7 @@
 		qnaboard WHERE qnaboard.rn BETWEEN #{begin} AND #{end}
 	</select>
 	
-<select id="dogcount">
+	<select id="dogcount">
 	  	SELECT count(no) FROM project_board where category='강아지'
 	</select>
 	
@@ -59,6 +59,18 @@
 		(SELECT rownum as rn, form. * FROM (select
 		no,title,id,category,write_date,hits,likes from project_board where
 		category='강아지' order by no desc)form)
+		board WHERE board.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="infocount">
+	  	SELECT count(no) FROM project_board where category='공지사항'
+	</select>
+	
+	<select id="infoboardForm" resultMap="boardDto">
+		SELECT board. * FROM
+		(SELECT rownum as rn, form. * FROM (select
+		no,title,id,category,write_date,hits,likes from project_board where
+		category='공지사항' order by no desc)form)
 		board WHERE board.rn BETWEEN #{begin} AND #{end}
 	</select>
 	

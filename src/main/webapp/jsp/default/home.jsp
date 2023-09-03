@@ -4,9 +4,7 @@
      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <c:import url="/header" />
   	<link rel="stylesheet" href="${contextRoot}css/home.css">
-    <link href="css/reset.css" rel="stylesheet" type="text/css">
-  <style type="text/css">
-</style>    
+    <link href="css/reset.css" rel="stylesheet" type="text/css"> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +12,7 @@
 <title>home</title>
 </head>
 <body>
-<div class="mainlogo"><a href="${context }home" id="logo"><img src="/image/logo2.png" alt="logo" width="300" height="300" ></a></div>
+<div class="mainlogo"><a href="${context }home" id="logo"><img src="/image/logo.png" alt="logo" width="300px" height="300px" ></a></div>
 <div class="web">
  	<div class="top">
 		<div class="tl">
@@ -76,7 +74,7 @@
 			    <tbody>
 			    	<c:forEach var="info" items="${infos}">
 						<tr>
-							<td>${no=no+1}</td>
+							<td>${infoNo=infoNo+1}</td>
 							<td>${info.category}</td>
 							<td>${info.name}</td>
 						</tr>

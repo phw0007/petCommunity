@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link href="css/reset.css" rel="stylesheet" type="text/css">
 <link href="${contextRoot}css/board.css" rel="stylesheet" type="text/css">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+      .inner ul li:nth-child(2) a{color:black; border-bottom:3px solid black;}
 </style>
 <c:import url = "/header"/>
 <div class="boardForm">
@@ -11,7 +13,7 @@
 	<h1>기타동물게시판</h1>
 	<div class="boardCategory">
 		<ul>
-			
+			<li><a href="infoboardForm">공지사항</a></li>
 			<li><a href="freeboardForm">자유게시판</a></li>
 			<li><a href="qNaboardForm">Q&A</a></li>
 			<li><a href="dogboardForm">강아지</a></li>
@@ -20,7 +22,7 @@
 			<li><a href="birdboardForm">조류</a></li>
 			<li><a href="fishboardForm">수중생물</a></li>
 			<li><a href="smallboardForm">소동물</a></li>
-			<li><a href="etcboardForm">기타동물</a></li>
+			<li><a href="etcboardForm" style="font-weight: bold;">기타동물</a></li>
 		</ul>
 	</div>
 
@@ -79,8 +81,8 @@
 						</c:choose>
 					</select>
 					 <input type="hidden" name="category" value="자유게시판">
-					<input type="text" name="search" style="width:600px; height:30px;" value="${search}"> 
-		<input type="submit" value="검색" style="width:100px; height:30px; font-family:'Poor Story';background:#fcd11e;">
+					<input type="text" name="search" style="width:600px; height:30px; float: left;  border-right: 0;border-left: 0; " value="${search}"> 
+		<input type="submit" value="검색" style="width:100px; height:30px; font-weight: bold; font-family:'Poor Story';background:#fcd11e;">
 	</form>
 	</div>
 	<form>
