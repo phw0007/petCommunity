@@ -13,11 +13,11 @@
 		<result column="file_name" property="fileName"/>
 		<result column="write_date" property="writeDate"/>
 		<result column="hits" property="hits"/>
-		<result column="likes" property="likes"/>
+		<result column="like CONCATs" property="like CONCATs"/>
 		<result column="comment_content" property="commentContent"/>
-		<result column="likeno" property="likeno"/>
-		<result column="like_check" property="likeCheck"/>
-		<result column="likes_id" property="likesId"/>
+		<result column="like CONCATno" property="like CONCATno"/>
+		<result column="like CONCAT_check" property="like CONCATCheck"/>
+		<result column="like CONCATs_id" property="like CONCATsId"/>
 	</resultMap>
     
     <insert id="boardWriteProc">
@@ -38,7 +38,7 @@
  
 	<select id="freeboardForm" resultMap="boardDto">
 	SELECT freeboard. * FROM 
-	(SELECT rownum as rn, free. * FROM (select no,title,id,category,write_date,hits,likes from project_board where category='자유게시판' order by no desc)free)
+	(SELECT ROWNUM() as rn, free. * FROM (select no,title,id,category,write_date,hits,like CONCATs from project_board where category='자유게시판' order by no desc)free)
 	freeboard WHERE freeboard.rn BETWEEN #{begin} AND #{end}
 	</select>
 
@@ -76,42 +76,42 @@
 	   DELETE FROM project_board_comment WHERE id=#{id} AND category=#{category} AND no=#{no} AND write_date=#{writeDate}
 	</delete>
 	
-	   <select id = "boardLikeCheck" resultMap="boardDto">
-      SELECT * FROM (SELECT * FROM project_board_likes 
-      WHERE id=#{id} AND category=#{category} AND no=#{no})WHERE likes_id=#{likesId}
+	   <select id = "boardlike CONCATCheck" resultMap="boardDto">
+      SELECT * FROM (SELECT * FROM project_board_like CONCATs 
+      WHERE id=#{id} AND category=#{category} AND no=#{no})WHERE like CONCATs_id=#{like CONCATsId}
    </select>
    
    <update id = "boardHitDown">
       UPDATE project_board SET hits=hits-1 WHERE id=#{id} AND category=#{category} AND no=#{no}
    </update>
    
-   <insert id="boardLikeUserInsert">
-      INSERT INTO project_board_likes VALUES(#{id}, #{no}, #{category}, #{likesId})
+   <insert id="boardlike CONCATUserInsert">
+      INSERT INTO project_board_like CONCATs VALUES(#{id}, #{no}, #{category}, #{like CONCATsId})
    </insert>
    
-   <update id = "boardLike">
-      UPDATE project_board SET likes=likes+1 WHERE id=#{id} AND category=#{category} AND no=#{no}
+   <update id = "boardlike CONCAT">
+      UPDATE project_board SET like CONCATs=like CONCATs+1 WHERE id=#{id} AND category=#{category} AND no=#{no}
    </update>
 	
 	<select id="boardSearch" resultMap="boardDto">
 		<choose>
 			<when test="select == 'title'">
-	SELECT BBB.* FROM ( SELECT rownum as rn, AAA.* FROM
-       (SELECT no, id, category, title, content, file_name, write_date, hits, likes FROM project_board WHERE title like ('%' || #{search} || '%')
+	SELECT BBB.* FROM ( SELECT ROWNUM() as rn, AAA.* FROM
+       (SELECT no, id, category, title, content, file_name, write_date, hits, like CONCATs FROM project_board WHERE title like CONCAT ('%' , #{search} , '%')
         ORDER BY no DESC) AAA) BBB
 WHERE BBB.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'id'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_board WHERE id like ('%' ||  #{search} || '%'))AAA 
+				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
+				, write_date, hits, like CONCATs FROM project_board WHERE id like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 				<otherwise>
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_board WHERE category like ('%' ||  #{search} || '%') or
-				title like ('%' ||  #{search} || '%') or id like ('%' ||  #{search} || '%'))AAA 
+				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
+				, write_date, hits, like CONCATs FROM project_board WHERE category like CONCAT ('%' ,  #{search} , '%') or
+				title like CONCAT ('%' ,  #{search} , '%') or id like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</otherwise>
 		</choose>
@@ -120,10 +120,10 @@ WHERE BBB.rn BETWEEN #{begin} AND #{end}
 	<select id="searchCount">
 		<choose>
 	  		<when test="select == 'title'">
-	  			SELECT count(no) FROM project_board WHERE title like ('%' ||  #{search} || '%')
+	  			SELECT count(no) FROM project_board WHERE title like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'id'">
-	  			SELECT count(no) FROM project_board WHERE category='자유게시판' AND id like ('%' ||  #{search} || '%')
+	  			SELECT count(no) FROM project_board WHERE category='자유게시판' AND id like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 		</choose>
 	</select>

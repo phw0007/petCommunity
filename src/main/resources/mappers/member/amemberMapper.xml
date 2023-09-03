@@ -79,40 +79,40 @@
 		<choose>
 			<when test="select == 'id'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, id, pw, user_name, register_day, address
+				(SELECT ROWNUM()() as rn, no, id, pw, user_name, register_day, address
 				, email, mobile, pet_name, pet_category, pet_file
-				FROM project_register WHERE id like ('%' ||  #{search} || '%'))AAA 
+				FROM project_register WHERE id like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'name'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, id, pw, user_name, register_day, address
+				(SELECT ROWNUM() as rn, no, id, pw, user_name, register_day, address
 				, email, mobile, pet_name, pet_category, pet_file
-				FROM project_register WHERE user_name like ('%' ||  #{search} || '%'))AAA 
+				FROM project_register WHERE user_name like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'address'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, id, pw, user_name, register_day, address
+				(SELECT ROWNUM() as rn, no, id, pw, user_name, register_day, address
 				, email, mobile, pet_name, pet_category, pet_file
-				FROM project_register WHERE address like ('%' ||  #{search} || '%'))AAA 
+				FROM project_register WHERE address like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'mobile'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, id, pw, user_name, register_day, address
+				(SELECT ROWNUM() as rn, no, id, pw, user_name, register_day, address
 				, email, mobile, pet_name, pet_category, pet_file
-				FROM project_register WHERE mobile like ('%' ||  #{search} || '%'))AAA 
+				FROM project_register WHERE mobile like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<otherwise>
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, id, pw, user_name, register_day, address
+				(SELECT ROWNUM() as rn, no, id, pw, user_name, register_day, address
 				, email, mobile, pet_name, pet_category, pet_file
-				FROM project_register WHERE id like ('%' ||  #{search} || '%') or
-				user_name like ('%' ||  #{search} || '%') or
-				address like ('%' ||  #{search} || '%') or
-				mobile like ('%' ||  #{search} || '%'))AAA 
+				FROM project_register WHERE id like CONCAT ('%' ,  #{search} , '%') or
+				user_name like CONCAT ('%' ,  #{search} , '%') or
+				address like CONCAT ('%' ,  #{search} , '%') or
+				mobile like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</otherwise>
 		</choose>
@@ -121,22 +121,22 @@
 	<select id="count">
 		<choose>
 	  		<when test="select == 'id'">
-	  			SELECT count(id) FROM project_register WHERE id like ('%' ||  #{search} || '%')
+	  			SELECT count(id) FROM project_register WHERE id like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'name'">
-	  			SELECT count(id) FROM project_register WHERE user_name like ('%' ||  #{search} || '%')
+	  			SELECT count(id) FROM project_register WHERE user_name like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'address'">
-	  			SELECT count(id) FROM project_register WHERE address like ('%' ||  #{search} || '%')
+	  			SELECT count(id) FROM project_register WHERE address like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'mobile'">
-	  			SELECT count(id) FROM project_register WHERE mobile like ('%' ||  #{search} || '%')
+	  			SELECT count(id) FROM project_register WHERE mobile like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<otherwise>
-	  			SELECT count(id) FROM project_register WHERE id like ('%' ||  #{search} || '%') or
-	  			user_name like ('%' ||  #{search} || '%') or 
-	  			address like ('%' ||  #{search} || '%') or
-	  			mobile like ('%' ||  #{search} || '%')
+	  			SELECT count(id) FROM project_register WHERE id like CONCAT ('%' ,  #{search} , '%') or
+	  			user_name like CONCAT ('%' ,  #{search} , '%') or 
+	  			address like CONCAT ('%' ,  #{search} , '%') or
+	  			mobile like CONCAT ('%' ,  #{search} , '%')
 	  		</otherwise>
 		</choose>
 	</select>
@@ -159,32 +159,32 @@
 	
 	<select id="amaminMember" resultMap="memberDto">
 		SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, id, pw, user_name, register_day, address
+				(SELECT ROWNUM() as rn, no, id, pw, user_name, register_day, address
 				, email, mobile, pet_name, pet_category, pet_file
 				FROM project_register)AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
 	</select>
 	
 	<select id="amaminBoard" resultMap="boardDto">
 		SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, id, category, title, content, file_name
+				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
 				, write_date, hits, likes FROM project_board)AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
 	</select>
 	
 	<select id="amaminInfo" resultMap="infoDTO">
 		SELECT AAA.* FROM 
-				(SELECT rownum as rn, category, name, address, home_page, mobile 
+				(SELECT ROWNUM() as rn, category, name, address, home_page, mobile 
 				FROM project_info)AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
 	</select>
 	
 	<select id="amaminShop" resultMap="ashopDto">
 			SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, category, product, company, pay, inventory
+				(SELECT ROWNUM() as rn, no, category, product, company, pay, inventory
 				, image_file, info FROM project_shop)AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
 	</select>
 	
 	<select id="amaminPhoto" resultMap="photoDto">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, id, category, title, content, file_name
+				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
 				, write_date, hits, likes FROM project_photo)AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
 	</select>
 	

@@ -17,33 +17,33 @@
 		<choose>
 			<when test="select == 'category'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, category, name, address, home_page,mobile 
-				FROM project_info WHERE category like ('%' ||  #{search} || '%')AND category =#{category})AAA 
+				(SELECT ROWNUM() as rn, category, name, address, home_page,mobile 
+				FROM project_info WHERE category like CONCAT ('%' ,  #{search} , '%')AND category =#{category})AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'name'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, category, name, address, home_page, mobile 
-				FROM project_info WHERE name like ('%' ||  #{search} || '%')AND category =#{category})AAA 
+				(SELECT ROWNUM() as rn, category, name, address, home_page, mobile 
+				FROM project_info WHERE name like CONCAT ('%' ,  #{search} , '%')AND category =#{category})AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'address'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, category, name, address, home_page, mobile 
-				FROM project_info WHERE address like ('%' ||  #{search} || '%')AND category =#{category})AAA 
+				(SELECT ROWNUM() as rn, category, name, address, home_page, mobile 
+				FROM project_info WHERE address like CONCAT ('%' ,  #{search} , '%')AND category =#{category})AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'mobile'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, category, name, address, home_page, mobile 
-				FROM project_info WHERE mobile like ('%' ||  #{search} || '%')AND category =#{category})AAA 
+				(SELECT ROWNUM() as rn, category, name, address, home_page, mobile 
+				FROM project_info WHERE mobile like CONCAT ('%' ,  #{search} , '%')AND category =#{category})AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<otherwise>
 			SELECT AAA.*FROM 
-			(SELECT rownum as rn, category, name, address, home_page, mobile
-             FROM project_info WHERE (category like ('%' ||  #{search} || '%') or name like ('%' ||  #{search} || '%') or
-                 address like ('%' ||  #{search} || '%') or mobile like ('%' ||  #{search} || '%'))
+			(SELECT ROWNUM() as rn, category, name, address, home_page, mobile
+             FROM project_info WHERE (category like CONCAT ('%' ,  #{search} , '%') or name like CONCAT ('%' ,  #{search} , '%') or
+                 address like CONCAT ('%' ,  #{search} , '%') or mobile like CONCAT ('%' ,  #{search} , '%'))
                   AND category =#{category}) AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</otherwise>
 		</choose>
@@ -52,21 +52,21 @@
 	<select id="hoscount">
 		<choose>
 			<when test="select == 'category'">
-	  			SELECT count(name) FROM project_info WHERE category like ('%' ||  #{search} || '%')
+	  			SELECT count(name) FROM project_info WHERE category like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'name'">
-	  			SELECT count(name) FROM project_info WHERE name like ('%' ||  #{search} || '%')
+	  			SELECT count(name) FROM project_info WHERE name like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'address'">
-	  			SELECT count(name) FROM project_info WHERE address like ('%' ||  #{search} || '%')
+	  			SELECT count(name) FROM project_info WHERE address like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'mobile'">
-	  			SELECT count(name) FROM project_info WHERE mobile like ('%' ||  #{search} || '%')
+	  			SELECT count(name) FROM project_info WHERE mobile like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<otherwise>
-	  		SELECT count(category) FROM project_info WHERE category like ('%' ||  #{search} || '%') or
-	  			name like ('%' ||  #{search} || '%') or address like ('%' ||  #{search} || '%') or 
-	  			mobile like ('%' ||  #{search} || '%')
+	  		SELECT count(category) FROM project_info WHERE category like CONCAT ('%' ,  #{search} , '%') or
+	  			name like CONCAT ('%' ,  #{search} , '%') or address like CONCAT ('%' ,  #{search} , '%') or 
+	  			mobile like CONCAT ('%' ,  #{search} , '%')
 	  		</otherwise>
 		</choose>
 	</select>

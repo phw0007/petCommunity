@@ -27,7 +27,7 @@
 		<result column="hits" property="hits"/>
 		<result column="likes" property="likes"/>
 		<result column="comment_content" property="commentContent"/>
-		<result column="likeno" property="likeno"/>
+		<result column="likeno" property="like CONCATno"/>
 		<result column="like_check" property="likeCheck"/>
 		<result column="likes_id" property="likesId"/>
 	</resultMap>
@@ -53,15 +53,15 @@
       <choose> 
          <when test="select == 'id'">
             SELECT AAA.* FROM 
-            (SELECT rownum as rn, no, id, category, title, content, file_name
-            , write_date, hits, likes FROM project_photo WHERE id like ('%' ||  #{search} || '%'))AAA 
+            (SELECT ROWNUM() as rn, no, id, category, title, content, file_name
+            , write_date, hits, likes FROM project_photo WHERE id like CONCAT ('%' ,  #{search} , '%'))AAA 
             WHERE AAA.rn BETWEEN #{begin} AND #{end}
             ORDER BY no   DESC
          </when>
          <otherwise>
             SELECT AAA.* FROM 
-            (SELECT rownum as rn, no, id, category, title, content, file_name
-            , write_date, hits, likes FROM project_photo WHERE id like ('%' ||  #{search} || '%'))AAA 
+            (SELECT ROWNUM() as rn, no, id, category, title, content, file_name
+            , write_date, hits, likes FROM project_photo WHERE id like CONCAT ('%' ,  #{search} , '%'))AAA 
             WHERE AAA.rn BETWEEN #{begin} AND #{end}
             ORDER BY no   DESC
          </otherwise>
@@ -71,10 +71,10 @@
    <select id="count">
       <choose>
            <when test="select == 'id'">
-              SELECT count(id) FROM project_photo WHERE id like ('%' ||  #{search} || '%')
+              SELECT count(id) FROM project_photo WHERE id like CONCAT ('%' ,  #{search} , '%')
            </when>
            <otherwise>
-              SELECT count(id) FROM project_photo WHERE id like ('%' ||  #{search} || '%')
+              SELECT count(id) FROM project_photo WHERE id like CONCAT ('%' ,  #{search} , '%')
            </otherwise>
       </choose>
    </select>
@@ -90,7 +90,7 @@
 
  <select id="mainhomeboard" resultMap="BoardDto">
     SELECT AAA.* FROM 
-		(SELECT rownum as rn, no, id, category, title, content, file_name
+		(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
 		, write_date, hits, likes FROM project_board)AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}  
 </select>
 

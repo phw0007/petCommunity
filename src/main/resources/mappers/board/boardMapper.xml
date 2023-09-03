@@ -31,7 +31,7 @@
 	
 	<select id="freeboardForm" resultMap="boardDto">
 		SELECT freeboard. * FROM
-		(SELECT rownum as rn, free. * FROM (select
+		(SELECT ROWNUM() as rn, free. * FROM (select
 		no,title,id,category,write_date,hits,likes from project_board where
 		category='자유게시판' order by no desc)free)
 		freeboard WHERE freeboard.rn BETWEEN #{begin} AND #{end}
@@ -44,7 +44,7 @@
 	
 	<select id="qNaboardForm" resultMap="boardDto">
 		SELECT qnaboard. * FROM
-		(SELECT rownum as rn, qna. * FROM (select
+		(SELECT ROWNUM() as rn, qna. * FROM (select
 		no,title,id,category,write_date,hits,likes from project_board where
 		category='QnA' order by no desc)qna)
 		qnaboard WHERE qnaboard.rn BETWEEN #{begin} AND #{end}
@@ -56,7 +56,7 @@
 	
 	<select id="dogboardForm" resultMap="boardDto">
 		SELECT board. * FROM
-		(SELECT rownum as rn, form. * FROM (select
+		(SELECT ROWNUM() as rn, form. * FROM (select
 		no,title,id,category,write_date,hits,likes from project_board where
 		category='강아지' order by no desc)form)
 		board WHERE board.rn BETWEEN #{begin} AND #{end}
@@ -80,7 +80,7 @@
 	
 	<select id="catboardForm" resultMap="boardDto">
 		SELECT board. * FROM
-		(SELECT rownum as rn, form. * FROM (select
+		(SELECT ROWNUM() as rn, form. * FROM (select
 		no,title,id,category,write_date,hits,likes from project_board where
 		category='고양이' order by no desc)form)
 		board WHERE board.rn BETWEEN #{begin} AND #{end}
@@ -92,7 +92,7 @@
 	
 	<select id="reptileboardForm" resultMap="boardDto">
 		SELECT board. * FROM
-		(SELECT rownum as rn, form. * FROM (select
+		(SELECT ROWNUM() as rn, form. * FROM (select
 		no,title,id,category,write_date,hits,likes from project_board where
 		category='파충류' order by no desc)form)
 		board WHERE board.rn BETWEEN #{begin} AND #{end}
@@ -104,7 +104,7 @@
 	
 	<select id="birdboardForm" resultMap="boardDto">
 		SELECT board. * FROM
-		(SELECT rownum as rn, form. * FROM (select
+		(SELECT ROWNUM() as rn, form. * FROM (select
 		no,title,id,category,write_date,hits,likes from project_board where
 		category='조류' order by no desc)form)
 		board WHERE board.rn BETWEEN #{begin} AND #{end}
@@ -116,7 +116,7 @@
 	
 	<select id="fishboardForm" resultMap="boardDto">
 		SELECT board. * FROM
-		(SELECT rownum as rn, form. * FROM (select
+		(SELECT ROWNUM() as rn, form. * FROM (select
 		no,title,id,category,write_date,hits,likes from project_board where
 		category='수중생물' order by no desc)form)
 		board WHERE board.rn BETWEEN #{begin} AND #{end}
@@ -128,7 +128,7 @@
 	
 	<select id="smallboardForm" resultMap="boardDto">
 		SELECT board. * FROM
-		(SELECT rownum as rn, form. * FROM (select
+		(SELECT ROWNUM() as rn, form. * FROM (select
 		no,title,id,category,write_date,hits,likes from project_board where
 		category='소동물' order by no desc)form)
 		board WHERE board.rn BETWEEN #{begin} AND #{end}
@@ -140,7 +140,7 @@
 	
 	<select id="etcboardForm" resultMap="boardDto">
 		SELECT board. * FROM
-		(SELECT rownum as rn, form. * FROM (select
+		(SELECT ROWNUM() as rn, form. * FROM (select
 		no,title,id,category,write_date,hits,likes from project_board where
 		category='기타동물' order by no desc)form)
 		board WHERE board.rn BETWEEN #{begin} AND #{end}
@@ -188,43 +188,43 @@
 	   DELETE FROM project_board_comment WHERE id=#{id} AND category=#{category} AND no=#{no} AND write_date=#{writeDate}
 	</delete>
 	
-	   <select id = "boardLikeCheck" resultMap="boardDto">
+	   <select id = "boardlike CONCATCheck" resultMap="boardDto">
       SELECT * FROM (SELECT * FROM project_board_likes 
-      WHERE id=#{id} AND category=#{category} AND no=#{no})WHERE likes_id=#{likesId}
+      WHERE id=#{id} AND category=#{category} AND no=#{no})WHERE likes_id=#{like CONCATsId}
    </select>
    
    <update id = "boardHitDown">
       UPDATE project_board SET hits=hits-1 WHERE id=#{id} AND category=#{category} AND no=#{no}
    </update>
    
-   <insert id="boardLikeUserInsert">
+   <insert id="boardlike CONCATUserInsert">
       INSERT INTO project_board_likes VALUES(#{id}, #{no}, #{category}, #{likesId})
    </insert>
    
-   <update id = "boardLike">
+   <update id = "boardlike CONCAT">
       UPDATE project_board SET likes=likes+1 WHERE id=#{id} AND category=#{category} AND no=#{no}
    </update>
 	
 	<select id="boardSearch" resultMap="boardDto">
 		<choose>
 			<when test="select == 'title'">
-	        SELECT BBB.* FROM ( SELECT rownum as rn, AAA.* FROM
+	        SELECT BBB.* FROM ( SELECT ROWNUM() as rn, AAA.* FROM
             (SELECT no, id, category, title, content, file_name, write_date, hits, likes FROM project_board WHERE title
-            like ('%' || #{search} || '%')AND category=#{category}
+            like CONCAT ('%' , #{search} , '%')AND category=#{category}
             ORDER BY no DESC) AAA) BBB
           WHERE BBB.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<when test="select == 'id'">
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_board WHERE id like ('%' ||  #{search} || '%')AND category=#{category})AAA 
+				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE id like CONCAT ('%' ,  #{search} , '%')AND category=#{category})AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</when>
 				<otherwise>
 				SELECT AAA.* FROM 
-				(SELECT rownum as rn, no, id, category, title, content, file_name
-				, write_date, hits, likes FROM project_board WHERE category like ('%' ||  #{search} || '%') or
-				title like ('%' ||  #{search} || '%') or id like ('%' ||  #{search} || '%'))AAA 
+				(SELECT ROWNUM() as rn, no, id, category, title, content, file_name
+				, write_date, hits, likes FROM project_board WHERE category like CONCAT ('%' ,  #{search} , '%') or
+				title like CONCAT ('%' ,  #{search} , '%') or id like CONCAT ('%' ,  #{search} , '%'))AAA 
 				WHERE AAA.rn BETWEEN #{begin} AND #{end}
 			</otherwise>
 		</choose>
@@ -233,10 +233,10 @@
 	<select id="searchCount">
 		<choose>
 	  		<when test="select == 'title'">
-	  			SELECT count(no) FROM project_board WHERE title like ('%' ||  #{search} || '%')
+	  			SELECT count(no) FROM project_board WHERE title like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 	  		<when test="select == 'id'">
-	  			SELECT count(no) FROM project_board WHERE category='자유게시판' AND id like ('%' ||  #{search} || '%')
+	  			SELECT count(no) FROM project_board WHERE category='자유게시판' AND id like CONCAT ('%' ,  #{search} , '%')
 	  		</when>
 		</choose>
 	</select>

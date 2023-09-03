@@ -43,19 +43,19 @@
       <choose>
          <when test="select == 'id'">
             SELECT AAA.* FROM 
-            (SELECT ROWNUM() as rn, no, id, pw, userName, registerDay, birth, address, mobile, email, petName, petCategory, petFile
-            FROM project_register WHERE id like CONCAT('%', #{search}, '%'))AAA 
+            (SELECT ROWNUM()() as rn, no, id, pw, userName, registerDay, birth, address, mobile, email, petName, petCategory, petFile
+            FROM project_register WHERE id like CONCAT CONCAT('%', #{search}, '%'))AAA 
             WHERE AAA.rn BETWEEN #{begin} AND #{end}
          </when>
          <when test="select == 'mobile'">
             SELECT AAA.* FROM 
-            (SELECT ROWNUM() as rn, no, id, pw, userName, registerDay, birth, address, mobile, email, petName, petCategory, petFile 
-            FROM project_register WHERE mobile like CONCAT('%', #{search}, '%'))AAA 
+            (SELECT ROWNUM()() as rn, no, id, pw, userName, registerDay, birth, address, mobile, email, petName, petCategory, petFile 
+            FROM project_register WHERE mobile like CONCAT CONCAT('%', #{search}, '%'))AAA 
             WHERE AAA.rn BETWEEN #{begin} AND #{end}
          </when>
          <otherwise>
             SELECT AAA.* FROM 
-            (SELECT ROWNUM() as rn, no, id, pw, userName, registerDay, birth, address, mobile, email, petName, petCategory, petFile  
+            (SELECT ROWNUM()() as rn, no, id, pw, userName, registerDay, birth, address, mobile, email, petName, petCategory, petFile  
             FROM project_register )AAA 
             WHERE AAA.rn BETWEEN #{begin} AND #{end}
          </otherwise>
